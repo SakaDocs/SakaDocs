@@ -1,0 +1,99 @@
+.content {
+	margin-top: 50px;
+}
+.undecorated-link:hover {
+	text-decoration: none;
+}
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	display: none !important;
+}
+.ng-invalid.ng-dirty {
+	border-color: #FA787E;
+}
+.ng-valid.ng-dirty {
+	border-color: #78FA89;
+}
+#homesearch{
+	top: 10px;
+}
+#docsection{
+	background-color: white;
+	min-height: 100px;
+	width: 40%;
+}
+#emptysection{
+	width: 4%;
+	min-height: 100px;
+	/*background-color: blue;*/
+}
+.menuitem{
+	background-color: grey;
+}
+.leftmenu{
+	background-color: brown;
+	min-height: 600px;
+	width: 12%;
+}
+#picstrip{
+	min-height: 100px;
+	background-color: green;
+
+}
+/*#typedown{
+	color: grey;
+	width: 60px;
+	min-height: 35px;
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
+	border-color: orange;
+	border-right-color: white;
+	border-style: solid;
+	border-width: 1px;
+}*/
+.nav-input{
+	border-left-width: 2px;
+}
+.brand{
+	width: 10%;
+}
+#typedown{
+	color: orange;
+	min-height: 35px;
+	border-color: orange;
+	border-left-color: orange;
+	border-right-color: white;
+	border-width: 1px;
+	border-style: solid;
+	width: 314px;
+	font-weight: bolder;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 65px;
+
+}
+#button{
+	background-color: orange;
+	border-color: orange;
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+	min-height: 35px;
+	border-style: solid;
+}
+.dropdownheading{
+	color: orange;
+	font-weight: bolder;
+	font-size: 2em;
+}
+.menuname{
+	color: orange;
+}
+#postdoc{
+	font-weight: bolder;
+}
+#signupbtn{
+	background-color: orange;
+	font-weight: bold;
+}
+#createaccount{
+	font-weight: bold;
+}
