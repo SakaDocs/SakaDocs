@@ -1,4 +1,5 @@
 <section class="row" data-ng-controller="AuthenticationController">
+	<br>
 	<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
 		<form name="userForm" data-ng-submit="signup()" class="signin form-horizontal" novalidate autocomplete="off">
 			<fieldset>
@@ -27,8 +28,8 @@
 					<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">
 				</div>
 				<div class="text-center form-group">
-					<button type="submit" class="btn btn-large" id="signupbtn">Sign up</button>&nbsp; or&nbsp;
-					<a href="/#!/signin" class="show-signup">Sign in</a>
+					<button type="submit" class="btn btn-large" id="signupbtn">Create an account</button>&nbsp; or&nbsp;
+					<a href="/#!/signin" class="show-signup btn btn-large " id="altbtn">Sign in</a>
 				</div>
 				<div data-ng-show="error" class="text-center text-danger">
 					<strong data-ng-bind="error"></strong>

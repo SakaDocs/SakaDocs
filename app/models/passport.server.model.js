@@ -10,8 +10,27 @@ var mongoose = require('mongoose'),
  * Passport Schema
  */
 var PassportSchema = new Schema({
-	// Passport model fields   
-	// ...
+	fullNames: {
+		type: String,
+		trim: true
+	},
+	passportNumber: {
+		type: String,
+		trim: true
+	},
+	country: {
+		type: String,
+		trim: true
+	},
+	locationFound: {
+		type: String,
+		trim: true
+	},
+	finderNumber: {
+		type: String,
+		trim: true
+	},
+
 });
 
 mongoose.model('Passport', PassportSchema);

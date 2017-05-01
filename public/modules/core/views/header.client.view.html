@@ -9,24 +9,24 @@
         <a href="/#!/" class="navbar-brand">Logo</a>
     </div>
     <div class="navbar-nav col-sm-7" id="homesearch">
-        <form class="form-wrapper searchform row" action="" method="">
+        <form class="form-wrapper searchform row">
             <div class="col-sm-9">
-                <select name="docType" class="nav-search-dropdown" id="typedown" oninvalid="this.setCustomValidity('You must choose a document type')" oninput="setCustomValidity('')" required aria-required=”true” required validate>
+                <select name="docType" data-ng-model="docType" class="nav-search-dropdown" id="typedown" oninvalid="this.setCustomValidity('You must choose a document type')" oninput="setCustomValidity('')" required aria-required=”true” required validate>
                     <option value="" disabled="disabled" class="text-center" selected="selected" style="display:none">
                         <span class="dropdownheading">Search for document</span>
                     </option>
-                    <option value="nationalId">National ID</option>
+                    <option value="national">National ID</option>
                     <option value="studentId">Student ID</option>
                     <option value="staffId">Staff ID</option>
-                    <option value="atmCard">ATM card</option>
+                    <option value="atm">ATM card</option>
                     <option value="nhifCard">NHIF card</option>
                     <option value="certificate">Certificate</option>
                     <option value="passport">Passport</option>
                     <option value="dl">Driving license</option>
                 </select>
             </div>
-            <div class="col-sm-3">
-                <button id="button" type="submit">
+            <div class="col-sm-3" type="submit">
+                <button id="button" type="submit" ng-click="search()">
                     <span class="glyphicon glyphicon-search"></span></button>
             </div>
         </form>
@@ -48,18 +48,59 @@
         </ul>
         <br>
         <ul class="nav navbar-nav  text-center" data-ng-hide="authentication.user">
+            <li  ng-class="{active: $uiRoute}">
+                <a href="/#!"><span class="menuname" id="createaccount">Home</span></a>
+            </li>
             <li ui-route="/signup" ng-class="{active: $uiRoute}">
                 <a href="/#!/signup"><span class="menuname" id="createaccount">Create an account</span></a>
             </li>
             <li class="divider-vertical"></li>
             <li ui-route="/signin" ng-class="{active: $uiRoute}">
-                <a href="/#!/signin"><span class="menuname">Sign in</span></a>
+                <a href="/#!/signin"><span class="menuname" id="createaccount">Sign in</span></a>
             </li>
-            <li ui-route="/signi" ng-class="{active: $uiRoute}">
-                <a href="/#!/signin"><span class="menuname">Post a document</span></a>
+            <li class="dropdown" dropdown>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle>
+                    <span class="menuname" id="createaccount">Post a document</span> <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li ui-route="/signin">
+                        <a href="/#!/postid"><span class="menuname">National Id</span></a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="/#!/settings/accounts"><span class="menuname">Student Id<span class="menuname"></a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="/#!/settings/password"><span class="menuname">Staff Id</span></a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="/auth/signout"><span class="menuname">ATM card</span></a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="/auth/signout"><span class="menuname">NHIF card</span></a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="/auth/signout"><span class="menuname">Certificate</span></a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="/auth/signout"><span class="menuname">Passport</span></a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="/auth/signout"><span class="menuname">Driving license</span></a>
+                    </li>
+                </ul>
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">
+            <li  ng-class="{active: $uiRoute}">
+                <a href="/#!"><span class="menuname" id="createaccount">Home</span></a>
+            </li>
             <li ui-route="/signi"  ng-class="{active: $uiRoute}">
                 <a href="/#!/signin"><span class="menuname" id="postdoc">Post a document</span></a>
             </li>
@@ -87,7 +128,7 @@
                 </ul>
             </li>
             <li ui-route="/signi"  ng-class="{active: $uiRoute}">
-               <a href=""><span class="menuname">Account balance:  <span data-ng-bind="authentication.user.accountBalance | currency"></span></span></a>
+               <a href=""><span class="menuname">Account balance:  <span data-ng-bind="authentication.user.accountBalance | currencyr"></span></span></a>
             </li>
         </ul>
     </nav>

@@ -138,3 +138,13 @@ The first models is that of the user. A schema has been defined(userSchema) that
  #Document
  Each document has been given its own schema and will be stored in  the database separately. 
 
+
+
+ ## API for documents
+	1. ID(nationals)
+	 store a new id- URL: post /natioalids
+	 Get all the ids- URL: get /nationalids
+	 Get one id based on its mongo _id
+	 update an id's detail
+
+
