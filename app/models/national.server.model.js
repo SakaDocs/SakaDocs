@@ -25,6 +25,14 @@ var NationalSchema = new Schema({
 	finderNumber: {
 		type: String, 
 		trim: true
+	},
+	posted: {
+		type: Date,
+		default: Date.now
+	},
+	idPhoto: {
+		type: String,
+		trim: true
 	}
 	// store photo
 });

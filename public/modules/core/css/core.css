@@ -48,11 +48,11 @@
 	border-right-color: white;
 	border-width: 1px;
 	border-style: solid;
-	width: 314px;
+	width: 365px;
 	font-weight: bolder;
 	padding-top: 5px;
 	padding-bottom: 5px;
-	padding-left: 65px;
+	/*padding-left: 85px;*/
 
 }
 #uniquefilter{
@@ -77,9 +77,12 @@
 	border-style: solid;
 }
 .dropdownheading{
-	color: orange;
+	color: blue;
 	font-weight: bolder;
 	font-size: 2em;
+}
+#searchbtn{
+	left: -16px;
 }
 .menuname{
 	color: orange;
@@ -146,4 +149,22 @@
 }
 .divider{
 	max-height: 1px;
+}
+#postbtn{
+	background-color: orange;
+	font-weight: bold;
+	width: 200px;
+}
+.form-control{
+	border-color: orange;
+	border-style: solid;
+}
+#picinput{
+	min-height: 300px;
+	border-color: orange;
+	border-style: solid;
+}
+#logo{
+	left: -110px;
+	position: relative;
 }

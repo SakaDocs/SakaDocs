@@ -12,6 +12,7 @@ var mongoose = require('mongoose'),
  * Create(post) a National Id
  */
 exports.create = function(req, res) {
+	console.log(req.body);
 	var national = new National(req.body);
 
 	national.save(function(err) {
@@ -69,7 +70,7 @@ exports.list = function(req, res) {
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            res.json(ids);
+            res.json(ids.reverse(	));
         }
     });
 };

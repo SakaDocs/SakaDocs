@@ -1,0 +1,37 @@
+<br><section data-ng-controller="PostController">
+	<div class="col-sm-3"></div>
+	<div class="col-sm-6">
+		<form name="idForm" data-ng-submit="post()"  autocomplete="off">
+			<fieldset>
+				<div data-ng-show="err" class="text-center text-danger">
+					<strong data-ng-bind="err"></strong>
+				</div>
+				<div class="form-group">
+					<label for="fullNames">Full names on ID</label>
+					<input type="text" required id="fullNames" name="fullNames" class="form-control" data-ng-model="id.fullNames" placeholder="Full names on id" validate>
+				</div>
+				<div class="form-group">
+					<label for="idNumber">ID number</label>
+					<input type="text" id="idNumber" name="idNumber" class="form-control" data-ng-model="id.idNumber" placeholder="ID number" required validate>
+				</div>
+				<div class="form-group">
+					<label for="locationFound">Where did you find ID?</label>
+					<input type="text" id="locationFound" name="locationFound" class="form-control" data-ng-model="id.locationFound" placeholder="Enter location" required validate>
+				</div>
+				<div class="form-group">
+					<label for="idphoto">Upload ID photo</label>
+					<input type = "file" id="file" name="file" />
+				</div>
+				
+				<div class="text-center form-group">
+					<button type="submit" class="btn btn-large"  id="postbtn">Post ID</button> 
+				</div>
+				<div data-ng-show="sccs" class="text-center text-success">
+					<strong data-ng-bind="sccs"></strong>
+				</div>
+			</fieldset>
+		</form>
+
+	</div>
+	<div class="col-sm-3"></div>
+</section>
