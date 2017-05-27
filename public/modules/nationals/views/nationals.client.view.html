@@ -1,30 +1,25 @@
 <section class="row text-center" data-ng-controller="NationalsController" data-ng-init="find()">
     <br>
-    <div class="col-sm-2"></div>
-    <div class="col-sm-8 text-center">
-        <input type="text" placeholder="Search by ID number or names" ng-model="search" id="uniquefilter"> &nbsp; or &nbsp;
-        <a href="/#!/postid"><button type="submit" class="btn" id="altbtn">Post a new id</button></a>
-    </div>
-    <br>
-    <div class="col-sm-10 text-center">
-        <br>
-        <br>
-        <div data-ng-repeat="id in ids | filter: search" class=" row ">
-            <div class="col-sm-6 thumbnail">
-                <img src="/modules/core/img/nationalid.jpg" alt="">
-            </div>
-            <div class="col-sm-6">
-                <br>
-                <br>
-                <p style="font-weight: bold;">Full names: <span style="color: orange;">{{id.fullNames | uppercase}}</span></p>
-                <p style="font-weight: bold;">Id number: <span style="color: orange;">{{id.idNumber | uppercase}}</span> </p>
-                <p style="font-weight: bold;">Area found: <span style="color: orange;">{{id.locationFound | uppercase}}</span> </p>
-                <button type="submit" class="btn" id="signupbtn">Claim this id</button>
-            </div>
-            <hr style="color: black; border-style: solid;">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 text-center">
+            <input type="text" placeholder="Search by ID number or full names" ng-model="search" id="uniquefilter"> &nbsp; or &nbsp;
+            <a href="/#!/postid">
+                <button type="submit" class="btn" id="altbtn">Post a new id</button>
+            </a>
         </div>
-    </div>
-    <div class="col-sm-2 container text-center">
-        <h3>Advert</h3>
+        <div class="col-sm-2"></div>
+    </div><br><br>
+    <div data-ng-repeat="id in ids | filter: search" id="idholder" class="row thumbnail"><br>
+        <div class="col-sm-4 thumbnail img-responsive" id="idpic">
+            <img class="img-responsive" ng-src="{{id.idPhoto}}" alt="">
+        </div>
+        <div class="col-sm-8">
+            <br>`
+            <p style="font-weight: bold;">Full names: <span style="color: orange;">{{id.fullNames | uppercase}}</span></p>
+            <p style="font-weight: bold;">Id number: <span style="color: orange;">{{id.idNumber | uppercase}}</span> </p>
+            <p style="font-weight: bold;">Area found: <span style="color: orange;">{{id.locationFound | uppercase}}</span> </p>            
+            <button type="submit" class="btn" ng-click="claimId()" ng-init="docid = {{id._id}}" id="signupbtn"><span id="claimtext">Claim this id</span></button>
+        </div>
     </div>
 </section>

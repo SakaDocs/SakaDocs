@@ -93,6 +93,7 @@
 #signupbtn{
 	background-color: orange;
 	font-weight: bold;
+	text-decoration: none;
 }
 #altbtn{
 	background-color: black;
@@ -167,4 +168,51 @@
 #logo{
 	left: -110px;
 	position: relative;
+}
+.mythumbnail{
+	height: 100%;
+	width: 100%;
+	max-width: 400px;
+}
+#thumbnail{
+	min-height: 150px;
+	width: 100%;
+}
+#idholder{
+	border-bottom-color: black;
+	border-right-color: black;
+	border-left-color: black;
+	border-top-color: orange;
+	border-style: solid;
+	border-width: 3px;
+	border-right-style: double;
+	border-left-style: double;
+}
+.pagehead{
+	font-weight: bolder;
+	color: orange;
+	font-size: 2em;
+}
+.postid{
+	width: 110px;
+}
+#postiddescription{
+	font-weight: bold;
+	color: black;
+	font-size: 1.5em;
+}
+#postidform{
+	/*left: -10px;*/
+}
+.forminput{
+	border-top: hidden;
+	border-right: hidden;
+	border-left: hidden;
+	border-bottom-right-radius: 10px; 
+	border-bottom-width: 3px;  
+}
+#claimtext{
+	text-decoration: none;
+	color: black;
+	font-weight: bold;
 }

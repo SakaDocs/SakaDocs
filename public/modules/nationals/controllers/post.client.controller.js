@@ -1,20 +1,51 @@
 'use strict';
 
-angular.module('nationals').controller('PostController', ['$scope', '$http', '$location', 'Authentication',
-
-function($scope, $http, $location, Authentication) {
-    $scope.authentication = Authentication;
-    if ($scope.authentication.user) {
-        $scope.post = function() {
-            $http.post('/nationalids', $scope.id).success(function(response) {
-                $scope.sccs = "successfully posted id";
-                $location.path('nationals');
-            }).error(function(response) {
-                $scope.err = response.message;
-            });
+angular.module('nationals').controller('PostController', ['$scope', '$timeout', '$location', 'Authentication', 'Uploadfileservice',
+    function($scope, $timeout, $location, Authentication, Uploadfileservice) {
+       $scope.authentication = Authentication;
+       // check if user is logged in
+       if ($scope.authentication.user) {
+        $scope.file = {};
+        $scope.Submit = function() {
+            $scope.uploading = true;
+            // set the users number as finderNumber 
+            $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
+            Uploadfileservice.upload($scope.file, $scope.id).then(function(data) {
+                if (data.data.success) {
+                    $scope.alert = 'alert alert-success';
+                    $scope.message = data.data.message;
+                    $scope.file = {};
+                    $scope.uploading = false;
+                } else {
+                    $scope.uploading = false;
+                    $scope.alert = 'alert alert-danger';
+                    $scope.message = data.data.message;
+                    $scope.file = {};
+                }
+            })
         }
-} else {
-    $location.path('signin');
-    $scope.err = "Please sign in or Create an account to continue";
-}
-}]);
+        $scope.photoChanged = function(files) {
+            if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
+                $scope.uploading = true;
+                var file = files[0];
+                var fileReader = new FileReader();
+                fileReader.readAsDataURL(file);
+                fileReader.onload = function(e) {
+                    $timeout(function() {
+                        $scope.thumbnail = {};
+                        $scope.thumbnail.dataUrl = e.target.result;
+                        $scope.uploading = false;
+                        $scope.message = false;
+                    });
+                }
+
+            } else {
+                $scope.thumbnail = {};
+                $scope.message = false;
+            }
+        }
+    }else{
+    	$location.path('/signin');
+    }
+    }
+]);

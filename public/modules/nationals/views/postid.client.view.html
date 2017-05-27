@@ -1,37 +1,62 @@
-<br><section data-ng-controller="PostController">
-	<div class="col-sm-3"></div>
-	<div class="col-sm-6">
-		<form name="idForm" data-ng-submit="post()"  autocomplete="off">
-			<fieldset>
-				<div data-ng-show="err" class="text-center text-danger">
-					<strong data-ng-bind="err"></strong>
-				</div>
-				<div class="form-group">
-					<label for="fullNames">Full names on ID</label>
-					<input type="text" required id="fullNames" name="fullNames" class="form-control" data-ng-model="id.fullNames" placeholder="Full names on id" validate>
-				</div>
-				<div class="form-group">
-					<label for="idNumber">ID number</label>
-					<input type="text" id="idNumber" name="idNumber" class="form-control" data-ng-model="id.idNumber" placeholder="ID number" required validate>
-				</div>
-				<div class="form-group">
-					<label for="locationFound">Where did you find ID?</label>
-					<input type="text" id="locationFound" name="locationFound" class="form-control" data-ng-model="id.locationFound" placeholder="Enter location" required validate>
-				</div>
-				<div class="form-group">
-					<label for="idphoto">Upload ID photo</label>
-					<input type = "file" id="file" name="file" />
-				</div>
-				
-				<div class="text-center form-group">
-					<button type="submit" class="btn btn-large"  id="postbtn">Post ID</button> 
-				</div>
-				<div data-ng-show="sccs" class="text-center text-success">
-					<strong data-ng-bind="sccs"></strong>
-				</div>
-			</fieldset>
-		</form>
-
-	</div>
-	<div class="col-sm-3"></div>
+<section data-ng-controller="PostController">
+    <div class="row text-center">
+        <h3 class="pagehead">Post national ID below</h3>
+        <p id="postiddescription">Post details and photo of the ID you have found, keep the ID until it is claimed and you will earn Kshs 100 when its collected.</p>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-9">
+            <div class="row" id="postidform">
+                <div class="col-sm-3">
+                    <div class="thumbnail" id="thumbnail" ng-show="thumbnail.dataUrl">
+                        <img class="mythumbnail img-responsive" ng-src="{{thumbnail.dataUrl}}">
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div ng-show="message">
+                        <div ng-class="alert">{{message}}</div>
+                    </div>
+                    <form ng-submit="Submit();">
+                        <div class="form-group">
+                            <!-- <label for="fullNames">Full names on Id</label> -->
+                            <br>
+                            <input type="text" name="fullNames" class="form-control forminput" data-ng-model="id.fullNames" placeholder="Full names on ID" required validate>
+                        </div>
+                        <div class="form-group">
+                            <!--  <label for="idNumber">ID number</label> -->
+                            <br>
+                            <input type="text" name="idNumber" class="form-control forminput" data-ng-model="id.idNumber" placeholder="ID number" title=" Enter a valid ID number" size="8" pattern="^\d{4}\d{4}$" validate required>
+                        </div>
+                        <div class="form-group">
+                            <!-- <label for="location">Location found</label> -->
+                            <br>
+                            <input type="text" name="Where did you find ID" class="form-control forminput" data-ng-model="id.location" placeholder="location" required>
+                        </div>
+                        <!-- <label for="">Upload Photo:</label> -->
+                        <label class="btn" id="altbtn">Upload Photo
+                            <input type="file" file-model="file.upload" name="idphoto" ng-disabled="uploading" style="display: none;" onchange="angular.element(this).scope().photoChanged(this.files)">
+                        </label>
+                        <br>
+                        <br>
+                        <div ng-show="uploading" class="progress">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-4"></div>
+                            <div class="col-sm-4">
+                                <button id="signupbtn"  class="btn text-center postid" ng-disabled="uploading">Post ID</button>
+                            </div>
+                            <div class="col-sm-4"></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-1"></div>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
 </section>

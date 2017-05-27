@@ -33,6 +33,11 @@ var NationalSchema = new Schema({
 	idPhoto: {
 		type: String,
 		trim: true
+	},
+	claimed: {
+		type: Boolean,
+		default: false
+
 	}
 	// store photo
 });

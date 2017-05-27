@@ -6,9 +6,12 @@ angular.module('nationals').controller('NationalsController', ['$scope', '$http'
     	$scope.find = function() {
             $http.get('/nationalids').success(function(res) {
             	$scope.ids = res;
-            }).error(function(response) {
+            }).error(function(res) {
                 $scope.error = res.message;
             });
+        }
+        $scope.claimId = function () {
+        	console.log($scope.docid);
         }
         
 

@@ -5,6 +5,10 @@ angular.module('nationals').config(['$stateProvider',
 	function($stateProvider) {
 		// Nationals state routing
 		$stateProvider.
+		state('claimid', {
+			url: '/claimid',
+			templateUrl: 'modules/nationals/views/claimid.client.view.html'
+		}).
 		state('postid', {
 			url: '/postid',
 			templateUrl: 'modules/nationals/views/postid.client.view.html'

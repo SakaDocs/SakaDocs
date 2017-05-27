@@ -3,6 +3,9 @@
 	<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
 		<form name="userForm" data-ng-submit="signup()" class="signin form-horizontal" novalidate autocomplete="off">
 			<fieldset>
+				<div data-ng-show="error" class="text-center text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
 				<div class="form-group">
 					<label for="firstName">First Name</label>
 					<input type="text" required id="firstName" name="firstName" class="form-control" data-ng-model="credentials.firstName" placeholder="First Name">
@@ -21,7 +24,7 @@
 				</div>
 				<div class="form-group">
 					<label for="phoneNumber">Mobile Number</label>
-					<input type="text" id="mobileNumber" name="phoneNumber" class="form-control" data-ng-model="credentials.phoneNumber" placeholder="+254715342000">
+					<input type="text" id="mobileNumber" name="phoneNumber" class="form-control" data-ng-model="credentials.phoneNumber" size="13" pattern="(\+254)7([0-9|9])(\d){7}" title=" e.g +254700000000">
 				</div>
 				<div class="form-group">
 					<label for="password">Password</label>
@@ -31,9 +34,7 @@
 					<button type="submit" class="btn btn-large" id="signupbtn">Create an account</button>&nbsp; or&nbsp;
 					<a href="/#!/signin" class="show-signup btn btn-large " id="altbtn">Sign in</a>
 				</div>
-				<div data-ng-show="error" class="text-center text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
+				
 			</fieldset>
 		</form>
 	</div>
