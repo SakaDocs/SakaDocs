@@ -4,8 +4,8 @@
   "version": "0.0.1",
   "author": "Pnganga",
   "engines": {
-    "node": "0.10.x",
-    "npm": "1.4.x"
+    "node": "7.10.1"
+    
   },
   "scripts": {
     "start": "grunt",
