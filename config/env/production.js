@@ -1,8 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://heroku_h9hs2m8k:811ms0qottjb66474vt2b4gm83@ds153752.mlab.com:53752/heroku_h9hs2m8k', 
-	// process.env.MONGOHQ_URL || 	'mongodb://herokupata:darell05@ds155582.mlab.com:55582/heroku_s4n0d1l7' || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/patadocs',
+	db:  process.env.MONGOHQ_URL || MONGODB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/patadocs',
 	assets: {
 		lib: {
 			css: [
