@@ -33,6 +33,11 @@ var StudentSchema = new Schema({
     created: {
         type: Date,
         default: Date.now
+    },
+    claimed: {
+        type: Boolean,
+        default: false
+
     }
     // store photo
 });

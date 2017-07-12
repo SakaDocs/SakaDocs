@@ -37,10 +37,7 @@ exports.create = function(req, res) {
     }).single('idphoto');
 
     upload(req, res, function(err) {
-            console.log(req.body);
-            console.log(req.file);
             if (err) {
-                console.log(err);
                 if (err.code === 'LIMIT_FILE_SIZE') {
                     res.json({
                         success: false,
@@ -73,7 +70,6 @@ exports.create = function(req, res) {
                         finderNumber: idDetails.finderNumber,
                         idPhoto: "modules/uploads/images/ids/" + req.file.filename
                     };
-                    console.log(id);
                     var national = new National(id);
                     national.save(function(err) {
                         if (err) {

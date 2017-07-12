@@ -1,173 +1,173 @@
 <div class="container" data-ng-controller="HeaderController">
     <div class=" navbar-header col-sm-2 text-center">
-        <!--  <button class="navbar-toggle" type="button" data-ng-click="toggleCollapsibleMenu()">
+        <a href="/#!/" class="navbar-brand" id="logo"><img class="img-responsive" src="/modules/core/img/brand/logo.png" alt="logo"></a>
+        <button class="navbar-toggle" type="button" data-ng-click="toggleCollapsibleMenu()">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-        </button> -->
-        <a href="/#!/" class="navbar-brand" id="logo"><img src="/modules/core/img/brand/logo.png" alt="logo"></a>
+        </button>
     </div>
-    <div class="col-sm-10">
-        <div class=" row navbar-nav" id="homesearch">
-            <br>
+    <div class="col-sm-8" id="searchnav">
+        <div class="row" id="searchholder">
             <form class="form-wrapper searchform row">
-                <div class="col-sm-10">
-                    <select name="docType" data-ng-model="docType" class="nav-search-dropdown" id="typedown" oninvalid="this.setCustomValidity('You must choose a document type')" oninput="setCustomValidity('')" required aria-required=”true” required validate>
-                        <option value="" disabled="disabled" class="text-center" selected="selected" style="display:none">
-                            <span class="dropdownheading">Search for document</span>
-                        </option>
-                        <option value="national">National ID</option>
-                        <option value="studentId">Student ID</option>
-                        <option value="staffId">Staff ID</option>
-                        <option value="atm">ATM card</option>
-                        <option value="nhifCard">NHIF card</option>
-                        <option value="certificate">Certificate</option>
-                        <option value="passport">Passport</option>
-                        <option value="dl">Driving license</option>
-                    </select>
-                </div>
-                <div class="col-sm-2" id="searchbtn" type="submit">
-                    <button id="button" type="submit" ng-click="search()">
-                        <span class="glyphicon glyphicon-search"></span></button>
-                </div>
+                <select name="docType" data-ng-model="docType" class="nav-search-dropdown" id="typedown" oninvalid="this.setCustomValidity('You must choose a document type')" oninput="setCustomValidity('')" required aria-required=”true” required validate>
+                    <option value="" disabled="disabled" class="text-center" selected="selected" style="display:none">
+                        <span class="dropdownheading">Search for document</span>
+                    </option>
+                    <option value="national">National ID</option>
+                    <option value="studentId">Student ID</option>
+                    <option value="staffId">Staff ID</option>
+                    <option value="atm">ATM card</option>
+                    <option value="nhifCard">Insurance card</option>
+                    <option value="certificate">Certificate</option>
+                    <option value="passport">Passport</option>
+                    <option value="dl">Driving license</option>
+                    <option value="dl">Envelope</option>
+                </select>
+                <button id="button" type="submit" ng-click="search()">
+                    <span class="glyphicon glyphicon-search"></span></button>
             </form>
         </div>
-        <nav class="collapse navbar-collapse row" collapse="!isCollapsed" role="navigation">
-            <!--  <ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
-                <li data-ng-repeat="item in menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType" ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}" ng-class="{active: ($uiRoute)}" dropdown="item.menuItemType === 'dropdown'">
-                    <a ng-switch-when="dropdown" class="dropdown-toggle" dropdown-toggle>
-                        <span data-ng-bind="item.title"></span>
-                        <b class="caret"></b>
-                    </a>
-                    <ul ng-switch-when="dropdown" class="dropdown-menu">
-                        <li data-ng-repeat="subitem in item.items | orderBy: 'position'" data-ng-if="subitem.shouldRender(authentication.user);" ui-route="{{subitem.uiRoute}}" ng-class="{active: $uiRoute}">
-                            <a href="/#!/{{subitem.link}}" data-ng-bind="subitem.title"></a>
-                        </li>
-                    </ul>
-                    <a ng-switch-default href="/#!/{{item.link}}" data-ng-bind="item.title"></a>
-                </li>
-            </ul> -->
-            <br>
-            <ul class="nav navbar-nav  text-center" data-ng-hide="authentication.user">
-                <li ng-class="{active: $uiRoute}">
-                    <a href="/#!"><span class="menuname" id="createaccount">Home</span></a>
-                </li>
-                <li ui-route="/signup" ng-class="{active: $uiRoute}">
-                    <a href="/#!/signup"><span class="menuname" id="createaccount">Create an account</span></a>
-                </li>
-                <li class="divider-vertical"></li>
-                <li ui-route="/signin" ng-class="{active: $uiRoute}">
-                    <a href="/#!/signin"><span class="menuname" id="createaccount">Sign in</span></a>
-                </li>
-                <li class="dropdown" dropdown>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle>
-                        <span class="menuname" id="createaccount">Post a document</span> <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li name="doc" data-ng-model="doc">
-                            <a href="/#!/postid"><span class="menuname">National Id</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="/#!/settings/accounts"><span class="menuname">Student Id<span class="menuname"></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="/#!/settings/password"><span class="menuname">Staff Id</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="/auth/signout"><span class="menuname">ATM card</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="/auth/signout"><span class="menuname">NHIF card</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="/auth/signout"><span class="menuname">Certificate</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="/auth/signout"><span class="menuname">Passport</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="/auth/signout"><span class="menuname">Driving license</span></a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav text-center" data-ng-show="authentication.user">
-                <li ng-class="{active: $uiRoute}">
-                    <a href="/#!"><span class="menuname" id="createaccount">Home</span></a>
-                </li>
-                <li class="dropdown" dropdown>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle>
-                        <span class="menuname" id="createaccount">Post a document</span> <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li name="doc" data-ng-model="doc">
-                            <a href="/#!/postid"><span class="menuname">National Id</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="/#!/settings/accounts"><span class="menuname">Student Id<span class="menuname"></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="/#!/settings/password"><span class="menuname">Staff Id</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="/auth/signout"><span class="menuname">ATM card</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="/auth/signout"><span class="menuname">NHIF card</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="/auth/signout"><span class="menuname">Certificate</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="/auth/signout"><span class="menuname">Passport</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="/auth/signout"><span class="menuname">Driving license</span></a>
-                        </li>
-                    </ul>
-                </li>
-                <li ui-route="/signi" ng-class="{active: $uiRoute}">
-                    <a href="/#!/myposts"><span class="menuname" id="postdoc">My Posts</span></a>
-                </li>
-                <li class="dropdown" dropdown>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle>
-                        <span class="menuname" data-ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href=""><span class="menuname">Account balance:  <span data-ng-bind="authentication.user.accountBalance | currency"></span></span></a>
-                        </li>
-                        <li>
-                            <a href="/#!/settings/profile"><span class="menuname">Edit Profile</span></a>
-                        </li>
-                        <li>
-                            <a href="/#!/settings/accounts"><span class="menuname">Manage Social Accounts<span class="menuname"></a>
-                        </li>
-                        <li data-ng-show="authentication.user.provider === 'local'">
-                            <a href="/#!/settings/password"><span class="menuname">Change Password</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="/auth/signout"><span class="menuname">Signout</span></a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
+        <div class="row" id="navholder">
+            <nav class="collapse navbar-collapse row" collapse="!isCollapsed" role="navigation">
+                <ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
+                    <li data-ng-repeat="item in menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType" ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}" ng-class="{active: ($uiRoute)}" dropdown="item.menuItemType === 'dropdown'">
+                        <a ng-switch-when="dropdown" class="dropdown-toggle" dropdown-toggle>
+                            <span data-ng-bind="item.title"></span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul ng-switch-when="dropdown" class="dropdown-menu">
+                            <li data-ng-repeat="subitem in item.items | orderBy: 'position'" data-ng-if="subitem.shouldRender(authentication.user);" ui-route="{{subitem.uiRoute}}" ng-class="{active: $uiRoute}">
+                                <a href="/#!/{{subitem.link}}" data-ng-bind="subitem.title"></a>
+                            </li>
+                        </ul>
+                        <a ng-switch-default href="/#!/{{item.link}}" data-ng-bind="item.title"></a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav  text-center" data-ng-hide="authentication.user">
+                    <li ng-class="{active: $uiRoute}">
+                        <a href="/#!"><span class="menuname" id="createaccount">Home</span></a>
+                    </li>
+                    <li ui-route="/signup" ng-class="{active: $uiRoute}">
+                        <a href="/#!/signup"><span class="menuname" id="createaccount">Create an account</span></a>
+                    </li>
+                    <li class="divider-vertical"></li>
+                    <li ui-route="/signin" ng-class="{active: $uiRoute}">
+                        <a href="/#!/signin"><span class="menuname" id="createaccount">Sign in</span></a>
+                    </li>
+                    <li class="dropdown" dropdown>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle>
+                            <span class="menuname" id="createaccount">Post a document</span> <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li name="doc" data-ng-model="doc">
+                                <a href="/#!/postid"><span class="menuname">National Id</span></a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/#!/settings/accounts"><span class="menuname">Student Id<span class="menuname"></a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/#!/settings/password"><span class="menuname">Staff Id</span></a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/auth/signout"><span class="menuname">ATM card</span></a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/auth/signout"><span class="menuname">NHIF card</span></a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/auth/signout"><span class="menuname">Certificate</span></a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/auth/signout"><span class="menuname">Passport</span></a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/auth/signout"><span class="menuname">Driving license</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav text-center" data-ng-show="authentication.user">
+                    <li ng-class="{active: $uiRoute}">
+                        <a href="/#!"><span class="menuname" id="createaccount">Home</span></a>
+                    </li>
+                    <li class="dropdown" dropdown>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle>
+                            <span class="menuname" id="createaccount">Post a document</span> <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li name="doc" data-ng-model="doc">
+                                <a href="/#!/postid"><span class="menuname">National Id</span></a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/#!/settings/accounts"><span class="menuname">Student Id<span class="menuname"></a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/#!/settings/password"><span class="menuname">Staff Id</span></a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/auth/signout"><span class="menuname">ATM card</span></a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/auth/signout"><span class="menuname">NHIF card</span></a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/auth/signout"><span class="menuname">Certificate</span></a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/auth/signout"><span class="menuname">Passport</span></a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/auth/signout"><span class="menuname">Driving license</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li ui-route="/signin" ng-class="{active: $uiRoute}">
+                        <a href="/#!/myposts"><span class="menuname" id="postdoc">My Posts</span></a>
+                    </li>
+                    <li class="dropdown" dropdown>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle>
+                            <span class="menuname" data-ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href=""><span class="menuname">Account balance:  <span data-ng-bind="authentication.user.accountBalance | currency"></span></span></a>
+                            </li>
+                            <li>
+                                <a href="/#!/settings/profile"><span class="menuname">Edit Profile</span></a>
+                            </li>
+                            <li>
+                                <a href="/#!/settings/accounts"><span class="menuname">Manage Social Accounts<span class="menuname"></a>
+                            </li>
+                            <li data-ng-show="authentication.user.provider === 'local'">
+                                <a href="/#!/settings/password"><span class="menuname">Change Password</span></a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/auth/signout"><span class="menuname">Signout</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="col-sm-2" style="color: white;"><br><br>
+        <h5>Mpesa Paybill</h5>
     </div>
 </div>

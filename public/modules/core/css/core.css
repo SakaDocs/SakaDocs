@@ -42,17 +42,18 @@
 }
 #typedown{
 	color: orange;
-	min-height: 35px;
+	min-height: 45px;
 	border-color: orange;
 	border-left-color: orange;
 	border-right-color: white;
 	border-width: 1px;
 	border-style: solid;
-	width: 365px;
+	width: 395px;
 	font-weight: bolder;
-	padding-top: 5px;
+	padding-top: 10px;
 	padding-bottom: 5px;
-	/*padding-left: 85px;*/
+	padding-left: 15px;
+	top: 10px;
 
 }
 #uniquefilter{
@@ -68,16 +69,37 @@
 	padding-left: 65px;
 
 }
+#docholder{
+	/*min-height: 200px;*/
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center; 
+	border-style: dashed; 
+	border-bottom-style: solid;
+	border-color: #eeeeee;
+	/*margin-right: 1	px;*/
+}
+body{
+	height: 100%;
+}
+.doc{
+	display: block;	
+	margin: auto;
+}
 #button{
 	background-color: orange;
 	border-color: orange;
 	border-bottom-right-radius: 5px;
 	border-top-right-radius: 5px;
-	min-height: 35px;
+	min-height: 46px;
 	border-style: solid;
+	margin-left: -3.8px;
+	border-top: 8px;
+	width: 6%;
+
 }
 .dropdownheading{
-	color: blue;
+	/*color: blue;*/
 	font-weight: bolder;
 	font-size: 2em;
 }
@@ -133,8 +155,7 @@
 }
 #idsection{
 	background-color: white;
-	min-height: 100px;
-	width: 40%;
+	
 }
 #idheadlink{
 	text-decoration: none;
@@ -166,8 +187,9 @@
 	border-style: solid;
 }
 #logo{
-	left: -110px;
-	position: relative;
+	/*top: 500px;*/
+	height: auto;
+	width: 100%;
 }
 .mythumbnail{
 	height: 100%;
@@ -193,6 +215,13 @@
 	color: orange;
 	font-size: 2em;
 }
+#searchnav{
+	left: 150px;
+	top: 15px;
+}
+#searchholder{
+
+}
 .postid{
 	width: 110px;
 }
@@ -215,4 +244,16 @@
 	text-decoration: none;
 	color: black;
 	font-weight: bold;
+}
+@media only screen and (max-width: 500px) {
+	#logo{
+	left: 50px;
+	position: relative;
+	height: auto;
+	width: 100%;
+}
+#typedown{
+	width: 70%;
+	left: 80px;
+}
 }

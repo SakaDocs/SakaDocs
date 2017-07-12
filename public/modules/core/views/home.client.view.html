@@ -1,36 +1,105 @@
 <!-- This is the homepage -->
-<section data-ng-controller="HomeController" class="homedocs text-center">
-    <h2 style="font-weight: bold;">Popular Documents</h2><br>
-    <div class="row">
-    	<div class="col-sm-1" id="emptysection"></div>
-        <a href="/#!/national">
-            <div class="col-sm-4 thumbnail" id="idsection">
-            <img src="/modules/core/img/nationalid.jpg" style="" alt="id">
-            <a href="" id="idheadlink"><h4 id="idhead">NATIONAL ID</h4></a>
+<br>
+<section data-ng-controller="HomeController" class="homedocs ">
+    <br>
+    <div class="container-fluid">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10 text-center">
+            <br>
+            <h6 style="font-weight: bold; font-size: 1.2em;">To find your document, use the search bar above or click a specific category below.</h6>
+            <br>
+            <br>
+            <div class="row">
+                <div class=" container col-sm-4 text-center" id="docholder">
+                    <br>
+                    <a href="/#!/national">
+                        <div class="text-center" id="idsection" style="background-color: white;">
+                            <img class="doc" src="/modules/core/img/nationalID.jpg" alt="id">
+                        </div>
+                        <a href="/#!/national" class="text-center" id="idheadlink"><h4 id="idhead">NATIONAL ID</h4></a>
+                    </a>
+                </div>
+                <div class="container col-sm-4 text-center " id="docholder">
+                    <br>
+                    <a href="/#!/studentids">
+                        <div class="text-center" id="idsection" style="background-color: white">
+                            <img class="doc" src="/modules/core/img/StudentID.jpg" style="" alt="staff id">
+                        </div>
+                        <a href="/#!/studentids" id="idheadlink"><h4 id="idhead">STUDENT ID</h4></a>
+                    </a>
+                </div>
+                <div class="container col-sm-4 text-center" id="docholder">
+                    <br>
+                    <a href="/#!/staffid">
+                        <div class="text-center" id="idsection" style="background-color: white">
+                            <img class="doc" src="/modules/core/img/StaffID.jpg" style="" alt="staff id">
+                        </div>
+                        <a href="/#!/staffid" id="idheadlink"><h4 id="idhead">STAFF ID</h4></a>
+                    </a>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <div class=" container col-sm-4 text-center" id="docholder">
+                    <br>
+                    <a href="/#!/atm">
+                        <div class="text-center" id="idsection" style="background-color: white;">
+                            <img class="doc" src="/modules/core/img/ATMcard.jpg" alt="ATMcard">
+                        </div>
+                        <a href="/#!/atm" class="text-center" id="idheadlink"><h4 id="idhead">ATM CARD</h4></a>
+                    </a>
+                </div>
+                <div class="container col-sm-4 text-center " id="docholder">
+                    <br>
+                    <a href="/#!/insurancecard">
+                        <div class="text-center" id="idsection" style="background-color: white">
+                            <img class="doc" src="/modules/core/img/InsuranceCard.jpg" style="" alt="InsuranceCard">
+                        </div>
+                        <a href="/#!/insurancecard" id="idheadlink"><h4 id="idhead">INSURANCE CARD</h4></a>
+                    </a>
+                </div>
+                <div class="container col-sm-4 text-center" id="docholder">
+                    <br>
+                    <a href="/#!/certificate">
+                        <div class="text-center" id="idsection" style="background-color: white">
+                            <img class="doc" src="/modules/core/img/Certificate.jpg" style="" alt="Certificate">
+                        </div>
+                        <a href="/#!/certificate" id="idheadlink"><h4 id="idhead">CERTIFICATE</h4></a>
+                    </a>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <div class=" container col-sm-4 text-center" id="docholder">
+                    <br>
+                    <a href="/#!/dl">
+                        <div class="text-center" id="idsection" style="background-color: white;">
+                            <img class="doc" src="/modules/core/img/DrivingLicence.jpg" alt="DrivingLicense">
+                        </div>
+                        <a href="/#!/dl" class="text-center" id="idheadlink"><h4 id="idhead">DRIVING LICENCE</h4></a>
+                    </a>
+                </div>
+                <div class="container col-sm-4 text-center " id="docholder">
+                    <br>
+                    <a href="/#!/passport">
+                        <div class="text-center" id="idsection" style="background-color: white">
+                            <img class="doc" src="/modules/core/img/Passport.jpg" style="" alt="Passport">
+                        </div>
+                        <a href="/#!/passport" id="idheadlink"><h4 id="idhead">PASSPORT</h4></a>
+                    </a>
+                </div>
+                <div class="container col-sm-4 text-center" id="docholder">
+                    <br>
+                    <a href="/#!/envelope">
+                        <div class="text-center" id="idsection" style="background-color: white">
+                            <img class="doc" src="/modules/core/img/Envelope.jpg" style="" alt="Certificate">
+                        </div>
+                        <a href="/#!/envelope" id="idheadlink"><h4 id="idhead">ENVELOPE</h4></a>
+                    </a>
+                </div>
+            </div>
         </div>
-        </a>
-        <div class="col-sm-1" id="emptysection"></div>
-        <a href="/#!/atm"><div class="col-sm-4 thumbnail" id="docsection">
-            <img src="/modules/core/img/ATMcard.jpg" style="" alt="id">
-            <a href="" id="idheadlink"><h4 id="idhead">ATM CARD</h4></a>
-        </div></a>
-    </div>
-     <div class="row">
-    	<div class="col-sm-1" id="emptysection"></div>
-        <div class="col-sm-4 thumbnail" id="docsection"></div>
-        <div class="col-sm-1" id="emptysection"></div>
-        <div class="col-sm-4 thumbnail" id="docsection"></div>
-    </div>
-     <div class="row">
-    	<div class="col-sm-1" id="emptysection"></div>
-        <div class="col-sm-4 thumbnail" id="docsection"></div>
-        <div class="col-sm-1" id="emptysection"></div>
-        <div class="col-sm-4 thumbnail" id="docsection"></div>
-    </div>
-     <div class="row">
-    	<div class="col-sm-1" id="emptysection"></div>
-        <div class="col-sm-4 thumbnail" id="docsection"></div>
-        <div class="col-sm-1" id="emptysection"></div>
-        <div class="col-sm-4 thumbnail" id="docsection"></div>
     </div>
 </section>
