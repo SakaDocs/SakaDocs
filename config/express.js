@@ -99,15 +99,16 @@ module.exports = function(db) {
     app.use(cookieParser());
 
     // Express MongoDB session storage
-    app.use(session({
-        saveUninitialized: true,
-        resave: true,
-        secret: config.sessionSecret,
-        store: new mongoStore({
-            db: db.connection.db,
-            collection: config.sessionCollection
-        })
-    }));
+    // app.use(session({
+    //     saveUninitialized: true,
+    //     resave: true,
+    //     secret: config.sessionSecret,
+    //     store: new mongoStore({
+    //         db: db.connection.db,
+    //         collection: config.sessionCollection,
+    //         auto_reconnect: true
+    //     })
+    // }));
 
     // use passport session
     app.use(passport.initialize());
