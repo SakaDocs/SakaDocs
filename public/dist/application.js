@@ -96,6 +96,10 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 
 		// Home state routing
 		$stateProvider.
+		state('payment', {
+			url: '/payment',
+			templateUrl: 'modules/core/views/payment.client.view.html'
+		}).
 		state('footer', {
 			url: '/footer',
 			templateUrl: 'modules/core/views/footer.client.view.html'
@@ -123,7 +127,7 @@ angular.module('core').controller('HeaderController', ['$scope', '$http', '$loca
         $scope.menu = Menus.getMenu('topbar');
         $scope.search = function() {
         	$location.path($scope.docType);
-        }
+        };
         $scope.toggleCollapsibleMenu = function() {
             $scope.isCollapsed = !$scope.isCollapsed;
         };
@@ -313,12 +317,12 @@ angular.module('core').service('Menus', [
 'use strict';
 
 //Setting up route
-angular.module('nationals').config(['$stateProvider',
+angular.module('nationals').config(['$stateProvider', 
 	function($stateProvider) {
 		// Nationals state routing
 		$stateProvider.
 		state('claimid', {
-			url: '/claimid',
+			url: '/claimid/:id',
 			templateUrl: 'modules/nationals/views/claimid.client.view.html'
 		}).
 		state('postid', {
@@ -333,14 +337,19 @@ angular.module('nationals').config(['$stateProvider',
 ]);
 'use strict';
 
-angular.module('nationals').controller('ClaimController', ['$scope', '$location', 'Authentication',
-    function($scope, $location, Authentication) {
+angular.module('nationals').controller('ClaimController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
+    function($scope, $http, $location, Authentication, $stateParams) {
         $scope.authentication = Authentication;
         if ($scope.authentication.user) {
             $scope.claim = function() {
-                
+                // $http.get('/nationalids/$stateParams.id').success(function(res) {
+                //     $scope.ids = res;
+                // }).error(function(res) {
+                //     $scope.error = res.message;
+                // });
+
                 if ($scope.authentication.user.accountBalance < 200) {
-                	
+                    $scope.message = "Recharge account";
                 } else {
                     $scope.message = "claim id";
                 }
@@ -353,7 +362,6 @@ angular.module('nationals').controller('ClaimController', ['$scope', '$location'
 
     }
 ]);
-
 'use strict';
 
 angular.module('nationals').controller('NationalsController', ['$scope', '$http', '$location', 'Authentication',
@@ -366,11 +374,7 @@ angular.module('nationals').controller('NationalsController', ['$scope', '$http'
                 $scope.error = res.message;
             });
         }
-        $scope.claimId = function() {
-         
-        }
-
-
+       
     }
 ]);
 
@@ -584,6 +588,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				// And redirect to the index page
 				$location.path('/');
 			}).error(function(response) {
+				console.log(response)
 				$scope.error = response.message;
 			});
 		};
