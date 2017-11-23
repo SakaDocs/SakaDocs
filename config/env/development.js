@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://heroku_h9hs2m8k:811ms0qottjb66474vt2b4gm83@ds153752.mlab.com:53752/heroku_h9hs2m8k',
+	db: 'mongodb://localhost/patadocs-dev',
 	app: {
 		title: 'Patadocs - Your document finding solution'
 	},
