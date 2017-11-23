@@ -8,6 +8,10 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 
 		// Home state routing
 		$stateProvider.
+		state('payment', {
+			url: '/payment',
+			templateUrl: 'modules/core/views/payment.client.view.html'
+		}).
 		state('footer', {
 			url: '/footer',
 			templateUrl: 'modules/core/views/footer.client.view.html'

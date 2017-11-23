@@ -99,16 +99,19 @@ module.exports = function(db) {
     app.use(cookieParser());
 
     // Express MongoDB session storage
-    // app.use(session({
-    //     saveUninitialized: true,
-    //     resave: true,
-    //     secret: config.sessionSecret,
-    //     store: new mongoStore({
-    //         db: db.connection.db,
-    //         collection: config.sessionCollection,
-    //         auto_reconnect: true
-    //     })
-    // }));
+    app.use(session({
+        saveUninitialized: true,
+        resave: true,
+        secret: config.sessionSecret,
+        store: new mongoStore({
+            mongooseConnection: db.connection,
+            collection: config.sessionCollection
+        })
+
+    }));
+
+    // Setting the app router and static folder
+    app.use(express.static(path.resolve('./public')));
 
     // use passport session
     app.use(passport.initialize());
@@ -124,8 +127,7 @@ module.exports = function(db) {
     app.use(helmet.ienoopen());
     app.disable('x-powered-by');
 
-    // Setting the app router and static folder
-    app.use(express.static(path.resolve('./public')));
+
 
     // Globbing routing files
     config.getGlobbedFiles('./app/routes/**/*.js').forEach(function(routePath) {

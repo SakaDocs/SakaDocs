@@ -10,10 +10,6 @@ angular.module('nationals').controller('NationalsController', ['$scope', '$http'
                 $scope.error = res.message;
             });
         }
-        $scope.claimId = function() {
-         
-        }
-
-
+       
     }
 ]);

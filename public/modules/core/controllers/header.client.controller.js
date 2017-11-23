@@ -7,7 +7,7 @@ angular.module('core').controller('HeaderController', ['$scope', '$http', '$loca
         $scope.menu = Menus.getMenu('topbar');
         $scope.search = function() {
         	$location.path($scope.docType);
-        }
+        };
         $scope.toggleCollapsibleMenu = function() {
             $scope.isCollapsed = !$scope.isCollapsed;
         };

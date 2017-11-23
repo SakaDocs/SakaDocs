@@ -39,15 +39,13 @@
 
 <body class="ng-cloak">
     <header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
-    <br>
-    <br>
-    <br>
+    <div id="mobile-space"></div>
     <section class="content">
         <section class="container">
             {% block content %}{% endblock %}
         </section>
     </section>
-    <footer data-ng-include="'/modules/core/views/footer.client.view.html'"></footer>
+    <!-- <footer data-ng-include="'/modules/core/views/footer.client.view.html'"></footer> -->
     <!--Embedding The User Object-->
     <script type="text/javascript">
     var user = {

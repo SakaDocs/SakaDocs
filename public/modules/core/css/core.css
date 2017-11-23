@@ -50,10 +50,7 @@
 	border-style: solid;
 	width: 395px;
 	font-weight: bolder;
-	padding-top: 10px;
-	padding-bottom: 5px;
-	padding-left: 15px;
-	top: 10px;
+	top: 11px;
 
 }
 #uniquefilter{
@@ -70,14 +67,11 @@
 
 }
 #docholder{
-	/*min-height: 200px;*/
-	display: table-cell;
 	vertical-align: middle;
 	text-align: center; 
 	border-style: dashed; 
 	border-bottom-style: solid;
 	border-color: #eeeeee;
-	/*margin-right: 1	px;*/
 }
 body{
 	height: 100%;
@@ -87,16 +81,19 @@ body{
 	margin: auto;
 }
 #button{
+	top: 10px;
 	background-color: orange;
 	border-color: orange;
 	border-bottom-right-radius: 5px;
 	border-top-right-radius: 5px;
-	min-height: 46px;
+	min-height: 45px;
 	border-style: solid;
 	margin-left: -3.8px;
-	border-top: 8px;
 	width: 6%;
 
+}
+#mobile-space{
+	min-height: 80px;
 }
 .dropdownheading{
 	/*color: blue;*/
@@ -230,9 +227,6 @@ body{
 	color: black;
 	font-size: 1.5em;
 }
-#postidform{
-	/*left: -10px;*/
-}
 .forminput{
 	border-top: hidden;
 	border-right: hidden;
@@ -245,7 +239,7 @@ body{
 	color: black;
 	font-weight: bold;
 }
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 700px) {
 	#logo{
 	left: 50px;
 	position: relative;
@@ -255,5 +249,20 @@ body{
 #typedown{
 	width: 70%;
 	left: 80px;
+}
+#searchbar{
+	margin-left: -150px;
+	width: 100%;
+}
+#mobile-space{
+	min-height: 270px;
+}
+#hamburger{
+	float: none;
+  margin-right: 0;
+
+}
+#mobilenav{
+	float: left;  
 }
 }
