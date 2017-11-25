@@ -1,12 +1,14 @@
-<section class="row" data-ng-controller="AuthenticationController">
-	<br>
+<section class="row" data-ng-controller="AuthenticationController"> 
+	<div class="col-sm-2"></div>
+	<div class="col-sm-8">
+		<br>
 	    <div class="row text-center">
         <h3 class="pagehead">Sign Up</h3>
-        <p id="postiddescription">Fill out the required fields to create an account with SakaDocs</p>
+        <p id="postiddescription">Fill in the required fields to create an account with SakaDocs</p>
     </div>
     <div class="row">
 	<div class="col-sm-2"></div>
-	<div class="col-sm-8" >
+	<div class="col-sm-8"  >
 		<form name="userForm" data-ng-submit="signup()" class="signin form-horizontal" novalidate autocomplete="off">
 			<fieldset>
 				<div data-ng-show="error" class="text-center text-danger">
@@ -46,4 +48,8 @@
 	</div>
 	<div class="col-sm-2"></div>
 	</div>
+	</div>
+	<div class="col-sm-2"></div>
+
+	
 </section>

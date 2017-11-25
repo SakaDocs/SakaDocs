@@ -56,13 +56,30 @@ exports.create = function(req, res) {
                 }
             } else {
                 if (!req.file) {
-                    res.json({
-                        success: false,
-                        message: 'No Image was uploaded'
+                    var idDetails = JSON.parse(req.body.iddetails);
+                    var id = {
+                        fullNames: idDetails.fullNames,
+                        idNumber: idDetails.idNumber,
+                        locationFound: idDetails.location,
+                        finderNumber: idDetails.finderNumber,
+                        
+                    };
+                    var national = new National(id);
+                    national.save(function(err) {
+                        if (err) {
+                            return res.status(400).send({
+                                message: errorHandler.getErrorMessage(err)
+                            });
+                        } else {
+                            res.status(201).json({
+                        success: true,
+                        message: 'You have uploaded Id successfully!!'
                     });
+                        }
+                    });
+                    
                 } else {
                 	var idDetails = JSON.parse(req.body.iddetails);
-                	console.log(idDetails);
                     var id = {
                         fullNames: idDetails.fullNames,
                         idNumber: idDetails.idNumber,

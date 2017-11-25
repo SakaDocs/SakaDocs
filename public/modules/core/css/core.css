@@ -234,6 +234,9 @@ body{
 	border-bottom-right-radius: 10px; 
 	border-bottom-width: 3px;  
 }
+#profile_on_mobile{
+	display: none;
+}
 #claimtext{
 	text-decoration: none;
 	color: black;
@@ -242,20 +245,17 @@ body{
 @media only screen and (max-width: 400px) {
 	#logo{
 	left: 50px;
-	position: relative;
+	/*position: relative;*/
 	height: auto;
-	width: 100%;
+	width: 70%;
 }
 #typedown{
 	width: 70%;
 	left: 80px;
 }
-#searchbar{
-	margin-left: -150px;
-	width: 100%;
-}
 #mobile-space{
-	min-height: 270px;
+	min-height: 120px;
+
 }
 #hamburger{
 	float: none;
@@ -264,5 +264,20 @@ body{
 }
 #mobilenav{
 	float: left;  
+}
+#searchholder{
+	display: none;
+}
+#headercontainer{
+	max-height: 50px;
+}
+#topinfo{
+	display: none;
+}
+#profile_on_mobile{
+	display: unset;
+}
+#profile_on_pc{
+	display: none;
 }
 }
