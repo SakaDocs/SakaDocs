@@ -237,10 +237,17 @@ body{
 #profile_on_mobile{
 	display: none;
 }
+#mobile_signup{
+	display: none;
+}
 #claimtext{
 	text-decoration: none;
 	color: black;
 	font-weight: bold;
+}
+
+#mobilehometext{
+	display: none;
 }
 @media only screen and (max-width: 400px) {
 	#logo{
@@ -279,5 +286,14 @@ body{
 }
 #profile_on_pc{
 	display: none;
+}
+#mobile_signup{
+	display: unset;
+}
+#pchometext{
+	display: none;
+}
+#mobilehometext{
+	display: unset;
 }
 }
