@@ -1,11 +1,16 @@
 <section class="row text-center" data-ng-controller="NationalsController" data-ng-init="find()">
     <br>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <a href="/#!/postid"><button class="btn btn-large" id="signupbtn"><span style="color: black;">Post found ID</span></button></a>
+        </div>
+        <div class="col-sm-2"></div>
+    </div> <br><br>
     <div class="row" style="background-color: black;  background-attachment: fixed;">
         <div class="col-sm-2"></div>
         <div class="col-sm-8 text-center">
-            <input type="text" placeholder="Search by ID number or full names" ng-model="search" id="uniquefilter">
-           
-           
+            <input type="text" placeholder="Search by your ID number or name" ng-model="search" id="uniquefilter">
         </div>
         <div class="col-sm-2"></div>
     </div><br><br>

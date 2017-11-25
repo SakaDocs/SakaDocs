@@ -9,7 +9,7 @@ module.exports = function(app) {
         .get(nationals.list)
      app.route('/postnationalid')
         .post(nationals.create);
-    app.route('/nationalids/:id')
+    app.route('/nationalid/:id')
         .get(nationals.read);
     
 };

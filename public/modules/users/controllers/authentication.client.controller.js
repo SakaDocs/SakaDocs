@@ -15,14 +15,12 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				// And redirect to the index page
 				$location.path('/');
 			}).error(function(response) {
-				console.log(response)
 				$scope.error = response.message;
 			});
 		};
 
 		$scope.signin = function() {
 			$http.post('/auth/signin', $scope.credentials).success(function(response) {
-				console.log($location.path())
 				// If successful we assign the response to the global user model
 				$scope.authentication.user = response;
 
