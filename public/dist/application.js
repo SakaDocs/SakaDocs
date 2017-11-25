@@ -342,16 +342,16 @@ angular.module('nationals').controller('ClaimController', ['$scope', '$http', '$
         $scope.authentication = Authentication;
         if ($scope.authentication.user) {
             $scope.claim = function() {
-                // $http.get('/nationalids/$stateParams.id').success(function(res) {
-                //     $scope.ids = res;
-                // }).error(function(res) {
-                //     $scope.error = res.message;
-                // });
-
+                console.log($stateParams.id)
                 if ($scope.authentication.user.accountBalance < 200) {
-                    $scope.message = "Recharge account";
-                } else {
-                    $scope.message = "claim id";
+                    $http.get('/nationalid/' + $stateParams.id).success(function(res) {
+                    $scope.id = res;
+                    console.log(res);
+                    
+                
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
                 }
 
             }
@@ -588,7 +588,6 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				// And redirect to the index page
 				$location.path('/');
 			}).error(function(response) {
-				console.log(response)
 				$scope.error = response.message;
 			});
 		};
