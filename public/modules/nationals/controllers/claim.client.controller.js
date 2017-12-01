@@ -5,13 +5,9 @@ angular.module('nationals').controller('ClaimController', ['$scope', '$http', '$
         $scope.authentication = Authentication;
         if ($scope.authentication.user) {
             $scope.claim = function() {
-                console.log($stateParams.id)
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get('/nationalid/' + $stateParams.id).success(function(res) {
                     $scope.id = res;
-                    console.log(res);
-                    
-                
                 }).error(function(res) {
                     $scope.error = res.message;
                 });

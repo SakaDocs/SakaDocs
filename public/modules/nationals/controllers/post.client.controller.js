@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('nationals').controller('PostController', ['$scope', '$timeout', '$location', 'Authentication', 'Uploadfileservice',
-    function($scope, $timeout, $location, Authentication, Uploadfileservice) {
+angular.module('nationals').controller('PostController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice',
+    function($scope, $timeout, $location, $interval, Authentication, Uploadfileservice) {
        $scope.authentication = Authentication;
        // check if user is logged in
        if ($scope.authentication.user) {
@@ -16,6 +16,10 @@ angular.module('nationals').controller('PostController', ['$scope', '$timeout', 
                     $scope.message = data.data.message;
                     $scope.file = {};
                     $scope.uploading = false;
+                    $interval(function () {
+                        $location.path('/nationals')
+                    }, 2000, 1,false);
+                    
                 } else {
                     $scope.uploading = false;
                     $scope.alert = 'alert alert-danger';

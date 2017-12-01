@@ -14,7 +14,8 @@
         </div>
         <div class="col-sm-2"></div>
     </div><br><br>
-    <div data-ng-repeat="id in ids | filter: search" data-ng-href="#!/nationals/{{id._id}}" id="idholder" class="row thumbnail"><br>
+
+    <div data-ng-repeat="id in testValue=(ids | filter: search) " data-ng-href="#!/nationals/{{id._id}}" id="idholder" class="row thumbnail"><br>
         <div class="col-sm-4 thumbnail img-responsive" id="idpic">
             <img class="img-responsive" ng-src="{{id.idPhoto}}" alt="">
         </div>
@@ -26,4 +27,10 @@
             <a href="/#!/claimid/{{id._id}}"><button type="submit" class="btn" id="signupbtn"><span id="claimtext">Claim this id</span></button></a>
         </div>
     </div>
+     <div ng-show="!ids.length" ng-class="alert">
+         <h2>Your document has not been posted yet. Please visit us later</h2>
+     </div>
+     <div ng-show="!testValue.length" ng-class="alert">
+         <h2>Your document has not been posted yet. Please visit us later</h2>
+     </div>
 </section>

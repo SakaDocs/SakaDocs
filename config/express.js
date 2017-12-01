@@ -22,7 +22,9 @@ var fs = require('fs'),
     config = require('./config'),
     consolidate = require('consolidate'),
     multer = require('multer'),
-    path = require('path');
+    path = require('path'),
+    cloudinaryStorage = require('multer-storage-cloudinary'),
+    Cloudinary = require('cloudinary');
 module.exports = function(db) {
     // Initialize express app
     var app = express();
@@ -81,18 +83,21 @@ module.exports = function(db) {
         extended: true
     }));
     app.use(bodyParser.json());
-    var storage = multer.diskStorage({ //multers disk storage settings
-        destination: function(req, file, cb) {
-            cb(null, './uploads/')
-        },
-        filename: function(req, file, cb) {
-            var datetimestamp = Date.now();
-            cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1])
-        }
-    });
-    var upload = multer({ //multer settings
-        storage: storage
-    }).single('file');
+    // var storage = multer.diskStorage({ //multers disk storage settings
+    //     destination: function(req, file, cb) {
+    //         cb(null, './uploads/')
+    //     },
+    //     filename: function(req, file, cb) {
+    //         var datetimestamp = Date.now();
+    //         cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1])
+    //     }
+    // });
+    //multer settings
+    // var upload = multer({ 
+    //     storage: storage
+    // }).single('file');
+
+    
     app.use(methodOverride());
 
     // CookieParser should be above session

@@ -24,7 +24,6 @@
 #emptysection{
 	width: 4%;
 	min-height: 100px;
-	/*background-color: blue;*/
 }
 .menuitem{
 	background-color: grey;
@@ -67,7 +66,6 @@
 
 }
 #docholder{
-	vertical-align: middle;
 	text-align: center; 
 	border-style: dashed; 
 	border-bottom-style: solid;
@@ -249,10 +247,9 @@ body{
 #mobilehometext{
 	display: none;
 }
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 700px) {
 	#logo{
 	left: 50px;
-	/*position: relative;*/
 	height: auto;
 	width: 70%;
 }

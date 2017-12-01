@@ -6,6 +6,7 @@ angular.module('nationals').controller('NationalsController', ['$scope', '$http'
         $scope.find = function() {
             $http.get('/nationalids').success(function(res) {
                 $scope.ids = res;
+                 $scope.alert = 'alert alert-danger';
             }).error(function(res) {
                 $scope.error = res.message;
             });
