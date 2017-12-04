@@ -34,6 +34,10 @@ var StudentSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    idPhoto: {
+        type: String,
+        trim: true
+    },
     claimed: {
         type: Boolean,
         default: false

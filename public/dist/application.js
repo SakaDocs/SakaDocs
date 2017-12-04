@@ -483,6 +483,14 @@ angular.module('students').config(['$stateProvider',
 	function($stateProvider) {
 		// Students state routing
 		$stateProvider.
+		state('claimstudentid', {
+			url: '/claimstudentid/:id',
+			templateUrl: 'modules/students/views/claimstudentid.client.view.html'
+		}).
+		state('poststudentid', {
+			url: '/poststudentid',
+			templateUrl: 'modules/students/views/poststudentid.client.view.html'
+		}).
 		state('studentids', {
 			url: '/studentids',
 			templateUrl: 'modules/students/views/studentids.client.view.html'
@@ -491,12 +499,127 @@ angular.module('students').config(['$stateProvider',
 ]);
 'use strict';
 
-angular.module('students').controller('StudentidsController', ['$scope',
+angular.module('students').controller('ClaimstudentidController', ['$scope',
 	function($scope) {
-		// Controller Logic
+		// Claimstudentid controller logic
 		// ...
 	}
 ]);
+'use strict';
+
+angular.module('students').controller('PoststudentidController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice',
+    function($scope, $timeout, $location, $interval, Authentication, Uploadfileservice) {
+       $scope.authentication = Authentication;
+       // check if user is logged in
+       if ($scope.authentication.user) {
+        $scope.file = {};
+        $scope.Submit = function() {
+            $scope.uploading = true;
+            // set the users number as finderNumber 
+            $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
+            Uploadfileservice.upload($scope.file, $scope.id).then(function(data) {
+                if (data.data.success) {
+                    $scope.alert = 'alert alert-success';
+                    $scope.message = data.data.message;
+                    $scope.file = {};
+                    $scope.uploading = false;
+                    $interval(function () {
+                        $location.path('/studentids')
+                    }, 2000, 1,false);
+                    
+                } else {
+                    $scope.uploading = false;
+                    $scope.alert = 'alert alert-danger';
+                    $scope.message = data.data.message;
+                    $scope.file = {};
+                }
+            })
+        }
+        $scope.photoChanged = function(files) {
+            if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
+                $scope.uploading = true;
+                var file = files[0];
+                var fileReader = new FileReader();
+                fileReader.readAsDataURL(file);
+                fileReader.onload = function(e) {
+                    $timeout(function() {
+                        $scope.thumbnail = {};
+                        $scope.thumbnail.dataUrl = e.target.result;
+                        $scope.uploading = false;
+                        $scope.message = false;
+                    });
+                }
+
+            } else {
+                $scope.thumbnail = {};
+                $scope.message = false;
+            }
+        }
+    }else{
+    	$location.path('/signin');
+    }
+    }
+]);
+
+'use strict';
+
+angular.module('students').controller('StudentidsController', ['$scope', '$http', '$location', 'Authentication',
+    function($scope, $http, $location, Authentication) {
+        $scope.find = function() {
+            $http.get('/studentids').success(function(res) {
+                $scope.ids = res;
+                $scope.alert = 'alert alert-danger';
+            }).error(function(res) {
+                $scope.error = res.message;
+            });
+        }
+    }
+]);
+'use strict';
+
+angular.module('students').directive('fileModel', [
+    function() {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+                var parsedFile = $parse(attrs.fileModel);
+                var parsedFileSetter = parsedFile.assign;
+
+                element.bind('change', function() {
+                    scope.$apply(function() {
+                        parsedFileSetter(scope, element[0].files[0]);
+                    })
+                })
+            }
+        };
+    }
+]);
+'use strict';
+
+angular.module('students').service																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																												('Uploadfileservice', ['$http',
+	function($http) {
+		this.upload = function (file, id) {
+			var data = {
+				model: id,
+				file: file
+			};
+			var fd = new FormData();
+			fd.append('iddetails', angular.toJson(data.model));
+			fd.append('idphoto', data.file.upload);
+		     return  $http.post('/poststudentid', fd,{
+				transformRequest: angular.identity,
+				headers: {'Content-Type': undefined}
+
+			});
+
+		}
+
+		
+		
+	}
+]);
+
+
 'use strict';
 
 // Config HTTP Error Handling
@@ -575,36 +698,41 @@ angular.module('users').config(['$stateProvider',
 'use strict';
 
 angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$location', 'Authentication',
-	function($scope, $http, $location, Authentication) {
-		$scope.authentication = Authentication;
+    function($scope, $http, $location, Authentication) {
+        $scope.authentication = Authentication;
 
-		// If user is signed in then redirect back home
-		if ($scope.authentication.user) $location.path('/');
+        // If user is signed in then redirect back home
+        if ($scope.authentication.user) $location.path('/');
 
-		$scope.signup = function() {
-			$http.post('/auth/signup', $scope.credentials).success(function(response) {
-				// If successful we assign the response to the global user model
-				$scope.authentication.user = response;
+        $scope.signup = function() {
+            if ($scope.credentials.terms) {
+                $http.post('/auth/signup', $scope.credentials).success(function(response) {
+                    // If successful we assign the response to the global user model
+                    $scope.authentication.user = response;
 
-				// And redirect to the index page
-				$location.path('/');
-			}).error(function(response) {
-				$scope.error = response.message;
-			});
-		};
+                    // And redirect to the index page
+                    $location.path('/');
+                }).error(function(response) {
+                    $scope.error = response.message;
+                });
+            }else{
+            	$scope.error = "Please accept our terms of use"
+            }
 
-		$scope.signin = function() {
-			$http.post('/auth/signin', $scope.credentials).success(function(response) {
-				// If successful we assign the response to the global user model
-				$scope.authentication.user = response;
+        };
 
-				// And redirect to the index page
-				$location.path('/');
-			}).error(function(response) {
-				$scope.error = response.message;
-			});
-		};
-	}
+        $scope.signin = function() {
+            $http.post('/auth/signin', $scope.credentials).success(function(response) {
+                // If successful we assign the response to the global user model
+                $scope.authentication.user = response;
+
+                // And redirect to the index page
+                $location.path('/');
+            }).error(function(response) {
+                $scope.error = response.message;
+            });
+        };
+    }
 ]);
 'use strict';
 

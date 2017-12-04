@@ -42,28 +42,8 @@ exports.create = function(req, res) {
         }
     });
 
-    var parser = multer({ storage: storage }).single('idphoto')
+    var parser = multer({ storage: storage }).single('idphoto');
 
-    // var storage = multer.diskStorage({
-    //     destination: function(req, file, cb) {
-    //         cb(null, 'public/modules/uploads/images/ids')
-    //     },
-    //     filename: function(req, file, cb) {
-    //         if (!file.originalname.match(/\.(png|jpg|jpeg)$/)) {
-    //             var err = new Error();
-    //             err.code = 'filetype';
-    //             return cb(err);
-    //         } else {
-    //             cb(null, Date.now() + '_' + file.originalname);
-    //         }
-
-    //     }
-    // })
-    // var upload = multer({
-    //     storage: storage,
-    //     limits: { fileSize: 10000000 }
-
-    // }).single('idphoto');
     parser(req, res, function(err) {
         if (err) {
             if (err.code === 'LIMIT_FILE_SIZE') {
