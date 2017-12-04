@@ -1,58 +1,58 @@
-<section class="row" data-ng-controller="AuthenticationController"> 
-	<div class="col-sm-2"></div>
-	<div class="col-sm-8">
-		<br>
-	    <div class="row text-center">
-        <h3 class="pagehead">Sign Up</h3>
-        <p id="postiddescription">Fill in the required fields to create an account with SakaDocs</p>
-    </div>
-    <div class="row">
-	<div class="col-sm-2"></div>
-	<div class="col-sm-8"  >
-		<form name="userForm" data-ng-submit="signup()" class="signin form-horizontal" novalidate autocomplete="off">
-			<fieldset>
-				<div data-ng-show="error" class="text-center text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-				<div class="form-group">
-					<!-- <label for="firstName">First Name</label> -->
-					<input type="text" required id="firstName" name="firstName" class="form-control forminput" data-ng-model="credentials.firstName" placeholder="First Name">
-				</div>
-				<div class="form-group">
-					<!-- <label for="lastName">Last Name</label> -->
-					<input type="text" id="lastName" name="lastName" class="form-control forminput" data-ng-model="credentials.lastName" placeholder="Last Name">
-				</div>
-				<div class="form-group">
-					<!-- <label for="email">Email</label> -->
-					<p>*optional</p>
-					<input type="email" id="email" name="email" class="form-control forminput" data-ng-model="credentials.email" placeholder="Email">
-				</div>
-				<div class="form-group">
-					<!-- <label for="username">Username</label> -->
-					<input type="text" id="username" name="username" class="form-control forminput" data-ng-model="credentials.username" placeholder="Username">
-				</div>
-				<div class="form-group">
-					<!-- <label for="phoneNumber">Mobile Number</label> -->
-					<input type="text" id="mobileNumber" name="phoneNumber" class="form-control forminput"  data-ng-model="credentials.phoneNumber" size="13" pattern="(\+254)7([0-9|9])(\d){7}" title=" e.g +254700000000" placeholder="Mobile number">
-				</div>
-				<div class="form-group">
-					<!-- <label for="password">Password</label> -->
-					<input type="password" id="password" name="password" class="form-control forminput" data-ng-model="credentials.password" placeholder="Password">
-				</div>
-				<div class="text-center form-group">
-					<button type="submit" class="btn btn-large" id="signupbtn">Create an account</button>
-				</div>
-				<div>
+<section class="row" data-ng-controller="AuthenticationController">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <br>
+        <div class="row text-center">
+            <h3 class="pagehead">Sign Up</h3>
+            <p id="postiddescription">Fill in the required fields to create an account with SakaDocs</p>
+        </div>
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <form name="userForm" data-ng-submit="signup()" class="signin form-horizontal" novalidate autocomplete="off">
+                    <fieldset>
+                        <div data-ng-show="error" class="text-center text-danger">
+                            <strong data-ng-bind="error"></strong>
+                        </div>
+                        <div class="form-group">
+                            
+                            <input type="text" required id="firstName" name="firstName" class="form-control forminput" data-ng-model="credentials.firstName" placeholder="First Name">
+                        </div>
+                        <div class="form-group">
+                            
+                            <input type="text" id="lastName" name="lastName" class="form-control forminput" data-ng-model="credentials.lastName" placeholder="Last Name">
+                        </div>
+                        <div class="form-group">
+                            
+                            <p>*optional</p>
+                            <input type="email" id="email" name="email" class="form-control forminput" data-ng-model="credentials.email" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            
+                            <input type="text" id="username" name="username" class="form-control forminput" data-ng-model="credentials.username" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            
+                            <input type="text" id="mobileNumber" name="phoneNumber" class="form-control forminput" data-ng-model="credentials.phoneNumber" size="13" pattern="(\+254)7([0-9|9])(\d){7}" title=" e.g +254700000000" placeholder="Mobile number">
+                        </div>
+                        <div class="form-group">
+                            
+                            <input type="password" id="password" name="password" class="form-control forminput" data-ng-model="credentials.password" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                        	<input type="checkbox" id="terms" class="forminput" name="terms" data-ng-model="credentials.terms" required > By checking this message, I confirm that I have read and agreed with SakaDocs <a href="">terms of use</a>
+                        </div>
+                        <div class="text-center form-group">
+                            <button type="submit" class="btn btn-large" id="signupbtn">Create an account</button>
+                        </div>
+                        <div>
                             <a href="/#!/signin" id="forgotpassword">I already have a SakaDocs account</a>
                         </div>
-				
-			</fieldset>
-		</form>
-	</div>
-	<div class="col-sm-2"></div>
-	</div>
-	</div>
-	<div class="col-sm-2"></div>
-
-	
+                    </fieldset>
+                </form>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+    <div class="col-sm-2"></div>
 </section>

@@ -197,9 +197,8 @@ body{
 }
 #idholder{
 	border-bottom-color: black;
-	border-right-color: black;
 	border-left-color: black;
-	border-top-color: orange;
+	border-top-style: dashed;
 	border-style: solid;
 	border-width: 3px;
 	border-right-style: double;
