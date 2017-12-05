@@ -1,0 +1,37 @@
+<section class="row text-center" data-ng-controller="StaffidsController" data-ng-init="find()">
+    <br>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <a href="/#!/poststaffid"><button class="btn btn-large" id="signupbtn"><span style="color: black;">Post Staff ID</span></button></a>
+        </div>
+        <div class="col-sm-2"></div>
+    </div> <br><br>
+    <div class="row" style="background-color: black;  background-attachment: fixed;">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 text-center">
+            <input type="text" placeholder="Search " ng-model="search" id="uniquefilter">
+        </div>
+        <div class="col-sm-2"></div>
+    </div><br><br>
+
+    <div data-ng-repeat="id in testValue=(ids | filter: search) " data-ng-href="#!/nationals/{{id._id}}" id="idholder" class="row thumbnail"><br>
+        <div class="col-sm-4 thumbnail img-responsive" id="idpic">
+            <img class="img-responsive" ng-src="{{id.idPhoto}}" alt="">
+        </div>
+        <div class="col-sm-8">
+
+            <p style="font-weight: bold;">Full names: <span style="color: orange;">{{id.fullNames | uppercase}}</span></p>
+            <p style="font-weight: bold;">Job number: <span style="color: orange;">{{id.jobNumber | uppercase}}</span> </p>
+            <p style="font-weight: bold;">Company name: <span style="color: orange;">{{id.companyName | uppercase}}</span> </p>    
+            <p style="font-weight: bold;">Location found: <span style="color: orange;">{{id.locationFound | uppercase}}</span> </p> 
+            <a href="/#!/claimstudentid/{{id._id}}"><button type="submit" class="btn" id="signupbtn"><span id="claimtext">Claim this staff</span></button></a>
+        </div>
+    </div>
+     <div ng-show="!ids.length" ng-class="alert">
+         <h2>Your document has not been posted yet. Please visit us later</h2>
+     </div>
+     <div ng-show="!testValue.length" ng-class="alert">
+         <h2>Your document has not been posted yet. Please visit us later</h2>
+     </div>
+</section>

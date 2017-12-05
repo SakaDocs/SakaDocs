@@ -59,6 +59,11 @@ ApplicationConfiguration.registerModule('nationals');
 'use strict';
 
 // Use application configuration module to register a new module
+ApplicationConfiguration.registerModule('staffs');
+
+'use strict';
+
+// Use application configuration module to register a new module
 ApplicationConfiguration.registerModule('students');
 
 'use strict';
@@ -387,7 +392,8 @@ angular.module('nationals').controller('PostController', ['$scope', '$timeout', 
             $scope.uploading = true;
             // set the users number as finderNumber 
             $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
-            Uploadfileservice.upload($scope.file, $scope.id).then(function(data) {
+            var url = '/postnationalid';
+            Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
                 if (data.data.success) {
                     $scope.alert = 'alert alert-success';
                     $scope.message = data.data.message;
@@ -452,9 +458,9 @@ angular.module('nationals').directive('fileModel', ['$parse',
 ]);
 'use strict';
 
-angular.module('nationals').service																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																												('Uploadfileservice', ['$http',
+angular.module('students').service																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																												('Uploadfileservice', ['$http',
 	function($http) {
-		this.upload = function (file, id) {
+		this.upload = function (file, id, url) {
 			var data = {
 				model: id,
 				file: file
@@ -462,7 +468,143 @@ angular.module('nationals').service																																													
 			var fd = new FormData();
 			fd.append('iddetails', angular.toJson(data.model));
 			fd.append('idphoto', data.file.upload);
-		     return  $http.post('/postnationalid', fd,{
+		     return  $http.post(url, fd,{
+				transformRequest: angular.identity,
+				headers: {'Content-Type': undefined}
+
+			});
+
+		}
+
+		
+		
+	}
+]);
+
+
+'use strict';
+
+//Setting up route
+angular.module('staffs').config(['$stateProvider',
+	function($stateProvider) {
+		// Staffs state routing
+		$stateProvider.
+		state('poststaffid', {
+			url: '/poststaffid',
+			templateUrl: 'modules/staffs/views/poststaffid.client.view.html'
+		}).
+		state('staffids', {
+			url: '/staffids',
+			templateUrl: 'modules/staffs/views/staffids.client.view.html'
+		});
+	}
+]);
+'use strict';
+
+angular.module('students').controller('PoststaffidController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice',
+    function($scope, $timeout, $location, $interval, Authentication, Uploadstudentidservice) {
+       $scope.authentication = Authentication;
+       // check if user is logged in
+       if ($scope.authentication.user) {
+        $scope.file = {};
+        $scope.Submit = function() {
+            $scope.uploading = true;
+            // set the users number as finderNumber 
+            $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
+            var url = '/poststaffid'
+           Uploadstudentidservice.upload($scope.file, $scope.id, url).then(function(data) {
+                if (data.data.success) {
+                    $scope.alert = 'alert alert-success';
+                    $scope.message = data.data.message;
+                    $scope.file = {};
+                    $scope.uploading = false;
+                    $interval(function () {
+                        $location.path('/staffids')
+                    }, 2000, 1,false);
+                    
+                } else {
+                    $scope.uploading = false;
+                    $scope.alert = 'alert alert-danger';
+                    $scope.message = data.data.message;
+                    $scope.file = {};
+                }
+            })
+        }
+        $scope.photoChanged = function(files) {
+            if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
+                $scope.uploading = true;
+                var file = files[0];
+                var fileReader = new FileReader();
+                fileReader.readAsDataURL(file);
+                fileReader.onload = function(e) {
+                    $timeout(function() {
+                        $scope.thumbnail = {};
+                        $scope.thumbnail.dataUrl = e.target.result;
+                        $scope.uploading = false;
+                        $scope.message = false;
+                    });
+                }
+
+            } else {
+                $scope.thumbnail = {};
+                $scope.message = false;
+            }
+        }
+    }else{
+    	$location.path('/signin');
+    }
+    }
+]);
+
+'use strict';
+
+angular.module('staffs').controller('StaffidsController', ['$scope', '$http', '$location', 'Authentication',
+    function($scope, $http, $location, Authentication) {
+
+        $scope.find = function() {
+            $http.get('/staffids').success(function(res) {
+                $scope.ids = res;
+                 $scope.alert = 'alert alert-danger';
+            }).error(function(res) {
+                $scope.error = res.message;
+            });
+        }
+       
+    }
+]);
+
+'use strict';
+
+angular.module('students').directive('fileModel', [
+    function($parse) {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+                var parsedFile = $parse(attrs.fileModel);
+                var parsedFileSetter = parsedFile.assign;
+
+                element.bind('change', function() {
+                    scope.$apply(function() {
+                        parsedFileSetter(scope, element[0].files[0]);
+                    })
+                })
+            }
+        };
+    }
+]);
+'use strict';
+
+angular.module('students').service																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																												('Uploadfileservice', ['$http',
+	function($http) {
+		this.upload = function (file, id, url) {
+			var data = {
+				model: id,
+				file: file
+			};
+			var fd = new FormData();
+			fd.append('iddetails', angular.toJson(data.model));
+			fd.append('idphoto', data.file.upload);
+		     return  $http.post(url, fd,{
 				transformRequest: angular.identity,
 				headers: {'Content-Type': undefined}
 
@@ -508,7 +650,7 @@ angular.module('students').controller('ClaimstudentidController', ['$scope',
 'use strict';
 
 angular.module('students').controller('PoststudentidController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice',
-    function($scope, $timeout, $location, $interval, Authentication, Uploadfileservice) {
+    function($scope, $timeout, $location, $interval, Authentication, Uploadstudentidservice) {
        $scope.authentication = Authentication;
        // check if user is logged in
        if ($scope.authentication.user) {
@@ -517,7 +659,8 @@ angular.module('students').controller('PoststudentidController', ['$scope', '$ti
             $scope.uploading = true;
             // set the users number as finderNumber 
             $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
-            Uploadfileservice.upload($scope.file, $scope.id).then(function(data) {
+            var url = '/poststudentid'
+           Uploadstudentidservice.upload($scope.file, $scope.id, url).then(function(data) {
                 if (data.data.success) {
                     $scope.alert = 'alert alert-success';
                     $scope.message = data.data.message;
@@ -578,7 +721,7 @@ angular.module('students').controller('StudentidsController', ['$scope', '$http'
 'use strict';
 
 angular.module('students').directive('fileModel', [
-    function() {
+    function($parse) {
         return {
             restrict: 'A',
             link: function(scope, element, attrs) {
@@ -598,7 +741,7 @@ angular.module('students').directive('fileModel', [
 
 angular.module('students').service																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																												('Uploadfileservice', ['$http',
 	function($http) {
-		this.upload = function (file, id) {
+		this.upload = function (file, id, url) {
 			var data = {
 				model: id,
 				file: file
@@ -606,7 +749,7 @@ angular.module('students').service																																														
 			var fd = new FormData();
 			fd.append('iddetails', angular.toJson(data.model));
 			fd.append('idphoto', data.file.upload);
-		     return  $http.post('/poststudentid', fd,{
+		     return  $http.post(url, fd,{
 				transformRequest: angular.identity,
 				headers: {'Content-Type': undefined}
 

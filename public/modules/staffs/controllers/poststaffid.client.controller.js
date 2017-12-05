@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('students').controller('PoststudentidController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice',
+angular.module('students').controller('PoststaffidController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice',
     function($scope, $timeout, $location, $interval, Authentication, Uploadstudentidservice) {
        $scope.authentication = Authentication;
        // check if user is logged in
@@ -10,7 +10,7 @@ angular.module('students').controller('PoststudentidController', ['$scope', '$ti
             $scope.uploading = true;
             // set the users number as finderNumber 
             $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
-            var url = '/poststudentid'
+            var url = '/poststaffid'
            Uploadstudentidservice.upload($scope.file, $scope.id, url).then(function(data) {
                 if (data.data.success) {
                     $scope.alert = 'alert alert-success';
@@ -18,7 +18,7 @@ angular.module('students').controller('PoststudentidController', ['$scope', '$ti
                     $scope.file = {};
                     $scope.uploading = false;
                     $interval(function () {
-                        $location.path('/studentids')
+                        $location.path('/staffids')
                     }, 2000, 1,false);
                     
                 } else {

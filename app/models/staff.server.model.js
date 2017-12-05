@@ -33,8 +33,15 @@ var StaffSchema = new Schema({
 	created: {
 		type: Date,
 		default: Date.now
-	}
-	// store photo
+	},
+	idPhoto: {
+        type: String,
+        trim: true
+    },
+    claimed: {
+        type: Boolean,
+        default: false
+    }
 });
 
 mongoose.model('Staff', StaffSchema);

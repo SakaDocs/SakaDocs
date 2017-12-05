@@ -10,7 +10,8 @@ angular.module('nationals').controller('PostController', ['$scope', '$timeout', 
             $scope.uploading = true;
             // set the users number as finderNumber 
             $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
-            Uploadfileservice.upload($scope.file, $scope.id).then(function(data) {
+            var url = '/postnationalid';
+            Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
                 if (data.data.success) {
                     $scope.alert = 'alert alert-success';
                     $scope.message = data.data.message;
