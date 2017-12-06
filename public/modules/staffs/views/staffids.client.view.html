@@ -25,12 +25,9 @@
             <p style="font-weight: bold;">Job number: <span style="color: orange;">{{id.jobNumber | uppercase}}</span> </p>
             <p style="font-weight: bold;">Company name: <span style="color: orange;">{{id.companyName | uppercase}}</span> </p>    
             <p style="font-weight: bold;">Location found: <span style="color: orange;">{{id.locationFound | uppercase}}</span> </p> 
-            <a href="/#!/claimstudentid/{{id._id}}"><button type="submit" class="btn" id="signupbtn"><span id="claimtext">Claim this staff</span></button></a>
+            <a href="/#!/claimstaffid/{{id._id}}"><button type="submit" class="btn" id="signupbtn"><span id="claimtext">Claim this staff ID</span></button></a>
         </div>
     </div>
-     <div ng-show="!ids.length" ng-class="alert">
-         <h2>Your document has not been posted yet. Please visit us later</h2>
-     </div>
      <div ng-show="!testValue.length" ng-class="alert">
          <h2>Your document has not been posted yet. Please visit us later</h2>
      </div>

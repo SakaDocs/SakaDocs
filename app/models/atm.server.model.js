@@ -9,15 +9,15 @@ var mongoose = require('mongoose'),
  * Atm Schema
  */
 var AtmSchema = new Schema({
-	bank: {
+	bankName: {
 		type: String, 
 		trim: true
 	},
-	type: {
+	cardType: {
 		type: String, 
 		trim: true
 	},
-	Name: {
+	fullNames: {
 		type: String, 
 		trim: true
 	},
@@ -28,8 +28,20 @@ var AtmSchema = new Schema({
 	finderNumber: {
 		type: String, 
 		trim: true
-	}
-	// store photo
+	},
+	 created: {
+        type: Date,
+        default: Date.now
+    },
+	 idPhoto: {
+        type: String,
+        trim: true
+    },
+	claimed: {
+        type: Boolean,
+        default: false
+
+    }
 });
 
 mongoose.model('Atm', AtmSchema);

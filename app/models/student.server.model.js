@@ -43,7 +43,6 @@ var StudentSchema = new Schema({
         default: false
 
     }
-    // store photo
 });
 
 mongoose.model('Student', StudentSchema);
