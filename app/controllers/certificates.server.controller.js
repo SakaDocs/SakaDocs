@@ -5,7 +5,7 @@
  */
 var mongoose = require('mongoose'),
     errorHandler = require('./errors.server.controller'),
-    Staff = mongoose.model('Staff'),
+    Certificate = mongoose.model('Certificate'),
     multer = require('multer'),
     cloudinaryStorage = require('multer-storage-cloudinary'),
     Cloudinary = require('cloudinary'),
@@ -22,12 +22,12 @@ Cloudinary.config({
 });
 
 /**
- * Create a Student id
+ * Create a certificate id
  */
 exports.create = function(req, res) {
     var storage = cloudinaryStorage({
         cloudinary: Cloudinary,
-        folder: 'staff_ids',
+        folder: 'Certificates',
         allowedFormats: ['jpg', 'png'],
         filename: function(req, file, cb) {
             if (!file.originalname.match(/\.(png|jpg|jpeg)$/)) {
@@ -68,24 +68,22 @@ exports.create = function(req, res) {
                 var idDetails = JSON.parse(req.body.iddetails);
                 var id = {
                     fullNames: idDetails.fullNames,
-                    jobNumber: idDetails.admissionNumber,
-                    locationFound: idDetails.location,
-                    companyName: idDetails.companyName,
-                    finderNumber: idDetails.finderNumber
+                    institutionName: idDetails.institutionName,
+                    finderNumber: idDetails.finderNumber,
+                    locationFound: idDetails.location
 
                 }
             } else {
                 var idDetails = JSON.parse(req.body.iddetails);
                 var id = {
                     fullNames: idDetails.fullNames,
-                    jobNumber: idDetails.jobNumber,
-                    locationFound: idDetails.location,
-                    companyName: idDetails.companyName,
+                    institutionName: idDetails.institutionName,
                     finderNumber: idDetails.finderNumber,
+                    locationFound: idDetails.location,
                     idPhoto: req.file.secure_url
                 };
-                var staff = new Staff(id);
-                staff.save(function(err) {
+                var certificate = new Certificate(id);
+                certificate.save(function(err) {
                     if (err) {
                         return res.status(400).send({
                             message: errorHandler.getErrorMessage(err)
@@ -93,7 +91,7 @@ exports.create = function(req, res) {
                     } else {
                         res.status(201).json({
                             success: true,
-                            message: 'You have uploaded Id successfully!!'
+                            message: 'You have uploaded certificate successfully!!'
                         });
                     }
                 });
@@ -104,11 +102,11 @@ exports.create = function(req, res) {
 };
 
 /**
- * Show the current Student
+ * Show the current Certificate
  */
 
 exports.read = function(req, res) {
-    Staff.findById(req.params.id).exec(function(err, id) {
+    Certificate.findById(req.params.id).exec(function(err, id) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -116,7 +114,7 @@ exports.read = function(req, res) {
         } else {
             if (!id) {
                 return res.status(404).send({
-                    message: 'Student ID not found'
+                    message: 'certificate ID not found'
                 });
             }
             res.json(id);
@@ -125,24 +123,24 @@ exports.read = function(req, res) {
 };
 
 /**
- * Update a Student
+ * Update a Certificate
  */
 exports.update = function(req, res) {
 
 };
 
 /**
- * Delete an Student
+ * Delete an certificate
  */
 exports.delete = function(req, res) {
 
 };
 
 /**
- * List of Students
+ * List of certificates
  */
 exports.list = function(req, res) {
-    Staff.find({ "claimed": false }).exec(function(err, ids) {
+    Certificate.find({ "claimed": false }).exec(function(err, ids) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)

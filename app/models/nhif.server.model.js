@@ -10,8 +10,39 @@ var mongoose = require('mongoose'),
  * Nhif Schema
  */
 var NhifSchema = new Schema({
-	// Nhif model fields   
-	// ...
+	companyName: {
+		type: String, 
+		trim: true
+	},
+	cardNumber: {
+		type: String, 
+		trim: true
+	},
+	fullNames: {
+		type: String, 
+		trim: true
+	},
+	locationFound: {
+		type: String, 
+		trim: true
+	},
+	finderNumber: {
+		type: String, 
+		trim: true
+	},
+	 created: {
+        type: Date,
+        default: Date.now
+    },
+	 idPhoto: {
+        type: String,
+        trim: true
+    },
+	claimed: {
+        type: Boolean,
+        default: false
+
+    }
 });
 
 mongoose.model('Nhif', NhifSchema);

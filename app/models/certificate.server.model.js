@@ -10,11 +10,11 @@ var mongoose = require('mongoose'),
  * Certificate Schema
  */
 var CertificateSchema = new Schema({
-	awardedBy: {
+	institutionName: {
 		type: String, 
 		trim: true
 	},
-	awardedTo: {
+	fullNames: {
 		type: String, 
 		trim: true
 	},
@@ -25,8 +25,20 @@ var CertificateSchema = new Schema({
 	finderNumber: {
 		type: String, 
 		trim: true
-	}
-	// store photo
+	},
+	created: {
+        type: Date,
+        default: Date.now
+    },
+	 idPhoto: {
+        type: String,
+        trim: true
+    },
+	claimed: {
+        type: Boolean,
+        default: false
+
+    }
 });
 
 mongoose.model('Certificate', CertificateSchema);

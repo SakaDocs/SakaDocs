@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('students').service																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																												('Uploadfileservice', ['$http',
+angular.module('staffs').service																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																												('Uploadfileservice', ['$http',
 	function($http) {
 		this.upload = function (file, id, url) {
 			var data = {

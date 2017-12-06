@@ -5,7 +5,7 @@
  */
 var mongoose = require('mongoose'),
     errorHandler = require('./errors.server.controller'),
-    Staff = mongoose.model('Staff'),
+    Nhif = mongoose.model('Nhif'),
     multer = require('multer'),
     cloudinaryStorage = require('multer-storage-cloudinary'),
     Cloudinary = require('cloudinary'),
@@ -22,12 +22,12 @@ Cloudinary.config({
 });
 
 /**
- * Create a Student id
+ * Create a Nhif card id
  */
 exports.create = function(req, res) {
     var storage = cloudinaryStorage({
         cloudinary: Cloudinary,
-        folder: 'staff_ids',
+        folder: 'insurance_cards',
         allowedFormats: ['jpg', 'png'],
         filename: function(req, file, cb) {
             if (!file.originalname.match(/\.(png|jpg|jpeg)$/)) {
@@ -68,7 +68,7 @@ exports.create = function(req, res) {
                 var idDetails = JSON.parse(req.body.iddetails);
                 var id = {
                     fullNames: idDetails.fullNames,
-                    jobNumber: idDetails.admissionNumber,
+                    cardNumber: idDetails.cardNumber,
                     locationFound: idDetails.location,
                     companyName: idDetails.companyName,
                     finderNumber: idDetails.finderNumber
@@ -78,14 +78,14 @@ exports.create = function(req, res) {
                 var idDetails = JSON.parse(req.body.iddetails);
                 var id = {
                     fullNames: idDetails.fullNames,
-                    jobNumber: idDetails.jobNumber,
+                    cardNumber: idDetails.cardNumber,
                     locationFound: idDetails.location,
                     companyName: idDetails.companyName,
                     finderNumber: idDetails.finderNumber,
                     idPhoto: req.file.secure_url
                 };
-                var staff = new Staff(id);
-                staff.save(function(err) {
+                var nhif = new Nhif(id);
+                nhif.save(function(err) {
                     if (err) {
                         return res.status(400).send({
                             message: errorHandler.getErrorMessage(err)
@@ -93,7 +93,7 @@ exports.create = function(req, res) {
                     } else {
                         res.status(201).json({
                             success: true,
-                            message: 'You have uploaded Id successfully!!'
+                            message: 'You have uploaded Nhif card successfully!!'
                         });
                     }
                 });
@@ -104,11 +104,11 @@ exports.create = function(req, res) {
 };
 
 /**
- * Show the current Student
+ * Show the current Nhif card
  */
 
 exports.read = function(req, res) {
-    Staff.findById(req.params.id).exec(function(err, id) {
+    Nhif.findById(req.params.id).exec(function(err, id) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -116,7 +116,7 @@ exports.read = function(req, res) {
         } else {
             if (!id) {
                 return res.status(404).send({
-                    message: 'Student ID not found'
+                    message: 'Nhif card  not found'
                 });
             }
             res.json(id);
@@ -125,24 +125,24 @@ exports.read = function(req, res) {
 };
 
 /**
- * Update a Student
+ * Update a Nhif card
  */
 exports.update = function(req, res) {
 
 };
 
 /**
- * Delete an Student
+ * Delete an Nhif card
  */
 exports.delete = function(req, res) {
 
 };
 
 /**
- * List of Students
+ * List of Nhif cards
  */
 exports.list = function(req, res) {
-    Staff.find({ "claimed": false }).exec(function(err, ids) {
+    Nhif.find({ "claimed": false }).exec(function(err, ids) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)

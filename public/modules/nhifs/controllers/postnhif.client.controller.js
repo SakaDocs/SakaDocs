@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('staffs').controller('PoststaffidController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice',
+angular.module('nhifs').controller('PostnhifController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice',
     function($scope, $timeout, $location, $interval, Authentication, Uploadfileservice) {
        $scope.authentication = Authentication;
        // check if user is logged in
@@ -10,7 +10,7 @@ angular.module('staffs').controller('PoststaffidController', ['$scope', '$timeou
             $scope.uploading = true;
             // set the users number as finderNumber 
             $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
-            var url = '/poststaffid'
+            var url = '/postnhifcard'
            Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
                 if (data.data.success) {
                     $scope.alert = 'alert alert-success';
@@ -18,7 +18,7 @@ angular.module('staffs').controller('PoststaffidController', ['$scope', '$timeou
                     $scope.file = {};
                     $scope.uploading = false;
                     $interval(function () {
-                        $location.path('/staffids')
+                        $location.path('/nhifs')
                     }, 2000, 1,false);
                     
                 } else {
