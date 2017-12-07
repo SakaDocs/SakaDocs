@@ -1,9 +1,9 @@
-<section class="row text-center" data-ng-controller="CertificatesController" data-ng-init="find()">
+<section class="row text-center" data-ng-controller="DlsController" data-ng-init="find()">
     <br>
     <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
-            <a href="/#!/postcertificate"><button class="btn btn-large" id="signupbtn"><span style="color: black;">Post Certificate</span></button></a>
+            <a href="/#!/postdl"><button class="btn btn-large" id="signupbtn"><span style="color: black;">Post Driving licence</span></button></a>
         </div>
         <div class="col-sm-2"></div>
     </div> <br><br>
@@ -15,17 +15,16 @@
         <div class="col-sm-2"></div>
     </div><br><br>
 
-    <div data-ng-repeat="id in testValue=(ids | filter: search) " data-ng-href="#!/certificates/{{id._id}}" id="idholder" class="row thumbnail"><br>
+    <div data-ng-repeat="id in testValue=(ids | filter: search) " data-ng-href="#!/dls/{{id._id}}" id="idholder" class="row thumbnail"><br>
         <div class="col-sm-4 thumbnail img-responsive" id="idpic">
             <img class="img-responsive" ng-src="{{id.idPhoto}}" alt="">
         </div>
         <div class="col-sm-8">
 
-            <p style="font-weight: bold;">Full names: <span style="color: orange;">{{id.fullNames | uppercase}}</span></p>
-            <p style="font-weight: bold;">Institution name: <span style="color: orange;">{{id.institutionName | uppercase}}</span> </p>    
+            <p style="font-weight: bold;">Full names: <span style="color: orange;">{{id.fullNames | uppercase}}</span></p> 
             <p style="font-weight: bold;">Location found: <span style="color: orange;">{{id.locationFound | uppercase}}</span> </p> 
             <p style="font-weight: bold;">Date posted: <span style="color: grey;">{{id.created | date}}</span> </p> 
-            <a href="/#!/claimcertificate/{{id._id}}"><button type="submit" class="btn" id="signupbtn"><span id="claimtext">Claim this certificate</span></button></a>
+            <a href="/#!/claimdl/{{id._id}}"><button type="submit" class="btn" id="signupbtn"><span id="claimtext">Claim driving licence</span></button></a>
         </div>
     </div>
      <div ng-show="!testValue.length" ng-class="alert">

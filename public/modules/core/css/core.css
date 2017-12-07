@@ -216,7 +216,7 @@ body{
 
 }
 .postid{
-	width: 110px;
+	width: 100%;
 }
 #postiddescription{
 	font-weight: bold;

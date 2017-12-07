@@ -1,7 +1,7 @@
-<section data-ng-controller="PostcertificateController">
+<section data-ng-controller="PostdlController">
     <div class="row text-center">
-        <h3 class="pagehead">Post certificate below</h3>
-        <p id="postiddescription">Post details and photo of the certificate you have found, keep the Certificate until it is claimed and you will earn Kshs 300 when its collected.</p>
+        <h3 class="pagehead">Post driving licence below</h3>
+        <p id="postiddescription">Post details and photo of the driving licence you have found, keep the driving licence until it is claimed and you will earn Kshs 300 when its collected.</p>
     </div>
     <br>
     <div class="row">
@@ -21,17 +21,13 @@
                         <div class="form-group">
                             
                             <br>
-                            <input type="text" name="fullNames" class="form-control forminput" data-ng-model="id.fullNames" placeholder="Full names on certificate card" required validate>
+                            <input type="text" name="fullNames" class="form-control forminput" data-ng-model="id.fullNames" placeholder="Full names on driving licence" required validate>
                         </div>
+                       
                         <div class="form-group">
                             
                             <br>
-                            <input type="text" name="institutionName" class="form-control forminput" data-ng-model="id.institutionName" placeholder="What institution owns the certificate?" required>
-                        </div>
-                        <div class="form-group">
-                            
-                            <br>
-                            <input type="text" name="Where did you find ID" class="form-control forminput" data-ng-model="id.location" placeholder="location" required>
+                            <input type="text" name="Where did you find Driving licence?" class="form-control forminput" data-ng-model="id.location" placeholder="location" required>
                         </div>
             
                         <label class="btn" id="altbtn">Click to Upload Photo
@@ -48,7 +44,7 @@
                         <div class="row">
                             <div class="col-sm-4"></div>
                             <div class="col-sm-4">
-                                <button id="signupbtn"  class="btn text-center postid" ng-disabled="uploading">Post certificate</button>
+                                <button id="signupbtn"  class="btn btn-large text-center postid" ng-disabled="uploading">Post driving licence</button>
                             </div>
                             <div class="col-sm-4"></div>
                         </div>
