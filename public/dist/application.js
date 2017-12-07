@@ -58,6 +58,11 @@ ApplicationConfiguration.registerModule('core');
 'use strict';
 
 // Use application configuration module to register a new module
+ApplicationConfiguration.registerModule('dls');
+
+'use strict';
+
+// Use application configuration module to register a new module
 ApplicationConfiguration.registerModule('nationals');
 
 
@@ -65,6 +70,11 @@ ApplicationConfiguration.registerModule('nationals');
 
 // Use application configuration module to register a new module
 ApplicationConfiguration.registerModule('nhifs');
+
+'use strict';
+
+// Use application configuration module to register a new module
+ApplicationConfiguration.registerModule('passports');
 
 'use strict';
 
@@ -120,11 +130,26 @@ angular.module('atms').controller('AtmsController', ['$scope', '$http', '$locati
 
 'use strict';
 
-angular.module('atms').controller('ClaimatmController', ['$scope',
-	function($scope) {
-		// Controller Logic
-		// ...
-	}
+angular.module('atms').controller('ClaimatmController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
+    function($scope, $http, $location, Authentication, $stateParams) {
+        $scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+            $scope.claim = function() {
+                if ($scope.authentication.user.accountBalance < 200) {
+                    $http.get('/atms/' + $stateParams.id).success(function(res) {
+                    $scope.id = res;
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+                }
+
+            }
+
+        } else {
+            $location.path('/signin');
+        }
+
+    }
 ]);
 'use strict';
 
@@ -606,6 +631,153 @@ angular.module('core').service('Menus', [
 'use strict';
 
 //Setting up route
+angular.module('dls').config(['$stateProvider',
+	function($stateProvider) {
+		// Dls state routing
+		$stateProvider.
+		state('claimdl', {
+			url: '/claimdl/:id',
+			templateUrl: 'modules/dls/views/claimdl.client.view.html'
+		}).
+		state('postdl', {
+			url: '/postdl',
+			templateUrl: 'modules/dls/views/postdl.client.view.html'
+		}).
+		state('dls', {
+			url: '/dls',
+			templateUrl: 'modules/dls/views/dls.client.view.html'
+		});
+	}
+]);
+'use strict';
+
+angular.module('dls').controller('ClaimdlController', ['$scope',
+	function($scope) {
+		// Controller Logic
+		// ...
+	}
+]);
+'use strict';
+
+angular.module('dls').controller('DlsController', ['$scope', '$http', '$location', 'Authentication',
+    function($scope, $http, $location, Authentication) {
+
+        $scope.find = function() {
+            $http.get('/dls').success(function(res) {
+                $scope.ids = res;
+                 $scope.alert = 'alert alert-danger';
+            }).error(function(res) {
+                $scope.error = res.message;
+            });
+        }
+       
+    }
+]);
+
+'use strict';
+
+angular.module('dls').controller('PostdlController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice',
+    function($scope, $timeout, $location, $interval, Authentication, Uploadfileservice) {
+       $scope.authentication = Authentication;
+       // check if user is logged in
+       if ($scope.authentication.user) {
+        $scope.file = {};
+        $scope.Submit = function() {
+            $scope.uploading = true;
+            // set the users number as finderNumber 
+            $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
+            var url = '/postdl'
+           Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
+                if (data.data.success) {
+                    $scope.alert = 'alert alert-success';
+                    $scope.message = data.data.message;
+                    $scope.file = {};
+                    $scope.uploading = false;
+                    $interval(function () {
+                        $location.path('/dls')
+                    }, 2000, 1,false);
+                    
+                } else {
+                    $scope.uploading = false;
+                    $scope.alert = 'alert alert-danger';
+                    $scope.message = data.data.message;
+                    $scope.file = {};
+                }
+            })
+        }
+        $scope.photoChanged = function(files) {
+            if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
+                $scope.uploading = true;
+                var file = files[0];
+                var fileReader = new FileReader();
+                fileReader.readAsDataURL(file);
+                fileReader.onload = function(e) {
+                    $timeout(function() {
+                        $scope.thumbnail = {};
+                        $scope.thumbnail.dataUrl = e.target.result;
+                        $scope.uploading = false;
+                        $scope.message = false;
+                    });
+                }
+
+            } else {
+                $scope.thumbnail = {};
+                $scope.message = false;
+            }
+        }
+    }else{
+    	$location.path('/signin');
+    }
+    }
+]);
+
+'use strict';
+
+angular.module('dls').directive('fileModel', [
+    function($parse) {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+                var parsedFile = $parse(attrs.fileModel);
+                var parsedFileSetter = parsedFile.assign;
+
+                element.bind('change', function() {
+                    scope.$apply(function() {
+                        parsedFileSetter(scope, element[0].files[0]);
+                    })
+                })
+            }
+        };
+    }
+]);
+'use strict';
+
+angular.module('dls').service																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																												('Uploadfileservice', ['$http',
+	function($http) {
+		this.upload = function (file, id, url) {
+			var data = {
+				model: id,
+				file: file
+			};
+			var fd = new FormData();
+			fd.append('iddetails', angular.toJson(data.model));
+			fd.append('idphoto', data.file.upload);
+		     return  $http.post(url, fd,{
+				transformRequest: angular.identity,
+				headers: {'Content-Type': undefined}
+
+			});
+
+		}
+
+		
+		
+	}
+]);
+
+'use strict';
+
+//Setting up route
 angular.module('nationals').config(['$stateProvider', 
 	function($stateProvider) {
 		// Nationals state routing
@@ -891,6 +1063,151 @@ angular.module('nhifs').directive('fileModel', [
 'use strict';
 
 angular.module('nhifs').service																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																												('Uploadfileservice', ['$http',
+	function($http) {
+		this.upload = function (file, id, url) {
+			var data = {
+				model: id,
+				file: file
+			};
+			var fd = new FormData();
+			fd.append('iddetails', angular.toJson(data.model));
+			fd.append('idphoto', data.file.upload);
+		     return  $http.post(url, fd,{
+				transformRequest: angular.identity,
+				headers: {'Content-Type': undefined}
+
+			});
+
+		}
+
+		
+		
+	}
+]);
+
+
+'use strict';
+
+//Setting up route
+angular.module('passports').config(['$stateProvider',
+	function($stateProvider) {
+		// Passports state routing
+		$stateProvider.
+		state('claimpassports', {
+			url: '/claimpassport/:id',
+			templateUrl: 'modules/passports/views/claimpassports.client.view.html'
+		}).
+		state('postpassport', {
+			url: '/postpassport',
+			templateUrl: 'modules/passports/views/postpassport.client.view.html'
+		}).
+		state('passports', {
+			url: '/passports',
+			templateUrl: 'modules/passports/views/passports.client.view.html'
+		});
+	}
+]);
+'use strict';
+
+angular.module('passports').controller('ClaimpassportsController', ['$scope',
+	function($scope) {
+		// Controller Logic
+		// ...
+	}
+]);
+'use strict';
+
+angular.module('passports').controller('PassportsController', ['$scope', '$http', '$location', 'Authentication',
+    function($scope, $http, $location, Authentication) {
+
+        $scope.find = function() {
+            $http.get('/passports').success(function(res) {
+                $scope.ids = res;
+                 $scope.alert = 'alert alert-danger';
+            }).error(function(res) {
+                $scope.error = res.message;
+            });
+        }
+       
+    }
+]);
+
+'use strict';
+
+angular.module('passports').controller('PostpassportController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice',
+    function($scope, $timeout, $location, $interval, Authentication, Uploadfileservice) {
+       $scope.authentication = Authentication;
+       // check if user is logged in
+       if ($scope.authentication.user) {
+        $scope.file = {};
+        $scope.Submit = function() {
+            $scope.uploading = true;
+            // set the users number as finderNumber 
+            $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
+            var url = '/postpassport'
+           Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
+                if (data.data.success) {
+                    $scope.alert = 'alert alert-success';
+                    $scope.message = data.data.message;
+                    $scope.file = {};
+                    $scope.uploading = false;
+                    $interval(function () {
+                        $location.path('/passports')
+                    }, 2000, 1,false);
+                    
+                } else {
+                    $scope.uploading = false;
+                    $scope.alert = 'alert alert-danger';
+                    $scope.message = data.data.message;
+                    $scope.file = {};
+                }
+            })
+        }
+        $scope.photoChanged = function(files) {
+            if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
+                $scope.uploading = true;
+                var file = files[0];
+                var fileReader = new FileReader();
+                fileReader.readAsDataURL(file);
+                fileReader.onload = function(e) {
+                    $timeout(function() {
+                        $scope.thumbnail = {};
+                        $scope.thumbnail.dataUrl = e.target.result;
+                        $scope.uploading = false;
+                        $scope.message = false;
+                    });
+                }
+
+            } else {
+                $scope.thumbnail = {};
+                $scope.message = false;
+            }
+        }
+    }else{
+    	$location.path('/signin');
+    }
+    }
+]);
+
+'use strict';
+
+angular.module('passports').directive('fileModel', [
+	function() {
+		return {
+			template: '<div></div>',
+			restrict: 'E',
+			link: function postLink(scope, element, attrs) {
+				// File model directive logic
+				// ...
+
+				element.text('this is the fileModel directive');
+			}
+		};
+	}
+]);
+'use strict';
+
+angular.module('passports').service																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																												('Uploadfileservice', ['$http',
 	function($http) {
 		this.upload = function (file, id, url) {
 			var data = {
