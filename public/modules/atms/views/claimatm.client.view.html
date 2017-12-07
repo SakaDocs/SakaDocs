@@ -1,3 +1,26 @@
-<section data-ng-controller="ClaimatmController">
-	This is the Claimatm view
+<section data-ng-controller="ClaimatmController" data-ng-init="claim()">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="row thumbnail img-responsive" id="idpic">
+                <img class=" col-sm-6 img-responsive" ng-src="{{id.idPhoto}}" alt="">
+                <div class="col-sm-6">
+                    <p style="font-weight: bold;">Full names: <span style="color: orange;">{{id.fullNames | uppercase}}</span></p>
+                    <p style="font-weight: bold;">Card type: <span style="color: orange;">{{id.cardType | uppercase}}</span> </p>
+                     <p style="font-weight: bold;">Bank name: <span style="color: orange;">{{id.bankName | uppercase}}</span> </p>
+                    <p style="font-weight: bold;">Area found: <span style="color: orange;">{{id.locationFound | uppercase}}</span> </p>
+                    <p style="font-weight: bold;">Date posted: <span style="color: grey;">{{id.created | date}}</span> </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <h1>Follow the steps below to claim your ATM card</h1>
+            <p>1. Send Kshs 300/= via mpesa to 0715753308.</p>
+            <p>2. Text your ATM card number and MPesa confirmation code to 0707293292.</p>
+            <p>3. You will receive an sms from 0707293292 with phone number of the person who posted your ATM card and a SakaDocs code. </p>
+            <p>4. Call the received number and arrange to meet the person who posted your ATM card. </p>
+            <p>5. The person who posted your ATM card will give you your ATM card in exchange for the SakaDocs code you received.</p>
+
+            <p></p>
+        </div>
+    </div>
 </section>

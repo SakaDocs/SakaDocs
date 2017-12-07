@@ -1,7 +1,7 @@
-<section data-ng-controller="PostnhifController">
+<section data-ng-controller="PostpassportController">
     <div class="row text-center">
-        <h3 class="pagehead">Post Insurance card below</h3>
-        <p id="postiddescription">Post details and photo of the Insurance card you have found, keep the Isurance until it is claimed and you will earn Kshs 150 when its collected.</p>
+        <h3 class="pagehead">Post passport below</h3>
+        <p id="postiddescription">Post details and photo of the passport you have found, keep the passport until it is claimed and you will earn Kshs 500 when its collected.</p>
     </div>
     <br>
     <div class="row">
@@ -21,22 +21,22 @@
                         <div class="form-group">
                             
                             <br>
-                            <input type="text" name="fullNames" class="form-control forminput" data-ng-model="id.fullNames" placeholder="Full names on Insurance card" required validate>
+                            <input type="text" name="fullNames" class="form-control forminput" data-ng-model="id.fullNames" placeholder="Full names on passport" required validate>
                         </div>
                         <div class="form-group">
                            
                             <br>
-                            <input type="text" name="cardNumber" class="form-control forminput" data-ng-model="id.cardNumber" placeholder="Card number" title=" Enter a valid Job number" size="10" pattern="^\d{4}\d{4}$" validate required>
+                            <input type="text" name="passportNumber" class="form-control forminput" data-ng-model="id.passportNumber" placeholder="passport number" title=" Enter a valid passport number" size="10" pattern="^\d{4}\d{4}$" validate required>
                         </div>
                         <div class="form-group">
                             
                             <br>
-                            <input type="text" name="companyName" class="form-control forminput" data-ng-model="id.companyName" placeholder="What company owns the Insurance card?" required>
+                            <input type="text" name="country" class="form-control forminput" data-ng-model="id.country" placeholder="What country owns the passport?" required>
                         </div>
                         <div class="form-group">
                             
                             <br>
-                            <input type="text" name="Where did you find ID" class="form-control forminput" data-ng-model="id.location" placeholder="location" required>
+                            <input type="text" name="Where did you find passport?" class="form-control forminput" data-ng-model="id.location" placeholder="location" required>
                         </div>
             
                         <label class="btn" id="altbtn">Click to Upload Photo
@@ -53,7 +53,7 @@
                         <div class="row">
                             <div class="col-sm-4"></div>
                             <div class="col-sm-4">
-                                <button id="signupbtn"  class="btn btn-large text-center postid" ng-disabled="uploading">Post  card</button>
+                                <button id="signupbtn"  class="btn btn-large text-center postid" ng-disabled="uploading">Post  passport</button>
                             </div>
                             <div class="col-sm-4"></div>
                         </div>

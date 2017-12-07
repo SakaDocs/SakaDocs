@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	Schema = mongoose.Schema;
+    Schema = mongoose.Schema;
 var generateSequence = function (){
   var result = "";
   var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -15,42 +15,38 @@ var generateSequence = function (){
   return result;
 }
 /**
- * Certificate Schema
+ * Dl Schema
  */
-var CertificateSchema = new Schema({
-	institutionName: {
-		type: String, 
-		trim: true
-	},
-	fullNames: {
-		type: String, 
-		trim: true
-	},
-	locationFound: {
-		type: String, 
-		trim: true
-	},
-	finderNumber: {
-		type: String, 
-		trim: true
-	},
-	created: {
-        type: Date,
-        default: Date.now
-    },
-	 idPhoto: {
+var EnvelopeSchema = new Schema({
+    fullNames: {
         type: String,
         trim: true
     },
-	claimed: {
+    locationFound: {
+        type: String,
+        trim: true
+    },
+    finderNumber: {
+        type: String,
+        trim: true
+    },
+    created: {
+        type: Date,
+        default: Date.now
+    },
+    idPhoto: {
+        type: String,
+        trim: true
+    },
+    claimed: {
         type: Boolean,
         default: false
 
     },
     sakaDocsCode: {
-    	type: String,
-    	default: Math.floor(Math.random()*900).toString() + generateSequence()
+        type: String,
+        default: Math.floor(Math.random()*900).toString() + generateSequence()
     }
 });
 
-mongoose.model('Certificate', CertificateSchema);
+mongoose.model('Envelope', EnvelopeSchema);
