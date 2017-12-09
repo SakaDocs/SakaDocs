@@ -134,6 +134,20 @@ exports.read = function(req, res) {
     });
 };
 
+exports.myids = function(req, res) {
+    console.log(req.params.finderNumber);
+    var fN = req.params.finderNumber;
+    National.find({ "finderNumber": fN }).exec(function(err, ids) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.json(ids.reverse());
+        }
+    });
+};
+
 /**
  * Update a Category
  */

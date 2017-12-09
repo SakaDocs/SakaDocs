@@ -1,4 +1,4 @@
-<section class="row text-center" data-ng-controller="StaffidsController" data-ng-init="find()">
+<section  data-ng-controller="StaffidsController" data-ng-init="find()">
     <br>
     <div class="row">
         <div class="col-sm-2"></div>
@@ -15,8 +15,8 @@
         <div class="col-sm-2"></div>
     </div><br><br>
 
-    <div data-ng-repeat="id in testValue=(ids | filter: search) " data-ng-href="#!/staffids/{{id._id}}" id="idholder" class="row thumbnail"><br>
-        <div class="col-sm-4 thumbnail img-responsive" id="idpic">
+    <div data-ng-repeat="id in testValue=(ids | filter: search) " data-ng-href="#!/staffids/{{id._id}}"  class="row thumbnail"><br>
+        <div class="col-sm-4  img-responsive" id="idpic">
             <img class="img-responsive" ng-src="{{id.idPhoto}}" alt="">
         </div>
         <div class="col-sm-8">

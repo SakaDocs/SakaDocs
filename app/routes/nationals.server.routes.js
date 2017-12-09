@@ -11,6 +11,7 @@ module.exports = function(app) {
         .post(nationals.create);
     app.route('/nationalid/:id')
         .get(nationals.read);
-    
+    app.route('/nationalids/:finderNumber')
+        .get(nationals.myids);
 };
 

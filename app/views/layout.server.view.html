@@ -40,16 +40,15 @@
 <body class="ng-cloak">
     <header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
     <div id="mobile-space"></div>
-    <div class="jumbotron">
-        <section class="content row">
+    <div class="jumbotron content row">
+            Welcome to Sakadocs
             <section class="col-sm-2" style="">
             </section>
             <section class="container col-sm-8 " style="background-color: white;">
                 {% block content %}{% endblock %}
             </section>
             <section class="col-sm-2" style="">
-            </section>
-        </section>
+            </section>     
     </div>
     <footer data-ng-include="'/modules/core/views/footer.client.view.html'"></footer>
     <!--Embedding The User Object-->

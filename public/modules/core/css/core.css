@@ -235,6 +235,7 @@ body{
 }
 #mobile_signup{
 	display: none;
+
 }
 #claimtext{
 	text-decoration: none;
@@ -278,17 +279,20 @@ body{
 }
 #profile_on_mobile{
 	display: unset;
+	visibility: visible;
 }
 #profile_on_pc{
 	display: none;
 }
 #mobile_signup{
 	display: unset;
+	visibility: visible;
 }
 #pchometext{
 	display: none;
 }
 #mobilehometext{
 	display: unset;
+	visibility: visible;
 }
 }

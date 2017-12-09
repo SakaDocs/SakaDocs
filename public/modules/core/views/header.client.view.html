@@ -87,31 +87,31 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="/#!/settings/accounts"><span class="menuname">Student Id<span class="menuname"></a>
+                                <a href="/#!/poststudentid"><span class="menuname">Student Id<span class="menuname"></a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="/#!/settings/password"><span class="menuname">Staff Id</span></a>
+                                <a href="/#!/poststaffid"><span class="menuname">Staff Id</span></a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="/auth/signout"><span class="menuname">ATM card</span></a>
+                                <a href="/#!/postatm"><span class="menuname">ATM card</span></a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="/auth/signout"><span class="menuname">NHIF card</span></a>
+                                <a href="/#!/postnhif"><span class="menuname">NHIF card</span></a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="/auth/signout"><span class="menuname">Certificate</span></a>
+                                <a href="/#!/postcertificate"><span class="menuname">Certificate</span></a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="/auth/signout"><span class="menuname">Passport</span></a>
+                                <a href="/#!/passport"><span class="menuname">Passport</span></a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="/auth/signout"><span class="menuname">Driving license</span></a>
+                                <a href="/#!/postdl"><span class="menuname">Driving license</span></a>
                             </li>
                         </ul>
                     </li>
@@ -130,36 +130,71 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="/#!/settings/accounts"><span class="menuname">Student Id<span class="menuname"></a>
+                                <a href="/#!/poststudentid"><span class="menuname">Student Id<span class="menuname"></a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="/#!/settings/password"><span class="menuname">Staff Id</span></a>
+                                <a href="/#!/poststaffid"><span class="menuname">Staff Id</span></a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="/auth/signout"><span class="menuname">ATM card</span></a>
+                                <a href="/#!/postatm"><span class="menuname">ATM card</span></a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="/auth/signout"><span class="menuname">NHIF card</span></a>
+                                <a href="/#!/postnhif"><span class="menuname">NHIF card</span></a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="/auth/signout"><span class="menuname">Certificate</span></a>
+                                <a href="/#!/postcertificate"><span class="menuname">Certificate</span></a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="/auth/signout"><span class="menuname">Passport</span></a>
+                                <a href="/#!/postpassport"><span class="menuname">Passport</span></a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="/auth/signout"><span class="menuname">Driving license</span></a>
+                                <a href="/#!/postdl"><span class="menuname">Driving license</span></a>
                             </li>
                         </ul>
                     </li>
-                    <li ui-route="/signin" ng-class="{active: $uiRoute}">
-                        <a href="/#!/myposts"><span class="menuname" id="postdoc">My Posts</span></a>
+                    <li class="dropdown" dropdown>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle>
+                            <span class="menuname" id="createaccount">My Posts</span> <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li name="doc" data-ng-model="doc">
+                                <a href="/#!/myids"><span class="menuname">National Id</span></a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/#!/poststudentid"><span class="menuname">Student Id<span class="menuname"></a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/#!/poststaffid"><span class="menuname">Staff Id</span></a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/#!/postatm"><span class="menuname">ATM card</span></a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/#!/postnhif"><span class="menuname">NHIF card</span></a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/#!/postcertificate"><span class="menuname">Certificate</span></a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/#!/passport"><span class="menuname">Passport</span></a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/#!/postdl"><span class="menuname">Driving license</span></a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="dropdown" dropdown id="profile_on_pc">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle>
