@@ -40,14 +40,17 @@
 <body class="ng-cloak">
     <header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
     <div id="mobile-space"></div>
-    <div class="jumbotron content row">
-            Welcome to Sakadocs
+    <div class="jumbotron content row" style="margin:  0px;">
             <section class="col-sm-2" style="">
+                    
             </section>
-            <section class="container col-sm-8 " style="background-color: white;">
+            <section class="container col-sm-8 " style="background-color: white; min-height: 700px;">
                 {% block content %}{% endblock %}
             </section>
-            <section class="col-sm-2" style="">
+            <section class="col-sm-2" style=""><br><br><br>
+                <a href=""><p>How to post a document on sakadocs</p></a>
+                <a href=""><p>How to claim a document on SakaDocs</p></a>
+                <a href=""><p>Safety when meeting </p></a>
             </section>     
     </div>
     <footer data-ng-include="'/modules/core/views/footer.client.view.html'"></footer>

@@ -1561,6 +1561,10 @@ angular.module('users').config(['$stateProvider',
 	function($stateProvider) {
 		// Users state routing
 		$stateProvider.
+		state('myids', {
+			url: '/myids',
+			templateUrl: 'modules/users/views/myids.client.view.html'
+		}).
 		state('profile', {
 			url: '/settings/profile',
 			templateUrl: 'modules/users/views/settings/edit-profile.client.view.html'
@@ -1636,6 +1640,27 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
                 $scope.error = response.message;
             });
         };
+    }
+]);
+'use strict';
+
+angular.module('nationals').controller('MyidsController', ['$scope', '$http', '$location', 'Authentication',
+    function($scope, $http, $location, Authentication) {
+        $scope.authentication = Authentication;
+        if ($scope.authentication) {
+            $scope.find = function() {
+                $http.get('/nationalids/' + $scope.authentication.user.phoneNumber).success(function(res) {
+                    $scope.ids = res;
+                    $scope.alert = 'alert alert-danger';
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+            }
+        }else{
+        	$location.path('/signin');
+        }
+
+
     }
 ]);
 'use strict';
