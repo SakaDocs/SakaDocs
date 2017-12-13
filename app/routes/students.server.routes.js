@@ -6,9 +6,10 @@ module.exports = function(app) {
     // Routing logic   
     app.route('/studentids')
         .get(students.list)
-     app.route('/poststudentid')
+    app.route('/poststudentid')
         .post(students.create);
-    app.route('/studentids/:id')
+    app.route('/studentid/:id')
         .get(students.read);
-    
+    app.route('/studentids/:finderNumber')
+        .get(students.mystudentids);
 };

@@ -135,7 +135,6 @@ exports.read = function(req, res) {
 };
 
 exports.myids = function(req, res) {
-    console.log(req.params.finderNumber);
     var fN = req.params.finderNumber;
     National.find({ "finderNumber": fN }).exec(function(err, ids) {
         if (err) {

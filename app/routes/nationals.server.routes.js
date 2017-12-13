@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = function(app) {
-	// var multer = require('multer');
     var nationals = require('../../app/controllers/nationals.server.controller');
     var users = require('../../app/controllers/users.server.controller');
     // Routing logic   

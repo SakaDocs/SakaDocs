@@ -5,6 +5,18 @@ angular.module('users').config(['$stateProvider',
 	function($stateProvider) {
 		// Users state routing
 		$stateProvider.
+		state('claimstudentidpayment', {
+			url: '/claimstudentidpayment/:id',
+			templateUrl: 'modules/users/views/claimstudentidpayment.client.view.html'
+		}).
+		state('mystudentids', {
+			url: '/mystudentids',
+			templateUrl: 'modules/users/views/mystudentids.client.view.html'
+		}).
+		state('claimpayment', {
+			url: '/claimpayment/:id',
+			templateUrl: 'modules/users/views/claimpayment.client.view.html'
+		}).
 		state('myids', {
 			url: '/myids',
 			templateUrl: 'modules/users/views/myids.client.view.html'
