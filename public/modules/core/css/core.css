@@ -87,6 +87,9 @@ body{
 	width: 6%;
 
 }
+.breaks{
+	display: none;
+}
 #mobile-space{
 	min-height: 80px;
 }
@@ -283,7 +286,7 @@ body{
 }
 #mobile_signup{
 	display: unset;
-	visibility: visible;
+	
 }
 #pchometext{
 	display: none;
@@ -291,5 +294,8 @@ body{
 #mobilehometext{
 	display: unset;
 	visibility: visible;
+}
+.breaks{
+	display: unset;
 }
 }

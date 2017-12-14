@@ -1561,6 +1561,18 @@ angular.module('users').config(['$stateProvider',
 	function($stateProvider) {
 		// Users state routing
 		$stateProvider.
+		state('claimstudentidpayment', {
+			url: '/claimstudentidpayment/:id',
+			templateUrl: 'modules/users/views/claimstudentidpayment.client.view.html'
+		}).
+		state('mystudentids', {
+			url: '/mystudentids',
+			templateUrl: 'modules/users/views/mystudentids.client.view.html'
+		}).
+		state('claimpayment', {
+			url: '/claimpayment/:id',
+			templateUrl: 'modules/users/views/claimpayment.client.view.html'
+		}).
 		state('myids', {
 			url: '/myids',
 			templateUrl: 'modules/users/views/myids.client.view.html'
@@ -1644,12 +1656,81 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 ]);
 'use strict';
 
-angular.module('nationals').controller('MyidsController', ['$scope', '$http', '$location', 'Authentication',
+angular.module('users').controller('ClaimpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
+    function($scope, $http, $location, Authentication, $stateParams) {
+        $scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+            $scope.claim = function() {
+            	var url =  '/nationalid/';
+                if ($scope.authentication.user.accountBalance < 200) {
+                    $http.get(url + $stateParams.id).success(function(res) {
+                    $scope.id = res;
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+                }
+
+            }
+
+        } else {
+            $location.path('/signin');
+        }
+
+    }
+]);
+'use strict';
+
+angular.module('users').controller('ClaimstudentidpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
+    function($scope, $http, $location, Authentication, $stateParams) {
+        $scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+            $scope.claim = function() {
+            	var url = '/studentid/';
+                if ($scope.authentication.user.accountBalance < 200) {
+                    $http.get(url + $stateParams.id).success(function(res) {
+                    $scope.id = res;
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+                }
+
+            }
+
+        } else {
+            $location.path('/signin');
+        }
+
+    }
+]);
+'use strict';
+
+angular.module('users').controller('MyidsController', ['$scope', '$http', '$location', 'Authentication',
     function($scope, $http, $location, Authentication) {
         $scope.authentication = Authentication;
         if ($scope.authentication) {
             $scope.find = function() {
                 $http.get('/nationalids/' + $scope.authentication.user.phoneNumber).success(function(res) {
+                    $scope.ids = res;
+                    $scope.alert = 'alert alert-danger';
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+            }
+        }else{
+        	$location.path('/signin');
+        }
+
+
+    }
+]);
+'use strict';
+
+angular.module('users').controller('MystudentidsController', ['$scope', '$http', '$location', 'Authentication',
+    function($scope, $http, $location, Authentication) {
+        $scope.authentication = Authentication;
+        if ($scope.authentication) {
+            $scope.find = function() {
+                $http.get('/studentids/' + $scope.authentication.user.phoneNumber).success(function(res) {
                     $scope.ids = res;
                     $scope.alert = 'alert alert-danger';
                 }).error(function(res) {
