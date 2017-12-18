@@ -124,6 +124,21 @@ exports.read = function(req, res) {
     });
 };
 
+exports.mypassports = function(req, res) {
+
+    var fN = req.params.finderNumber;
+    Passport.find({ "finderNumber": fN }).exec(function(err, ids) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.json(ids.reverse());
+        }
+    });
+};
+
+
 /**
  * Update a Passport
  */

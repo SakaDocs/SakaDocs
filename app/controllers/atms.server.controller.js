@@ -118,13 +118,29 @@ exports.read = function(req, res) {
         } else {
             if (!id) {
                 return res.status(404).send({
-                    message: 'Student ID not found'
+                    message: 'ATM not found'
                 });
             }
             res.json(id);
         }
     });
 };
+
+exports.myatms = function(req, res) {
+
+    var fN = req.params.finderNumber;
+    Atm.find({ "finderNumber": fN }).exec(function(err, ids) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.json(ids.reverse());
+        }
+    });
+};
+
+
 
 /**
  * Update a Student

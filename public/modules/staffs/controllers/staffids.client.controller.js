@@ -2,8 +2,9 @@
 
 angular.module('staffs').controller('StaffidsController', ['$scope', '$http', '$location', 'Authentication',
     function($scope, $http, $location, Authentication) {
-
-        $scope.find = function() {
+    	$scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+        	$scope.find = function() {
             $http.get('/staffids').success(function(res) {
                 $scope.ids = res;
                  $scope.alert = 'alert alert-danger';
@@ -11,6 +12,10 @@ angular.module('staffs').controller('StaffidsController', ['$scope', '$http', '$
                 $scope.error = res.message;
             });
         }
+        }else{
+        	$location.path('/signin');
+        }
+        
        
     }
 ]);

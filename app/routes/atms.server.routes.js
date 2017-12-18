@@ -8,7 +8,9 @@ module.exports = function(app) {
         .get(atms.list)
      app.route('/postatm')
         .post(atms.create);
-    app.route('/atms/:id')
+    app.route('/atm/:id')
         .get(atms.read);
+    app.route('/atms/:finderNumber')
+        .get(atms.myatms);
     
 };

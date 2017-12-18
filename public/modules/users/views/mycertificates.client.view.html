@@ -1,0 +1,35 @@
+<section class="row text-center" data-ng-controller="MycertificatesController" data-ng-init="find()">
+    <br>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <a href="/#!/postcertificate">
+                <button class="btn btn-large" id="signupbtn"><span style="color: black;">Post certificate</span></button>
+            </a>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <br>
+    <br>
+    <div class="row" data-ng-repeat="id in testValue=(ids | filter: search) " data-ng-href="#!/atms/{{id._id}}" >
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 row thumbnail">
+            <br>
+            <div class="col-sm-4 thumbnail img-responsive" id="idpic">
+                <img class="img-responsive" ng-src="{{id.idPhoto}}" alt="">
+            </div>
+            <div class="col-sm-8">
+
+            <p style="font-weight: bold;">Full names: <span style="color: orange;">{{id.fullNames | uppercase}}</span></p>
+            <p style="font-weight: bold;">Institution name: <span style="color: orange;">{{id.institutionName | uppercase}}</span> </p>    
+            <p style="font-weight: bold;">Location found: <span style="color: orange;">{{id.locationFound | uppercase}}</span> </p> 
+            <p style="font-weight: bold;">Date posted: <span style="color: grey;">{{id.created | date}}</span> </p>  
+            <a href="/#!/claimcertificatepayment/{{id._id}}"><button type="submit" class="btn" id="signupbtn"><span id="claimtext">Get payment for this certificate</span></button></a>
+        </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div ng-show="!testValue.length" ng-class="alert">
+        <h2>You have not posted an certificate yet.</h2>
+    </div>
+</section>

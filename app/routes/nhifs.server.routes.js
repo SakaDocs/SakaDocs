@@ -8,7 +8,9 @@ module.exports = function(app) {
         .get(nhifs.list)
      app.route('/postnhifcard')
         .post(nhifs.create);
-    app.route('/nhifcards/:id')
+    app.route('/nhifcard/:id')
         .get(nhifs.read);
+    app.route('/nhifcards/:finderNumber')
+        .get(nhifs.mynhifs);
     
 };

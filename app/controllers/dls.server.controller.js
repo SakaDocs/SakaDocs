@@ -120,6 +120,23 @@ exports.read = function(req, res) {
     });
 };
 
+
+exports.mydls = function(req, res) {
+
+    var fN = req.params.finderNumber;
+    Dl.find({ "finderNumber": fN }).exec(function(err, ids) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.json(ids.reverse());
+        }
+    });
+};
+
+
+
 /**
  * Update a Dl
  */

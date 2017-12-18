@@ -8,7 +8,9 @@ module.exports = function(app) {
         .get(passports.list)
      app.route('/postpassport')
         .post(passports.create);
-    app.route('/passports/:id')
+    app.route('/passport/:id')
         .get(passports.read);
+    app.route('/passports/:finderNumber')
+        .get(passports.mypassports);
     
 };

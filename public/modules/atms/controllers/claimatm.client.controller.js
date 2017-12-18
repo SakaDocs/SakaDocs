@@ -6,7 +6,7 @@ angular.module('atms').controller('ClaimatmController', ['$scope', '$http', '$lo
         if ($scope.authentication.user) {
             $scope.claim = function() {
                 if ($scope.authentication.user.accountBalance < 200) {
-                    $http.get('/atms/' + $stateParams.id).success(function(res) {
+                    $http.get('/atm/' + $stateParams.id).success(function(res) {
                     $scope.id = res;
                 }).error(function(res) {
                     $scope.error = res.message;

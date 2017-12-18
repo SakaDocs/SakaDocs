@@ -8,7 +8,8 @@ module.exports = function(app) {
         .get(dls.list)
      app.route('/postdl')
         .post(dls.create);
-    app.route('/dls/:id')
+    app.route('/dl/:id')
         .get(dls.read);
-    
+    app.route('/dls/:finderNumber')
+        .get(dls.mydls);
 };

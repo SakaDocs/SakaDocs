@@ -115,19 +115,21 @@ angular.module('atms').config(['$stateProvider',
 
 angular.module('atms').controller('AtmsController', ['$scope', '$http', '$location', 'Authentication',
     function($scope, $http, $location, Authentication) {
-
-        $scope.find = function() {
-            $http.get('/atms').success(function(res) {
-                $scope.ids = res;
-                 $scope.alert = 'alert alert-danger';
-            }).error(function(res) {
-                $scope.error = res.message;
-            });
+        $scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+            $scope.find = function() {
+                $http.get('/atms').success(function(res) {
+                    $scope.ids = res;
+                    $scope.alert = 'alert alert-danger';
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+            }
+        } else {
+            $location.path('/signin');
         }
-       
     }
 ]);
-
 'use strict';
 
 angular.module('atms').controller('ClaimatmController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
@@ -136,7 +138,7 @@ angular.module('atms').controller('ClaimatmController', ['$scope', '$http', '$lo
         if ($scope.authentication.user) {
             $scope.claim = function() {
                 if ($scope.authentication.user.accountBalance < 200) {
-                    $http.get('/atms/' + $stateParams.id).success(function(res) {
+                    $http.get('/atm/' + $stateParams.id).success(function(res) {
                     $scope.id = res;
                 }).error(function(res) {
                     $scope.error = res.message;
@@ -278,8 +280,9 @@ angular.module('certificates').config(['$stateProvider',
 
 angular.module('certificates').controller('CertificatesController', ['$scope', '$http', '$location', 'Authentication',
     function($scope, $http, $location, Authentication) {
-
-        $scope.find = function() {
+        $scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+             $scope.find = function() {
             $http.get('/certificates').success(function(res) {
                 $scope.ids = res;
                  $scope.alert = 'alert alert-danger';
@@ -287,17 +290,34 @@ angular.module('certificates').controller('CertificatesController', ['$scope', '
                 $scope.error = res.message;
             });
         }
-       
+        }else{
+            $location.path('/signin');
+        }    
     }
 ]);
 
 'use strict';
 
-angular.module('certificates').controller('ClaimcertificateController', ['$scope',
-	function($scope) {
-		// Controller Logic
-		// ...
-	}
+angular.module('nationals').controller('ClaimcertificateController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
+    function($scope, $http, $location, Authentication, $stateParams) {
+        $scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+            $scope.claim = function() {
+                if ($scope.authentication.user.accountBalance < 200) {
+                    $http.get('/certificate/' + $stateParams.id).success(function(res) {
+                    $scope.id = res;
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+                }
+
+            }
+
+        } else {
+            $location.path('/signin');
+        }
+
+    }
 ]);
 'use strict';
 
@@ -651,29 +671,48 @@ angular.module('dls').config(['$stateProvider',
 ]);
 'use strict';
 
-angular.module('dls').controller('ClaimdlController', ['$scope',
-	function($scope) {
-		// Controller Logic
-		// ...
-	}
+angular.module('dls').controller('ClaimdlController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
+    function($scope, $http, $location, Authentication, $stateParams) {
+        $scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+            $scope.claim = function() {
+                if ($scope.authentication.user.accountBalance < 200) {
+                    $http.get('/dl/' + $stateParams.id).success(function(res) {
+                    $scope.id = res;
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+                }
+
+            }
+
+        } else {
+            $location.path('/signin');
+        }
+
+    }
 ]);
 'use strict';
 
 angular.module('dls').controller('DlsController', ['$scope', '$http', '$location', 'Authentication',
     function($scope, $http, $location, Authentication) {
-
-        $scope.find = function() {
-            $http.get('/dls').success(function(res) {
-                $scope.ids = res;
-                 $scope.alert = 'alert alert-danger';
-            }).error(function(res) {
-                $scope.error = res.message;
-            });
+        $scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+            $scope.find = function() {
+                $http.get('/dls').success(function(res) {
+                    $scope.ids = res;
+                    $scope.alert = 'alert alert-danger';
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+            }
+        } else {
+            $location.path('/signin');
         }
-       
+
+
     }
 ]);
-
 'use strict';
 
 angular.module('dls').controller('PostdlController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice',
@@ -823,19 +862,23 @@ angular.module('nationals').controller('ClaimController', ['$scope', '$http', '$
 
 angular.module('nationals').controller('NationalsController', ['$scope', '$http', '$location', 'Authentication',
     function($scope, $http, $location, Authentication) {
-
-        $scope.find = function() {
-            $http.get('/nationalids').success(function(res) {
-                $scope.ids = res;
-                 $scope.alert = 'alert alert-danger';
-            }).error(function(res) {
-                $scope.error = res.message;
-            });
+        $scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+            $scope.find = function() {
+                $http.get('/nationalids').success(function(res) {
+                    $scope.ids = res;
+                    $scope.alert = 'alert alert-danger';
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+            }
+        } else {
+            $location.path('/signin');
         }
-       
+
+
     }
 ]);
-
 'use strict';
 
 angular.module('nationals').controller('PostController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice',
@@ -961,29 +1004,48 @@ angular.module('nhifs').config(['$stateProvider',
 ]);
 'use strict';
 
-angular.module('nhifs').controller('ClaimnhifController', ['$scope',
-	function($scope) {
-		// Controller Logic
-		// ...
-	}
+angular.module('nhifs').controller('ClaimnhifController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
+    function($scope, $http, $location, Authentication, $stateParams) {
+        $scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+            $scope.claim = function() {
+                if ($scope.authentication.user.accountBalance < 200) {
+                    $http.get('/nhifcard/' + $stateParams.id).success(function(res) {
+                    $scope.id = res;
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+                }
+
+            }
+
+        } else {
+            $location.path('/signin');
+        }
+
+    }
 ]);
 'use strict';
 
 angular.module('nhifs').controller('NhifsController', ['$scope', '$http', '$location', 'Authentication',
     function($scope, $http, $location, Authentication) {
-
-        $scope.find = function() {
-            $http.get('/nhifs').success(function(res) {
-                $scope.ids = res;
-                 $scope.alert = 'alert alert-danger';
-            }).error(function(res) {
-                $scope.error = res.message;
-            });
+        $scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+            $scope.find = function() {
+                $http.get('/nhifs').success(function(res) {
+                    $scope.ids = res;
+                    $scope.alert = 'alert alert-danger';
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+            }
+        } else {
+            $location.path('/signin');
         }
-       
+
+
     }
 ]);
-
 'use strict';
 
 angular.module('nhifs').controller('PostnhifController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice',
@@ -1109,29 +1171,48 @@ angular.module('passports').config(['$stateProvider',
 ]);
 'use strict';
 
-angular.module('passports').controller('ClaimpassportsController', ['$scope',
-	function($scope) {
-		// Controller Logic
-		// ...
-	}
+angular.module('passports').controller('ClaimpassportController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
+    function($scope, $http, $location, Authentication, $stateParams) {
+        $scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+            $scope.claim = function() {
+                if ($scope.authentication.user.accountBalance < 200) {
+                    $http.get('/passport/' + $stateParams.id).success(function(res) {
+                    $scope.id = res;
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+                }
+
+            }
+
+        } else {
+            $location.path('/signin');
+        }
+
+    }
 ]);
 'use strict';
 
 angular.module('passports').controller('PassportsController', ['$scope', '$http', '$location', 'Authentication',
     function($scope, $http, $location, Authentication) {
-
-        $scope.find = function() {
-            $http.get('/passports').success(function(res) {
-                $scope.ids = res;
-                 $scope.alert = 'alert alert-danger';
-            }).error(function(res) {
-                $scope.error = res.message;
-            });
+        $scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+            $scope.find = function() {
+                $http.get('/passports').success(function(res) {
+                    $scope.ids = res;
+                    $scope.alert = 'alert alert-danger';
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+            }
+        } else {
+        	$location.path('/signin');
         }
-       
+
+
     }
 ]);
-
 'use strict';
 
 angular.module('passports').controller('PostpassportController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice',
@@ -1254,11 +1335,26 @@ angular.module('staffs').config(['$stateProvider',
 ]);
 'use strict';
 
-angular.module('staffs').controller('ClaimstaffidController', ['$scope',
-	function($scope) {
-		// Controller Logic
-		// ...
-	}
+angular.module('staffs').controller('ClaimstaffidController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
+    function($scope, $http, $location, Authentication, $stateParams) {
+        $scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+            $scope.claim = function() {
+                if ($scope.authentication.user.accountBalance < 200) {
+                    $http.get('/staffid/' + $stateParams.id).success(function(res) {
+                    $scope.id = res;
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+                }
+
+            }
+
+        } else {
+            $location.path('/signin');
+        }
+
+    }
 ]);
 'use strict';
 
@@ -1321,8 +1417,9 @@ angular.module('staffs').controller('PoststaffidController', ['$scope', '$timeou
 
 angular.module('staffs').controller('StaffidsController', ['$scope', '$http', '$location', 'Authentication',
     function($scope, $http, $location, Authentication) {
-
-        $scope.find = function() {
+    	$scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+        	$scope.find = function() {
             $http.get('/staffids').success(function(res) {
                 $scope.ids = res;
                  $scope.alert = 'alert alert-danger';
@@ -1330,6 +1427,10 @@ angular.module('staffs').controller('StaffidsController', ['$scope', '$http', '$
                 $scope.error = res.message;
             });
         }
+        }else{
+        	$location.path('/signin');
+        }
+        
        
     }
 ]);
@@ -1402,11 +1503,26 @@ angular.module('students').config(['$stateProvider',
 ]);
 'use strict';
 
-angular.module('students').controller('ClaimstudentidController', ['$scope',
-	function($scope) {
-		// Claimstudentid controller logic
-		// ...
-	}
+angular.module('students').controller('ClaimstudentidController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
+    function($scope, $http, $location, Authentication, $stateParams) {
+        $scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+            $scope.claim = function() {
+                if ($scope.authentication.user.accountBalance < 200) {
+                    $http.get('/studentid/' + $stateParams.id).success(function(res) {
+                    $scope.id = res;
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+                }
+
+            }
+
+        } else {
+            $location.path('/signin');
+        }
+
+    }
 ]);
 'use strict';
 
@@ -1469,14 +1585,20 @@ angular.module('students').controller('PoststudentidController', ['$scope', '$ti
 
 angular.module('students').controller('StudentidsController', ['$scope', '$http', '$location', 'Authentication',
     function($scope, $http, $location, Authentication) {
-        $scope.find = function() {
-            $http.get('/studentids').success(function(res) {
-                $scope.ids = res;
-                $scope.alert = 'alert alert-danger';
-            }).error(function(res) {
-                $scope.error = res.message;
-            });
+        $scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+            $scope.find = function() {
+                $http.get('/studentids').success(function(res) {
+                    $scope.ids = res;
+                    $scope.alert = 'alert alert-danger';
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+            }
+        } else {
+        	$location.path('/signin');
         }
+
     }
 ]);
 'use strict';
@@ -1561,6 +1683,54 @@ angular.module('users').config(['$stateProvider',
 	function($stateProvider) {
 		// Users state routing
 		$stateProvider.
+		state('claimpassportpayment', {
+			url: '/claimpassportpayment/:id',
+			templateUrl: 'modules/users/views/claimpassportpayment.client.view.html'
+		}).
+		state('mypassports', {
+			url: '/mypassports',
+			templateUrl: 'modules/users/views/mypassports.client.view.html'
+		}).
+		state('claimdlpayment', {
+			url: '/claimdlpayment/:id',
+			templateUrl: 'modules/users/views/claimdlpayment.client.view.html'
+		}).
+		state('mydls', {
+			url: '/mydls',
+			templateUrl: 'modules/users/views/mydls.client.view.html'
+		}).
+		state('claimcertificatepayment', {
+			url: '/claimcertificatepayment/:id',
+			templateUrl: 'modules/users/views/claimcertificatepayment.client.view.html'
+		}).
+		state('mycertificates', {
+			url: '/mycertificates',
+			templateUrl: 'modules/users/views/mycertificates.client.view.html'
+		}).
+		state('claimnhifpayment', {
+			url: '/claimnhifpayment/:id',
+			templateUrl: 'modules/users/views/claimnhifpayment.client.view.html'
+		}).
+		state('mynhifs', {
+			url: '/mynhifs',
+			templateUrl: 'modules/users/views/mynhifs.client.view.html'
+		}).
+		state('claimatmpayment', {
+			url: '/claimatmpayment/:id',
+			templateUrl: 'modules/users/views/claimatmpayment.client.view.html'
+		}).
+		state('myatms', {
+			url: '/myatms',
+			templateUrl: 'modules/users/views/myatms.client.view.html'
+		}).
+		state('claimstaffidpayment', {
+			url: '/claimstaffidpayment/:id',
+			templateUrl: 'modules/users/views/claimstaffidpayment.client.view.html'
+		}).
+		state('mystaffids', {
+			url: '/mystaffids',
+			templateUrl: 'modules/users/views/mystaffids.client.view.html'
+		}).
 		state('claimstudentidpayment', {
 			url: '/claimstudentidpayment/:id',
 			templateUrl: 'modules/users/views/claimstudentidpayment.client.view.html'
@@ -1656,12 +1826,156 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 ]);
 'use strict';
 
+angular.module('users').controller('ClaimatmpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
+    function($scope, $http, $location, Authentication, $stateParams) {
+        $scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+            $scope.claim = function() {
+            	var url = '/atm/';
+                if ($scope.authentication.user.accountBalance < 200) {
+                    $http.get(url + $stateParams.id).success(function(res) {
+                    $scope.id = res;
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+                }
+
+            }
+
+        } else {
+            $location.path('/signin');
+        }
+
+    }
+]);
+'use strict';
+
+angular.module('users').controller('ClaimcertificatepaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
+    function($scope, $http, $location, Authentication, $stateParams) {
+        $scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+            $scope.claim = function() {
+            	var url = '/certificate/';
+                if ($scope.authentication.user.accountBalance < 200) {
+                    $http.get(url + $stateParams.id).success(function(res) {
+                    $scope.id = res;
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+                }
+
+            }
+
+        } else {
+            $location.path('/signin');
+        }
+
+    }
+]);
+'use strict';
+
+angular.module('users').controller('ClaimdlpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
+    function($scope, $http, $location, Authentication, $stateParams) {
+        $scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+            $scope.claim = function() {
+            	var url = '/dl/';
+                if ($scope.authentication.user.accountBalance < 200) {
+                    $http.get(url + $stateParams.id).success(function(res) {
+                    $scope.id = res;
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+                }
+
+            }
+
+        } else {
+            $location.path('/signin');
+        }
+
+    }
+]);
+'use strict';
+
+angular.module('users').controller('ClaimnhifpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
+    function($scope, $http, $location, Authentication, $stateParams) {
+        $scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+            $scope.claim = function() {
+            	var url = '/nhifcard/';
+                if ($scope.authentication.user.accountBalance < 200) {
+                    $http.get(url + $stateParams.id).success(function(res) {
+                    $scope.id = res;
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+                }
+
+            }
+
+        } else {
+            $location.path('/signin');
+        }
+
+    }
+]);
+'use strict';
+
+angular.module('users').controller('ClaimpassportpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
+    function($scope, $http, $location, Authentication, $stateParams) {
+        $scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+            $scope.claim = function() {
+            	var url = '/passport/';
+                if ($scope.authentication.user.accountBalance < 200) {
+                    $http.get(url + $stateParams.id).success(function(res) {
+                    $scope.id = res;
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+                }
+
+            }
+
+        } else {
+            $location.path('/signin');
+        }
+
+    }
+]);
+'use strict';
+
 angular.module('users').controller('ClaimpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
     function($scope, $http, $location, Authentication, $stateParams) {
         $scope.authentication = Authentication;
         if ($scope.authentication.user) {
             $scope.claim = function() {
             	var url =  '/nationalid/';
+                if ($scope.authentication.user.accountBalance < 200) {
+                    $http.get(url + $stateParams.id).success(function(res) {
+                    $scope.id = res;
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+                }
+
+            }
+
+        } else {
+            $location.path('/signin');
+        }
+
+    }
+]);
+'use strict';
+
+angular.module('users').controller('ClaimstaffidpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
+    function($scope, $http, $location, Authentication, $stateParams) {
+        $scope.authentication = Authentication;
+        if ($scope.authentication.user) {
+            $scope.claim = function() {
+            	var url = '/staffid/';
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get(url + $stateParams.id).success(function(res) {
                     $scope.id = res;
@@ -1704,12 +2018,142 @@ angular.module('users').controller('ClaimstudentidpaymentController', ['$scope',
 ]);
 'use strict';
 
+angular.module('users').controller('MyatmsController', ['$scope', '$http', '$location', 'Authentication',
+    function($scope, $http, $location, Authentication) {
+        $scope.authentication = Authentication;
+        if ($scope.authentication) {
+            $scope.find = function() {
+                $http.get('/atms/' + $scope.authentication.user.phoneNumber).success(function(res) {
+                    $scope.ids = res;
+                    $scope.alert = 'alert alert-danger';
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+            }
+        }else{
+        	$location.path('/signin');
+        }
+
+
+    }
+]);
+'use strict';
+
+angular.module('users').controller('MycertificatesController', ['$scope', '$http', '$location', 'Authentication',
+    function($scope, $http, $location, Authentication) {
+        $scope.authentication = Authentication;
+        if ($scope.authentication) {
+            $scope.find = function() {
+                $http.get('/certificates/' + $scope.authentication.user.phoneNumber).success(function(res) {
+                    $scope.ids = res;
+                    $scope.alert = 'alert alert-danger';
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+            }
+        }else{
+        	$location.path('/signin');
+        }
+
+
+    }
+]);
+'use strict';
+
+angular.module('users').controller('MydlsController', ['$scope', '$http', '$location', 'Authentication',
+    function($scope, $http, $location, Authentication) {
+        $scope.authentication = Authentication;
+        if ($scope.authentication) {
+            $scope.find = function() {
+                $http.get('/dls/' + $scope.authentication.user.phoneNumber).success(function(res) {
+                    $scope.ids = res;
+                    $scope.alert = 'alert alert-danger';
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+            }
+        }else{
+        	$location.path('/signin');
+        }
+
+
+    }
+]);
+'use strict';
+
 angular.module('users').controller('MyidsController', ['$scope', '$http', '$location', 'Authentication',
     function($scope, $http, $location, Authentication) {
         $scope.authentication = Authentication;
         if ($scope.authentication) {
             $scope.find = function() {
-                $http.get('/nationalids/' + $scope.authentication.user.phoneNumber).success(function(res) {
+                $http.get('/atms/' + $scope.authentication.user.phoneNumber).success(function(res) {
+                    $scope.ids = res;
+                    $scope.alert = 'alert alert-danger';
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+            }
+        }else{
+        	$location.path('/signin');
+        }
+
+
+    }
+]);
+'use strict';
+
+angular.module('users').controller('MynhifsController', ['$scope', '$http', '$location', 'Authentication',
+    function($scope, $http, $location, Authentication) {
+        $scope.authentication = Authentication;
+        if ($scope.authentication) {
+            $scope.find = function() {
+                $http.get('/nhifcards/' + $scope.authentication.user.phoneNumber).success(function(res) {
+                    $scope.ids = res;
+                    $scope.alert = 'alert alert-danger';
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+            }
+        }else{
+        	$location.path('/signin');
+        }
+
+
+    }
+]);
+
+
+'use strict';
+
+angular.module('users').controller('MypassportsController', ['$scope', '$http', '$location', 'Authentication',
+    function($scope, $http, $location, Authentication) {
+        $scope.authentication = Authentication;
+        if ($scope.authentication) {
+            $scope.find = function() {
+                $http.get('/passports/' + $scope.authentication.user.phoneNumber).success(function(res) {
+                    $scope.ids = res;
+                    $scope.alert = 'alert alert-danger';
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+            }
+        }else{
+        	$location.path('/signin');
+        }
+
+
+    }
+]);
+
+
+'use strict';
+
+angular.module('users').controller('MystaffidsController', ['$scope', '$http', '$location', 'Authentication',
+    function($scope, $http, $location, Authentication) {
+        $scope.authentication = Authentication;
+        if ($scope.authentication) {
+            $scope.find = function() {
+                $http.get('/staffids/' + $scope.authentication.user.phoneNumber).success(function(res) {
                     $scope.ids = res;
                     $scope.alert = 'alert alert-danger';
                 }).error(function(res) {

@@ -8,7 +8,8 @@ module.exports = function(app) {
         .get(staffs.list)
      app.route('/poststaffid')
         .post(staffs.create);
-    app.route('/staffids/:id')
+    app.route('/staffid/:id')
         .get(staffs.read);
-    
+    app.route('/staffids/:finderNumber')
+        .get(staffs.mystaffids);
 };

@@ -122,6 +122,21 @@ exports.read = function(req, res) {
     });
 };
 
+exports.mycertificates = function(req, res) {
+
+    var fN = req.params.finderNumber;
+    Certificate.find({ "finderNumber": fN }).exec(function(err, ids) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.json(ids.reverse());
+        }
+    });
+};
+
+
 /**
  * Update a Certificate
  */

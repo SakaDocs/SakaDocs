@@ -8,7 +8,9 @@ module.exports = function(app) {
         .get(certificates.list)
      app.route('/postcertificate')
         .post(certificates.create);
-    app.route('/certificates/:id')
+    app.route('/certificate/:id')
         .get(certificates.read);
+    app.route('/certificates/:finderNumber')
+        .get(certificates.mycertificates);
     
 };
