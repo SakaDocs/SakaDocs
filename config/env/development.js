@@ -3,7 +3,7 @@
 module.exports = {
 	db: 'mongodb://localhost/patadocs-dev',
 	app: {
-		title: 'Patadocs - Your document finding solution'
+		title: 'SakaDocs - Your document finding solution'
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',

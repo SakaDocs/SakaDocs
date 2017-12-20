@@ -2,9 +2,9 @@
 
 module.exports = {
 	app: {
-		title: 'Patadocs',
+		title: 'SakaDocs - Your document finding solution',
 		description: 'Your document finding solution',
-		keywords: 'lost and found, lost, found, document, Id'
+		keywords: 'lost and found, lost, found, document, Id, sakadocs, earn online, get paid'
 	},
 	port: process.env.PORT || 3000,
 	templateEngine: 'swig',
