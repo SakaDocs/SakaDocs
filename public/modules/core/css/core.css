@@ -71,6 +71,9 @@
 body{
 	height: 100%;
 }
+#terms{
+	background-color: orange;
+}
 .doc{
 	display: block;	
 	margin: auto;
@@ -278,24 +281,23 @@ body{
 	display: none;
 }
 #profile_on_mobile{
-	display: unset;
-	visibility: visible;
+	
+	display: block;
 }
 #profile_on_pc{
 	display: none;
 }
 #mobile_signup{
-	display: unset;
-		
+	
+		display: block;
 }
 #pchometext{
 	display: none;
 }
 #mobilehometext{
-	display: unset;
-	visibility: visible;
+	display: block;
 }
 .breaks{
-	display: unset;
+	display: block;
 }
 }
