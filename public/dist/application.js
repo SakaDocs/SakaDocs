@@ -430,6 +430,14 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 
 		// Home state routing
 		$stateProvider.
+		state('pricingplan', {
+			url: '/pricingplan',
+			templateUrl: 'modules/core/views/pricingplan.client.view.html'
+		}).
+		state('termsofuse', {
+			url: '/termsofuse',
+			templateUrl: 'modules/core/views/termsofuse.client.view.html'
+		}).
 		state('payment', {
 			url: '/payment',
 			templateUrl: 'modules/core/views/payment.client.view.html'
@@ -480,6 +488,22 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 	function($scope, Authentication) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
+	}
+]);
+'use strict';
+
+angular.module('core').controller('PricingplanController', ['$scope',
+	function($scope) {
+		// Controller Logic
+		// ...
+	}
+]);
+'use strict';
+
+angular.module('core').controller('TermsofuseController', ['$scope',  
+	function($scope) {
+		
+ 
 	}
 ]);
 'use strict';
