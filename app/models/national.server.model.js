@@ -50,6 +50,10 @@ var NationalSchema = new Schema({
     sakaDocsCode: {
     	type: String,
     	default: Math.floor(Math.random()*900).toString() + generateSequence()
+    },
+    accountNumber: {
+    	type: String,
+    	default: "N" + Math.floor(Math.random()*900).toString() + generateSequence()
     }
 	// store photo
 });

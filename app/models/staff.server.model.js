@@ -53,6 +53,10 @@ var StaffSchema = new Schema({
     sakaDocsCode: {
     	type: String,
     	default: Math.floor(Math.random()*900).toString() + generateSequence()
+    },
+    accountNumber: {
+    	type: String,
+    	default: "J" + Math.floor(Math.random()*900).toString() + generateSequence()
     }
 });
 

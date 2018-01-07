@@ -53,6 +53,10 @@ var AtmSchema = new Schema({
     sakaDocsCode: {
     	type: String,
     	default: Math.floor(Math.random()*900).toString() + generateSequence()
+    },
+    accountNumber: {
+    	type: String,
+    	default: "A" + Math.floor(Math.random()*900).toString() + generateSequence()
     }
 });
 

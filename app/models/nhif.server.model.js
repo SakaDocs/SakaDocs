@@ -54,6 +54,10 @@ var NhifSchema = new Schema({
     sakaDocsCode: {
     	type: String,
     	default: Math.floor(Math.random()*900).toString() + generateSequence()
+    },
+    accountNumber: {
+    	type: String,
+    	default: "I" + Math.floor(Math.random()*900).toString() + generateSequence()
     }
 });
 

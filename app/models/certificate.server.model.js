@@ -50,6 +50,10 @@ var CertificateSchema = new Schema({
     sakaDocsCode: {
     	type: String,
     	default: Math.floor(Math.random()*900).toString() + generateSequence()
+    },
+    accountNumber: {
+    	type: String,
+    	default: "C" + Math.floor(Math.random()*900).toString() + generateSequence()
     }
 });
 
