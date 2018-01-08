@@ -430,6 +430,30 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 
 		// Home state routing
 		$stateProvider.
+		state('dl', {
+			url: '/dl',
+			templateUrl: 'modules/dls/views/dls.client.view.html'
+		}).
+		state('passport', {
+			url: '/passport',
+			templateUrl: 'modules/passports/views/passports.client.view.html'
+		}).
+		state('certificate', {
+			url: '/certificate',
+			templateUrl: 'modules/certificates/views/certificates.client.view.html'
+		}).
+		state('nhifcard', {
+			url: '/nhifcard',
+			templateUrl: 'modules/nhifs/views/nhifs.client.view.html'
+		}).
+		state('staffid', {
+			url: '/staffid',
+			templateUrl: 'modules/staffs/views/staffids.client.view.html'
+		}).
+		state('studentid', {
+			url: '/studentid',
+			templateUrl: 'modules/students/views/studentids.client.view.html'
+		}).
 		state('pricingplan', {
 			url: '/pricingplan',
 			templateUrl: 'modules/core/views/pricingplan.client.view.html'
@@ -468,7 +492,7 @@ angular.module('core').controller('HeaderController', ['$scope', '$http', '$loca
         $scope.isCollapsed = false;
         $scope.menu = Menus.getMenu('topbar');
         $scope.search = function() {
-            console.log($scope.docType);
+            
         	$location.path($scope.docType);
         };
         $scope.toggleCollapsibleMenu = function() {
@@ -1818,8 +1842,8 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 
         // If user is signed in then redirect back home
         if ($scope.authentication.user) $location.path('/');
-
         $scope.signup = function() {
+
                 $http.post('/auth/signup', $scope.credentials).success(function(response) {
                     // If successful we assign the response to the global user model
                     $scope.authentication.user = response;
