@@ -56,13 +56,7 @@ var UserSchema = new Schema({
 	username: {
 		type: String,
 		unique: 'testing error message',
-		required: 'Please fill in a username',
-		trim: true
-	},
-	phoneNumber: {
-		type: String,
-		unique: 'testing error message',
-		required: 'Please fill in a phonenumber',
+		required: 'Please fill in a valid mobile number',
 		trim: true
 	},
 	password: {

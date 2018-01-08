@@ -1,10 +1,9 @@
 <section class="row" data-ng-controller="AuthenticationController" style="min-height: 100%;">
     <div class="col-sm-2"></div>
     <div class="col-sm-8">
-        <br>
+        <br><br><br><br>
         <div class="row text-center">
-            <h3 class="pagehead">Log in</h3>
-            <p id="postiddescription">Fill in your username and password to login and access SakaDocs services </p>
+            <h3 class="pagehead" style="color: black;">Welcome back!</h3>
         </div>
         <div class="row">
             <div class="col-sm-2"></div>
@@ -15,22 +14,25 @@
                             <strong data-ng-bind="error"></strong>
                         </div>
                         <div class="form-group">
-                            <input type="text" id="username" name="username" class="form-control forminput" data-ng-model="credentials.username" placeholder="Username">
+                            <input type="text" id="username" name="username" class="form-control forminput" data-ng-model="credentials.username" placeholder="Mobile number">
                         </div>
-                        <br>
+                       
                         <div class="form-group">
                             <input type="password" id="password" name="password" class="form-control forminput" data-ng-model="credentials.password" placeholder="Password">
                         </div>
                         <div class="text-center form-group">
-                            <button type="submit" class="btn" id="signupbtn">Sign in</button>
+                            <button type="submit" class="btn" id="signupbtn">Sign in</button><br><br>
+                            <div class="row">
+                                <div class="forgot-password col-sm-6">
+                                    <a href="/#!/password/forgot" id="forgotpassword">Forgot your password?</a>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a href="/#!/signup" id="forgotpassword">I don't have an account </a>
+                                </div>
+                            </div>
+                            
                         </div>  
-                        <div class="forgot-password">
-                            <a href="/#!/password/forgot" id="forgotpassword">Forgot your password?</a>
-                        </div>
-                        <br>
-                        <div>
-                            <a href="/#!/signup" id="forgotpassword">I don't have an account </a>
-                        </div>
+                        
                     </fieldset>
                 </form>
             </div>

@@ -6,6 +6,7 @@ angular.module('core').controller('HeaderController', ['$scope', '$http', '$loca
         $scope.isCollapsed = false;
         $scope.menu = Menus.getMenu('topbar');
         $scope.search = function() {
+            console.log($scope.docType);
         	$location.path($scope.docType);
         };
         $scope.toggleCollapsibleMenu = function() {

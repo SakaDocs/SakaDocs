@@ -450,6 +450,14 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 			url: '/atm',
 			templateUrl: 'modules/atms/views/atms.client.view.html'
 		}).
+		state('studentId', {
+			url: '/studentId',
+			templateUrl: 'modules/students/views/students.client.view.html'
+		}).
+		state('staffId', {
+			url: '/staffId',
+			templateUrl: 'modules/staffs/views/staffs.client.view.html'
+		}).
 		state('national', {
 			url: '/national',
 			templateUrl: 'modules/nationals/views/nationals.client.view.html'

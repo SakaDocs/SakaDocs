@@ -36,6 +36,9 @@
 .brand{
 	width: 10%;
 }
+.navbar{
+	background-color: black;
+}
 #typedown{
 	color: orange;
 	min-height: 45px;
@@ -47,6 +50,18 @@
 	width: 395px;
 	font-weight: bolder;
 	top: 11px;
+	padding-top: 12px;
+
+}
+#button{
+	top: 11px;
+	background-color: orange;
+	border-color: orange;
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+	min-height: 45px;
+	border-style: solid;
+	width: 6%;
 
 }
 #uniquefilter{
@@ -78,18 +93,7 @@ body{
 	display: block;	
 	margin: auto;
 }
-#button{
-	top: 11px;
-	background-color: orange;
-	border-color: orange;
-	border-bottom-right-radius: 5px;
-	border-top-right-radius: 5px;
-	min-height: 45px;
-	border-style: solid;
-	margin-left: -3.8px;
-	width: 6%;
 
-}
 .breaks{
 	display: none;
 }
@@ -97,9 +101,9 @@ body{
 	min-height: 80px;
 }
 .dropdownheading{
-	/*color: blue;*/
+	
 	font-weight: bolder;
-	font-size: 2em;
+	
 }
 #searchbtn{
 	left: -16px;
@@ -122,10 +126,6 @@ body{
 }
 #createaccount{
 	font-weight: bold;
-}
-#forgotpassword{
-	text-decoration: none;
-	color: black ;
 }
 #username{
 	border-color: orange;
@@ -215,18 +215,15 @@ body{
 	left: 150px;
 	top: 15px;
 }
-#searchholder{
-
-}
 .postid{
 	width: 100%;
 }
 #postiddescription{
-	font-weight: bold;
+	font-weight: bolder;
 	color: black;
-	font-size: 1.5em;
+	font-size: 14px;
 }
-.forminput{
+.input{
 	border-top: hidden;
 	border-right: hidden;
 	border-left: hidden;
@@ -239,6 +236,9 @@ body{
 #mobile_signup{
 	display: none;
 
+}
+#navholder{
+	margin-top: 10px;
 }
 #claimtext{
 	text-decoration: none;
@@ -255,11 +255,7 @@ body{
 	height: auto;
 	width: 70%;
 }
-#typedown{
-	width: 70%;
-	left: 80px;
-}
-#mobile-space{
+mobile-space{
 	min-height: 120px;
 
 }

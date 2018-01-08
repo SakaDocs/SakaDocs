@@ -1,4 +1,4 @@
-## About Patadocs 
+## About SakaDocs 
 
 This platform is built using MEAN.JS. It is a platform that makes it easy for people to find their lost documents
 
@@ -124,27 +124,4 @@ we will provide a license & terms of use for this software soon
 The user will have an option of either searching for a document, or posting a document that he/she has found.Before doing any of the above, he/she will be required to login to his/her account and if they dont have one, they should create it.
 If user searches for and finds a document, they will be required to top up their account via mpesa/visa/mastercard/paypal, and after confirming that, they will receive the mobile number of the user that posted the document and a code to pass to the finder. 
 After they have called the finder, recovered their document and passed the code to them, their account balance will be deducted the amount payable for the document they have recovered, and the account of the finder will be credited with a share of the amount if the finder enters the code received from the document owner. Users will have an option of withdrawing their balance.
-
-## Layout
-
-The following sections will explain the layout of the app in terms of models and routes.
-
-## Models
-
-  #User
-
-The first models is that of the user. A schema has been defined(userSchema) that models the user to be saved in mongodb database. Each user will be an instance of the User model.
-
- #Document
- Each document has been given its own schema and will be stored in  the database separately. 
-
-
-
- ## API for documents
-	1. ID(nationals)
-	 store a new id- URL: post /natioalids
-	 Get all the ids- URL: get /nationalids
-	 Get one id based on its mongo _id
-	 update an id's detail
-
 

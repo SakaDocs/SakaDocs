@@ -35,5 +35,5 @@ app.listen(config.port);
 exports = module.exports = app;
 
 // Logging initialization
-console.log('PataDocs started on port ' + config.port);
+console.log('SakaDocs started on port ' + config.port);
 

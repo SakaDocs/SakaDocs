@@ -8,7 +8,6 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
         if ($scope.authentication.user) $location.path('/');
 
         $scope.signup = function() {
-            if ($scope.credentials.terms) {
                 $http.post('/auth/signup', $scope.credentials).success(function(response) {
                     // If successful we assign the response to the global user model
                     $scope.authentication.user = response;
@@ -18,10 +17,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
                 }).error(function(response) {
                     $scope.error = response.message;
                 });
-            }else{
-            	$scope.error = "Please accept our terms of use"
-            }
-
+           
         };
 
         $scope.signin = function() {
