@@ -40,7 +40,8 @@
 	background-color: black;
 }
 #typedown{
-	color: orange;
+	font-size: 18px;
+	color:#BDBDBD;
 	min-height: 45px;
 	border-color: orange;
 	border-left-color: orange;
@@ -50,7 +51,8 @@
 	width: 395px;
 	font-weight: bolder;
 	top: 11px;
-	padding-top: 12px;
+	padding-top: 10px;
+	
 
 }
 #button{
@@ -85,6 +87,16 @@
 }
 body{
 	height: 100%;
+	font-family: 'Roboto', sans-serif;
+}
+.footer_notes{
+	font-size: 11px;
+}
+.footer_headers{
+	color: white;
+}
+#jumbo{
+	padding-bottom: 0;
 }
 #terms{
 	background-color: orange;

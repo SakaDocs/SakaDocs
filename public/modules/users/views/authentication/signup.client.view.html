@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-sm-2"></div>
             <div class="col-sm-8">
-                <form name="userForm" data-ng-submit="signup()" class="signin form-horizontal" novalidate autocomplete="off">
+                <form name="userForm" data-ng-submit="signup(userForm.$valid)" class="signin form-horizontal"  autocomplete="off">
                     <fieldset>
                         <div data-ng-show="error" class="text-center text-danger">
                             <strong data-ng-bind="error"></strong>
@@ -34,7 +34,7 @@
                                     <p style="font-size: 12px;">By clicking the Create account button below, I confirm that I have read and agreed to the SakaDocs <a href="/#!/termsofuse">terms of service.</a></p>   
                         </div>
                         <div class="text-center form-group">
-                            <button type="submit" class="btn btn-large" id="signupbtn">Create account</button><br><br>
+                            <button type="submit"  class="btn btn-large" id="signupbtn">Create account</button><br><br>
                             <div>
                             <a href="/#!/signin" id="forgotpassword">I already have a SakaDocs account</a>
                         </div>

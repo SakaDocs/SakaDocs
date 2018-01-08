@@ -8,48 +8,46 @@
             <span class="icon-bar"></span>
         </button>
         <div data-ng-show="authentication.user" id="profile_on_mobile">
-                <li class="dropdown" >
-                        <a href="#" style="text-decoration: none;" class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle>
+            <li class="dropdown">
+                <a href="#" style="text-decoration: none;" class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle>
                             <span class="menuname" data-ng-bind="authentication.user.displayName"></span><b class="caret"></b>
                         </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href=""><span class="menuname">Account balance:  <span data-ng-bind="authentication.user.accountBalance | currency"></span></span></a>
-                            </li>
-                            <li>
-                                <a href="/#!/settings/profile"><span class="menuname">Edit Profile</span></a>
-                            </li>
-                            <li data-ng-show="authentication.user.provider === 'local'">
-                                <a href="/#!/settings/password"><span class="menuname">Change Password</span></a>
-                            </li>
-                            <li>
-                                <a href="/auth/signout"><span class="menuname">Signout</span></a>
-                            </li>
-                        </ul>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href=""><span class="menuname">Account balance:  <span data-ng-bind="authentication.user.accountBalance | currency"></span></span></a>
                     </li>
+                    <li>
+                        <a href="/#!/settings/profile"><span class="menuname">Edit Profile</span></a>
+                    </li>
+                    <li data-ng-show="authentication.user.provider === 'local'">
+                        <a href="/#!/settings/password"><span class="menuname">Change Password</span></a>
+                    </li>
+                    <li>
+                        <a href="/auth/signout"><span class="menuname">Signout</span></a>
+                    </li>
+                </ul>
+            </li>
         </div>
     </div>
     <div class="col-md-8 row" id="searchnav">
         <div class="row" id="searchholder">
             <select name="docType" data-ng-model="docType" class="nav-search-dropdown col-md-10" id="typedown" oninvalid="this.setCustomValidity('You must choose a document type')" oninput="setCustomValidity('')" required aria-required=”true” required validate>
-                    <option value="" disabled="disabled" class="text-center" selected="selected">
-                        <span class="dropdownheading">Search for document</span>
-                    </option>
-                    <option value="national">National ID</option>
-                    <option value="studentId">Student ID</option>
-                    <option value="staffId">Staff ID</option>
-                    <option value="atm">ATM card</option>
-                    <option value="nhifCard">Insurance card</option>
-                    <option value="certificate">Certificate</option>
-                    <option value="passport">Passport</option>
-                    <option value="dl">Driving license</option>
-                    <option value="dl">Envelope</option>
+                <option value="" disabled="disabled" class="text-center" selected="selected">
+                    <span class="dropdownheading">Search for document</span>
+                </option>
+                <option value="national">National ID</option>
+                <option value="studentid">Student ID</option>
+                <option value="staffid">Staff ID</option>
+                <option value="atm">ATM card</option>
+                <option value="nhifcard">Insurance card</option>
+                <option value="certificate">Certificate</option>
+                <option value="passport">Passport</option>
+                <option value="dl">Driving license</option>
             </select>
             <button class="col-md-2" id="button" type="submit" ng-click="search()">
-                    <span class="glyphicon glyphicon-search"></span>
+                <span class="glyphicon glyphicon-search"></span>
             </button>
-        </div>       
-        
+        </div>
         <div class="row" id="navholder">
             <nav class="collapse navbar-collapse row" id="mobilenav" collapse="!isCollapsed" role="navigation">
                 <ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
@@ -116,7 +114,7 @@
                         </ul>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav text-center" data-ng-show="authentication.user" >
+                <ul class="nav navbar-nav text-center" data-ng-show="authentication.user">
                     <li ng-class="{active: $uiRoute}">
                         <a href="/#!"><span class="menuname" id="createaccount">Home</span></a>
                     </li>
@@ -219,7 +217,8 @@
             </nav>
         </div>
     </div>
-    <div class="col-sm-2" id="topinfo" style="color: white;"><br>
+    <div class="col-sm-2" id="topinfo" style="color: white;">
+        <br>
         <h5><span style="color: white; font-weight: bold;">Customer Service:</span></h5>
         <h5><span style="font-weight: bolder; color: orange; font-size: 1.5em;">0715 753 308 </span>
         </h5>

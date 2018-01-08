@@ -450,14 +450,6 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 			url: '/atm',
 			templateUrl: 'modules/atms/views/atms.client.view.html'
 		}).
-		state('studentId', {
-			url: '/studentId',
-			templateUrl: 'modules/students/views/students.client.view.html'
-		}).
-		state('staffId', {
-			url: '/staffId',
-			templateUrl: 'modules/staffs/views/staffs.client.view.html'
-		}).
 		state('national', {
 			url: '/national',
 			templateUrl: 'modules/nationals/views/nationals.client.view.html'
@@ -476,6 +468,7 @@ angular.module('core').controller('HeaderController', ['$scope', '$http', '$loca
         $scope.isCollapsed = false;
         $scope.menu = Menus.getMenu('topbar');
         $scope.search = function() {
+            console.log($scope.docType);
         	$location.path($scope.docType);
         };
         $scope.toggleCollapsibleMenu = function() {
@@ -1827,7 +1820,6 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
         if ($scope.authentication.user) $location.path('/');
 
         $scope.signup = function() {
-            if ($scope.credentials.terms) {
                 $http.post('/auth/signup', $scope.credentials).success(function(response) {
                     // If successful we assign the response to the global user model
                     $scope.authentication.user = response;
@@ -1837,10 +1829,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
                 }).error(function(response) {
                     $scope.error = response.message;
                 });
-            }else{
-            	$scope.error = "Please accept our terms of use"
-            }
-
+           
         };
 
         $scope.signin = function() {

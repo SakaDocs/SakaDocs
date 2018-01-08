@@ -8,6 +8,30 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 
 		// Home state routing
 		$stateProvider.
+		state('dl', {
+			url: '/dl',
+			templateUrl: 'modules/dls/views/dls.client.view.html'
+		}).
+		state('passport', {
+			url: '/passport',
+			templateUrl: 'modules/passports/views/passports.client.view.html'
+		}).
+		state('certificate', {
+			url: '/certificate',
+			templateUrl: 'modules/certificates/views/certificates.client.view.html'
+		}).
+		state('nhifcard', {
+			url: '/nhifcard',
+			templateUrl: 'modules/nhifs/views/nhifs.client.view.html'
+		}).
+		state('staffid', {
+			url: '/staffid',
+			templateUrl: 'modules/staffs/views/staffids.client.view.html'
+		}).
+		state('studentid', {
+			url: '/studentid',
+			templateUrl: 'modules/students/views/studentids.client.view.html'
+		}).
 		state('pricingplan', {
 			url: '/pricingplan',
 			templateUrl: 'modules/core/views/pricingplan.client.view.html'
