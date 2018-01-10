@@ -39,7 +39,19 @@
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
-
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5a5674cfd7591465c7069f79/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
 <body class="ng-cloak">
     <header  data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top "></header><br class="breaks"><br class="breaks"><br class="breaks">
     <div id="mobile-space"></div>
@@ -75,9 +87,6 @@
     <!--Application JavaScript Files-->
     {% for jsFile in jsFiles %}
     <script type="text/javascript" src="{{jsFile}}"></script>{% endfor %} {% if process.env.NODE_ENV === 'development' %}
-    <!-- Compiled and minified JavaScript -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script> -->
-    <!--Livereload script rendered -->
     <script type="text/javascript" src="http://{{request.hostname}}:35729/livereload.js"></script>
     {% endif %}
 </body>

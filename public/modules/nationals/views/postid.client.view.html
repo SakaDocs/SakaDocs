@@ -1,9 +1,8 @@
 <section data-ng-controller="PostController">
     <div class="row text-center">
-        <h3 class="pagehead">Post national ID below</h3>
-        <p id="postiddescription">Post details and photo of the ID you have found, keep the ID until it is claimed and you will earn Kshs 200 when its collected.</p>
+        <h3 class="pagehead">Post National ID card below</h3>
+        <p id="postiddescription">Post details and photo of the ID you have found, keep the ID until it is claimed and earn Kshs 150 when it's collected.</p>
     </div>
-    <br>
     <div class="row">
         <div class="col-sm-1"></div>
         <div class="col-sm-9">
@@ -19,22 +18,15 @@
                     </div>
                     <form ng-submit="Submit();">
                         <div class="form-group">
-                            
-                            <br>
-                            <input type="text" name="fullNames" class="form-control forminput" data-ng-model="id.fullNames" placeholder="Full names on ID" required validate>
+                            <input type="text" name="fullNames" class="form-control forminput" data-ng-model="id.fullNames" placeholder="Name on the ID you found" required validate>
                         </div>
                         <div class="form-group">
-                           
-                            <br>
-                            <input type="text" name="idNumber" class="form-control forminput" data-ng-model="id.idNumber" placeholder="ID number" title=" Enter a valid ID number" size="8" pattern="^\d{4}\d{4}$" validate required>
+                            <input type="text" name="idNumber" class="form-control forminput" data-ng-model="id.idNumber" placeholder="ID number on the document you found" title=" Enter a valid ID number" size="8" pattern="^\d{4}\d{4}$" validate required>
                         </div>
                         <div class="form-group">
-                            
-                            <br>
-                            <input type="text" name="Where did you find ID" class="form-control forminput" data-ng-model="id.location" placeholder="location" required>
-                        </div>
-            
-                        <label class="btn" id="altbtn">Click to Upload Photo
+                            <input type="text" name="location" class="form-control forminput" data-ng-model="id.location" placeholder="Where did you find ID" required>
+                        </div>      
+                        <label class="btn" id="altbtn">Upload ID photo
                             <input type="file" file-model="file.upload" name="idphoto" ng-disabled="uploading" style="display: none;" onchange="angular.element(this).scope().photoChanged(this.files)">
                         </label>
                         <br>
