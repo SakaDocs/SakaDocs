@@ -84,6 +84,7 @@
 	border-style: dashed; 
 	border-bottom-style: solid;
 	border-color: #eeeeee;
+	/*height: 200px;*/
 }
 body{
 	height: 100%;
@@ -120,8 +121,21 @@ body{
 #searchbtn{
 	left: -16px;
 }
+#card-text{
+	font-size: 12px;
+}
 .menuname{
 	color: orange;
+}
+#blog-head{
+	background-color: black;
+	min-height: 30px;
+}
+#blog-title{
+	font-weight: bold;
+	font-size: 16px;
+	padding-top: 3px;
+	color: white
 }
 #postdoc{
 	font-weight: bolder;

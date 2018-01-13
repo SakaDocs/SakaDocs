@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
-            <a href="/#!/postid"><button class="btn btn-large" id="signupbtn"><span style="color: black;">Post found ID</span></button></a>
+            <a href="/#!/postid"><button class="btn btn-large" id="signupbtn"><span style="color: black;">Post National ID</span></button></a>
         </div>
         <div class="col-sm-2"></div>
     </div> <br><br>
@@ -16,18 +16,20 @@
     </div><br><br>
 
     <div data-ng-repeat="id in testValue=(ids | filter: search) " data-ng-href="#!/nationals/{{id._id}}"  class="row thumbnail"><br>
-        <div class="col-sm-4 img-responsive" id="idpic">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-3 img-responsive" id="idpic">
             <img class="img-responsive" ng-src="{{id.idPhoto}}" alt="">
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-5">
 
-            <p style="font-weight: bold;">Full names: <span style="color: orange;">{{id.fullNames | uppercase}}</span></p>
-            <p style="font-weight: bold;">Id number: <span style="color: orange;">{{id.idNumber | uppercase}}</span> </p>
-            <p style="font-weight: bold;">Area found: <span style="color: orange;">{{id.locationFound | uppercase}}</span> </p> 
-            <p style="font-weight: bold;">Date posted: <span style="color: grey;">{{id.posted | date}}</span> </p>            
+            <p style="font-weight: bold; font-size: 15px;">Full names: <span style="color: orange;">{{id.fullNames | uppercase}}</span></p>
+            <p style="font-weight: bold; font-size: 15px;">Id number: <span style="color: orange;">{{id.idNumber | uppercase}}</span> </p>
+            <p style="font-weight: bold; font-size: 15px;">Area found: <span style="color: orange;">{{id.locationFound | uppercase}}</span> </p> 
+            <p style="font-weight: bold; font-size: 15px;   ">Date posted: <span style="color: grey;">{{id.posted | date}}</span> </p>            
             <a href="/#!/claimid/{{id._id}}"><button type="submit" class="btn" id="signupbtn"><span id="claimtext">Claim this id</span></button></a>
         </div>
     </div>
+    <div class="col-sm-2"></div>
      <div ng-show="!testValue.length" ng-class="alert">
          <h2>Your document has not been posted yet. Please visit us later</h2>
      </div>

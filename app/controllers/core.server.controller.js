@@ -15,5 +15,9 @@ exports.index = function(req, res) {
 	});
 };
 exports.doctype = function(req, res) {
+	
+};
+exports.mpesapayment = function(req, res) {
 	console.log(req.body);
+	// if (req.body.accountNumber.charAt(0)) {}
 };

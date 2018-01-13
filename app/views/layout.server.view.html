@@ -27,8 +27,7 @@
     <meta name="twitter:url" content="{{url}}">
     <meta name="twitter:image" content="/img/brand/logo.png">
     <!-- Insert roboto font -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <!-- Fav Icon -->
     <link href="/modules/core/img/brand/logo.jpg" rel="shortcut icon" type="image">
     <!--Application CSS Files-->
@@ -41,38 +40,50 @@
 </head>
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/5a5674cfd7591465c7069f79/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
+var Tawk_API = Tawk_API || {},
+    Tawk_LoadStart = new Date();
+(function() {
+    var s1 = document.createElement("script"),
+        s0 = document.getElementsByTagName("script")[0];
+    s1.async = true;
+    s1.src = 'https://embed.tawk.to/5a5674cfd7591465c7069f79/default';
+    s1.charset = 'UTF-8';
+    s1.setAttribute('crossorigin', '*');
+    s0.parentNode.insertBefore(s1, s0);
 })();
 </script>
 <!--End of Tawk.to Script-->
+
 <body class="ng-cloak">
-    <header  data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top "></header><br class="breaks"><br class="breaks"><br class="breaks">
+    <header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top "></header>
+    <br class="breaks">
+    <br class="breaks">
+    <br class="breaks">
     <div id="mobile-space"></div>
     <div class="jumbotron content row" id="jumbo" style="margin:  0px;">
         <section class="col-sm-2" style="">
         </section>
-
         <section class="container col-sm-8 " style="background-color: white; min-height: 700px;">
-
             {% block content %}{% endblock %}
         </section>
-        <section class="col-sm-2" style=""><br>
-            <div class="card text-center" style="background-color: white;" >
+        <section class="col-sm-2" style="">
+            <div class="card" style="background-color: white;">
+                <div id="blog-head" class=" text-center">
+                    <p id="blog-title">Blog</p>
+                </div>
+                <br>
                 <a href="" style="text-decoration: none; color: orange;">
-                    <p class="card-text"  >How to post a document on sakadocs</p>
+                    <p class="card-text" id="card-text">How to post a document on sakadocs</p>
                 </a>
+                <hr>
                 <a href="" style="text-decoration: none; color: orange;">
-                    <p class="card-text">How to claim a document on SakaDocs</p>
+                    <p class="card-text" id="card-text">How to claim a document on SakaDocs</p>
                 </a>
+                <hr>
+                <a href="" style="text-decoration: none; color: orange;">
+                    <p class="card-text" id="card-text">How to claim your payment on SakaDocs</p>
+                </a><hr>
             </div>
-          
         </section>
     </div>
     <footer data-ng-include="'/modules/core/views/footer.client.view.html'"></footer>
