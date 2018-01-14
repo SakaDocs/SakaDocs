@@ -285,10 +285,15 @@ mobile-space{
 	min-height: 120px;
 
 }
+.navbar-header .navbar-toggle .icon-bar {
+  background-color: orange; /* Changes regular toggle color */
+}
+.navbar-header .navbar-toggle .icon-bar:hover {
+  background-color: white; /* Changes toggle color on hover */
+}
 #hamburger{
 	float: none;
   margin-right: 0;
-
 }
 #mobilenav{
 	float: left;  

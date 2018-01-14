@@ -10,9 +10,9 @@
             <div class="col-sm-8">
                 <form data-ng-submit="signin()" class="signin form-horizontal" autocomplete="off">
                     <fieldset>
-                        <div data-ng-show="error" class="text-center text-danger">
-                            <strong data-ng-bind="error"></strong>
-                        </div>
+                        <div data-ng-show="error" class="text-center text-danger bg-danger">
+                            <strong style="padding-top: 4px;" data-ng-bind="error"></strong>
+                        </div><br>
                         <div class="form-group">
                             <input type="text" id="username" name="username" class="form-control forminput" data-ng-model="credentials.username" placeholder="Mobile number">
                         </div>
