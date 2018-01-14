@@ -76,7 +76,7 @@
 	font-weight: bolder;
 	padding-top: 5px;
 	padding-bottom: 5px;
-	padding-left: 65px;
+	padding-left: 30px;
 
 }
 #docholder{
@@ -84,7 +84,6 @@
 	border-style: dashed; 
 	border-bottom-style: solid;
 	border-color: #eeeeee;
-	/*height: 200px;*/
 }
 body{
 	height: 100%;
@@ -118,6 +117,10 @@ body{
 	font-weight: bolder;
 	
 }
+#terms_text{
+	font-size: 10px;
+}
+
 #searchbtn{
 	left: -16px;
 }
@@ -129,7 +132,7 @@ body{
 }
 #blog-head{
 	background-color: black;
-	min-height: 30px;
+	min-height: 40px;
 }
 #blog-title{
 	font-weight: bold;
@@ -215,6 +218,10 @@ body{
 	height: auto;
 	width: 100%;
 }
+
+#small_logo{
+	display: none;
+}
 .mythumbnail{
 	height: 100%;
 	width: 100%;
@@ -243,6 +250,10 @@ body{
 }
 .postid{
 	width: 100%;
+}
+#blog_text_holder{
+	min-height: 10px;
+
 }
 #postiddescription{
 	font-weight: bolder;
@@ -284,6 +295,12 @@ body{
 mobile-space{
 	min-height: 120px;
 
+}
+#small_logo{
+	display: unset;
+}
+#big_logo{
+	display: none;
 }
 .navbar-header .navbar-toggle .icon-bar {
   background-color: orange; /* Changes regular toggle color */
