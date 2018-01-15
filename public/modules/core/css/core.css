@@ -81,9 +81,9 @@
 }
 #docholder{
 	text-align: center; 
-	border-style: dashed; 
+	/*border-style: dashed; 
 	border-bottom-style: solid;
-	border-color: #eeeeee;
+	border-color: #eeeeee;*/
 }
 body{
 	height: 100%;
@@ -138,7 +138,7 @@ body{
 	font-weight: bold;
 	font-size: 16px;
 	padding-top: 3px;
-	color: white
+	color: orange;
 }
 #postdoc{
 	font-weight: bolder;
