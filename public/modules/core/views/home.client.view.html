@@ -3,24 +3,26 @@
     <div class="container-fluid">
         <div class="col-sm-1"></div>
         <div class="col-sm-10 text-center">
-              <div class="row" id="mobile_signup">
+            <div class="row" id="mobile_signup">
                 <div class="col-xs-6" data-ng-hide="authentication.user">
-                    <a href="/#!/signup"><button class="btn" id="signupbtn"><span style="color: black;">Create an account</span></button></a>
-                </div> 
-                <div class="col-xs-6" data-ng-hide="authentication.user">
-                    <a href="/#!/signin"><button class="btn" id="signupbtn"><span style="color: black;">Sign In</span></button></a>
+                    <a href="/#!/signup">
+                        <button class="btn" id="signupbtn"><span style="color: black;">Create an account</span></button>
+                    </a>
                 </div>
-            </div><br><br>
-            <h6 style="font-weight: bold; font-size: 1.2em;" id="pchometext">To post or find a document, <span data-ng-hide="authentication.user"><span><a href="/#!/signup" style="color: orange ">create an account</a></span> or <span><a href="/#!/signin" style="color: orange ">sign in</a></span> and</span> use the search bar above or click a specific category below.</h6>
-             <h6 style="font-weight: bold; font-size: 1.2em;" id="mobilehometext">To post or find a document, <span data-ng-hide="authentication.user"><span><a href="/#!/signup" style="color: orange ">create an account</a></span> or <span><a href="/#!/signin" style="color: orange ">sign in</a> </span>and</span>  click a specific category below.</h6>
+                <div class="col-xs-6" data-ng-hide="authentication.user">
+                    <a href="/#!/signin">
+                        <button class="btn" id="signupbtn"><span style="color: black;">Sign In</span></button>
+                    </a>
+                </div>
+            </div>
             <br>
-            <br>
-          
+            <h6 style="font-weight: bolder; font-size: 0.97em;" id="pchometext">To post or find a document, <span data-ng-hide="authentication.user"><span><a href="/#!/signup" style="color: orange ">create an account</a></span> or <span><a href="/#!/signin" style="color: orange ">sign in</a></span> and</span> use the search bar above or click a specific category below.</h6>
+            <h6 style="font-weight: bold; font-size: 0.97em;" id="mobilehometext">To post or find a document, <span data-ng-hide="authentication.user"><span><a href="/#!/signup" style="color: orange ">create an account</a></span> or <span><a href="/#!/signin" style="color: orange ">sign in</a> </span>and</span>  click a specific category below.</h6>
             <div class="row">
                 <div class="  col-sm-4 text-center" id="docholder">
                     <br>
                     <a href="/#!/national">
-                        <div class="text-center"  style="background-color: white;">
+                        <div class="text-center" style="background-color: white;">
                             <img class="doc img-responsive" src="/modules/core/img/nationalID.jpg" alt="id">
                         </div>
                         <a href="/#!/national" class="text-center" id="idheadlink"><h4 id="idhead">NATIONAL ID</h4></a>
@@ -45,7 +47,6 @@
                     </a>
                 </div>
             </div>
-            <br>
             <br>
             <div class="row">
                 <div class=" container col-sm-4 text-center" id="docholder">
@@ -77,13 +78,12 @@
                 </div>
             </div>
             <br>
-            <br>
             <div class="row">
                 <div class=" container col-sm-4 text-center" id="docholder">
                     <br>
                     <a href="/#!/dls">
                         <div class="text-center" id="idsection" style="background-color: white;">
-                            <img class="doc img-responsive" src="/modules/core/img/DrivingLicence.jpg" alt="DrivingLicense">
+                            <img class="doc img-responsive" src="/modules/core/img/DrivingLicence.png" alt="DrivingLicense">
                         </div>
                         <a href="/#!/dls" class="text-center" id="idheadlink"><h4 id="idhead">DRIVING LICENCE</h4></a>
                     </a>
@@ -101,9 +101,9 @@
                     <br>
                     <a href="/#!/envelope">
                         <div class="text-center" id="idsection" style="background-color: white">
-                            <img class="doc img-responsive" src="/modules/core/img/Envelope.jpg" style="" alt="Certificate">
+                            <img class="doc img-responsive" src="/modules/core/img/SakaDocs_others.png" style="" alt="Certificate">
                         </div>
-                        <a href="/#!/envelope" id="idheadlink"><h4 id="idhead">ENVELOPE</h4></a>
+                        <a href="/#!/envelope" id="idheadlink"><h4 id="idhead">OTHER DOCUMENTS</h4></a>
                     </a>
                 </div>
             </div>

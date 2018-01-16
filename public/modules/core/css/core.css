@@ -81,9 +81,6 @@
 }
 #docholder{
 	text-align: center; 
-	/*border-style: dashed; 
-	border-bottom-style: solid;
-	border-color: #eeeeee;*/
 }
 body{
 	height: 100%;
@@ -137,7 +134,7 @@ body{
 #blog-title{
 	font-weight: bold;
 	font-size: 16px;
-	padding-top: 3px;
+	padding-top: 7px;
 	color: orange;
 }
 #postdoc{
@@ -186,7 +183,7 @@ body{
 }
 #idheadlink{
 	text-decoration: none;
-	color: orange;
+	color: black;
 	
 }
 #idhead{
@@ -273,6 +270,26 @@ body{
 #mobile_signup{
 	display: none;
 
+}
+#table-head{
+	background-color: orange;
+	font-size: 13px;
+	padding-right: 7px;
+	padding-left: 8px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: white;
+}
+#table-data{
+	background-color: black;
+	font-size: 10px;
+	padding-right: 7px;
+	padding-left: 8px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: white;
+	color: orange;
+	height: 30px;
 }
 #navholder{
 	margin-top: 10px;
