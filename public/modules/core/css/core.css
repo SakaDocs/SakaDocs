@@ -177,10 +177,7 @@ body{
 	border-color: orange;
 	border-style: solid;
 }
-#idsection{
-	background-color: white;
-	
-}
+
 #idheadlink{
 	text-decoration: none;
 	color: black;
@@ -279,6 +276,9 @@ body{
 	border-width: 2px;
 	border-style: solid;
 	border-color: white;
+	height: 30px;
+	font-weight: bolder;
+
 }
 #table-data{
 	background-color: black;

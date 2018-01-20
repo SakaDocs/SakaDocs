@@ -38,14 +38,14 @@
                 <option value="" disabled="disabled" class="text-center" selected="selected">
                     <span class="dropdownheading">Search for document</span>
                 </option>
-                <option value="national">National ID</option>
-                <option value="studentid">Student ID</option>
-                <option value="staffid">Staff ID</option>
-                <option value="atm">ATM card</option>
-                <option value="nhifcard">Insurance card</option>
-                <option value="certificate">Certificate</option>
-                <option value="passport">Passport</option>
-                <option value="dl">Driving license</option>
+                <option value="national" ng-click="search()">National ID</option>
+                <option value="studentid" ng-click="search()">Student ID</option>
+                <option value="staffid" ng-click="search()">Staff ID</option>
+                <option value="atm" ng-click="search()">ATM card</option>
+                <option value="nhifcard" ng-click="search()">Insurance card</option>
+                <option value="certificate" ng-click="search()">Certificate</option>
+                <option value="passport" ng-click="search()">Passport</option>
+                <option value="dl" ng-click="search()">Driving license</option>
             </select>
             <button class="col-md-2" id="button" type="submit" ng-click="search()">
                 <span class="glyphicon glyphicon-search"></span>
@@ -222,7 +222,7 @@
     </div>
     <div class="col-sm-2" id="topinfo" style="color: white;">
         <br>
-        <h5><span style="color: white; font-size: 1em; padding-left: 25px;">Customer Service</span></h5>
-        <img class="img-responsive" src="/modules/core/img/SakaDocs_customer_service_number.png" alt="SakaDocs customer service number">
+        <h5><span style="color: white; font-size: 1em; padding-left: 18px;">Customer Service</span></h5>
+        <img class="img-responsive" src="/modules/core/img/SakaDocs_customer_service_number.png" alt="SakaDocs customer service number +254715753308">
     </div>
 </div>

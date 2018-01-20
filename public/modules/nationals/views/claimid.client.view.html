@@ -1,25 +1,46 @@
 <section data-ng-controller="ClaimController" data-ng-init="claim()">
+    <br>
+    <br>
+    <br>
+    <br>
     <div class="row">
         <div class="col-sm-6">
-            <div class="row thumbnail img-responsive" id="idpic">
+            <div class="row img-responsive" id="idpic">
                 <img class=" col-sm-6 img-responsive" ng-src="{{id.idPhoto}}" alt="">
                 <div class="col-sm-6">
-                    <p style="font-weight: bold;">Full names: <span style="color: orange;">{{id.fullNames | uppercase}}</span></p>
-                    <p style="font-weight: bold;">Id number: <span style="color: orange;">{{id.idNumber | uppercase}}</span> </p>
-                    <p style="font-weight: bold;">Area found: <span style="color: orange;">{{id.locationFound | uppercase}}</span> </p>
-                    <p style="font-weight: bold;">Date posted: <span style="color: grey;">{{id.posted | date}}</span> </p>
+                    <p style="font-weight: bold; font-size: 13px;">Full names: <span style="color: orange; font-size: 13px;">{{id.fullNames | uppercase}}</span></p>
+                    <p style="font-weight: bold; font-size: 13px;">Id number: <span style="color: orange; font-size: 13px;">{{id.idNumber | uppercase}}</span> </p>
+                    <p style="font-weight: bold; font-size: 13px;">Area found: <span style="color: orange; font-size: 13px;">{{id.locationFound | uppercase}}</span> </p>
+                    <p style="font-weight: bold; font-size: 13px;">Date posted: <span style="color: grey; font-size: 13px;">{{id.posted | date}}</span> </p>
                 </div>
             </div>
         </div>
         <div class="col-sm-6">
-            <h3 style="font-weight: bold;">Follow the steps below to claim your ID</h3>
-            <p>1. Send Kshs 300/= via mpesa to 0715753308.</p>
-            <p>2. Text this ID's number, full names and MPesa confirmation code to 0707293292.</p>
-            <p>3. You will receive an sms from 0707293292 with phone number of the person who posted your ID and a SakaDocs code. </p>
-            <p>4. Call the received number and arrange to meet the person. </p>
-            <p>5. The person will give you your ID in exchange for the SakaDocs code you received.</p>
-
-            <p></p>
+            <div class="row" >
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8" >
+                    <p style="font-size: 13px;">To claim this ID, kindly choose a payment method below and pay Kshs 300 to automatically receive (via SMS) the mobile number of the person who posted your document (the Poster) and a unique <span><a href="">SakaDocs code</a></span> (which you will be required to give to the Poster once they give you your document) . You can then call the Poster to agree on how they will avail your document.</p>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
         </div>
+    </div>
+    <div class="text-center">
+        <div class="col-sm-6 row">
+            <h4>Choose payment method</h4>
+            <br>
+            <div class="row col-sm-5" style="height: 7  0px;">
+                <div class="thumbnail img-responsive">
+                    <img src="/modules/core/img/SakaDocs_ MPesa_paybill.png" class="img-responsive" alt="">
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+            <div class="row col-sm-5" style="height: 70px;">
+                <div class="thumbnail img-responsive">
+                    <img src="/modules/core/img/SakaDocs_Airtel_Money_Paybill.png" class="img-responsive" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6"></div>
     </div>
 </section>
