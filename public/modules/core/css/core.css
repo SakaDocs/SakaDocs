@@ -302,7 +302,9 @@ body{
 #idpic{
 	max-height: 180px;
 }
-
+#mobile_home_docs{
+	display: none;
+}
 
 
 
@@ -312,6 +314,20 @@ body{
 
 
 @media only screen and (max-width: 700px) {
+#mobileidheadlink{
+	text-decoration: none;
+	color: black;
+	
+}
+#mobileidhead{
+	font-size: 0.91em;
+}
+#pc_home_docs{
+	display: none;
+}
+#mobile_home_docs{
+	display: unset;
+}
 #small_logo{
 	height: auto;
 	width: auto;
