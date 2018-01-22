@@ -4,7 +4,61 @@
         <div class="col-sm-1" id="left_side_div"></div>
         <div class="col-sm-10 text-center">
             <div class="row" id="mobile_signup">
-                <div class="row">
+                <div class="row" data-ng-show="authentication.user">
+                    <div class="col-xs-4" id="user_mobile_button">
+                        <div class="dropdown" dropdown style="width: 100%;"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle style="text-decoration: none;">
+                            <span style="color: white; text-decoration: none;" data-ng-bind="authentication.user.displayName" ></span> <b class="caret" style="color: orange;"></b>
+                        </a>
+                            <ul class="dropdown-menu">
+                                <li style="background-color: #EEEEEE;">
+                                    <a href="/#!/settings/profile"><span class="menuname">Edit Profile</span></a>
+                                </li>
+                                <li  data-ng-show="authentication.user.provider === 'local'">
+                                    <a href="/#!/settings/password"><span class="menuname">Change Password</span></a>
+                                </li>
+                                <li style="background-color: #EEEEEE;">
+                                    <a href="/auth/signout"><span class="menuname">Sign out</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-8" id="user_mobile_button" style="width: 50%;">
+                        <div class="dropdown" dropdown style="width: 100%;"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle style="text-decoration: none;">
+                            <span style="color: white; text-decoration: none;">My posts</span> <b class="caret" style="color: orange;"></b>
+                        </a>
+                            <ul class="dropdown-menu">
+                                <li name="doc" data-ng-model="doc">
+                                    <a href="/#!/myids"><span class="menuname">National Id</span></a>
+                                </li>
+                                <li style="background-color: #EEEEEE;">
+                                    <a href="/#!/mystudentids"><span class="menuname">Student Id<span class="menuname"></a>
+                                </li>
+                                <li>
+                                    <a href="/#!/mystaffids"><span class="menuname">Staff Id</span></a>
+                                </li>
+                                <li style="background-color: #EEEEEE;">
+                                    <a href="/#!/myatms"><span class="menuname">ATM card</span></a>
+                                </li>
+                                <li>
+                                    <a href="/#!/mynhifs"><span class="menuname">Insurance card</span></a>
+                                </li>
+                                <li style="background-color: #EEEEEE;">
+                                    <a href="/#!/mycertificates"><span class="menuname">Certificate</span></a>
+                                </li>
+                                <li>
+                                    <a href="/#!/mypassports"><span class="menuname">Passport</span></a>
+                                </li>
+                                <li style="background-color: #EEEEEE;">
+                                    <a href="/#!/mydls"><span class="menuname">Driving license</span></a>
+                                </li>
+                                <li>
+                                    <a href=""><span class="menuname">Others</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" data-ng-hide="authentication.user">
                     <div class="col-xs-2"></div>
                     <a href="/#!/signup">
                         <div class="col-xs-4" id="mobile_button">Sign up</div>
@@ -159,7 +213,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="row">                  
+                <div class="row">
                     <div class=" col-xs-6 text-center" id="docholder">
                         <br>
                         <a href="/#!/staffids">
@@ -169,7 +223,7 @@
                             <a href="/#!/staffids" id="mobileidheadlink"><h4 id="mobileidhead">STAFF ID</h4></a>
                         </a>
                     </div>
-                     <div class=" container col-xs-6 text-center" id="docholder">
+                    <div class=" container col-xs-6 text-center" id="docholder">
                         <br>
                         <a href="/#!/atms">
                             <div class="text-center" id="idsection">
@@ -179,7 +233,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="row">                  
+                <div class="row">
                     <div class="container col-xs-6 text-center " id="docholder">
                         <br>
                         <a href="/#!/nhifs">
@@ -216,15 +270,6 @@
                                 <img class="doc img-responsive" src="/modules/core/img/Passport.jpg" style="" alt="passports">
                             </div>
                             <a href="/#!/passports" id="mobileidheadlink"><h4 id="mobileidhead">PASSPORT</h4></a>
-                        </a>
-                    </div>
-                    <div class="container col-xs-6 text-center" id="docholder">
-                        <br>
-                        <a href="/#!/envelope">
-                            <!-- <div class="text-center"> -->
-                            <img class="doc img-responsive" src="/modules/core/img/SakaDocs_others.png" style="" alt="Certificate">
-                            <!-- </div> -->
-                            <a href="/#!/envelope" id="mobileidheadlink"><h4 id="mobileidhead">OTHER DOCUMENTS</h4></a>
                         </a>
                     </div>
                 </div>

@@ -314,6 +314,17 @@ body{
 
 
 @media only screen and (max-width: 700px) {
+#user_mobile_button{
+	background-color: #212121; 
+	border-width: 2px; 
+	color: white; 
+	font-weight: bold; 
+	border-style: solid; 
+	border-color: white;
+	white-space: nowrap;
+	border-radius: 5px;
+	width: 50%;
+}
 #mobileidheadlink{
 	text-decoration: none;
 	color: black;
