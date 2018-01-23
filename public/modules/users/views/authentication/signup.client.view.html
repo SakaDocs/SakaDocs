@@ -27,12 +27,8 @@
                             <input type="text" id="username" name="username" class="form-control forminput" data-ng-model="credentials.username" size="13" pattern="(\+254)7([0-9|9])(\d){7}" title=" e.g +254700000000" placeholder="Mobile number" validate required>
                         </div>
                         <div class="form-group">
-                            <input type="password" id="password" name="password" class="form-control forminput" data-ng-model="credentials.password" placeholder="Password" equals="{{credentials.confirmPassword}}" validate required>
-                        </div>
-                        <div class="form-group">
-                            <input type="password" id="confirmPassword" name="confirmPassword" data-ng-model="credentials.confirmPassword" class="form-control forminput"   placeholder="Confirm password" equals="{{credentials.password}}" required>
-                        </div>
-                       
+                            <input type="password" id="password" name="password" class="form-control forminput" data-ng-model="credentials.password" placeholder="Password" validate required>
+                        </div>       
                         <div class="form-group">
                             <p style="font-size: 12px;">By clicking the Create account button below, I confirm that I have read and agreed to the SakaDocs <a href="/#!/termsofuse">terms of service.</a></p>
                         </div>
