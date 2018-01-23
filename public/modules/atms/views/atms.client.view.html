@@ -1,35 +1,54 @@
 <section data-ng-controller="AtmsController" data-ng-init="find()">
-    <br>
-    <div class="row">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-8">
-            <a href="/#!/postatm"><button class="btn btn-large" id="signupbtn"><span style="color: black;">Post Atm card</span></button></a>
-        </div>
-        <div class="col-sm-2"></div>
-    </div> <br><br>
     <div class="row" style="background-color: black;  background-attachment: fixed;">
         <div class="col-sm-2"></div>
         <div class="col-sm-8 text-center">
-            <input type="text" placeholder="Search " ng-model="search" id="uniquefilter">
+            <input type="text" placeholder="Type in your name " ng-model="Type in your name" id="uniquefilter">
         </div>
         <div class="col-sm-2"></div>
-    </div><br><br>
-
-    <div data-ng-repeat="id in testValue=(ids | filter: search) " data-ng-href="#!/atms/{{id._id}}"  class="row thumbnail"><br>
-        <div class="col-sm-4 img-responsive" id="idpic">
-            <img class="img-responsive" ng-src="{{id.idPhoto}}" alt="">
+    </div>
+    <div data-ng-repeat="id in testValue=(ids | filter: search) " data-ng-href="#!/atms/{{id._id}}" class="row thumbnail">
+        <br>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-3 img-responsive" id="idpic">
+            <img style="max-height: 180px;" class="img-responsive" ng-src="{{id.idPhoto}}" alt="">
         </div>
-        <div class="col-sm-8">
-
-            <p style="font-weight: bold;">Full names: <span style="color: orange;">{{id.fullNames | uppercase}}</span></p>
-            <p style="font-weight: bold;">Card type: <span style="color: orange;">{{id.cardType | uppercase}}</span> </p>
-            <p style="font-weight: bold;">Bank name: <span style="color: orange;">{{id.bankName | uppercase}}</span> </p>    
-            <p style="font-weight: bold;">Location found: <span style="color: orange;">{{id.locationFound | uppercase}}</span> </p> 
-            <p style="font-weight: bold;">Date posted: <span style="color: grey;">{{id.created | date}}</span> </p> 
-            <a href="/#!/claimatm/{{id._id}}"><button type="submit" class="btn" id="signupbtn"><span id="claimtext">Claim this Atm card</span></button></a>
+        <div class="col-sm-5">
+            <p style="font-weight: bold; font-size: 15px;">Full names: <span style="color: orange;">{{id.fullNames | uppercase}}</span></p>
+            <p style="font-weight: bold; font-size: 15px;">Card type: <span style="color: orange;">{{id.cardType | uppercase}}</span> </p>
+            <p style="font-weight: bold; font-size: 15px;">Bank name: <span style="color: orange;">{{id.bankName | uppercase}}</span> </p>
+            <p style="font-weight: bold; font-size: 15px;">Location found: <span style="color: orange;">{{id.locationFound | uppercase}}</span> </p>
+            <p style="font-weight: bold; font-size: 15px;">Date posted: <span style="color: grey;">{{id.created | date}}</span> </p>
+            <a href="/#!/claimatm/{{id._id}}">
+                <button type="submit" class="btn" id="signupbtn"><span id="claimtext">Claim this Atm card</span></button>
+            </a>
+            <br>
+            <br>
         </div>
     </div>
-     <div ng-show="!testValue.length" ng-class="alert">
-         <h2>Your document has not been posted yet. Please visit us later</h2>
-     </div>
+    <div class="col-sm-2"></div>
+    <br>
+    <br>
+    <div class="row" ng-show="!testValue.length" style="min">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6" style="min-height: 300px; ">
+                <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-6">
+                        <img src="modules/core/img/SakaDocsPageError.png" alt="">
+                    </div>
+                    <div class="col-sm-3"></div>
+                </div>
+                <br>
+                <p>Oops! Your document has not been posted yet.</p>
+                <div class="text-center">
+                    <p style="font-size: 10px;">Good news though, You can get alerted(via sms) when your ATM card is posted</p>
+                    <input type="text" placeholder="Enter your name">
+                    <input type="text" placeholder="Enter card type e.g Visa">
+                    <button>Get alert</button>
+                </div>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
 </section>

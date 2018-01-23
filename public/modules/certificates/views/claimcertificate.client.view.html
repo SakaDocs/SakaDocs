@@ -1,24 +1,90 @@
 <section data-ng-controller="ClaimcertificateController" data-ng-init="claim()">
+    
+<div class="row text-center" style="background-color: black; color: orange;">
+        <h4 style="font-weight: bold; font-size: 16px;">Claim your document</h4>
+    </div>
+    <br>
+    <br>
+    <br>
     <div class="row">
         <div class="col-sm-6">
-            <div class="row thumbnail img-responsive" id="idpic">
+            <div class="row img-responsive" id="idpic">
                 <img class=" col-sm-6 img-responsive" ng-src="{{id.idPhoto}}" alt="">
                 <div class="col-sm-6">
-                    <p style="font-weight: bold;">Full names: <span style="color: orange;">{{id.fullNames | uppercase}}</span></p>
-                    <p style="font-weight: bold;">Institution name: <span style="color: orange;">{{id.institutionName | uppercase}}</span> </p>
-                    <p style="font-weight: bold;">Location found: <span style="color: orange;">{{id.locationFound | uppercase}}</span> </p>
-                    <p style="font-weight: bold;">Date posted: <span style="color: grey;">{{id.created | date}}</span> </p>
+                    <p style="font-weight: bold; font-size: 13px;">Full names: <span style="color: orange;">{{id.fullNames | uppercase}}</span></p>
+                    <p style="font-weight: bold; font-size: 13px;">Institution name: <span style="color: orange;">{{id.institutionName | uppercase}}</span> </p>
+                    <p style="font-weight: bold; font-size: 13px;">Location found: <span style="color: orange;">{{id.locationFound | uppercase}}</span> </p>
+                    <p style="font-weight: bold; font-size: 13px;">Date posted: <span style="color: grey;">{{id.created | date}}</span> </p>
                 </div>
             </div>
+            <br>
+            <div class="row">
+                <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-6">
+                        <div class="">
+                            <h6 style="font-weight: bold; font-size: 15px;">Payment via MPesa</h6>
+                        </div>
+                        <p style="font-size: 12px;">1. Go to MPesa menu</p>
+                        <p style="font-size: 12px;">2. Choose Lipa Na MPesa</p>
+                        <p style="font-size: 12px;">3. Next go to Paybill</p>
+                        <p style="font-size: 12px;">4. Enter Business number 753753</p>
+                        <p style="font-size: 12px;">5. Enter Account number {{id.accountNumber}}</p>
+                        <p style="font-size: 12px;">6. Enter amount then your MPesa PIN to <span>finish transaction</span>.</p>
+                    </div>
+                    <div class="col-sm-3"></div>
+                </div>
+            </div>
+            
         </div>
         <div class="col-sm-6">
-            <h3 style="font-weight: bold;">Follow the steps below to claim your certificate</h3>
-            <p>1. Send Kshs 300/= via mpesa to 0715753308.</p>
-            <p>2. Text this certificate's institution name, full names and MPesa confirmation code to 0707293292.</p>
-            <p>3. You will receive an sms from 0707293292 with phone number of the person who posted your certificate and a SakaDocs code. </p>
-            <p>4. Call the received number and arrange to meet the person. </p>
-            <p>5. The person will give you your certificate in exchange for the SakaDocs code you received.</p>
-            <p></p>
+            <div class="row">
+                <div class="col-sm-10">
+                    <p style="font-size: 13px;">To claim this certificate, kindly choose a payment method below and pay Kshs 300 to automatically receive (via SMS) the mobile number of the person who posted your document (the Poster) and a unique <span><a href="">SakaDocs code</a></span> (which you will be required to give to the Poster once they give you your document) . You can then call the Poster to agree on how they will avail your document.</p>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+            <div class=" row">
+                <div class="row">
+                <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-6">
+                        <div class="">
+                            <h6 style="font-weight: bold; font-size: 15px;">Payment via Airtel Money</h6>
+                        </div>
+                        <p style="font-size: 12px;">1. Go to MPesa menu</p>
+                        <p style="font-size: 12px;">2. Choose Lipa Na MPesa Paybill</p>
+                        <p style="font-size: 12px;">3. Choose Paybill</p>
+                        <p style="font-size: 12px;">4. Enter Business number 753753</p>
+                        <p style="font-size: 12px;">5. Enter Account number {{id.accountNumber}}</p>
+                        <p style="font-size: 12px;">6. Enter amount and your pin</p>
+                    </div>
+                    <div class="col-sm-3"></div>
+                </div>
+            </div>
+               <!--  <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <h4 style="font-weight: bold">Choose payment method</h4>
+                    <div class="row col-sm-6" style="height: 70px; padding-right: 19px;">
+                        <a href="">
+                            <div class="thumbnail img-responsive">
+                                <img src="/modules/core/img/SakaDocs_ MPesa_paybill.png" class="img-responsive" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="row col-sm-6" style="height: 70px;padding-left: 19px;">
+                        <a href="">
+                            <div class="thumbnail img-responsive">
+                                <img src="/modules/core/img/SakaDocs_Airtel_Money_Paybill.png" class="img-responsive" alt="">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-2"></div> -->
+            </div>
         </div>
     </div>
+    </div>
 </section>
+
+
