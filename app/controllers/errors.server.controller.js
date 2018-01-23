@@ -8,12 +8,13 @@ var getUniqueErrorMessage = function(err) {
 
 	try {
 		var fieldName = err.err.substring(err.err.lastIndexOf('.$') + 2, err.err.lastIndexOf('_1'));
+		
 		output = fieldName.charAt(0).toUpperCase() + fieldName.slice(1) + ' already exists';
 
 	} catch (ex) {
-		output = 'Unique field already exists';
+		output = 'The mobile number or email already exists';
 	}
-
+	console.log(err);
 	return output;
 };
 
@@ -26,6 +27,8 @@ exports.getErrorMessage = function(err) {
 	if (err.code) {
 		switch (err.code) {
 			case 11000:
+				message = getUniqueErrorMessage(err);
+				break;
 			case 11001:
 				message = getUniqueErrorMessage(err);
 				break;

@@ -314,6 +314,10 @@ body{
 #big_logo{
 	display: block;
 }
+#form-group{
+	margin-right: 0px;
+	margin-left: 0px;
+}
 
 
 
