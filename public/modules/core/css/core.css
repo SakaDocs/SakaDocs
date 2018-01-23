@@ -305,7 +305,12 @@ body{
 #mobile_home_docs{
 	display: none;
 }
-
+#pc_payment_options{
+	display: block;
+}
+#mobile_payment_options{
+	display: none;
+}
 
 
 
@@ -314,6 +319,12 @@ body{
 
 
 @media only screen and (max-width: 700px) {
+#pc_payment_options{
+	display: none;
+}
+#mobile_payment_options{
+	display: block;
+}
 #user_mobile_button{
 	background-color: #212121; 
 	border-width: 2px; 
@@ -337,7 +348,7 @@ body{
 	display: none;
 }
 #mobile_home_docs{
-	display: unset;
+	display: block;
 }
 #small_logo{
 	height: auto;
