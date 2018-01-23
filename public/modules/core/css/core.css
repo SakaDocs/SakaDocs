@@ -311,7 +311,9 @@ body{
 #mobile_payment_options{
 	display: none;
 }
-
+#big_logo{
+	display: block;
+}
 
 
 
@@ -351,16 +353,13 @@ body{
 	display: block;
 }
 #small_logo{
+	display: inline-block;
 	height: auto;
 	width: auto;
 }
 #mobile-space{
 	min-height: 80px;
 
-}
-
-#small_logo{
-	display: unset;
 }
 #big_logo{
 	display: none;
