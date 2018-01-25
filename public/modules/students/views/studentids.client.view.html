@@ -24,7 +24,9 @@
             <br>
             <br>
         </div>
-    </div><br><br>
+    </div>
+    <br>
+    <br>
     <div class="row" ng-show="!testValue.length" style="min">
         <div class="row">
             <div class="col-sm-3"></div>
@@ -40,9 +42,14 @@
                 <p>Oops! Your document has not been posted yet.</p>
                 <div class="text-center">
                     <p style="font-size: 10px;">Good news though, You can get alerted(via sms) when your ID is posted</p>
-                    <input type="text" placeholder="Enter school name">
-                    <input type="text" placeholder="Enter your admission/reg number">
-                    <button>Get alert</button>
+                    <form data-ng-submit="getAlert()" autocomplete="off">
+                        <div data-ng-show="message" class="text-center text-success bg-success">
+                            <strong style="padding-top: 2px; font-size: 7px;" data-ng-bind="message"></strong>
+                        </div>
+                        <input type="text" name="schoolName" data-ng-model="studentId.schoolName" placeholder="Enter school name">
+                        <input type="text" name="admissionNumber" data-ng-model="studentId.admissionNumber" placeholder="Enter your admission/reg number">
+                        <button type="submit">Get alert</button>
+                    </form>
                 </div>
             </div>
             <div class="col-sm-3"></div>

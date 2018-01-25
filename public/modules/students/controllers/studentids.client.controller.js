@@ -12,8 +12,20 @@ angular.module('students').controller('StudentidsController', ['$scope', '$http'
                     $scope.error = res.message;
                 });
             }
+            $scope.getAlert = function() {
+                $scope.studentId.mobileNumber = Authentication.user.username;
+                $http.post('/studentidalert', $scope.studentId).success(function(response) {
+
+                    // If successful we assign the response to the success message
+                    $scope.message = response.message;
+                    $scope.studentId.admissionNumber = "";
+                    $scope.studentId.schoolName = "";
+                }).error(function(response) {
+                    $scope.error = response.message;
+                });
+            }
         } else {
-        	$location.path('/signin');
+            $location.path('/signin');
         }
 
     }

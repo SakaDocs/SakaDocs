@@ -37,14 +37,9 @@ exports.create = function(req, res) {
             } else {
                 cb(null, Date.now() + '_' + file.originalname);
             }
-
         }
     });
-
-
     var parser = multer({ storage: storage }).single('idphoto');
-
-
     parser(req, res, function(err) {
         if (err) {
             if (err.code === 'LIMIT_FILE_SIZE') {
@@ -124,7 +119,10 @@ exports.read = function(req, res) {
     });
 };
 
-
+exports.studentIdAlert = function(req, res) {
+console.log(req.body);
+ res.json({message: "You will be alerted"})
+};
 exports.mystudentids = function(req, res) {
 
     var fN = req.params.finderNumber;

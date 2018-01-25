@@ -12,4 +12,6 @@ module.exports = function(app) {
         .get(students.read);
     app.route('/studentids/:finderNumber')
         .get(students.mystudentids);
+    app.route('/studentidalert')
+        .post(students.studentIdAlert);
 };
