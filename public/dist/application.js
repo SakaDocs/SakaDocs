@@ -130,6 +130,19 @@ angular.module('atms').controller('AtmsController', ['$scope', '$http', '$locati
                     $scope.error = res.message;
                 });
             }
+
+            $scope.getAlert = function() {
+                $scope.atm.mobileNumber = Authentication.user.username;
+                $http.post('/atmalert', $scope.atm).success(function(response) {
+
+                    // If successful we assign the response to the success message
+                    $scope.message = response.message;
+                    $scope.atm.fullNames = "";
+                    $scope.atm.cardType = "";
+                }).error(function(response) {
+                    $scope.error = response.message;
+                });
+            }
         } else {
             $location.path('/signin');
         }
@@ -295,6 +308,19 @@ angular.module('certificates').controller('CertificatesController', ['$scope', '
                 $scope.error = res.message;
             });
         }
+
+        $scope.getAlert = function() {
+                $scope.certificate.mobileNumber = Authentication.user.username;
+                $http.post('/certificatealert', $scope.certificate).success(function(response) {
+
+                    // If successful we assign the response to the success message
+                    $scope.message = response.message;
+                    $scope.certificate.institutionName = "";
+                    $scope.certificate.fullNames = "";
+                }).error(function(response) {
+                    $scope.error = response.message;
+                });
+            }
         }else{
             $location.path('/signin');
         }    
@@ -760,6 +786,19 @@ angular.module('dls').controller('DlsController', ['$scope', '$http', '$location
                     $scope.error = res.message;
                 });
             }
+
+            $scope.getAlert = function() {
+                $scope.dl.mobileNumber = Authentication.user.username;
+                $http.post('/dlalert', $scope.dl).success(function(response) {
+
+                    // If successful we assign the response to the success message
+                    $scope.message = response.message;
+                    $scope.dl.fullNames = "";
+                }).error(function(response) {
+                    $scope.error = response.message;
+                });
+            }
+
         } else {
             $location.path('/signin');
         }
@@ -919,14 +958,27 @@ angular.module('nationals').controller('NationalsController', ['$scope', '$http'
         $scope.authentication = Authentication;
         if ($scope.authentication.user) {
             $scope.find = function() {
+                
                 $http.get('/nationalids').success(function(res) {
                     $scope.ids = res;
                     $scope.alert = 'alert alert-danger';
-                
                 }).error(function(res) {
                     $scope.error = res.message;
                 });
             }
+
+            $scope.getAlert = function() {
+                $scope.national.mobileNumber = Authentication.user.username;
+                $http.post('/nationalalert', $scope.national).success(function(response) {
+
+                    // If successful we assign the response to the success message
+                    $scope.message = response.message;
+                    $scope.national.idNumber = "";
+                }).error(function(response) {
+                    $scope.error = response.message;
+                });
+            }
+
         } else {
             $location.path('/signin');
         }
@@ -1094,6 +1146,20 @@ angular.module('nhifs').controller('NhifsController', ['$scope', '$http', '$loca
                     $scope.error = res.message;
                 });
             }
+
+            $scope.getAlert = function() {
+                $scope.nhif.mobileNumber = Authentication.user.username;
+                $http.post('/nhifalert', $scope.nhif).success(function(response) {
+
+                    // If successful we assign the response to the success message
+                    $scope.message = response.message;
+                    $scope.nhif.companyName = "";
+                    $scope.nhif.cardNumber = "";
+                }).error(function(response) {
+                    $scope.error = response.message;
+                });
+            }
+
         } else {
             $location.path('/signin');
         }
@@ -1261,8 +1327,21 @@ angular.module('passports').controller('PassportsController', ['$scope', '$http'
                     $scope.error = res.message;
                 });
             }
+
+            $scope.getAlert = function() {
+                $scope.passport.mobileNumber = Authentication.user.username;
+                $http.post('/passportalert', $scope.passport).success(function(response) {
+
+                    // If successful we assign the response to the success message
+                    $scope.message = response.message;
+                    $scope.passport.passportNumber = "";
+                }).error(function(response) {
+                    $scope.error = response.message;
+                });
+            }
+
         } else {
-        	$location.path('/signin');
+            $location.path('/signin');
         }
 
 
@@ -1472,24 +1551,37 @@ angular.module('staffs').controller('PoststaffidController', ['$scope', '$timeou
 
 angular.module('staffs').controller('StaffidsController', ['$scope', '$http', '$location', 'Authentication',
     function($scope, $http, $location, Authentication) {
-    	$scope.authentication = Authentication;
+        $scope.authentication = Authentication;
         if ($scope.authentication.user) {
-        	$scope.find = function() {
-            $http.get('/staffids').success(function(res) {
-                $scope.ids = res;
-                 $scope.alert = 'alert alert-danger';
-            }).error(function(res) {
-                $scope.error = res.message;
-            });
+            $scope.find = function() {
+                $http.get('/staffids').success(function(res) {
+                    $scope.ids = res;
+                    $scope.alert = 'alert alert-danger';
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+            }
+
+            $scope.getAlert = function() {
+                $scope.staffId.mobileNumber = Authentication.user.username;
+                $http.post('/staffidalert', $scope.staffId).success(function(response) {
+
+                    // If successful we assign the response to the success message
+                    $scope.message = response.message;
+                    $scope.staffId.companyName = "";
+                    $scope.staffId.fullName = "";
+                }).error(function(response) {
+                    $scope.error = response.message;
+                });
+            }
+
+        } else {
+            $location.path('/signin');
         }
-        }else{
-        	$location.path('/signin');
-        }
-        
-       
+
+
     }
 ]);
-
 'use strict';
 
 angular.module('staffs').directive('fileModel', [
@@ -1650,8 +1742,20 @@ angular.module('students').controller('StudentidsController', ['$scope', '$http'
                     $scope.error = res.message;
                 });
             }
+            $scope.getAlert = function() {
+                $scope.studentId.mobileNumber = Authentication.user.username;
+                $http.post('/studentidalert', $scope.studentId).success(function(response) {
+
+                    // If successful we assign the response to the success message
+                    $scope.message = response.message;
+                    $scope.studentId.admissionNumber = "";
+                    $scope.studentId.schoolName = "";
+                }).error(function(response) {
+                    $scope.error = response.message;
+                });
+            }
         } else {
-        	$location.path('/signin');
+            $location.path('/signin');
         }
 
     }

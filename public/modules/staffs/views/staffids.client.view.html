@@ -28,7 +28,7 @@
     <div class="col-sm-2"></div>
     <br>
     <br>
-    <div class="row" ng-show="!testValue.length" style="min">
+    <div class="row" ng-show="!testValue.length" style="min" id="pc_notfound">
         <div class="row">
             <div class="col-sm-3"></div>
             <div class="col-sm-6" style="min-height: 300px; ">
@@ -55,5 +55,35 @@
             </div>
             <div class="col-sm-3"></div>
         </div>
+    </div>
+     <div class="row" ng-show="!testValue.length" style="min" id="mobile_notfound">
+        <div class="col-sm-3"></div>
+        <div class=" col-sm-9 row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6" style="min-height: 300px; ">
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4    ">
+                        <img src="modules/core/img/SakaDocsPageError.png" alt="" style="padding-left: 35px;">
+                    </div>
+                    <div class="col-sm-4"></div>
+                </div>
+                <br>
+                <p>Oops! Your document has not been posted yet.</p>
+                <div class="text-center">
+                    <p style="font-size: 10px;">Good news though, You can get alerted(via sms) when your staff ID is posted</p>
+                    <form data-ng-submit="getAlert()" autocomplete="off">
+                        <div data-ng-show="message" class="text-center text-success bg-success">
+                            <strong style="padding-top: 2px; font-size: 7px;" data-ng-bind="message"></strong>
+                        </div>
+                        <input type="text" name="fullName" data-ng-model="staffId.fullName" placeholder="Enter school name"><br><br>
+                        <input type="text" name="companyName" data-ng-model="staffId.companyName" placeholder="Enter company name"><br><br>
+                        <button type="submit">Get alert</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+        <div class="col-sm-2"></div>
     </div>
 </section>
