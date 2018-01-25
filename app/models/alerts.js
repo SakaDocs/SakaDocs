@@ -14,12 +14,7 @@ var AlertSchema = new Schema({
     	type: String, 
     	trim: true 
     },
-    details: { 
-    	type:[{
-            type: String
-        }], 
-    	trim: true 
-    }   
+    details: {}   
 });
 
 mongoose.model('Alert', AlertSchema);

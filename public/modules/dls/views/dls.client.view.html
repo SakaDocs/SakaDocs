@@ -37,8 +37,13 @@
                 <p>Oops! Your document has not been posted yet.</p>
                 <div class="text-center">
                     <p style="font-size: 10px;">Good news though, You can get alerted when your Driving license is posted</p>
-                    <input type="text" placeholder="Enter your Name">
-                    <button>Get alerted</button>
+                    <form data-ng-submit="getAlert()" autocomplete="off">
+                        <div data-ng-show="message" class="text-center text-success bg-success">
+                            <strong style="padding-top: 2px; font-size: 7px;" data-ng-bind="message"></strong>
+                        </div>
+                        <input type="text" name="fullNames" data-ng-model="dl.fullNames" placeholder="Enter your name">
+                        <button type="submit">Get alert</button>
+                    </form>
                 </div>
             </div>
             <div class="col-sm-3"></div>

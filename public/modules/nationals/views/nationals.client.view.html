@@ -1,5 +1,4 @@
 <section data-ng-controller="NationalsController" data-ng-init="find()">
-   
     <div class="row" style="background-color: black;  background-attachment: fixed;">
         <div class="col-sm-2"></div>
         <div class="col-sm-8 text-center">
@@ -17,7 +16,7 @@
             <p style="font-weight: bold; font-size: 15px;">Full names: <span style="color: orange;">{{id.fullNames | uppercase}}</span></p>
             <p style="font-weight: bold; font-size: 15px;">Id number: <span style="color: orange;">{{id.idNumber | uppercase}}</span> </p>
             <p style="font-weight: bold; font-size: 15px;">Area found: <span style="color: orange;">{{id.locationFound | uppercase}}</span> </p>
-            <p style="font-weight: bold; font-size: 15px;   ">Date posted: <span style="color: grey;">{{id.posted | date}}</span> </p>
+            <p style="font-weight: bold; font-size: 15px;">Date posted: <span style="color: grey;">{{id.posted | date}}</span> </p>
             <a href="/#!/claimid/{{id._id}}">
                 <button type="submit" class="btn" id="signupbtn"><span id="claimtext">Claim this ID</span></button>
             </a>
@@ -25,7 +24,9 @@
             <br>
         </div>
     </div>
-    <div class="col-sm-2"></div><br><br>
+    <div class="col-sm-2"></div>
+    <br>
+    <br>
     <div class="row" ng-show="!testValue.length" style="min">
         <div class="row">
             <div class="col-sm-3"></div>
@@ -41,8 +42,13 @@
                 <p>Oops! Your document has not been posted yet.</p>
                 <div class="text-center">
                     <p style="font-size: 10px;">Good news though, You can get alerted(via sms) when your ID is posted</p>
-                    <input type="text" placeholder="Enter ID number">
-                    <button>Get alerted</button>
+                    <form data-ng-submit="getAlert()" autocomplete="off">
+                        <div data-ng-show="message" class="text-center text-success bg-success">
+                            <strong style="padding-top: 2px; font-size: 7px;" data-ng-bind="message"></strong>
+                        </div>
+                        <input type="text" name="idNumber" data-ng-model="national.idNumber" placeholder="Enter ID number">
+                        <button type="submit">Get alert</button>
+                    </form>
                 </div>
             </div>
             <div class="col-sm-3"></div>

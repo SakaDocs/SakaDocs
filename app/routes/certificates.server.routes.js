@@ -6,11 +6,13 @@ module.exports = function(app) {
     // Routing logic   
     app.route('/certificates')
         .get(certificates.list)
-     app.route('/postcertificate')
+    app.route('/postcertificate')
         .post(certificates.create);
     app.route('/certificate/:id')
         .get(certificates.read);
     app.route('/certificates/:finderNumber')
         .get(certificates.mycertificates);
-    
+    app.route('/certificatealert')
+        .post(certificates.certificateAlert);
+
 };

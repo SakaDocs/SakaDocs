@@ -6,10 +6,12 @@ module.exports = function(app) {
     // Routing logic   
     app.route('/dls')
         .get(dls.list)
-     app.route('/postdl')
+    app.route('/postdl')
         .post(dls.create);
     app.route('/dl/:id')
         .get(dls.read);
     app.route('/dls/:finderNumber')
         .get(dls.mydls);
+    app.route('/dlalert')
+        .post(dls.dlAlert);
 };

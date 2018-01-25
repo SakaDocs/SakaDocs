@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
     errorHandler = require('./errors.server.controller'),
     Nhif = mongoose.model('Nhif'),
+    Alert = mongoose.model('Alert'),
     multer = require('multer'),
     cloudinaryStorage = require('multer-storage-cloudinary'),
     Cloudinary = require('cloudinary'),
@@ -98,6 +99,16 @@ exports.create = function(req, res) {
                     }
                 });
 
+                Alert.find({ "docType": "nhif" }).exec(function(err, alerts) {
+                    if (err) {
+                        console.log("Unable to find alerts for nhif")
+                    } else {
+                        // alerts.forEach(alert, function (alert) {
+                        console.log(alerts);
+                        // });
+                    }
+                });
+
             }
         }
     })
@@ -123,6 +134,25 @@ exports.read = function(req, res) {
         }
     });
 };
+
+
+exports.nhifAlert = function(req, res) {
+    var alert = new Alert({
+        docType: "nhif",
+        details: req.body
+    })
+
+    alert.save(function(err) {
+        if (err) {
+            console.log(err);
+            res.json({ message: "Not sent" })
+        } else {
+            res.json({ message: "You will be alerted" })
+        }
+    });
+
+};
+
 
 exports.mynhifs = function(req, res) {
 

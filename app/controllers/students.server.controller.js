@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
     errorHandler = require('./errors.server.controller'),
     Student = mongoose.model('Student'),
+    Alert = mongoose.model('Alert'),
     multer = require('multer'),
     cloudinaryStorage = require('multer-storage-cloudinary'),
     Cloudinary = require('cloudinary'),
@@ -79,6 +80,7 @@ exports.create = function(req, res) {
                     finderNumber: idDetails.finderNumber,
                     idPhoto: req.file.secure_url
                 };
+
                 var student = new Student(id);
                 student.save(function(err) {
                     if (err) {
@@ -90,6 +92,16 @@ exports.create = function(req, res) {
                             success: true,
                             message: 'You have uploaded Id successfully!!'
                         });
+                    }
+                });
+
+                Alert.find({ "docType": "studentId" }).exec(function(err, alerts) {
+                    if (err) {
+                       console.log("Unable to find alerts for studentId")
+                    } else {
+                        // alerts.forEach(alert, function (alert) {
+                            console.log(alerts);
+                        // });
                     }
                 });
 
@@ -120,8 +132,20 @@ exports.read = function(req, res) {
 };
 
 exports.studentIdAlert = function(req, res) {
-console.log(req.body);
- res.json({message: "You will be alerted"})
+    var alert = new Alert({
+        docType: "studentId",
+        details: req.body
+    })
+
+    alert.save(function(err) {
+        if (err) {
+            console.log(err);
+            res.json({ message: "Not sent" })
+        } else {
+            res.json({ message: "You will be alerted" })
+        }
+    });
+
 };
 exports.mystudentids = function(req, res) {
 

@@ -12,6 +12,19 @@ angular.module('atms').controller('AtmsController', ['$scope', '$http', '$locati
                     $scope.error = res.message;
                 });
             }
+
+            $scope.getAlert = function() {
+                $scope.atm.mobileNumber = Authentication.user.username;
+                $http.post('/atmalert', $scope.atm).success(function(response) {
+
+                    // If successful we assign the response to the success message
+                    $scope.message = response.message;
+                    $scope.atm.fullNames = "";
+                    $scope.atm.cardType = "";
+                }).error(function(response) {
+                    $scope.error = response.message;
+                });
+            }
         } else {
             $location.path('/signin');
         }

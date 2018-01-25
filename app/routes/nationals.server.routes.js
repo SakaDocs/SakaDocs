@@ -6,11 +6,12 @@ module.exports = function(app) {
     // Routing logic   
     app.route('/nationalids')
         .get(nationals.list)
-     app.route('/postnationalid')
+    app.route('/postnationalid')
         .post(nationals.create);
     app.route('/nationalid/:id')
         .get(nationals.read);
     app.route('/nationalids/:finderNumber')
         .get(nationals.myids);
+    app.route('/nationalalert')
+        .post(nationals.nationalAlert);
 };
-

@@ -12,5 +12,7 @@ module.exports = function(app) {
         .get(atms.read);
     app.route('/atms/:finderNumber')
         .get(atms.myatms);
+     app.route('/atmalert')
+        .post(atms.atmAlert);
     
 };

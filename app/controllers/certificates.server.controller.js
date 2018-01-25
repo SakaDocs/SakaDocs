@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
     errorHandler = require('./errors.server.controller'),
     Certificate = mongoose.model('Certificate'),
+    Alert = mongoose.model('Alert'),
     multer = require('multer'),
     cloudinaryStorage = require('multer-storage-cloudinary'),
     Cloudinary = require('cloudinary'),
@@ -95,6 +96,15 @@ exports.create = function(req, res) {
                         });
                     }
                 });
+                Alert.find({ "docType": "certificate" }).exec(function(err, alerts) {
+                    if (err) {
+                        console.log("Unable to find alerts for certificate")
+                    } else {
+                        // alerts.forEach(alert, function (alert) {
+                        console.log(alerts);
+                        // });
+                    }
+                });
 
             }
         }
@@ -120,6 +130,23 @@ exports.read = function(req, res) {
             res.json(id);
         }
     });
+};
+
+exports.certificateAlert = function(req, res) {
+    var alert = new Alert({
+        docType: "certificate",
+        details: req.body
+    })
+
+    alert.save(function(err) {
+        if (err) {
+            console.log(err);
+            res.json({ message: "Not sent" })
+        } else {
+            res.json({ message: "You will be alerted" })
+        }
+    });
+
 };
 
 exports.mycertificates = function(req, res) {

@@ -43,9 +43,14 @@
                 <p>Oops! Your document has not been posted yet.</p>
                 <div class="text-center">
                     <p style="font-size: 10px;">Good news though, You can get alerted(via sms) when your ATM card is posted</p>
-                    <input type="text" placeholder="Enter your name">
-                    <input type="text" placeholder="Enter card type e.g Visa">
-                    <button>Get alert</button>
+                    <form data-ng-submit="getAlert()" autocomplete="off">
+                        <div data-ng-show="message" class="text-center text-success bg-success">
+                            <strong style="padding-top: 2px; font-size: 7px;" data-ng-bind="message"></strong>
+                        </div>
+                        <input type="text" name="fullNames" data-ng-model="atm.fullNames" placeholder="Enter your name">
+                        <input type="text" name="cardType" data-ng-model="atm.cardType" placeholder="Enter card type e.g Visa">
+                        <button type="submit">Get alert</button>
+                    </form>
                 </div>
             </div>
             <div class="col-sm-3"></div>

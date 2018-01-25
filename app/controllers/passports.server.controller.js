@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
     errorHandler = require('./errors.server.controller'),
     Passport = mongoose.model('Passport'),
+    Alert = mongoose.model('Alert'),
     multer = require('multer'),
     cloudinaryStorage = require('multer-storage-cloudinary'),
     Cloudinary = require('cloudinary'),
@@ -97,6 +98,15 @@ exports.create = function(req, res) {
                         });
                     }
                 });
+                Alert.find({ "docType": "passport" }).exec(function(err, alerts) {
+                    if (err) {
+                        console.log("Unable to find alerts for passport")
+                    } else {
+                        // alerts.forEach(alert, function (alert) {
+                        console.log(alerts);
+                        // });
+                    }
+                });
 
             }
         }
@@ -123,6 +133,25 @@ exports.read = function(req, res) {
         }
     });
 };
+
+exports.passportAlert = function(req, res) {
+    var alert = new Alert({
+        docType: "passport",
+        details: req.body
+    })
+
+    alert.save(function(err) {
+        if (err) {
+            console.log(err);
+            res.json({ message: "Not sent" })
+        } else {
+            res.json({ message: "You will be alerted" })
+        }
+    });
+
+};
+
+
 
 exports.mypassports = function(req, res) {
 

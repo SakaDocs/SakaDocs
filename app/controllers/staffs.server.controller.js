@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
     errorHandler = require('./errors.server.controller'),
     Staff = mongoose.model('Staff'),
+    Alert = mongoose.model('Alert'),
     multer = require('multer'),
     cloudinaryStorage = require('multer-storage-cloudinary'),
     Cloudinary = require('cloudinary'),
@@ -97,6 +98,15 @@ exports.create = function(req, res) {
                         });
                     }
                 });
+                Alert.find({ "docType": "staffId" }).exec(function(err, alerts) {
+                    if (err) {
+                        console.log("Unable to find alerts for staffId")
+                    } else {
+                        // alerts.forEach(alert, function (alert) {
+                        console.log(alerts);
+                        // });
+                    }
+                });
 
             }
         }
@@ -104,7 +114,7 @@ exports.create = function(req, res) {
 };
 
 /**
- * Show the current Student
+ * Show the current staff
  */
 
 exports.read = function(req, res) {
@@ -137,6 +147,24 @@ exports.mystaffids = function(req, res) {
             res.json(ids.reverse());
         }
     });
+};
+
+
+exports.staffIdAlert = function(req, res) {
+    var alert = new Alert({
+        docType: "staffId",
+        details: req.body
+    })
+
+    alert.save(function(err) {
+        if (err) {
+            console.log(err);
+            res.json({ message: "Not sent" })
+        } else {
+            res.json({ message: "You will be alerted" })
+        }
+    });
+
 };
 
 

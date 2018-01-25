@@ -6,11 +6,13 @@ module.exports = function(app) {
     // Routing logic   
     app.route('/nhifs')
         .get(nhifs.list)
-     app.route('/postnhifcard')
+    app.route('/postnhifcard')
         .post(nhifs.create);
     app.route('/nhifcard/:id')
         .get(nhifs.read);
     app.route('/nhifcards/:finderNumber')
         .get(nhifs.mynhifs);
-    
+    app.route('/nhifalert')
+        .post(nhifs.nhifAlert);
+
 };

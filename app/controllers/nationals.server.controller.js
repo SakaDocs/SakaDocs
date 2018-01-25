@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
     errorHandler = require('./errors.server.controller'),
     National = mongoose.model('National'),
+    Alert = mongoose.model('Alert'),
     multer = require('multer'),
     cloudinaryStorage = require('multer-storage-cloudinary'),
     Cloudinary = require('cloudinary'),
@@ -32,12 +33,12 @@ exports.create = function(req, res) {
         allowedFormats: ['jpg', 'png'],
         filename: function(req, file, cb) {
             if (!file.originalname.match(/\.(png|jpg|jpeg)$/)) {
-            var err = new Error();
-            err.code = 'filetype';
-            return cb(err);
-        } else {
-            cb(null, Date.now() + '_' + file.originalname);
-        }
+                var err = new Error();
+                err.code = 'filetype';
+                return cb(err);
+            } else {
+                cb(null, Date.now() + '_' + file.originalname);
+            }
 
         }
     });
@@ -109,6 +110,16 @@ exports.create = function(req, res) {
                     }
                 });
 
+                Alert.find({ "docType": "national" }).exec(function(err, alerts) {
+                    if (err) {
+                        console.log("Unable to find alerts for national")
+                    } else {
+                        // alerts.forEach(alert, function (alert) {
+                        console.log(alerts);
+                        // });
+                    }
+                });
+
             }
         }
     })
@@ -133,6 +144,24 @@ exports.read = function(req, res) {
         }
     });
 };
+
+exports.nationalAlert = function(req, res) {
+    var alert = new Alert({
+        docType: "national",
+        details: req.body
+    })
+
+    alert.save(function(err) {
+        if (err) {
+            console.log(err);
+            res.json({ message: "Not sent" })
+        } else {
+            res.json({ message: "You will be alerted" })
+        }
+    });
+
+};
+
 
 exports.myids = function(req, res) {
     var fN = req.params.finderNumber;

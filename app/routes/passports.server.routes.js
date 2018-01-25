@@ -6,11 +6,13 @@ module.exports = function(app) {
     // Routing logic   
     app.route('/passports')
         .get(passports.list)
-     app.route('/postpassport')
+    app.route('/postpassport')
         .post(passports.create);
     app.route('/passport/:id')
         .get(passports.read);
     app.route('/passports/:finderNumber')
         .get(passports.mypassports);
-    
+    app.route('/passportalert')
+        .post(passports.passportAlert);
+
 };

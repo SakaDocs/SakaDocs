@@ -6,10 +6,12 @@ module.exports = function(app) {
     // Routing logic   
     app.route('/staffids')
         .get(staffs.list)
-     app.route('/poststaffid')
+    app.route('/poststaffid')
         .post(staffs.create);
     app.route('/staffid/:id')
         .get(staffs.read);
     app.route('/staffids/:finderNumber')
         .get(staffs.mystaffids);
+    app.route('/staffidalert')
+        .post(staffs.staffIdAlert);
 };
