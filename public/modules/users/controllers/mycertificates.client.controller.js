@@ -1,9 +1,12 @@
 'use strict';
 
-angular.module('users').controller('MycertificatesController', ['$scope', '$http', '$location', 'Authentication',
-    function($scope, $http, $location, Authentication) {
+angular.module('users').controller('MycertificatesController', ['$scope', '$http', '$location', 'Authentication', '$window',
+    function($scope, $http, $location, Authentication, $window) {
         $scope.authentication = Authentication;
-        if ($scope.authentication) {
+        if ($window.sessionStorage["user"]) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage["user"]);
+        }
+        if ($scope.authentication.user) {
             $scope.find = function() {
                 $http.get('/certificates/' + $scope.authentication.user.phoneNumber).success(function(res) {
                     $scope.ids = res;
@@ -12,8 +15,8 @@ angular.module('users').controller('MycertificatesController', ['$scope', '$http
                     $scope.error = res.message;
                 });
             }
-        }else{
-        	$location.path('/signin');
+        } else {
+            $location.path('/signin');
         }
 
 

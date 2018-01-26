@@ -12,7 +12,16 @@ var mongoose = require('mongoose'),
     Cloudinary = require('cloudinary'),
     _ = require('lodash');
 
+// We need this to build our post string
+var querystring = require('querystring');
+var https       = require('https');
+// Your login credentials
+// var username = 'Sandbox';
+// var apikey   = 'ac55432597fbd8f4ee5cbc12627dde767ec91ba7597257451c89c41c95733cb1';
 
+
+var username = 'homefixer';
+var apikey   = 'c430018837f7fa144d1c0b5ea21a21dbd8340bcc7dd0a9a23898afba9f3f6b23';
 /**
  * Create(post) a National Id
  */
@@ -114,9 +123,70 @@ exports.create = function(req, res) {
                     if (err) {
                         console.log("Unable to find alerts for national")
                     } else {
-                        // alerts.forEach(alert, function (alert) {
-                        console.log(alerts);
-                        // });
+                        alerts.forEach(function(alert) {
+                            if (id["idNumber"] === alert.details["idNumber"]) {
+                                function sendMessage() {
+
+                                    // Define the recipient numbers in a comma separated string
+                                    // Numbers should be in international format as shown
+                                    var to = alert.details["mobileNumber"];
+
+                                    // And of course we want our recipients to know what we really do
+                                    var message = "Your ID number " + alert.details["idNumber"] + " has been posted on sakadocs.";
+
+                                    // Build the post string from an object
+
+                                    var post_data = querystring.stringify({
+                                        'username': username,
+                                        'to': to,
+                                        'message': message
+                                    });
+
+                                    var post_options = {
+                                        host: 'api.africastalking.com',
+                                        path: '/version1/messaging',
+                                        method: 'POST',
+
+                                        rejectUnauthorized: false,
+                                        requestCert: true,
+                                        agent: false,
+
+                                        headers: {
+                                            'Content-Type': 'application/x-www-form-urlencoded',
+                                            'Content-Length': post_data.length,
+                                            'Accept': 'application/json',
+                                            'apikey': apikey
+                                        }
+                                    };
+
+                                    var post_req = https.request(post_options, function(res) {
+                                        res.setEncoding('utf8');
+                                        res.on('data', function(chunk) {
+                                            console.log(chunk);
+                                            var jsObject = JSON.parse(chunk);
+                                            var recipients = jsObject.SMSMessageData.Recipients;
+                                            if (recipients.length > 0) {
+                                                for (var i = 0; i < recipients.length; ++i) {
+                                                    var logStr = 'number=' + recipients[i].number;
+                                                    logStr += ';cost=' + recipients[i].cost;
+                                                    logStr += ';status=' + recipients[i].status; // status is either "Success" or "error message"
+                                                    console.log(logStr);
+                                                }
+                                            } else {
+                                                console.log('Error while sending: ' + jsObject.SMSMessageData.Message);
+                                            }
+                                        });
+                                    });
+
+                                    // Add post parameters to the http request
+                                    post_req.write(post_data);
+
+                                    post_req.end();
+                                }
+                                //Call sendMessage method
+                                sendMessage();
+                            }
+                        });
                     }
                 });
 

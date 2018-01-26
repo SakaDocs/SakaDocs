@@ -1,8 +1,11 @@
 'use strict';
 
-angular.module('passports').controller('PassportsController', ['$scope', '$http', '$location', 'Authentication',
-    function($scope, $http, $location, Authentication) {
+angular.module('passports').controller('PassportsController', ['$scope', '$http', '$location', 'Authentication','$window',
+    function($scope, $http, $location, Authentication,$window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage["user"]) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage["user"]);
+        }
         if ($scope.authentication.user) {
             $scope.find = function() {
                 $http.get('/passports').success(function(res) {

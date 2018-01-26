@@ -1,19 +1,22 @@
 'use strict';
 
-angular.module('certificates').controller('CertificatesController', ['$scope', '$http', '$location', 'Authentication',
-    function($scope, $http, $location, Authentication) {
+angular.module('certificates').controller('CertificatesController', ['$scope', '$http', '$location', 'Authentication','$window',
+    function($scope, $http, $location, Authentication, $window) {
         $scope.authentication = Authentication;
-        if ($scope.authentication.user) {
-             $scope.find = function() {
-            $http.get('/certificates').success(function(res) {
-                $scope.ids = res;
-                 $scope.alert = 'alert alert-danger';
-            }).error(function(res) {
-                $scope.error = res.message;
-            });
+        if ($window.sessionStorage["user"]) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage["user"]);
         }
+        if ($scope.authentication.user) {
+            $scope.find = function() {
+                $http.get('/certificates').success(function(res) {
+                    $scope.ids = res;
+                    $scope.alert = 'alert alert-danger';
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+            }
 
-        $scope.getAlert = function() {
+            $scope.getAlert = function() {
                 $scope.certificate.mobileNumber = Authentication.user.username;
                 $http.post('/certificatealert', $scope.certificate).success(function(response) {
 
@@ -25,8 +28,8 @@ angular.module('certificates').controller('CertificatesController', ['$scope', '
                     $scope.error = response.message;
                 });
             }
-        }else{
+        } else {
             $location.path('/signin');
-        }    
+        }
     }
 ]);
