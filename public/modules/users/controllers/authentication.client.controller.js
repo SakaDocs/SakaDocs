@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$window', '$location', 'Authentication',
-    function($scope, $http, $window, $location, Authentication,) {
+angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$location', 'Authentication', '$window',
+    function($scope, $http, $location, Authentication, $window ) {
         $scope.authentication = Authentication;
-        if ($window.sessionStorage["user"]) {
-            $scope.authentication.user = JSON.parse($window.sessionStorage["user"]);
-        }
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         // If user is signed in then redirect back home
         if ($scope.authentication.user) $location.path('/');
 

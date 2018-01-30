@@ -2,11 +2,10 @@
 
 angular.module('users').controller('SettingsController', ['$scope', '$http', '$location', 'Users', 'Authentication', '$window',
     function($scope, $http, $location, Users, Authentication, $window) {
-        $scope.user = Authentication.user;
-        if ($window.sessionStorage["user"]) {
-            $scope.user = JSON.parse($window.sessionStorage["user"]);
-        }
-
+        $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         // If user is not signed in then redirect back home
         if (!$scope.user) $location.path('/');
 

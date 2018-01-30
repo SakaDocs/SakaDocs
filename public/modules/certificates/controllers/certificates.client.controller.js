@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('certificates').controller('CertificatesController', ['$scope', '$http', '$location', 'Authentication','$window',
+angular.module('certificates').controller('CertificatesController', ['$scope', '$http', '$location', 'Authentication', '$window',
     function($scope, $http, $location, Authentication, $window) {
         $scope.authentication = Authentication;
-        if ($window.sessionStorage["user"]) {
-            $scope.authentication.user = JSON.parse($window.sessionStorage["user"]);
-        }
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.find = function() {
                 $http.get('/certificates').success(function(res) {

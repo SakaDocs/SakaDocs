@@ -1,12 +1,13 @@
 'use strict';
 
-angular.module('users').controller('MyatmsController', ['$scope', '$http', '$location', 'Authentication', '$window',
+angular.module('users').controller('MyatmsController', ['$scope', '$http', '$location', 'Authentication', '$window'
+
     function($scope, $http, $location, Authentication, $window) {
         $scope.authentication = Authentication;
-        if ($window.sessionStorage["user"]) {
-            $scope.authentication.user = JSON.parse($window.sessionStorage["user"]);
-        }
-        if ($scope.authentication.user) {
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        if ($scope.authentication) {
             $scope.find = function() {
                 $http.get('/atms/' + $scope.authentication.user.phoneNumber).success(function(res) {
                     $scope.ids = res;

@@ -1,11 +1,14 @@
 'use strict';
 
-angular.module('nhifs').controller('PostnhifController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice','$window',
+angular.module('nhifs').controller('PostnhifController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice', '$window',
     function($scope, $timeout, $location, $interval, Authentication, Uploadfileservice, $window) {
         $scope.authentication = Authentication;
-        if ($window.sessionStorage["user"]) {
-            $scope.authentication.user = JSON.parse($window.sessionStorage["user"]);
-        }
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         // check if user is logged in
         if ($scope.authentication.user) {
             $scope.file = {};

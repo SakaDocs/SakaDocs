@@ -1,11 +1,12 @@
 'use strict';
 
-angular.module('users').controller('ClaimcertificatepaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
+angular.module('users').controller('ClaimcertificatepaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window'
+
     function($scope, $http, $location, Authentication, $stateParams, $window) {
         $scope.authentication = Authentication;
-        if ($window.sessionStorage["user"]) {
-            $scope.authentication.user = JSON.parse($window.sessionStorage["user"]);
-        }
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.claim = function() {
                 var url = '/certificate/';

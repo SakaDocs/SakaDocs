@@ -3,9 +3,9 @@
 angular.module('users').controller('PasswordController', ['$scope', '$stateParams', '$http', '$location', 'Authentication', '$window',
     function($scope, $stateParams, $http, $location, Authentication, $window) {
         $scope.authentication = Authentication;
-        if ($window.sessionStorage["user"]) {
-            $scope.authentication.user = JSON.parse($window.sessionStorage["user"]);
-        }
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         //If user is signed in then redirect back home
         if ($scope.authentication.user) $location.path('/');
 
