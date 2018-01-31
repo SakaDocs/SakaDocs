@@ -8,7 +8,7 @@ angular.module('users').controller('MyidsController', ['$scope', '$http', '$loca
         };
         if ($scope.authentication.user) {
             $scope.find = function() {
-                $http.get('/nationalids/' + $scope.authentication.user.phoneNumber).success(function(res) {
+                $http.get('/nationalids/' + $scope.authentication.user.username).success(function(res) {
                     $scope.ids = res;
                     $scope.alert = 'alert alert-danger';
                 }).error(function(res) {
