@@ -45,7 +45,10 @@ var NationalSchema = new Schema({
 	claimed: {
 		type: Boolean,
 		default: false
-
+	},
+	claimedBy: {
+		type: String,
+		trim: true
 	},
     sakaDocsCode: {
     	type: String,
