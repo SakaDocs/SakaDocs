@@ -2,3 +2,4 @@ node_modules/
 notes.md
 scratchpad/code_snippet.js
 npm-debug.log
+newrelic_agent.log
