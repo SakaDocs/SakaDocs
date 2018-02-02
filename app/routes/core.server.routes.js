@@ -5,5 +5,6 @@ module.exports = function(app) {
 	var core = require('../../app/controllers/core.server.controller');
 	app.route('/').get(core.index);
 	app.route('/doctype').get(core.doctype);
-	app.route('/mpesapayment').get(core.mpesapayment);
+	app.route('/mpesac2bvalidation').post(core.mpesac2bvalidation);
+	app.route('/mpesac2bconfirmation').post(core.mpesac2bvalidation);
 };

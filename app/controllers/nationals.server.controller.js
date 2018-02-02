@@ -34,7 +34,6 @@ Cloudinary.config({
 
 });
 
-
 exports.create = function(req, res) {
     var storage = cloudinaryStorage({
         cloudinary: Cloudinary,
@@ -106,6 +105,15 @@ exports.create = function(req, res) {
                     idPhoto: req.file.secure_url
                 };
                 var national = new National(id);
+                National.find({ "idNumber": id.idNumber }).exec(function(err, id) {
+                    if (err) {
+                        return res.status(400).send({
+                            message: errorHandler.getErrorMessage(err)
+                        });
+                    } else {
+                      return  res.json({ message: "This ID has already been posted" });
+                    }
+                });
                 national.save(function(err) {
                     if (err) {
                         return res.status(400).send({
@@ -137,7 +145,7 @@ exports.create = function(req, res) {
                                                 'message': message
                                             });
                                             var post_options = {
-                                                host: 'api.sandbox.africastalking.com',
+                                                host: 'api.africastalking.com',
                                                 path: '/version1/messaging',
                                                 method: 'POST',
 
@@ -193,8 +201,10 @@ exports.create = function(req, res) {
 
             }
         }
-    })
+    });
 };
+
+
 
 /**
  * Show the current ID
