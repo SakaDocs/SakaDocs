@@ -2,7 +2,7 @@
     <div class="row" style="background-color: black;  background-attachment: fixed;">
         <div class="col-sm-2"></div>
         <div class="col-sm-8 text-center">
-            <input type="text" placeholder="Type in your name " ng-model="search" id="uniquefilter">
+            <input type="text" placeholder="Type in your full name " ng-model="search" id="uniquefilter">
         </div>
         <div class="col-sm-2"></div>
     </div>
@@ -36,10 +36,10 @@
                 <br>
                 <p>Oops! Your document has not been posted yet.</p>
                 <div class="text-center">
-                    <p style="font-size: 10px;">Good news though, You can get alerted when your Driving license is posted</p>
+                    <p style="font-size: 10px;">Good news though, You can get ree alerts(Via SMS) when your Driving license is posted</p>
                     <form data-ng-submit="getAlert()" autocomplete="off">
                         <div data-ng-show="message" class="text-center text-success bg-success">
-                            <strong style="padding-top: 2px; font-size: 7px;" data-ng-bind="message"></strong>
+                            <strong style="padding-top: 2px; font-size: 10px;" data-ng-bind="message"></strong>
                         </div>
                         <input type="text" name="fullNames" data-ng-model="dl.fullNames" placeholder="Enter your name">
                         <button type="submit">Get alert</button>
@@ -64,7 +64,7 @@
                 <br>
                 <p>Oops! Your document has not been posted yet.</p>
                 <div class="text-center">
-                    <p style="font-size: 10px;">Good news though, You can get alerted(via sms) when your driving license is posted</p>
+                    <p style="font-size: 10px;">Good news though, You can get free alerts(Via SMS) when your driving license is posted</p>
                     <form data-ng-submit="getAlert()" autocomplete="off">
                         <div data-ng-show="message" class="text-center text-success bg-success">
                             <strong style="padding-top: 2px; font-size: 7px;" data-ng-bind="message"></strong>

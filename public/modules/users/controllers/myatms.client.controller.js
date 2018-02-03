@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('users').controller('MyatmsController', ['$scope', '$http', '$location', 'Authentication', '$window'
+angular.module('users').controller('MyatmsController', ['$scope', '$http', '$location', 'Authentication', '$window',
 
     function($scope, $http, $location, Authentication, $window) {
         $scope.authentication = Authentication;

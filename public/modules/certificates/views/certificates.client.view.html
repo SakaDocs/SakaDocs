@@ -2,7 +2,7 @@
     <div class="row" style="background-color: black;  background-attachment: fixed;">
         <div class="col-sm-2"></div>
         <div class="col-sm-8 text-center">
-            <input type="text" placeholder="Search " ng-model="Type in Institution name" id="uniquefilter">
+            <input type="text" placeholder="Type in Institution name" ng-model="search" id="uniquefilter">
         </div>
         <div class="col-sm-2"></div>
     </div>
@@ -41,10 +41,10 @@
                 <br>
                 <p>Oops! Your document has not been posted yet.</p>
                 <div class="text-center">
-                    <p style="font-size: 10px;">Good news though, You can get alerted(via sms) when your certificate is posted</p>
+                    <p style="font-size: 10px;">Good news though, You can get free alerts (Via SMS) when your certificate is posted</p>
                     <form data-ng-submit="getAlert()" autocomplete="off">
                         <div data-ng-show="message" class="text-center text-success bg-success">
-                            <strong style="padding-top: 2px; font-size: 7px;" data-ng-bind="message"></strong>
+                            <strong style="padding-top: 2px; font-size: 10px;" data-ng-bind="message"></strong>
                         </div>
                         <input type="text" name="fullNames" data-ng-model="certificate.fullNames" placeholder="Enter full names">
                         <input type="text" name="institutionName" data-ng-model="certificate.institutionName" placeholder="Enter institution name">
@@ -70,7 +70,7 @@
                 <br>
                 <p>Oops! Your document has not been posted yet.</p>
                 <div class="text-center">
-                    <p style="font-size: 10px;">Good news though, You can get alerted(via sms) when your certificate is posted</p>
+                    <p style="font-size: 10px;">Good news though, You can get free alerts (Via SMS) when your certificate is posted</p>
                     <form data-ng-submit="getAlert()" autocomplete="off">
                         <div data-ng-show="message" class="text-center text-success bg-success">
                             <strong style="padding-top: 2px; font-size: 7px;" data-ng-bind="message"></strong>

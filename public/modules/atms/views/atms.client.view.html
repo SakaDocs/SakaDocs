@@ -2,7 +2,7 @@
     <div class="row" style="background-color: black;  background-attachment: fixed;">
         <div class="col-sm-2"></div>
         <div class="col-sm-8 text-center">
-            <input type="text" placeholder="Type in your name " ng-model="Type in your name" id="uniquefilter">
+            <input type="text" placeholder="Type in your name " ng-model="search" id="uniquefilter">
         </div>
         <div class="col-sm-2"></div>
     </div>
@@ -31,7 +31,7 @@
     <div class="row" ng-show="!testValue.length" style="min" id="pc_notfound">
         <div class="row">
             <div class="col-sm-3"></div>
-            <div class="col-sm-6" style="min-height: 300px; ">
+            <div class="col-sm-6" style="min-height: 300px;">
                 <div class="row">
                     <div class="col-sm-3"></div>
                     <div class="col-sm-6">
@@ -42,7 +42,7 @@
                 <br>
                 <p>Oops! Your document has not been posted yet.</p>
                 <div class="text-center">
-                    <p style="font-size: 10px;">Good news though, You can get alerted(via sms) when your ATM card is posted</p>
+                    <p style="font-size: 10px;">Good news though, You can get free alerts (Via SMS) when your ATM card is posted</p>
                     <form data-ng-submit="getAlert()" autocomplete="off">
                         <div data-ng-show="message" class="text-center text-success bg-success">
                             <strong style="padding-top: 2px; font-size: 7px;" data-ng-bind="message"></strong>
@@ -60,7 +60,7 @@
         <div class="col-sm-3"></div>
         <div class=" col-sm-9 row">
             <div class="col-sm-3"></div>
-            <div class="col-sm-6" style="min-height: 300px; ">
+            <div class="col-sm-6" style="min-height: 300px;">
                 <div class="row">
                     <div class="col-sm-4"></div>
                     <div class="col-sm-4">
@@ -71,7 +71,7 @@
                 <br>
                 <p>Oops! Your document has not been posted yet.</p>
                 <div class="text-center">
-                    <p style="font-size: 10px;">Good news though, You can get alerted(via sms) when your ATM is posted</p>
+                    <p style="font-size: 10px;">Good news though, You can get free alerts (Via SMS) when your ATM is posted</p>
                     <form data-ng-submit="getAlert()" autocomplete="off">
                         <div data-ng-show="message" class="text-center text-success bg-success">
                             <strong style="padding-top: 2px; font-size: 7px;" data-ng-bind="message"></strong>

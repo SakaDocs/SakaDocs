@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('users').controller('ClaimcertificatepaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window'
+angular.module('users').controller('ClaimcertificatepaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
 
     function($scope, $http, $location, Authentication, $stateParams, $window) {
         $scope.authentication = Authentication;

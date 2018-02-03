@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
     errorHandler = require('./errors.server.controller'),
+    sms = require('./sms.server.controller'),
     Dl = mongoose.model('Dl'),
     Alert = mongoose.model('Alert'),
     multer = require('multer'),
@@ -88,22 +89,25 @@ exports.create = function(req, res) {
                             message: errorHandler.getErrorMessage(err)
                         });
                     } else {
+                        Alert.find({ "docType": "dl" }).exec(function(err, alerts) {
+                            if (err) {
+                                console.log("Unable to find alerts for DL");
+                            } else {
+                                alerts.forEach(function(alert) {
+                                    var message = "Hi, " +  alert.details["fullNames"].toUpperCase() + " Your driving license has been posted on SakaDocs. Visit www.sakadocs.co.ke to claim it.";
+                                    if (id["fullNames"].toUpperCase() === alert.details["fullNames"].toUpperCase()) {
+                                        sms.sendMessage(alert.details["mobileNumber"], message, req, res);
+                                    }
+                                })
+                            };
+
+                        })
                         res.status(201).json({
                             success: true,
                             message: 'You have uploaded Driving license successfully!!'
                         });
                     }
                 });
-                Alert.find({ "docType": "dl" }).exec(function(err, alerts) {
-                    if (err) {
-                        console.log("Unable to find alerts for dl")
-                    } else {
-                        // alerts.forEach(alert, function (alert) {
-                        console.log(alerts);
-                        // });
-                    }
-                });
-
 
             }
         }

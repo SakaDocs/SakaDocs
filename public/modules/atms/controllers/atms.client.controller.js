@@ -19,7 +19,6 @@ angular.module('atms').controller('AtmsController', ['$scope', '$http', '$locati
             $scope.getAlert = function() {
                 $scope.atm.mobileNumber = Authentication.user.username;
                 $http.post('/atmalert', $scope.atm).success(function(response) {
-
                     // If successful we assign the response to the success message
                     $scope.message = response.message;
                     $scope.atm.fullNames = "";
