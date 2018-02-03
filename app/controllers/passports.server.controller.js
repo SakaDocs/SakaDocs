@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
     errorHandler = require('./errors.server.controller'),
+    sms = require('./sms.server.controller'),
     Passport = mongoose.model('Passport'),
     Alert = mongoose.model('Alert'),
     multer = require('multer'),
@@ -92,22 +93,25 @@ exports.create = function(req, res) {
                             message: errorHandler.getErrorMessage(err)
                         });
                     } else {
+                        Alert.find({ "docType": "passport" }).exec(function(err, alerts) {
+                            if (err) {
+                                console.log("Unable to find alerts for passport");
+                            } else {
+                                alerts.forEach(function(alert) {
+                                    var message = "Hi, " + id["fullNames"].toUpperCase() + " Your Passport number " + alert.details["passportNumber"].toUpperCase() + " has been posted on SakaDocs. Visit www.sakadocs.co.ke to claim it.";
+                                    if (id["passportNumber"].toUpperCase() === alert.details["passportNumber"].toUpperCase()) {
+                                        sms.sendMessage(alert.details["mobileNumber"], message, req, res);
+                                    }
+                                })
+                            };
+
+                        })
                         res.status(201).json({
                             success: true,
                             message: 'You have uploaded Passport successfully!!'
                         });
                     }
                 });
-                Alert.find({ "docType": "passport" }).exec(function(err, alerts) {
-                    if (err) {
-                        console.log("Unable to find alerts for passport")
-                    } else {
-                        // alerts.forEach(alert, function (alert) {
-                        console.log(alerts);
-                        // });
-                    }
-                });
-
             }
         }
     })

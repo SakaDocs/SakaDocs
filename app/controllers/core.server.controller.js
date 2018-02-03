@@ -228,7 +228,21 @@ exports.mpesac2bconfirmation = function(req, res) {
                     message: errorHandler.getErrorMessage(err)
                 });
             } else {
-                res.json(message);
+                var claimedId = id[0];
+                console.log(claimedId);
+                var message = "Payment received. Contact the Poster of your ID through " + claimedId.finderNumber + ". Give SakaDocs code " + claimedId.sakaDocsCode + " to the Poster after getting your document.";
+                // send sms to user
+                sms.sendMessage(to, message, req, res);
+                claimedId.claimed = true;
+                claimedId.claimedBy = to;
+                claimedId.save(function(err) {
+                    if (err) {
+                        return res.status(400).send(result);
+                    } else {
+                        res.json(result);
+                    }
+                })
+
             }
         });
     } else if (docType === 'J') {

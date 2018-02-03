@@ -2,7 +2,7 @@
     <div class="row" style="background-color: black;  background-attachment: fixed;">
         <div class="col-sm-2"></div>
         <div class="col-sm-8 text-center">
-            <input type="text" placeholder="Type in your name/insurance name  " ng-model="search" id="uniquefilter">
+            <input type="text" placeholder="Type in your name" ng-model="search" id="uniquefilter">
         </div>
         <div class="col-sm-2"></div>
     </div>
@@ -42,10 +42,10 @@
                 <br>
                 <p>Oops! Your document has not been posted yet.</p>
                 <div class="text-center">
-                    <p style="font-size: 10px;">Good news though, You can get alerted(via sms) when your Insurance card is posted</p>
+                    <p style="font-size: 10px;">Good news though, You can get free alerts (Via SMS) when your Insurance card is posted</p>
                     <form data-ng-submit="getAlert()" autocomplete="off">
                         <div data-ng-show="message" class="text-center text-success bg-success">
-                            <strong style="padding-top: 2px; font-size: 7px;" data-ng-bind="message"></strong>
+                            <strong style="padding-top: 2px; font-size: 10px;" data-ng-bind="message"></strong>
                         </div>
                         <input type="text" name="companyName" data-ng-model="nhif.companyName" placeholder="Enter Insurance company name" ">
                         <input type="text " name="cardNumber " data-ng-model="nhif.cardNumber " placeholder="Enter Insurance card number ">
@@ -71,10 +71,10 @@
                 <br>
                 <p>Oops! Your document has not been posted yet.</p>
                 <div class="text-center">
-                    <p style="font-size: 10px;">Good news though, You can get alerted(via sms) when your Insurance card is posted</p>
+                    <p style="font-size: 10px;">Good news though, You can get free alerts (Via SMS) when your Insurance card is posted</p>
                     <form data-ng-submit="getAlert()" autocomplete="off">
                         <div data-ng-show="message" class="text-center text-success bg-success">
-                            <strong style="padding-top: 2px; font-size: 7px; " data-ng-bind="message"></strong>
+                            <strong style="padding-top: 2px; font-size: 10px; " data-ng-bind="message"></strong>
                         </div>
                          <input type="text" name="companyName" data-ng-model="nhif.companyName" placeholder="Enter Insurance company name">
                         <br>
