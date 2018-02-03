@@ -118,9 +118,12 @@ angular.module('atms').config(['$stateProvider',
 ]);
 'use strict';
 
-angular.module('atms').controller('AtmsController', ['$scope', '$http', '$location', 'Authentication',
-    function($scope, $http, $location, Authentication) {
+angular.module('atms').controller('AtmsController', ['$scope', '$http', '$location', 'Authentication', '$window',
+    function($scope, $http, $location, Authentication, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.find = function() {
                 $http.get('/atms').success(function(res) {
@@ -134,7 +137,6 @@ angular.module('atms').controller('AtmsController', ['$scope', '$http', '$locati
             $scope.getAlert = function() {
                 $scope.atm.mobileNumber = Authentication.user.username;
                 $http.post('/atmalert', $scope.atm).success(function(response) {
-
                     // If successful we assign the response to the success message
                     $scope.message = response.message;
                     $scope.atm.fullNames = "";
@@ -150,17 +152,20 @@ angular.module('atms').controller('AtmsController', ['$scope', '$http', '$locati
 ]);
 'use strict';
 
-angular.module('atms').controller('ClaimatmController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
-    function($scope, $http, $location, Authentication, $stateParams) {
+angular.module('atms').controller('ClaimatmController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
+    function($scope, $http, $location, Authentication, $stateParams, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.claim = function() {
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get('/atm/' + $stateParams.id).success(function(res) {
-                    $scope.id = res;
-                }).error(function(res) {
-                    $scope.error = res.message;
-                });
+                        $scope.id = res;
+                    }).error(function(res) {
+                        $scope.error = res.message;
+                    });
                 }
 
             }
@@ -173,61 +178,63 @@ angular.module('atms').controller('ClaimatmController', ['$scope', '$http', '$lo
 ]);
 'use strict';
 
-angular.module('atms').controller('PostatmController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice',
-    function($scope, $timeout, $location, $interval, Authentication, Uploadfileservice) {
-       $scope.authentication = Authentication;
-       // check if user is logged in
-       if ($scope.authentication.user) {
-        $scope.file = {};
-        $scope.Submit = function() {
-            $scope.uploading = true;
-            // set the users number as finderNumber 
-            $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
-            var url = '/postatm'
-           Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
-                if (data.data.success) {
-                    $scope.alert = 'alert alert-success';
-                    $scope.message = data.data.message;
-                    $scope.file = {};
-                    $scope.uploading = false;
-                    $interval(function () {
-                        $location.path('/atms')
-                    }, 2000, 1,false);
-                    
-                } else {
-                    $scope.uploading = false;
-                    $scope.alert = 'alert alert-danger';
-                    $scope.message = data.data.message;
-                    $scope.file = {};
-                }
-            })
-        }
-        $scope.photoChanged = function(files) {
-            if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
+angular.module('atms').controller('PostatmController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice', '$window',
+    function($scope, $timeout, $location, $interval, Authentication, Uploadfileservice, $window) {
+        $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        // check if user is logged in
+        if ($scope.authentication.user) {
+            $scope.file = {};
+            $scope.Submit = function() {
                 $scope.uploading = true;
-                var file = files[0];
-                var fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
-                fileReader.onload = function(e) {
-                    $timeout(function() {
-                        $scope.thumbnail = {};
-                        $scope.thumbnail.dataUrl = e.target.result;
+                // set the users number as finderNumber 
+                $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
+                var url = '/postatm'
+                Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
+                    if (data.data.success) {
+                        $scope.alert = 'alert alert-success';
+                        $scope.message = data.data.message;
+                        $scope.file = {};
                         $scope.uploading = false;
-                        $scope.message = false;
-                    });
-                }
+                        $interval(function() {
+                            $location.path('/atms')
+                        }, 2000, 1, false);
 
-            } else {
-                $scope.thumbnail = {};
-                $scope.message = false;
+                    } else {
+                        $scope.uploading = false;
+                        $scope.alert = 'alert alert-danger';
+                        $scope.message = data.data.message;
+                        $scope.file = {};
+                    }
+                })
             }
+            $scope.photoChanged = function(files) {
+                if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
+                    $scope.uploading = true;
+                    var file = files[0];
+                    var fileReader = new FileReader();
+                    fileReader.readAsDataURL(file);
+                    fileReader.onload = function(e) {
+                        $timeout(function() {
+                            $scope.thumbnail = {};
+                            $scope.thumbnail.dataUrl = e.target.result;
+                            $scope.uploading = false;
+                            $scope.message = false;
+                        });
+                    }
+
+                } else {
+                    $scope.thumbnail = {};
+                    $scope.message = false;
+                }
+            }
+        } else {
+            $location.path('/signin');
         }
-    }else{
-    	$location.path('/signin');
-    }
     }
 ]);
-
 'use strict';
 
 angular.module('atms').directive('fileModel', [
@@ -296,20 +303,23 @@ angular.module('certificates').config(['$stateProvider',
 ]);
 'use strict';
 
-angular.module('certificates').controller('CertificatesController', ['$scope', '$http', '$location', 'Authentication',
-    function($scope, $http, $location, Authentication) {
+angular.module('certificates').controller('CertificatesController', ['$scope', '$http', '$location', 'Authentication', '$window',
+    function($scope, $http, $location, Authentication, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
-             $scope.find = function() {
-            $http.get('/certificates').success(function(res) {
-                $scope.ids = res;
-                 $scope.alert = 'alert alert-danger';
-            }).error(function(res) {
-                $scope.error = res.message;
-            });
-        }
+            $scope.find = function() {
+                $http.get('/certificates').success(function(res) {
+                    $scope.ids = res;
+                    $scope.alert = 'alert alert-danger';
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+            }
 
-        $scope.getAlert = function() {
+            $scope.getAlert = function() {
                 $scope.certificate.mobileNumber = Authentication.user.username;
                 $http.post('/certificatealert', $scope.certificate).success(function(response) {
 
@@ -321,25 +331,27 @@ angular.module('certificates').controller('CertificatesController', ['$scope', '
                     $scope.error = response.message;
                 });
             }
-        }else{
+        } else {
             $location.path('/signin');
-        }    
+        }
     }
 ]);
-
 'use strict';
 
-angular.module('nationals').controller('ClaimcertificateController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
-    function($scope, $http, $location, Authentication, $stateParams) {
+angular.module('nationals').controller('ClaimcertificateController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
+    function($scope, $http, $location, Authentication, $stateParams, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.claim = function() {
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get('/certificate/' + $stateParams.id).success(function(res) {
-                    $scope.id = res;
-                }).error(function(res) {
-                    $scope.error = res.message;
-                });
+                        $scope.id = res;
+                    }).error(function(res) {
+                        $scope.error = res.message;
+                    });
                 }
 
             }
@@ -352,61 +364,63 @@ angular.module('nationals').controller('ClaimcertificateController', ['$scope', 
 ]);
 'use strict';
 
-angular.module('certificates').controller('PostcertificateController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice',
-    function($scope, $timeout, $location, $interval, Authentication, Uploadfileservice) {
-       $scope.authentication = Authentication;
-       // check if user is logged in
-       if ($scope.authentication.user) {
-        $scope.file = {};
-        $scope.Submit = function() {
-            $scope.uploading = true;
-            // set the users number as finderNumber 
-            $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
-            var url = '/postcertificate'
-           Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
-                if (data.data.success) {
-                    $scope.alert = 'alert alert-success';
-                    $scope.message = data.data.message;
-                    $scope.file = {};
-                    $scope.uploading = false;
-                    $interval(function () {
-                        $location.path('/certificates')
-                    }, 2000, 1,false);
-                    
-                } else {
-                    $scope.uploading = false;
-                    $scope.alert = 'alert alert-danger';
-                    $scope.message = data.data.message;
-                    $scope.file = {};
-                }
-            })
-        }
-        $scope.photoChanged = function(files) {
-            if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
+angular.module('certificates').controller('PostcertificateController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice', '$window',
+    function($scope, $timeout, $location, $interval, Authentication, Uploadfileservice, $window) {
+        $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        // check if user is logged in
+        if ($scope.authentication.user) {
+            $scope.file = {};
+            $scope.Submit = function() {
                 $scope.uploading = true;
-                var file = files[0];
-                var fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
-                fileReader.onload = function(e) {
-                    $timeout(function() {
-                        $scope.thumbnail = {};
-                        $scope.thumbnail.dataUrl = e.target.result;
+                // set the users number as finderNumber 
+                $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
+                var url = '/postcertificate'
+                Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
+                    if (data.data.success) {
+                        $scope.alert = 'alert alert-success';
+                        $scope.message = data.data.message;
+                        $scope.file = {};
                         $scope.uploading = false;
-                        $scope.message = false;
-                    });
-                }
+                        $interval(function() {
+                            $location.path('/certificates')
+                        }, 2000, 1, false);
 
-            } else {
-                $scope.thumbnail = {};
-                $scope.message = false;
+                    } else {
+                        $scope.uploading = false;
+                        $scope.alert = 'alert alert-danger';
+                        $scope.message = data.data.message;
+                        $scope.file = {};
+                    }
+                })
             }
+            $scope.photoChanged = function(files) {
+                if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
+                    $scope.uploading = true;
+                    var file = files[0];
+                    var fileReader = new FileReader();
+                    fileReader.readAsDataURL(file);
+                    fileReader.onload = function(e) {
+                        $timeout(function() {
+                            $scope.thumbnail = {};
+                            $scope.thumbnail.dataUrl = e.target.result;
+                            $scope.uploading = false;
+                            $scope.message = false;
+                        });
+                    }
+
+                } else {
+                    $scope.thumbnail = {};
+                    $scope.message = false;
+                }
+            }
+        } else {
+            $location.path('/signin');
         }
-    }else{
-    	$location.path('/signin');
-    }
     }
 ]);
-
 'use strict';
 
 angular.module('certificates').directive('fileModel', [
@@ -517,14 +531,14 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 ]);
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', '$http', '$location', 'Authentication', 'Menus',
-    function($scope, $http, $location, Authentication, Menus) {
+angular.module('core').controller('HeaderController', ['$scope', '$http', '$location', 'Authentication', 'Menus', '$window',
+    function($scope, $http, $location, Authentication, Menus, $window) {
         $scope.authentication = Authentication;
         $scope.isCollapsed = false;
         $scope.menu = Menus.getMenu('topbar');
         $scope.search = function() {
-            
-        	$location.path($scope.docType);
+
+            $location.path($scope.docType);
         };
         $scope.toggleCollapsibleMenu = function() {
             $scope.isCollapsed = !$scope.isCollapsed;
@@ -534,33 +548,59 @@ angular.module('core').controller('HeaderController', ['$scope', '$http', '$loca
         $scope.$on('$stateChangeSuccess', function() {
             $scope.isCollapsed = false;
         });
+        $scope.signout = function() {
+            $http.get('/auth/signout').success(function(res) {
+                $window.sessionStorage["user"] = null;
+                $location.path('/');
+            }).error(function(res) {
+                
+            });
+        }
+
+
     }
 ]);
-
 'use strict';
 
 
-angular.module('core').controller('HomeController', ['$scope', 'Authentication',
-	function($scope, Authentication) {
-		// This provides Authentication context.
-		$scope.authentication = Authentication;
-	}
+angular.module('core').controller('HomeController', ['$scope', 'Authentication', '$http', '$location', '$window',
+    function($scope, Authentication, $http, $location, $window) {
+    	$scope.authentication = Authentication;
+    	if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        $scope.signout = function() {
+            $http.get('/auth/signout').success(function(res) {
+                $window.sessionStorage['user'] = null;
+                $location.path('/signup');
+            }).error(function(res) {});
+        }
+    }
 ]);
 'use strict';
 
-angular.module('core').controller('PricingplanController', ['$scope',
-	function($scope) {
-		// Controller Logic
-		// ...
-	}
+angular.module('core').controller('PricingplanController', ['$scope', 'Authentication', '$window',
+    function($scope) {
+        // Controller Logic
+        // ...
+        $scope.authentication = Authentication;
+
+        if ($window.sessionStorage["user"]) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage["user"]);
+        }
+    }
 ]);
 'use strict';
 
-angular.module('core').controller('TermsofuseController', ['$scope',  
-	function($scope) {
-		
- 
-	}
+angular.module('core').controller('TermsofuseController', ['$scope', 'Authentication', '$window',
+    function($scope) {
+
+        $scope.authentication = Authentication;
+
+        if ($window.sessionStorage["user"]) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage["user"]);
+        }
+    }
 ]);
 'use strict';
 
@@ -751,17 +791,23 @@ angular.module('dls').config(['$stateProvider',
 ]);
 'use strict';
 
-angular.module('dls').controller('ClaimdlController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
-    function($scope, $http, $location, Authentication, $stateParams) {
+angular.module('dls').controller('ClaimdlController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
+    function($scope, $http, $location, Authentication, $stateParams, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.claim = function() {
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get('/dl/' + $stateParams.id).success(function(res) {
-                    $scope.id = res;
-                }).error(function(res) {
-                    $scope.error = res.message;
-                });
+                        $scope.id = res;
+                    }).error(function(res) {
+                        $scope.error = res.message;
+                    });
                 }
 
             }
@@ -774,9 +820,12 @@ angular.module('dls').controller('ClaimdlController', ['$scope', '$http', '$loca
 ]);
 'use strict';
 
-angular.module('dls').controller('DlsController', ['$scope', '$http', '$location', 'Authentication',
-    function($scope, $http, $location, Authentication) {
+angular.module('dls').controller('DlsController', ['$scope', '$http', '$location', 'Authentication', '$window',
+    function($scope, $http, $location, Authentication, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.find = function() {
                 $http.get('/dls').success(function(res) {
@@ -808,61 +857,63 @@ angular.module('dls').controller('DlsController', ['$scope', '$http', '$location
 ]);
 'use strict';
 
-angular.module('dls').controller('PostdlController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice',
-    function($scope, $timeout, $location, $interval, Authentication, Uploadfileservice) {
-       $scope.authentication = Authentication;
-       // check if user is logged in
-       if ($scope.authentication.user) {
-        $scope.file = {};
-        $scope.Submit = function() {
-            $scope.uploading = true;
-            // set the users number as finderNumber 
-            $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
-            var url = '/postdl'
-           Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
-                if (data.data.success) {
-                    $scope.alert = 'alert alert-success';
-                    $scope.message = data.data.message;
-                    $scope.file = {};
-                    $scope.uploading = false;
-                    $interval(function () {
-                        $location.path('/dls')
-                    }, 2000, 1,false);
-                    
-                } else {
-                    $scope.uploading = false;
-                    $scope.alert = 'alert alert-danger';
-                    $scope.message = data.data.message;
-                    $scope.file = {};
-                }
-            })
-        }
-        $scope.photoChanged = function(files) {
-            if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
+angular.module('dls').controller('PostdlController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice', '$window',
+    function($scope, $timeout, $location, $interval, Authentication, Uploadfileservice, $window) {
+        $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        // check if user is logged in
+        if ($scope.authentication.user) {
+            $scope.file = {};
+            $scope.Submit = function() {
                 $scope.uploading = true;
-                var file = files[0];
-                var fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
-                fileReader.onload = function(e) {
-                    $timeout(function() {
-                        $scope.thumbnail = {};
-                        $scope.thumbnail.dataUrl = e.target.result;
+                // set the users number as finderNumber 
+                $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
+                var url = '/postdl'
+                Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
+                    if (data.data.success) {
+                        $scope.alert = 'alert alert-success';
+                        $scope.message = data.data.message;
+                        $scope.file = {};
                         $scope.uploading = false;
-                        $scope.message = false;
-                    });
-                }
+                        $interval(function() {
+                            $location.path('/dls')
+                        }, 2000, 1, false);
 
-            } else {
-                $scope.thumbnail = {};
-                $scope.message = false;
+                    } else {
+                        $scope.uploading = false;
+                        $scope.alert = 'alert alert-danger';
+                        $scope.message = data.data.message;
+                        $scope.file = {};
+                    }
+                })
             }
+            $scope.photoChanged = function(files) {
+                if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
+                    $scope.uploading = true;
+                    var file = files[0];
+                    var fileReader = new FileReader();
+                    fileReader.readAsDataURL(file);
+                    fileReader.onload = function(e) {
+                        $timeout(function() {
+                            $scope.thumbnail = {};
+                            $scope.thumbnail.dataUrl = e.target.result;
+                            $scope.uploading = false;
+                            $scope.message = false;
+                        });
+                    }
+
+                } else {
+                    $scope.thumbnail = {};
+                    $scope.message = false;
+                }
+            }
+        } else {
+            $location.path('/signin');
         }
-    }else{
-    	$location.path('/signin');
-    }
     }
 ]);
-
 'use strict';
 
 angular.module('dls').directive('fileModel', [
@@ -930,19 +981,19 @@ angular.module('nationals').config(['$stateProvider',
 ]);
 'use strict';
 
-angular.module('nationals').controller('ClaimController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
-    function($scope, $http, $location, Authentication, $stateParams) {
+angular.module('nationals').controller('ClaimController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
+    function($scope, $http, $location, Authentication, $stateParams, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.claim = function() {
-
                 $http.get('/nationalid/' + $stateParams.id).success(function(res) {
                     $scope.id = res;
                 }).error(function(res) {
                     $scope.error = res.message;
                 });
-
-
             }
 
         } else {
@@ -953,12 +1004,15 @@ angular.module('nationals').controller('ClaimController', ['$scope', '$http', '$
 ]);
 'use strict';
 
-angular.module('nationals').controller('NationalsController', ['$scope', '$http', '$location', 'Authentication',
-    function($scope, $http, $location, Authentication) {
+angular.module('nationals').controller('NationalsController', ['$scope', '$http', '$location', 'Authentication', '$window',
+    function($scope, $http, $location, Authentication, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.find = function() {
-                
+
                 $http.get('/nationalids').success(function(res) {
                     $scope.ids = res;
                     $scope.alert = 'alert alert-danger';
@@ -988,61 +1042,63 @@ angular.module('nationals').controller('NationalsController', ['$scope', '$http'
 ]);
 'use strict';
 
-angular.module('nationals').controller('PostController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice',
-    function($scope, $timeout, $location, $interval, Authentication, Uploadfileservice) {
-       $scope.authentication = Authentication;
-       // check if user is logged in
-       if ($scope.authentication.user) {
-        $scope.file = {};
-        $scope.Submit = function() {
-            $scope.uploading = true;
-            // set the users number as finderNumber 
-            $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
-            var url = '/postnationalid';
-            Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
-                if (data.data.success) {
-                    $scope.alert = 'alert alert-success';
-                    $scope.message = data.data.message;
-                    $scope.file = {};
-                    $scope.uploading = false;
-                    $interval(function () {
-                        $location.path('/nationals')
-                    }, 2000, 1,false);
-                    
-                } else {
-                    $scope.uploading = false;
-                    $scope.alert = 'alert alert-danger';
-                    $scope.message = data.data.message;
-                    $scope.file = {};
-                }
-            })
-        }
-        $scope.photoChanged = function(files) {
-            if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
+angular.module('nationals').controller('PostController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice', '$window',
+    function($scope, $timeout, $location, $interval, Authentication, Uploadfileservice, $window) {
+        $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        // check if user is logged in
+        if ($scope.authentication.user) {
+            $scope.file = {};
+            $scope.Submit = function() {
                 $scope.uploading = true;
-                var file = files[0];
-                var fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
-                fileReader.onload = function(e) {
-                    $timeout(function() {
-                        $scope.thumbnail = {};
-                        $scope.thumbnail.dataUrl = e.target.result;
+                // set the users number as finderNumber 
+                $scope.id.finderNumber = $scope.authentication.user.username;
+                var url = '/postnationalid';
+                Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
+                    if (data.data.success) {
+                        $scope.alert = 'alert alert-success';
+                        $scope.message = data.data.message;
+                        $scope.file = {};
                         $scope.uploading = false;
-                        $scope.message = false;
-                    });
-                }
+                        $interval(function() {
+                            $location.path('/nationals')
+                        }, 2000, 1, false);
 
-            } else {
-                $scope.thumbnail = {};
-                $scope.message = false;
+                    } else {
+                        $scope.uploading = false;
+                        $scope.alert = 'alert alert-danger';
+                        $scope.message = data.data.message;
+                        $scope.file = {};
+                    }
+                })
             }
+            $scope.photoChanged = function(files) {
+                if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
+                    $scope.uploading = true;
+                    var file = files[0];
+                    var fileReader = new FileReader();
+                    fileReader.readAsDataURL(file);
+                    fileReader.onload = function(e) {
+                        $timeout(function() {
+                            $scope.thumbnail = {};
+                            $scope.thumbnail.dataUrl = e.target.result;
+                            $scope.uploading = false;
+                            $scope.message = false;
+                        });
+                    }
+
+                } else {
+                    $scope.thumbnail = {};
+                    $scope.message = false;
+                }
+            }
+        } else {
+            $location.path('/signin');
         }
-    }else{
-    	$location.path('/signin');
-    }
     }
 ]);
-
 'use strict';
 
 angular.module('nationals').directive('fileModel', ['$parse',
@@ -1111,17 +1167,20 @@ angular.module('nhifs').config(['$stateProvider',
 ]);
 'use strict';
 
-angular.module('nhifs').controller('ClaimnhifController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
-    function($scope, $http, $location, Authentication, $stateParams) {
+angular.module('nhifs').controller('ClaimnhifController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
+    function($scope, $http, $location, Authentication, $stateParams, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.claim = function() {
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get('/nhifcard/' + $stateParams.id).success(function(res) {
-                    $scope.id = res;
-                }).error(function(res) {
-                    $scope.error = res.message;
-                });
+                        $scope.id = res;
+                    }).error(function(res) {
+                        $scope.error = res.message;
+                    });
                 }
 
             }
@@ -1134,9 +1193,12 @@ angular.module('nhifs').controller('ClaimnhifController', ['$scope', '$http', '$
 ]);
 'use strict';
 
-angular.module('nhifs').controller('NhifsController', ['$scope', '$http', '$location', 'Authentication',
-    function($scope, $http, $location, Authentication) {
+angular.module('nhifs').controller('NhifsController', ['$scope', '$http', '$location', 'Authentication', '$window',
+    function($scope, $http, $location, Authentication, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.find = function() {
                 $http.get('/nhifs').success(function(res) {
@@ -1169,61 +1231,66 @@ angular.module('nhifs').controller('NhifsController', ['$scope', '$http', '$loca
 ]);
 'use strict';
 
-angular.module('nhifs').controller('PostnhifController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice',
-    function($scope, $timeout, $location, $interval, Authentication, Uploadfileservice) {
-       $scope.authentication = Authentication;
-       // check if user is logged in
-       if ($scope.authentication.user) {
-        $scope.file = {};
-        $scope.Submit = function() {
-            $scope.uploading = true;
-            // set the users number as finderNumber 
-            $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
-            var url = '/postnhifcard'
-           Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
-                if (data.data.success) {
-                    $scope.alert = 'alert alert-success';
-                    $scope.message = data.data.message;
-                    $scope.file = {};
-                    $scope.uploading = false;
-                    $interval(function () {
-                        $location.path('/nhifs')
-                    }, 2000, 1,false);
-                    
-                } else {
-                    $scope.uploading = false;
-                    $scope.alert = 'alert alert-danger';
-                    $scope.message = data.data.message;
-                    $scope.file = {};
-                }
-            })
-        }
-        $scope.photoChanged = function(files) {
-            if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
+angular.module('nhifs').controller('PostnhifController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice', '$window',
+    function($scope, $timeout, $location, $interval, Authentication, Uploadfileservice, $window) {
+        $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        // check if user is logged in
+        if ($scope.authentication.user) {
+            $scope.file = {};
+            $scope.Submit = function() {
                 $scope.uploading = true;
-                var file = files[0];
-                var fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
-                fileReader.onload = function(e) {
-                    $timeout(function() {
-                        $scope.thumbnail = {};
-                        $scope.thumbnail.dataUrl = e.target.result;
+                // set the users number as finderNumber 
+                $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
+                var url = '/postnhifcard'
+                Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
+                    if (data.data.success) {
+                        $scope.alert = 'alert alert-success';
+                        $scope.message = data.data.message;
+                        $scope.file = {};
                         $scope.uploading = false;
-                        $scope.message = false;
-                    });
-                }
+                        $interval(function() {
+                            $location.path('/nhifs')
+                        }, 2000, 1, false);
 
-            } else {
-                $scope.thumbnail = {};
-                $scope.message = false;
+                    } else {
+                        $scope.uploading = false;
+                        $scope.alert = 'alert alert-danger';
+                        $scope.message = data.data.message;
+                        $scope.file = {};
+                    }
+                })
             }
+            $scope.photoChanged = function(files) {
+                if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
+                    $scope.uploading = true;
+                    var file = files[0];
+                    var fileReader = new FileReader();
+                    fileReader.readAsDataURL(file);
+                    fileReader.onload = function(e) {
+                        $timeout(function() {
+                            $scope.thumbnail = {};
+                            $scope.thumbnail.dataUrl = e.target.result;
+                            $scope.uploading = false;
+                            $scope.message = false;
+                        });
+                    }
+
+                } else {
+                    $scope.thumbnail = {};
+                    $scope.message = false;
+                }
+            }
+        } else {
+            $location.path('/signin');
         }
-    }else{
-    	$location.path('/signin');
-    }
     }
 ]);
-
 'use strict';
 
 angular.module('nhifs').directive('fileModel', [
@@ -1292,17 +1359,20 @@ angular.module('passports').config(['$stateProvider',
 ]);
 'use strict';
 
-angular.module('passports').controller('ClaimpassportController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
-    function($scope, $http, $location, Authentication, $stateParams) {
+angular.module('passports').controller('ClaimpassportController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
+    function($scope, $http, $location, Authentication, $stateParams, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.claim = function() {
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get('/passport/' + $stateParams.id).success(function(res) {
-                    $scope.id = res;
-                }).error(function(res) {
-                    $scope.error = res.message;
-                });
+                        $scope.id = res;
+                    }).error(function(res) {
+                        $scope.error = res.message;
+                    });
                 }
 
             }
@@ -1315,9 +1385,12 @@ angular.module('passports').controller('ClaimpassportController', ['$scope', '$h
 ]);
 'use strict';
 
-angular.module('passports').controller('PassportsController', ['$scope', '$http', '$location', 'Authentication',
-    function($scope, $http, $location, Authentication) {
+angular.module('passports').controller('PassportsController', ['$scope', '$http', '$location', 'Authentication', '$window',
+    function($scope, $http, $location, Authentication, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.find = function() {
                 $http.get('/passports').success(function(res) {
@@ -1349,61 +1422,63 @@ angular.module('passports').controller('PassportsController', ['$scope', '$http'
 ]);
 'use strict';
 
-angular.module('passports').controller('PostpassportController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice',
-    function($scope, $timeout, $location, $interval, Authentication, Uploadfileservice) {
-       $scope.authentication = Authentication;
-       // check if user is logged in
-       if ($scope.authentication.user) {
-        $scope.file = {};
-        $scope.Submit = function() {
-            $scope.uploading = true;
-            // set the users number as finderNumber 
-            $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
-            var url = '/postpassport'
-           Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
-                if (data.data.success) {
-                    $scope.alert = 'alert alert-success';
-                    $scope.message = data.data.message;
-                    $scope.file = {};
-                    $scope.uploading = false;
-                    $interval(function () {
-                        $location.path('/passports')
-                    }, 2000, 1,false);
-                    
-                } else {
-                    $scope.uploading = false;
-                    $scope.alert = 'alert alert-danger';
-                    $scope.message = data.data.message;
-                    $scope.file = {};
-                }
-            })
-        }
-        $scope.photoChanged = function(files) {
-            if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
+angular.module('passports').controller('PostpassportController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice', '$window',
+    function($scope, $timeout, $location, $interval, Authentication, Uploadfileservice, $window) {
+        $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        // check if user is logged in
+        if ($scope.authentication.user) {
+            $scope.file = {};
+            $scope.Submit = function() {
                 $scope.uploading = true;
-                var file = files[0];
-                var fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
-                fileReader.onload = function(e) {
-                    $timeout(function() {
-                        $scope.thumbnail = {};
-                        $scope.thumbnail.dataUrl = e.target.result;
+                // set the users number as finderNumber 
+                $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
+                var url = '/postpassport'
+                Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
+                    if (data.data.success) {
+                        $scope.alert = 'alert alert-success';
+                        $scope.message = data.data.message;
+                        $scope.file = {};
                         $scope.uploading = false;
-                        $scope.message = false;
-                    });
-                }
+                        $interval(function() {
+                            $location.path('/passports')
+                        }, 2000, 1, false);
 
-            } else {
-                $scope.thumbnail = {};
-                $scope.message = false;
+                    } else {
+                        $scope.uploading = false;
+                        $scope.alert = 'alert alert-danger';
+                        $scope.message = data.data.message;
+                        $scope.file = {};
+                    }
+                })
             }
+            $scope.photoChanged = function(files) {
+                if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
+                    $scope.uploading = true;
+                    var file = files[0];
+                    var fileReader = new FileReader();
+                    fileReader.readAsDataURL(file);
+                    fileReader.onload = function(e) {
+                        $timeout(function() {
+                            $scope.thumbnail = {};
+                            $scope.thumbnail.dataUrl = e.target.result;
+                            $scope.uploading = false;
+                            $scope.message = false;
+                        });
+                    }
+
+                } else {
+                    $scope.thumbnail = {};
+                    $scope.message = false;
+                }
+            }
+        } else {
+            $location.path('/signin');
         }
-    }else{
-    	$location.path('/signin');
-    }
     }
 ]);
-
 'use strict';
 
 angular.module('passports').directive('fileModel', [
@@ -1469,17 +1544,20 @@ angular.module('staffs').config(['$stateProvider',
 ]);
 'use strict';
 
-angular.module('staffs').controller('ClaimstaffidController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
-    function($scope, $http, $location, Authentication, $stateParams) {
+angular.module('staffs').controller('ClaimstaffidController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
+    function($scope, $http, $location, Authentication, $stateParams, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.claim = function() {
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get('/staffid/' + $stateParams.id).success(function(res) {
-                    $scope.id = res;
-                }).error(function(res) {
-                    $scope.error = res.message;
-                });
+                        $scope.id = res;
+                    }).error(function(res) {
+                        $scope.error = res.message;
+                    });
                 }
 
             }
@@ -1492,66 +1570,71 @@ angular.module('staffs').controller('ClaimstaffidController', ['$scope', '$http'
 ]);
 'use strict';
 
-angular.module('staffs').controller('PoststaffidController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice',
-    function($scope, $timeout, $location, $interval, Authentication, Uploadfileservice) {
-       $scope.authentication = Authentication;
-       // check if user is logged in
-       if ($scope.authentication.user) {
-        $scope.file = {};
-        $scope.Submit = function() {
-            $scope.uploading = true;
-            // set the users number as finderNumber 
-            $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
-            var url = '/poststaffid'
-           Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
-                if (data.data.success) {
-                    $scope.alert = 'alert alert-success';
-                    $scope.message = data.data.message;
-                    $scope.file = {};
-                    $scope.uploading = false;
-                    $interval(function () {
-                        $location.path('/staffids')
-                    }, 2000, 1,false);
-                    
-                } else {
-                    $scope.uploading = false;
-                    $scope.alert = 'alert alert-danger';
-                    $scope.message = data.data.message;
-                    $scope.file = {};
-                }
-            })
-        }
-        $scope.photoChanged = function(files) {
-            if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
+angular.module('staffs').controller('PoststaffidController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice', '$window',
+    function($scope, $timeout, $location, $interval, Authentication, Uploadfileservice, $window) {
+        $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        // check if user is logged in
+        if ($scope.authentication.user) {
+            $scope.file = {};
+            $scope.Submit = function() {
                 $scope.uploading = true;
-                var file = files[0];
-                var fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
-                fileReader.onload = function(e) {
-                    $timeout(function() {
-                        $scope.thumbnail = {};
-                        $scope.thumbnail.dataUrl = e.target.result;
+                // set the users number as finderNumber 
+                $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
+                var url = '/poststaffid'
+                Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
+                    if (data.data.success) {
+                        $scope.alert = 'alert alert-success';
+                        $scope.message = data.data.message;
+                        $scope.file = {};
                         $scope.uploading = false;
-                        $scope.message = false;
-                    });
-                }
+                        $interval(function() {
+                            $location.path('/staffids')
+                        }, 2000, 1, false);
 
-            } else {
-                $scope.thumbnail = {};
-                $scope.message = false;
+                    } else {
+                        $scope.uploading = false;
+                        $scope.alert = 'alert alert-danger';
+                        $scope.message = data.data.message;
+                        $scope.file = {};
+                    }
+                })
             }
+            $scope.photoChanged = function(files) {
+                if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
+                    $scope.uploading = true;
+                    var file = files[0];
+                    var fileReader = new FileReader();
+                    fileReader.readAsDataURL(file);
+                    fileReader.onload = function(e) {
+                        $timeout(function() {
+                            $scope.thumbnail = {};
+                            $scope.thumbnail.dataUrl = e.target.result;
+                            $scope.uploading = false;
+                            $scope.message = false;
+                        });
+                    }
+
+                } else {
+                    $scope.thumbnail = {};
+                    $scope.message = false;
+                }
+            }
+        } else {
+            $location.path('/signin');
         }
-    }else{
-    	$location.path('/signin');
-    }
     }
 ]);
-
 'use strict';
 
-angular.module('staffs').controller('StaffidsController', ['$scope', '$http', '$location', 'Authentication',
-    function($scope, $http, $location, Authentication) {
+angular.module('staffs').controller('StaffidsController', ['$scope', '$http', '$location', 'Authentication', '$window',
+    function($scope, $http, $location, Authentication, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.find = function() {
                 $http.get('/staffids').success(function(res) {
@@ -1650,17 +1733,20 @@ angular.module('students').config(['$stateProvider',
 ]);
 'use strict';
 
-angular.module('students').controller('ClaimstudentidController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
-    function($scope, $http, $location, Authentication, $stateParams) {
+angular.module('students').controller('ClaimstudentidController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
+    function($scope, $http, $location, Authentication, $stateParams, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.claim = function() {
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get('/studentid/' + $stateParams.id).success(function(res) {
-                    $scope.id = res;
-                }).error(function(res) {
-                    $scope.error = res.message;
-                });
+                        $scope.id = res;
+                    }).error(function(res) {
+                        $scope.error = res.message;
+                    });
                 }
 
             }
@@ -1673,66 +1759,71 @@ angular.module('students').controller('ClaimstudentidController', ['$scope', '$h
 ]);
 'use strict';
 
-angular.module('students').controller('PoststudentidController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice',
-    function($scope, $timeout, $location, $interval, Authentication, Uploadstudentidservice) {
-       $scope.authentication = Authentication;
-       // check if user is logged in
-       if ($scope.authentication.user) {
-        $scope.file = {};
-        $scope.Submit = function() {
-            $scope.uploading = true;
-            // set the users number as finderNumber 
-            $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
-            var url = '/poststudentid'
-           Uploadstudentidservice.upload($scope.file, $scope.id, url).then(function(data) {
-                if (data.data.success) {
-                    $scope.alert = 'alert alert-success';
-                    $scope.message = data.data.message;
-                    $scope.file = {};
-                    $scope.uploading = false;
-                    $interval(function () {
-                        $location.path('/studentids')
-                    }, 2000, 1,false);
-                    
-                } else {
-                    $scope.uploading = false;
-                    $scope.alert = 'alert alert-danger';
-                    $scope.message = data.data.message;
-                    $scope.file = {};
-                }
-            })
-        }
-        $scope.photoChanged = function(files) {
-            if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
+angular.module('students').controller('PoststudentidController', ['$scope', '$timeout', '$location', '$interval', 'Authentication', 'Uploadfileservice', '$window',
+    function($scope, $timeout, $location, $interval, Authentication, Uploadstudentidservice, $window) {
+        $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        // check if user is logged in
+        if ($scope.authentication.user) {
+            $scope.file = {};
+            $scope.Submit = function() {
                 $scope.uploading = true;
-                var file = files[0];
-                var fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
-                fileReader.onload = function(e) {
-                    $timeout(function() {
-                        $scope.thumbnail = {};
-                        $scope.thumbnail.dataUrl = e.target.result;
+                // set the users number as finderNumber 
+                $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
+                var url = '/poststudentid'
+                Uploadstudentidservice.upload($scope.file, $scope.id, url).then(function(data) {
+                    if (data.data.success) {
+                        $scope.alert = 'alert alert-success';
+                        $scope.message = data.data.message;
+                        $scope.file = {};
                         $scope.uploading = false;
-                        $scope.message = false;
-                    });
-                }
+                        $interval(function() {
+                            $location.path('/studentids')
+                        }, 2000, 1, false);
 
-            } else {
-                $scope.thumbnail = {};
-                $scope.message = false;
+                    } else {
+                        $scope.uploading = false;
+                        $scope.alert = 'alert alert-danger';
+                        $scope.message = data.data.message;
+                        $scope.file = {};
+                    }
+                })
             }
+            $scope.photoChanged = function(files) {
+                if (files.length > 0 && files[0].name.match(/\.(png|jpg|jpeg)$/)) {
+                    $scope.uploading = true;
+                    var file = files[0];
+                    var fileReader = new FileReader();
+                    fileReader.readAsDataURL(file);
+                    fileReader.onload = function(e) {
+                        $timeout(function() {
+                            $scope.thumbnail = {};
+                            $scope.thumbnail.dataUrl = e.target.result;
+                            $scope.uploading = false;
+                            $scope.message = false;
+                        });
+                    }
+
+                } else {
+                    $scope.thumbnail = {};
+                    $scope.message = false;
+                }
+            }
+        } else {
+            $location.path('/signin');
         }
-    }else{
-    	$location.path('/signin');
-    }
     }
 ]);
-
 'use strict';
 
-angular.module('students').controller('StudentidsController', ['$scope', '$http', '$location', 'Authentication',
-    function($scope, $http, $location, Authentication) {
+angular.module('students').controller('StudentidsController', ['$scope', '$http', '$location', 'Authentication', '$window',
+    function($scope, $http, $location, Authentication, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.find = function() {
                 $http.get('/studentids').success(function(res) {
@@ -1946,31 +2037,38 @@ angular.module('users').config(['$stateProvider',
 ]);
 'use strict';
 
-angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$location', 'Authentication',
-    function($scope, $http, $location, Authentication) {
+angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$location', 'Authentication', '$window',
+    function($scope, $http, $location, Authentication, $window ) {
         $scope.authentication = Authentication;
-
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         // If user is signed in then redirect back home
         if ($scope.authentication.user) $location.path('/');
+
+
         $scope.signup = function() {
 
-                $http.post('/auth/signup', $scope.credentials).success(function(response) {
-                    // If successful we assign the response to the global user model
-                    $scope.authentication.user = response;
+            $http.post('/auth/signup', $scope.credentials).success(function(response) {
+                // If successful we assign the response to the global user model
+                $scope.authentication.user = response;
+                // we also save response to sessionStorage
+                $window.sessionStorage["user"] = JSON.stringify(response);
+                // And redirect to the index page
+                $location.path('/');
+            }).error(function(response) {
+                $scope.error = response.message;
+            });
 
-                    // And redirect to the index page
-                    $location.path('/');
-                }).error(function(response) {
-                    $scope.error = response.message;
-                });
-           
         };
 
         $scope.signin = function() {
             $http.post('/auth/signin', $scope.credentials).success(function(response) {
-               
+
                 // If successful we assign the response to the global user model
                 $scope.authentication.user = response;
+                // we also save response to sessionStorage
+                $window.sessionStorage["user"] = JSON.stringify(response);
 
                 // And redirect to the index page
                 $location.path('/');
@@ -1982,18 +2080,21 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 ]);
 'use strict';
 
-angular.module('users').controller('ClaimatmpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
-    function($scope, $http, $location, Authentication, $stateParams) {
+angular.module('users').controller('ClaimatmpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
+    function($scope, $http, $location, Authentication, $stateParams, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.claim = function() {
-            	var url = '/atm/';
+                var url = '/atm/';
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get(url + $stateParams.id).success(function(res) {
-                    $scope.id = res;
-                }).error(function(res) {
-                    $scope.error = res.message;
-                });
+                        $scope.id = res;
+                    }).error(function(res) {
+                        $scope.error = res.message;
+                    });
                 }
 
             }
@@ -2006,18 +2107,22 @@ angular.module('users').controller('ClaimatmpaymentController', ['$scope', '$htt
 ]);
 'use strict';
 
-angular.module('users').controller('ClaimcertificatepaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
-    function($scope, $http, $location, Authentication, $stateParams) {
+angular.module('users').controller('ClaimcertificatepaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
+
+    function($scope, $http, $location, Authentication, $stateParams, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.claim = function() {
-            	var url = '/certificate/';
+                var url = '/certificate/';
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get(url + $stateParams.id).success(function(res) {
-                    $scope.id = res;
-                }).error(function(res) {
-                    $scope.error = res.message;
-                });
+                        $scope.id = res;
+                    }).error(function(res) {
+                        $scope.error = res.message;
+                    });
                 }
 
             }
@@ -2030,18 +2135,21 @@ angular.module('users').controller('ClaimcertificatepaymentController', ['$scope
 ]);
 'use strict';
 
-angular.module('users').controller('ClaimdlpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
-    function($scope, $http, $location, Authentication, $stateParams) {
+angular.module('users').controller('ClaimdlpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
+    function($scope, $http, $location, Authentication, $stateParams, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.claim = function() {
-            	var url = '/dl/';
+                var url = '/dl/';
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get(url + $stateParams.id).success(function(res) {
-                    $scope.id = res;
-                }).error(function(res) {
-                    $scope.error = res.message;
-                });
+                        $scope.id = res;
+                    }).error(function(res) {
+                        $scope.error = res.message;
+                    });
                 }
 
             }
@@ -2054,18 +2162,21 @@ angular.module('users').controller('ClaimdlpaymentController', ['$scope', '$http
 ]);
 'use strict';
 
-angular.module('users').controller('ClaimnhifpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
-    function($scope, $http, $location, Authentication, $stateParams) {
+angular.module('users').controller('ClaimnhifpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
+    function($scope, $http, $location, Authentication, $stateParams, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.claim = function() {
-            	var url = '/nhifcard/';
+                var url = '/nhifcard/';
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get(url + $stateParams.id).success(function(res) {
-                    $scope.id = res;
-                }).error(function(res) {
-                    $scope.error = res.message;
-                });
+                        $scope.id = res;
+                    }).error(function(res) {
+                        $scope.error = res.message;
+                    });
                 }
 
             }
@@ -2078,18 +2189,21 @@ angular.module('users').controller('ClaimnhifpaymentController', ['$scope', '$ht
 ]);
 'use strict';
 
-angular.module('users').controller('ClaimpassportpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
-    function($scope, $http, $location, Authentication, $stateParams) {
+angular.module('users').controller('ClaimpassportpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
+    function($scope, $http, $location, Authentication, $stateParams, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.claim = function() {
-            	var url = '/passport/';
+                var url = '/passport/';
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get(url + $stateParams.id).success(function(res) {
-                    $scope.id = res;
-                }).error(function(res) {
-                    $scope.error = res.message;
-                });
+                        $scope.id = res;
+                    }).error(function(res) {
+                        $scope.error = res.message;
+                    });
                 }
 
             }
@@ -2102,18 +2216,21 @@ angular.module('users').controller('ClaimpassportpaymentController', ['$scope', 
 ]);
 'use strict';
 
-angular.module('users').controller('ClaimpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
-    function($scope, $http, $location, Authentication, $stateParams) {
+angular.module('users').controller('ClaimpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
+    function($scope, $http, $location, Authentication, $stateParams, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.claim = function() {
-            	var url =  '/nationalid/';
+                var url = '/nationalid/';
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get(url + $stateParams.id).success(function(res) {
-                    $scope.id = res;
-                }).error(function(res) {
-                    $scope.error = res.message;
-                });
+                        $scope.id = res;
+                    }).error(function(res) {
+                        $scope.error = res.message;
+                    });
                 }
 
             }
@@ -2126,18 +2243,21 @@ angular.module('users').controller('ClaimpaymentController', ['$scope', '$http',
 ]);
 'use strict';
 
-angular.module('users').controller('ClaimstaffidpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
-    function($scope, $http, $location, Authentication, $stateParams) {
+angular.module('users').controller('ClaimstaffidpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
+    function($scope, $http, $location, Authentication, $stateParams, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.claim = function() {
-            	var url = '/staffid/';
+                var url = '/staffid/';
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get(url + $stateParams.id).success(function(res) {
-                    $scope.id = res;
-                }).error(function(res) {
-                    $scope.error = res.message;
-                });
+                        $scope.id = res;
+                    }).error(function(res) {
+                        $scope.error = res.message;
+                    });
                 }
 
             }
@@ -2150,18 +2270,21 @@ angular.module('users').controller('ClaimstaffidpaymentController', ['$scope', '
 ]);
 'use strict';
 
-angular.module('users').controller('ClaimstudentidpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams',
-    function($scope, $http, $location, Authentication, $stateParams) {
+angular.module('users').controller('ClaimstudentidpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
+    function($scope, $http, $location, Authentication, $stateParams, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication.user) {
             $scope.claim = function() {
-            	var url = '/studentid/';
+                var url = '/studentid/';
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get(url + $stateParams.id).success(function(res) {
-                    $scope.id = res;
-                }).error(function(res) {
-                    $scope.error = res.message;
-                });
+                        $scope.id = res;
+                    }).error(function(res) {
+                        $scope.error = res.message;
+                    });
                 }
 
             }
@@ -2174,9 +2297,13 @@ angular.module('users').controller('ClaimstudentidpaymentController', ['$scope',
 ]);
 'use strict';
 
-angular.module('users').controller('MyatmsController', ['$scope', '$http', '$location', 'Authentication',
-    function($scope, $http, $location, Authentication) {
+angular.module('users').controller('MyatmsController', ['$scope', '$http', '$location', 'Authentication', '$window',
+
+    function($scope, $http, $location, Authentication, $window) {
         $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
         if ($scope.authentication) {
             $scope.find = function() {
                 $http.get('/atms/' + $scope.authentication.user.phoneNumber).success(function(res) {
@@ -2186,8 +2313,8 @@ angular.module('users').controller('MyatmsController', ['$scope', '$http', '$loc
                     $scope.error = res.message;
                 });
             }
-        }else{
-        	$location.path('/signin');
+        } else {
+            $location.path('/signin');
         }
 
 
@@ -2195,10 +2322,13 @@ angular.module('users').controller('MyatmsController', ['$scope', '$http', '$loc
 ]);
 'use strict';
 
-angular.module('users').controller('MycertificatesController', ['$scope', '$http', '$location', 'Authentication',
-    function($scope, $http, $location, Authentication) {
+angular.module('users').controller('MycertificatesController', ['$scope', '$http', '$location', 'Authentication', '$window',
+    function($scope, $http, $location, Authentication, $window) {
         $scope.authentication = Authentication;
-        if ($scope.authentication) {
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        if ($scope.authentication.user) {
             $scope.find = function() {
                 $http.get('/certificates/' + $scope.authentication.user.phoneNumber).success(function(res) {
                     $scope.ids = res;
@@ -2207,8 +2337,8 @@ angular.module('users').controller('MycertificatesController', ['$scope', '$http
                     $scope.error = res.message;
                 });
             }
-        }else{
-        	$location.path('/signin');
+        } else {
+            $location.path('/signin');
         }
 
 
@@ -2216,10 +2346,13 @@ angular.module('users').controller('MycertificatesController', ['$scope', '$http
 ]);
 'use strict';
 
-angular.module('users').controller('MydlsController', ['$scope', '$http', '$location', 'Authentication',
-    function($scope, $http, $location, Authentication) {
+angular.module('users').controller('MydlsController', ['$scope', '$http', '$location', 'Authentication', '$window',
+    function($scope, $http, $location, Authentication, $window) {
         $scope.authentication = Authentication;
-        if ($scope.authentication) {
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        if ($scope.authentication.user) {
             $scope.find = function() {
                 $http.get('/dls/' + $scope.authentication.user.phoneNumber).success(function(res) {
                     $scope.ids = res;
@@ -2228,8 +2361,8 @@ angular.module('users').controller('MydlsController', ['$scope', '$http', '$loca
                     $scope.error = res.message;
                 });
             }
-        }else{
-        	$location.path('/signin');
+        } else {
+            $location.path('/signin');
         }
 
 
@@ -2237,20 +2370,23 @@ angular.module('users').controller('MydlsController', ['$scope', '$http', '$loca
 ]);
 'use strict';
 
-angular.module('users').controller('MyidsController', ['$scope', '$http', '$location', 'Authentication',
-    function($scope, $http, $location, Authentication) {
+angular.module('users').controller('MyidsController', ['$scope', '$http', '$location', 'Authentication', '$window',
+    function($scope, $http, $location, Authentication, $window) {
         $scope.authentication = Authentication;
-        if ($scope.authentication) {
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        if ($scope.authentication.user) {
             $scope.find = function() {
-                $http.get('/nationalids/' + $scope.authentication.user.phoneNumber).success(function(res) {
+                $http.get('/nationalids/' + $scope.authentication.user.username).success(function(res) {
                     $scope.ids = res;
                     $scope.alert = 'alert alert-danger';
                 }).error(function(res) {
                     $scope.error = res.message;
                 });
             }
-        }else{
-        	$location.path('/signin');
+        } else {
+            $location.path('/signin');
         }
 
 
@@ -2258,10 +2394,13 @@ angular.module('users').controller('MyidsController', ['$scope', '$http', '$loca
 ]);
 'use strict';
 
-angular.module('users').controller('MynhifsController', ['$scope', '$http', '$location', 'Authentication',
-    function($scope, $http, $location, Authentication) {
+angular.module('users').controller('MynhifsController', ['$scope', '$http', '$location', 'Authentication', '$window',
+    function($scope, $http, $location, Authentication, $window) {
         $scope.authentication = Authentication;
-        if ($scope.authentication) {
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        if ($scope.authentication.user) {
             $scope.find = function() {
                 $http.get('/nhifcards/' + $scope.authentication.user.phoneNumber).success(function(res) {
                     $scope.ids = res;
@@ -2270,21 +2409,22 @@ angular.module('users').controller('MynhifsController', ['$scope', '$http', '$lo
                     $scope.error = res.message;
                 });
             }
-        }else{
-        	$location.path('/signin');
+        } else {
+            $location.path('/signin');
         }
 
 
     }
 ]);
-
-
 'use strict';
 
-angular.module('users').controller('MypassportsController', ['$scope', '$http', '$location', 'Authentication',
-    function($scope, $http, $location, Authentication) {
+angular.module('users').controller('MypassportsController', ['$scope', '$http', '$location', 'Authentication', '$window',
+    function($scope, $http, $location, Authentication, $window) {
         $scope.authentication = Authentication;
-        if ($scope.authentication) {
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        if ($scope.authentication.user) {
             $scope.find = function() {
                 $http.get('/passports/' + $scope.authentication.user.phoneNumber).success(function(res) {
                     $scope.ids = res;
@@ -2293,21 +2433,22 @@ angular.module('users').controller('MypassportsController', ['$scope', '$http', 
                     $scope.error = res.message;
                 });
             }
-        }else{
-        	$location.path('/signin');
+        } else {
+            $location.path('/signin');
         }
 
 
     }
 ]);
-
-
 'use strict';
 
-angular.module('users').controller('MystaffidsController', ['$scope', '$http', '$location', 'Authentication',
-    function($scope, $http, $location, Authentication) {
+angular.module('users').controller('MystaffidsController', ['$scope', '$http', '$location', 'Authentication', '$window',
+    function($scope, $http, $location, Authentication, $window) {
         $scope.authentication = Authentication;
-        if ($scope.authentication) {
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        if ($scope.authentication.user) {
             $scope.find = function() {
                 $http.get('/staffids/' + $scope.authentication.user.phoneNumber).success(function(res) {
                     $scope.ids = res;
@@ -2316,8 +2457,8 @@ angular.module('users').controller('MystaffidsController', ['$scope', '$http', '
                     $scope.error = res.message;
                 });
             }
-        }else{
-        	$location.path('/signin');
+        } else {
+            $location.path('/signin');
         }
 
 
@@ -2325,10 +2466,13 @@ angular.module('users').controller('MystaffidsController', ['$scope', '$http', '
 ]);
 'use strict';
 
-angular.module('users').controller('MystudentidsController', ['$scope', '$http', '$location', 'Authentication',
-    function($scope, $http, $location, Authentication) {
+angular.module('users').controller('MystudentidsController', ['$scope', '$http', '$location', 'Authentication', '$window',
+    function($scope, $http, $location, Authentication, $window) {
         $scope.authentication = Authentication;
-        if ($scope.authentication) {
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        if ($scope.authentication.user) {
             $scope.find = function() {
                 $http.get('/studentids/' + $scope.authentication.user.phoneNumber).success(function(res) {
                     $scope.ids = res;
@@ -2337,8 +2481,8 @@ angular.module('users').controller('MystudentidsController', ['$scope', '$http',
                     $scope.error = res.message;
                 });
             }
-        }else{
-        	$location.path('/signin');
+        } else {
+            $location.path('/signin');
         }
 
 
@@ -2346,118 +2490,122 @@ angular.module('users').controller('MystudentidsController', ['$scope', '$http',
 ]);
 'use strict';
 
-angular.module('users').controller('PasswordController', ['$scope', '$stateParams', '$http', '$location', 'Authentication',
-	function($scope, $stateParams, $http, $location, Authentication) {
-		$scope.authentication = Authentication;
+angular.module('users').controller('PasswordController', ['$scope', '$stateParams', '$http', '$location', 'Authentication', '$window',
+    function($scope, $stateParams, $http, $location, Authentication, $window) {
+        $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        //If user is signed in then redirect back home
+        if ($scope.authentication.user) $location.path('/');
 
-		//If user is signed in then redirect back home
-		if ($scope.authentication.user) $location.path('/');
+        // Submit forgotten password account id
+        $scope.askForPasswordReset = function() {
+            $scope.success = $scope.error = null;
 
-		// Submit forgotten password account id
-		$scope.askForPasswordReset = function() {
-			$scope.success = $scope.error = null;
+            $http.post('/auth/forgot', $scope.credentials).success(function(response) {
+                // Show user success message and clear form
+                $scope.credentials = null;
+                $scope.success = response.message;
 
-			$http.post('/auth/forgot', $scope.credentials).success(function(response) {
-				// Show user success message and clear form
-				$scope.credentials = null;
-				$scope.success = response.message;
+            }).error(function(response) {
+                // Show user error message and clear form
+                $scope.credentials = null;
+                $scope.error = response.message;
+            });
+        };
 
-			}).error(function(response) {
-				// Show user error message and clear form
-				$scope.credentials = null;
-				$scope.error = response.message;
-			});
-		};
+        // Change user password
+        $scope.resetUserPassword = function() {
+            $scope.success = $scope.error = null;
 
-		// Change user password
-		$scope.resetUserPassword = function() {
-			$scope.success = $scope.error = null;
+            $http.post('/auth/reset/' + $stateParams.token, $scope.passwordDetails).success(function(response) {
+                // If successful show success message and clear form
+                $scope.passwordDetails = null;
 
-			$http.post('/auth/reset/' + $stateParams.token, $scope.passwordDetails).success(function(response) {
-				// If successful show success message and clear form
-				$scope.passwordDetails = null;
+                // Attach user profile
+                Authentication.user = response;
 
-				// Attach user profile
-				Authentication.user = response;
-
-				// And redirect to the index page
-				$location.path('/password/reset/success');
-			}).error(function(response) {
-				$scope.error = response.message;
-			});
-		};
-	}
+                // And redirect to the index page
+                $location.path('/password/reset/success');
+            }).error(function(response) {
+                $scope.error = response.message;
+            });
+        };
+    }
 ]);
 'use strict';
 
-angular.module('users').controller('SettingsController', ['$scope', '$http', '$location', 'Users', 'Authentication',
-	function($scope, $http, $location, Users, Authentication) {
-		$scope.user = Authentication.user;
+angular.module('users').controller('SettingsController', ['$scope', '$http', '$location', 'Users', 'Authentication', '$window',
+    function($scope, $http, $location, Users, Authentication, $window) {
+        $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        // If user is not signed in then redirect back home
+        if (!$scope.user) $location.path('/');
 
-		// If user is not signed in then redirect back home
-		if (!$scope.user) $location.path('/');
+        // Check if there are additional accounts 
+        $scope.hasConnectedAdditionalSocialAccounts = function(provider) {
+            for (var i in $scope.user.additionalProvidersData) {
+                return true;
+            }
 
-		// Check if there are additional accounts 
-		$scope.hasConnectedAdditionalSocialAccounts = function(provider) {
-			for (var i in $scope.user.additionalProvidersData) {
-				return true;
-			}
+            return false;
+        };
 
-			return false;
-		};
+        // Check if provider is already in use with current user
+        $scope.isConnectedSocialAccount = function(provider) {
+            return $scope.user.provider === provider || ($scope.user.additionalProvidersData && $scope.user.additionalProvidersData[provider]);
+        };
 
-		// Check if provider is already in use with current user
-		$scope.isConnectedSocialAccount = function(provider) {
-			return $scope.user.provider === provider || ($scope.user.additionalProvidersData && $scope.user.additionalProvidersData[provider]);
-		};
+        // Remove a user social account
+        $scope.removeUserSocialAccount = function(provider) {
+            $scope.success = $scope.error = null;
 
-		// Remove a user social account
-		$scope.removeUserSocialAccount = function(provider) {
-			$scope.success = $scope.error = null;
+            $http.delete('/users/accounts', {
+                params: {
+                    provider: provider
+                }
+            }).success(function(response) {
+                // If successful show success message and clear form
+                $scope.success = true;
+                $scope.user = Authentication.user = response;
+            }).error(function(response) {
+                $scope.error = response.message;
+            });
+        };
 
-			$http.delete('/users/accounts', {
-				params: {
-					provider: provider
-				}
-			}).success(function(response) {
-				// If successful show success message and clear form
-				$scope.success = true;
-				$scope.user = Authentication.user = response;
-			}).error(function(response) {
-				$scope.error = response.message;
-			});
-		};
+        // Update a user profile
+        $scope.updateUserProfile = function(isValid) {
+            if (isValid) {
+                $scope.success = $scope.error = null;
+                var user = new Users($scope.user);
 
-		// Update a user profile
-		$scope.updateUserProfile = function(isValid) {
-			if (isValid) {
-				$scope.success = $scope.error = null;
-				var user = new Users($scope.user);
+                user.$update(function(response) {
+                    $scope.success = true;
+                    Authentication.user = response;
+                }, function(response) {
+                    $scope.error = response.data.message;
+                });
+            } else {
+                $scope.submitted = true;
+            }
+        };
 
-				user.$update(function(response) {
-					$scope.success = true;
-					Authentication.user = response;
-				}, function(response) {
-					$scope.error = response.data.message;
-				});
-			} else {
-				$scope.submitted = true;
-			}
-		};
+        // Change user password
+        $scope.changeUserPassword = function() {
+            $scope.success = $scope.error = null;
 
-		// Change user password
-		$scope.changeUserPassword = function() {
-			$scope.success = $scope.error = null;
-
-			$http.post('/users/password', $scope.passwordDetails).success(function(response) {
-				// If successful show success message and clear form
-				$scope.success = true;
-				$scope.passwordDetails = null;
-			}).error(function(response) {
-				$scope.error = response.message;
-			});
-		};
-	}
+            $http.post('/users/password', $scope.passwordDetails).success(function(response) {
+                // If successful show success message and clear form
+                $scope.success = true;
+                $scope.passwordDetails = null;
+            }).error(function(response) {
+                $scope.error = response.message;
+            });
+        };
+    }
 ]);
 'use strict';
 
@@ -2505,6 +2653,7 @@ angular.module('users').factory('Authentication', [
 		return _this._data;
 	}
 ]);
+
 'use strict';
 
 // Users service used for communicating with the users REST endpoint
