@@ -12,8 +12,8 @@ angular.module('certificates').controller('PostcertificateController', ['$scope'
             $scope.Submit = function() {
                 $scope.uploading = true;
                 // set the users number as finderNumber 
-                $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
-                var url = '/postcertificate'
+                $scope.id.finderNumber = $scope.authentication.user.username;
+                var url = '/postcertificate';
                 Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
                     if (data.data.success) {
                         $scope.alert = 'alert alert-success';

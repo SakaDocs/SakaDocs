@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('atms').directive('fileModel', [
+angular.module('atms').directive('fileModel', ['$parse',
     function($parse) {
         return {
             restrict: 'A',
