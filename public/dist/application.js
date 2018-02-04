@@ -190,7 +190,7 @@ angular.module('atms').controller('PostatmController', ['$scope', '$timeout', '$
             $scope.Submit = function() {
                 $scope.uploading = true;
                 // set the users number as finderNumber 
-                $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
+                $scope.id.finderNumber = $scope.authentication.user.username;
                 var url = '/postatm'
                 Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
                     if (data.data.success) {
@@ -237,7 +237,7 @@ angular.module('atms').controller('PostatmController', ['$scope', '$timeout', '$
 ]);
 'use strict';
 
-angular.module('atms').directive('fileModel', [
+angular.module('atms').directive('fileModel', ['$parse',
     function($parse) {
         return {
             restrict: 'A',
@@ -376,8 +376,8 @@ angular.module('certificates').controller('PostcertificateController', ['$scope'
             $scope.Submit = function() {
                 $scope.uploading = true;
                 // set the users number as finderNumber 
-                $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
-                var url = '/postcertificate'
+                $scope.id.finderNumber = $scope.authentication.user.username;
+                var url = '/postcertificate';
                 Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
                     if (data.data.success) {
                         $scope.alert = 'alert alert-success';
@@ -423,7 +423,7 @@ angular.module('certificates').controller('PostcertificateController', ['$scope'
 ]);
 'use strict';
 
-angular.module('certificates').directive('fileModel', [
+angular.module('certificates').directive('fileModel', ['$parse',
     function($parse) {
         return {
             restrict: 'A',
@@ -580,7 +580,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 'use strict';
 
 angular.module('core').controller('PricingplanController', ['$scope', 'Authentication', '$window',
-    function($scope) {
+    function($scope, Authentication, $window) {
         // Controller Logic
         // ...
         $scope.authentication = Authentication;
@@ -869,7 +869,7 @@ angular.module('dls').controller('PostdlController', ['$scope', '$timeout', '$lo
             $scope.Submit = function() {
                 $scope.uploading = true;
                 // set the users number as finderNumber 
-                $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
+                $scope.id.finderNumber = $scope.authentication.user.username;
                 var url = '/postdl'
                 Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
                     if (data.data.success) {
@@ -916,7 +916,7 @@ angular.module('dls').controller('PostdlController', ['$scope', '$timeout', '$lo
 ]);
 'use strict';
 
-angular.module('dls').directive('fileModel', [
+angular.module('dls').directive('fileModel', ['$parse',
     function($parse) {
         return {
             restrict: 'A',
@@ -1246,7 +1246,7 @@ angular.module('nhifs').controller('PostnhifController', ['$scope', '$timeout', 
             $scope.Submit = function() {
                 $scope.uploading = true;
                 // set the users number as finderNumber 
-                $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
+                $scope.id.finderNumber = $scope.authentication.user.username;
                 var url = '/postnhifcard'
                 Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
                     if (data.data.success) {
@@ -1293,7 +1293,7 @@ angular.module('nhifs').controller('PostnhifController', ['$scope', '$timeout', 
 ]);
 'use strict';
 
-angular.module('nhifs').directive('fileModel', [
+angular.module('nhifs').directive('fileModel', ['$parse',
     function($parse) {
         return {
             restrict: 'A',
@@ -1434,7 +1434,7 @@ angular.module('passports').controller('PostpassportController', ['$scope', '$ti
             $scope.Submit = function() {
                 $scope.uploading = true;
                 // set the users number as finderNumber 
-                $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
+                $scope.id.finderNumber = $scope.authentication.user.username;
                 var url = '/postpassport'
                 Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
                     if (data.data.success) {
@@ -1481,7 +1481,7 @@ angular.module('passports').controller('PostpassportController', ['$scope', '$ti
 ]);
 'use strict';
 
-angular.module('passports').directive('fileModel', [
+angular.module('passports').directive('fileModel', ['$parse',
 	function() {
 		return {
 			template: '<div></div>',
@@ -1582,7 +1582,7 @@ angular.module('staffs').controller('PoststaffidController', ['$scope', '$timeou
             $scope.Submit = function() {
                 $scope.uploading = true;
                 // set the users number as finderNumber 
-                $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
+                $scope.id.finderNumber = $scope.authentication.user.username;
                 var url = '/poststaffid'
                 Uploadfileservice.upload($scope.file, $scope.id, url).then(function(data) {
                     if (data.data.success) {
@@ -1667,7 +1667,7 @@ angular.module('staffs').controller('StaffidsController', ['$scope', '$http', '$
 ]);
 'use strict';
 
-angular.module('staffs').directive('fileModel', [
+angular.module('staffs').directive('fileModel', ['$parse',
     function($parse) {
         return {
             restrict: 'A',
@@ -1771,7 +1771,7 @@ angular.module('students').controller('PoststudentidController', ['$scope', '$ti
             $scope.Submit = function() {
                 $scope.uploading = true;
                 // set the users number as finderNumber 
-                $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
+                $scope.id.finderNumber = $scope.authentication.user.username;
                 var url = '/poststudentid'
                 Uploadstudentidservice.upload($scope.file, $scope.id, url).then(function(data) {
                     if (data.data.success) {
@@ -1853,7 +1853,7 @@ angular.module('students').controller('StudentidsController', ['$scope', '$http'
 ]);
 'use strict';
 
-angular.module('students').directive('fileModel', [
+angular.module('students').directive('fileModel', ['$parse',
     function($parse) {
         return {
             restrict: 'A',
