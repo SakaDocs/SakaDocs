@@ -126,6 +126,8 @@ exports.mpesac2bvalidation = function(req, res) {
     }
 };
 exports.mpesac2bconfirmation = function(req, res) {
+    // define variable for storing amount paid
+    var amountPaid = req.body.Amount
     var docType = req.body.BillRefNumber.toUpperCase().charAt(0);
     var to = "+" + req.body.Msisdn;
     var result = {
@@ -133,31 +135,13 @@ exports.mpesac2bconfirmation = function(req, res) {
         "ResultDesc": "Success"
     };
     if (docType === 'N') {
-        National.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
-            if (err) {
-                return res.status(400).send({
-                    message: errorHandler.getErrorMessage(err)
-                });
-            } else {
-                var claimedId = id[0];
-                console.log(claimedId);
-                var message = "Payment received. Contact the Poster of your ID through " + claimedId.finderNumber + ". Give SakaDocs code " + claimedId.sakaDocsCode + " to the Poster after getting your document.";
-                // send sms to user
-                sms.sendMessage(to, message, req, res);
-                claimedId.claimed = true;
-                claimedId.claimedBy = to;
-                claimedId.save(function(err) {
-                    if (err) {
-                        return res.status(400).send(result);
-                    } else {
-                        res.json(result);
-                    }
-                })
-
+        if (amountPaid != "300") {
+            var fail = {
+                "ResultCode": 1,
+                "ResultDesc": "Failure"
             }
-        });
-    } else if (docType === 'A') {
-        Atm.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
+            res.json(fail);
+        } else {
             National.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
                 if (err) {
                     return res.status(400).send({
@@ -165,96 +149,266 @@ exports.mpesac2bconfirmation = function(req, res) {
                     });
                 } else {
                     var claimedId = id[0];
-                    var message = "Payment received. Contact the Poster of your ID through " + claimedId.finderNumber + " Give SakaDocs code " + claimedId.SakaDocsCode + "after getting your document.";
-                    // send sms to user
-                    sms.sendMessage(to, message, req, res);
-                    claimedId.claimed = true;
-                    claimedId.claimedBy = to;
-                    claimedId.save(function(err) {
-                        if (err) {
-                            return res.status(400).send(result);
-                        } else {
-                            res.json(result);
-                        }
-                    })
+                    if (claimedId === undefined) {
 
+                        res.json(result);
+                    } else {
+                        var message = "Payment received. Contact the Poster of your ID through " + claimedId.finderNumber + ". Give SakaDocs code " + claimedId.sakaDocsCode + " to the Poster after getting your document.";
+                        // send sms to user
+                        sms.sendMessage(to, message, req, res);
+                        claimedId.claimed = true;
+                        claimedId.claimedBy = to;
+                        claimedId.save(function(err) {
+                            if (err) {
+                                return res.status(400).send(result);
+                            } else {
+                                res.json(result);
+                            }
+                        })
+                    }
                 }
             });
-        });
-    } else if (docType === 'C') {
-        Certificate.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
-            if (err) {
-                return res.status(400).send({
-                    message: errorHandler.getErrorMessage(err)
-                });
-            } else {
-                res.json(message);
+        }
+    } else if (docType === 'A') {
+        if (amountPaid != "300") {
+            var fail = {
+                "ResultCode": 1,
+                "ResultDesc": "Failure"
             }
-        });
-    } else if (docType === 'D') {
-        Dl.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
-            if (err) {
-                return res.status(400).send({
-                    message: errorHandler.getErrorMessage(err)
-                });
-            } else {
-                res.json(message);
-            }
-        });
-    } else if (docType === 'I') {
-        Nhif.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
-            if (err) {
-                return res.status(400).send({
-                    message: errorHandler.getErrorMessage(err)
-                });
-            } else {
-                res.json(message);
-            }
-        });
-    } else if (docType === 'P') {
-        Passport.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
-            if (err) {
-                return res.status(400).send({
-                    message: errorHandler.getErrorMessage(err)
-                });
-            } else {
-                res.json(message);
-            }
-        });
-    } else if (docType === 'S') {
-        Student.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
-            if (err) {
-                return res.status(400).send({
-                    message: errorHandler.getErrorMessage(err)
-                });
-            } else {
-                var claimedId = id[0];
-                console.log(claimedId);
-                var message = "Payment received. Contact the Poster of your ID through " + claimedId.finderNumber + ". Give SakaDocs code " + claimedId.sakaDocsCode + " to the Poster after getting your document.";
-                // send sms to user
-                sms.sendMessage(to, message, req, res);
-                claimedId.claimed = true;
-                claimedId.claimedBy = to;
-                claimedId.save(function(err) {
-                    if (err) {
-                        return res.status(400).send(result);
-                    } else {
+            res.json(fail);
+        } else {
+            Atm.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } else {
+                    var claimedId = id[0];
+                    if (claimedId === undefined) {
                         res.json(result);
+                    } else {
+                        var message = "Payment received. Contact the Poster of your ATM card through " + claimedId.finderNumber + ". Give SakaDocs code " + claimedId.sakaDocsCode + " to the Poster after getting your document.";
+                        // send sms to user
+                        sms.sendMessage(to, message, req, res);
+                        claimedId.claimed = true;
+                        claimedId.claimedBy = to;
+                        claimedId.save(function(err) {
+                            if (err) {
+                                return res.status(400).send(result);
+                            } else {
+                                res.json(result);
+                            }
+                        })
                     }
-                })
+                }
+            });
+        }
+    } else if (docType === 'C') {
+        if (amountPaid != "300") {
+            var fail = {
+                "ResultCode": 1,
+                "ResultDesc": "Failure"
+            }
+            res.json(fail);
+        } else {
+            Certificate.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } else {
+                    var claimedId = id[0];
+                    if (claimedId === undefined) {
+                        res.json(result);
+                    } else {
+                        var message = "Payment received. Contact the Poster of your Certificate through " + claimedId.finderNumber + ". Give SakaDocs code " + claimedId.sakaDocsCode + " to the Poster after getting your document.";
+                        // send sms to user
+                        sms.sendMessage(to, message, req, res);
+                        claimedId.claimed = true;
+                        claimedId.claimedBy = to;
+                        claimedId.save(function(err) {
+                            if (err) {
+                                return res.status(400).send(result);
+                            } else {
+                                res.json(result);
+                            }
+                        })
+                    }
+                }
+            });
+        }
 
+    } else if (docType === 'D') {
+        if (amountPaid != "500") {
+            var fail = {
+                "ResultCode": 1,
+                "ResultDesc": "Failure"
             }
-        });
+            res.json(fail);
+        } else {
+            Dl.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } else {
+                    var claimedId = id[0];
+                    if (claimedId === undefined) {
+                        res.json(result);
+                    } else {
+                        var message = "Payment received. Contact the Poster of your Driving license through " + claimedId.finderNumber + ". Give SakaDocs code " + claimedId.sakaDocsCode + " to the Poster after getting your document.";
+                        // send sms to user
+                        sms.sendMessage(to, message, req, res);
+                        claimedId.claimed = true;
+                        claimedId.claimedBy = to;
+                        claimedId.save(function(err) {
+                            if (err) {
+                                return res.status(400).send(result);
+                            } else {
+                                res.json(result);
+                            }
+                        })
+                    }
+                }
+            });
+        }
+    } else if (docType === 'I') {
+        if (amountPaid != "300") {
+            var fail = {
+                "ResultCode": 1,
+                "ResultDesc": "Failure"
+            }
+            res.json(fail);
+        } else {
+            Nhif.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } else {
+                    var claimedId = id[0];
+                    if (claimedId === undefined) {
+                        res.json(result);
+                    } else {
+                        var message = "Payment received. Contact the Poster of your Insurance card through " + claimedId.finderNumber + ". Give SakaDocs code " + claimedId.sakaDocsCode + " to the Poster after getting your document.";
+                        // send sms to user
+                        sms.sendMessage(to, message, req, res);
+                        claimedId.claimed = true;
+                        claimedId.claimedBy = to;
+                        claimedId.save(function(err) {
+                            if (err) {
+                                return res.status(400).send(result);
+                            } else {
+                                res.json(result);
+                            }
+                        })
+                    }
+                }
+            });
+        }
+    } else if (docType === 'P') {
+        if (amountPaid != "1000") {
+            var fail = {
+                "ResultCode": 1,
+                "ResultDesc": "Failure"
+            }
+            res.json(fail);
+        } else {
+            Passport.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } else {
+                    var claimedId = id[0];
+                    if (claimedId === undefined) {
+                        res.json(result);
+                    } else {
+                        console.log(claimedId);
+                        var message = "Payment received. Contact the Poster of your Passport through " + claimedId.finderNumber + ". Give SakaDocs code " + claimedId.sakaDocsCode + " to the Poster after getting your document.";
+                        // send sms to user
+                        sms.sendMessage(to, message, req, res);
+                        claimedId.claimed = true;
+                        claimedId.claimedBy = to;
+                        claimedId.save(function(err) {
+                            if (err) {
+                                return res.status(400).send(result);
+                            } else {
+                                res.json(result);
+                            }
+                        })
+                    }
+                }
+            });
+        }
+    } else if (docType === 'S') {
+        if (amountPaid != "300") {
+            var fail = {
+                "ResultCode": 1,
+                "ResultDesc": "Failure"
+            }
+            res.json(fail);
+        } else {
+            Student.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } else {
+                    var claimedId = id[0];
+                    if (claimedId === undefined) {
+                        res.json(result);
+                    } else {
+                        var message = "Payment received. Contact the Poster of your student ID through " + claimedId.finderNumber + ". Give SakaDocs code " + claimedId.sakaDocsCode + " to the Poster after getting your document.";
+                        // send sms to user
+                        sms.sendMessage(to, message, req, res);
+                        claimedId.claimed = true;
+                        claimedId.claimedBy = to;
+                        claimedId.save(function(err) {
+                            if (err) {
+                                return res.status(400).send(result);
+                            } else {
+                                res.json(result);
+                            }
+                        })
+                    }
+                }
+            });
+        }
     } else if (docType === 'J') {
-        Staff.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
-            if (err) {
-                return res.status(400).send({
-                    message: errorHandler.getErrorMessage(err)
-                });
-            } else {
-                res.json(message);
+        if (amountPaid != "300") {
+            var fail = {
+                "ResultCode": 1,
+                "ResultDesc": "Failure"
             }
-        });
+            res.json(fail);
+        } else {
+            Staff.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } else {
+                    var claimedId = id[0];
+                    if (claimedId === undefined) {
+                        res.json(result);
+                    } else {
+                        var message = "Payment received. Contact the Poster of your staff ID through " + claimedId.finderNumber + ". Give SakaDocs code " + claimedId.sakaDocsCode + " to the Poster after getting your document.";
+                        // send sms to user
+                        sms.sendMessage(to, message, req, res);
+                        claimedId.claimed = true;
+                        claimedId.claimedBy = to;
+                        claimedId.save(function(err) {
+                            if (err) {
+                                return res.status(400).send(result);
+                            } else {
+                                res.json(result);
+                            }
+                        })
+                    }
+                }
+            });
+        }
     }
 
 };

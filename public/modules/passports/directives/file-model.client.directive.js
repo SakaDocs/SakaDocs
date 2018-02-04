@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('passports').directive('fileModel', [
+angular.module('passports').directive('fileModel', ['$parse',
 	function() {
 		return {
 			template: '<div></div>',

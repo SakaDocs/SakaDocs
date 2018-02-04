@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('students').directive('fileModel', [
+angular.module('students').directive('fileModel', ['$parse',
     function($parse) {
         return {
             restrict: 'A',

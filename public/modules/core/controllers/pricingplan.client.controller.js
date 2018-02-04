@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('core').controller('PricingplanController', ['$scope', 'Authentication', '$window',
-    function($scope) {
+    function($scope, Authentication, $window) {
         // Controller Logic
         // ...
         $scope.authentication = Authentication;

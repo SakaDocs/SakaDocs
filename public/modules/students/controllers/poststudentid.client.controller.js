@@ -12,7 +12,7 @@ angular.module('students').controller('PoststudentidController', ['$scope', '$ti
             $scope.Submit = function() {
                 $scope.uploading = true;
                 // set the users number as finderNumber 
-                $scope.id.finderNumber = $scope.authentication.user.phoneNumber;
+                $scope.id.finderNumber = $scope.authentication.user.username;
                 var url = '/poststudentid'
                 Uploadstudentidservice.upload($scope.file, $scope.id, url).then(function(data) {
                     if (data.data.success) {
