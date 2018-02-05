@@ -126,7 +126,6 @@ exports.mpesac2bvalidation = function(req, res) {
     }
 };
 exports.mpesac2bconfirmation = function(req, res) {
-	console.log(req.body);
     // define variable for storing amount paid
     var amountPaid = req.body.Amount
     var docType = req.body.BillRefNumber.toUpperCase().charAt(0);
@@ -136,10 +135,10 @@ exports.mpesac2bconfirmation = function(req, res) {
         "ResultDesc": "Success"
     };
     if (docType === 'N') {
-        if (amountPaid != "300") {
+        if (amountPaid != "300.00") {
             var fail = {
                 "ResultCode": 1,
-                "ResultDesc": "Failure"
+                "ResultDesc": "Rejecting the transaction"
             }
             res.json(fail);
         } else {
@@ -171,10 +170,10 @@ exports.mpesac2bconfirmation = function(req, res) {
             });
         }
     } else if (docType === 'A') {
-        if (amountPaid != "300") {
+        if (amountPaid != "300.00") {
             var fail = {
                 "ResultCode": 1,
-                "ResultDesc": "Failure"
+                "ResultDesc": "Rejecting the transaction"
             }
             res.json(fail);
         } else {
@@ -205,10 +204,10 @@ exports.mpesac2bconfirmation = function(req, res) {
             });
         }
     } else if (docType === 'C') {
-        if (amountPaid != "300") {
+        if (amountPaid != "300.00") {
             var fail = {
                 "ResultCode": 1,
-                "ResultDesc": "Failure"
+                "ResultDesc": "Rejecting the transaction"
             }
             res.json(fail);
         } else {
@@ -240,10 +239,10 @@ exports.mpesac2bconfirmation = function(req, res) {
         }
 
     } else if (docType === 'D') {
-        if (amountPaid != "500") {
+        if (amountPaid != "500.00") {
             var fail = {
                 "ResultCode": 1,
-                "ResultDesc": "Failure"
+                "ResultDesc": "Rejecting the transaction"
             }
             res.json(fail);
         } else {
@@ -274,10 +273,10 @@ exports.mpesac2bconfirmation = function(req, res) {
             });
         }
     } else if (docType === 'I') {
-        if (amountPaid != "300") {
+        if (amountPaid != "300.00") {
             var fail = {
                 "ResultCode": 1,
-                "ResultDesc": "Failure"
+                "ResultDesc": "Rejecting the transaction"
             }
             res.json(fail);
         } else {
@@ -308,10 +307,10 @@ exports.mpesac2bconfirmation = function(req, res) {
             });
         }
     } else if (docType === 'P') {
-        if (amountPaid != "1000") {
+        if (amountPaid != "1000.00") {
             var fail = {
                 "ResultCode": 1,
-                "ResultDesc": "Failure"
+                "ResultDesc": "Rejecting the transaction"
             }
             res.json(fail);
         } else {
@@ -343,10 +342,10 @@ exports.mpesac2bconfirmation = function(req, res) {
             });
         }
     } else if (docType === 'S') {
-        if (amountPaid != "300") {
+        if (amountPaid != "300.00") {
             var fail = {
                 "ResultCode": 1,
-                "ResultDesc": "Failure"
+                "ResultDesc": "Rejecting the transaction"
             }
             res.json(fail);
         } else {
@@ -377,10 +376,10 @@ exports.mpesac2bconfirmation = function(req, res) {
             });
         }
     } else if (docType === 'J') {
-        if (amountPaid != "300") {
+        if (amountPaid != "300.00") {
             var fail = {
                 "ResultCode": 1,
-                "ResultDesc": "Failure"
+                "ResultDesc": "Rejecting the transaction"
             }
             res.json(fail);
         } else {
