@@ -126,7 +126,6 @@ exports.mpesac2bvalidation = function(req, res) {
     }
 };
 exports.mpesac2bconfirmation = function(req, res) {
-	console.log(req.body);
     // define variable for storing amount paid
     var amountPaid = req.body.TransAmount
     var docType = req.body.BillRefNumber.toUpperCase().charAt(0);
@@ -135,9 +134,6 @@ exports.mpesac2bconfirmation = function(req, res) {
         "ResultCode": 0,
         "ResultDesc": "Success"
     };
-    console.log(amountPaid);
-    console.log(docType);
-    console.log(to);
     if (docType === 'N') {
         if (amountPaid != "300.00") {
             var fail = {
@@ -154,13 +150,11 @@ exports.mpesac2bconfirmation = function(req, res) {
                 } else {
 
                     var claimedId = id[0];
-                    console.log(claimedId);
                     if (claimedId === undefined) {
 
                         res.json(result);
                     } else {
                         var message = "Payment received. Contact the Poster of your ID through " + claimedId.finderNumber + ". Give SakaDocs code " + claimedId.sakaDocsCode + " to the Poster after getting your document.";
-                        console.log(message);
                         // send sms to user
                         sms.sendMessage(to, message, req, res);
                         claimedId.claimed = true;
