@@ -126,6 +126,7 @@ exports.mpesac2bvalidation = function(req, res) {
     }
 };
 exports.mpesac2bconfirmation = function(req, res) {
+	console.log(req.body);
     // define variable for storing amount paid
     var amountPaid = req.body.Amount
     var docType = req.body.BillRefNumber.toUpperCase().charAt(0);
