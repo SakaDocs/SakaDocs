@@ -7,6 +7,7 @@ angular.module('users').controller('MydlsController', ['$scope', '$http', '$loca
             $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
         };
         if ($scope.authentication.user) {
+            $scope.show = false;
             $scope.find = function() {
                 $http.get('/dls/' + $scope.authentication.user.phoneNumber).success(function(res) {
                     $scope.ids = res;
@@ -14,6 +15,10 @@ angular.module('users').controller('MydlsController', ['$scope', '$http', '$loca
                 }).error(function(res) {
                     $scope.error = res.message;
                 });
+            };
+            $scope.toggle = function () {
+                 $scope.show = true;
+                 console.log(show);
             }
         } else {
             $location.path('/signin');

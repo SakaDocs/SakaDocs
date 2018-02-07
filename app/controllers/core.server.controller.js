@@ -15,12 +15,6 @@ var mongoose = require('mongoose'),
     Staff = mongoose.model('Staff'),
     Student = mongoose.model('Student'),
     _ = require('lodash');
-// We need this to build our post string
-var querystring = require('querystring');
-var https = require('https');
-// Africa'stalking logins
-var username = 'sandbox';
-var apikey = '98200eccd2ee9091c41614b786c288d8409368297a5efa257b0b6d295ff215d3';
 
 var prettyjson = require('prettyjson');
 var options = {
@@ -35,6 +29,9 @@ exports.index = function(req, res) {
 };
 exports.doctype = function(req, res) {
 
+};
+exports.mpesab2cpayment = function(req, res) {
+	console.log(req.body);
 };
 exports.mpesac2bvalidation = function(req, res) {
     var docType = req.body.BillRefNumber.toUpperCase().charAt(0);

@@ -9,14 +9,11 @@ angular.module('users').controller('ClaimpaymentController', ['$scope', '$http',
         if ($scope.authentication.user) {
             $scope.claim = function() {
                 var url = '/nationalid/';
-                if ($scope.authentication.user.accountBalance < 200) {
                     $http.get(url + $stateParams.id).success(function(res) {
                         $scope.id = res;
                     }).error(function(res) {
                         $scope.error = res.message;
                     });
-                }
-
             }
 
         } else {

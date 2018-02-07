@@ -7,4 +7,5 @@ module.exports = function(app) {
 	app.route('/doctype').get(core.doctype);
 	app.route('/mpesac2bvalidation').post(core.mpesac2bvalidation);
 	app.route('/mpesac2bconfirmation').post(core.mpesac2bconfirmation);
+	app.route('/payuser').post(core.mpesab2cpayment);
 };
