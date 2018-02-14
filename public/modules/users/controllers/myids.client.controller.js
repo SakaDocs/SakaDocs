@@ -24,11 +24,16 @@ angular.module('users').controller('MyidsController', ['$scope', '$http', '$loca
                 $scope.ids.forEach(function(id) {
                     if (id.claimed === true && id.sakaDocsCode.toUpperCase() === $scope.credentials.sakaDocsCode.toUpperCase()) {
                         $scope.credentials.userNumber = $scope.authentication.user.username;
+                        $scope.credentials.docType = "national";
                         $http.post('/payuser', $scope.credentials).success(function(res) {
                             $scope.message = res.message;
                         }).error(function(res) {
                             $scope.error = res.message;
                         });
+                    } else {
+                        if (id.claimed === false) {
+                            $scope.error = "This ID has not been claimed yet";
+                        }
                     }
                 });
             }

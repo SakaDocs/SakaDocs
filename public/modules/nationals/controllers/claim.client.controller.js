@@ -7,6 +7,12 @@ angular.module('nationals').controller('ClaimController', ['$scope', '$http', '$
             $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
         };
         if ($scope.authentication.user) {
+            $scope.toggleMpesa = function () {
+                // body...
+            }
+            $scope.toggleAirtel = function () {
+                // body...
+            }
             $scope.claim = function() {
                 $http.get('/nationalid/' + $stateParams.id).success(function(res) {
                     $scope.id = res;

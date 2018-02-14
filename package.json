@@ -53,6 +53,7 @@
     "passport-twitter": "~1.0.2",
     "prettyjson": "^1.2.1",
     "querystring": "^0.2.0",
+    "request": "^2.83.0",
     "swig": "~1.4.1"
   },
   "devDependencies": {

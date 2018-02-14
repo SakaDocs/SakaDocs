@@ -15,7 +15,12 @@ var mongoose = require('mongoose'),
     Staff = mongoose.model('Staff'),
     Student = mongoose.model('Student'),
     _ = require('lodash');
+var request = require('request'),
+    oauth_token = "zGUn650VL51exDiAJRDdbGbaxFVp",
+    url = "https://sandbox.safaricom.co.ke/mpesa/b2c/v1/paymentrequest",
+	auth = "Bearer " + oauth_token;
 
+   
 var prettyjson = require('prettyjson');
 var options = {
     noColor: true
@@ -31,7 +36,33 @@ exports.doctype = function(req, res) {
 
 };
 exports.mpesab2cpayment = function(req, res) {
-	console.log(req.body);
+    console.log(req.body);
+    var userNumber = req.body.userNumber.substr(1);
+    request({
+            method: 'POST',
+            url: url,
+            headers: {
+                "Authorization": auth
+            },
+            json: {
+                "InitiatorName": "testapi481",
+                "SecurityCredential": "Safaricom481$",
+                "CommandID": "SalaryPayment",
+                "Amount": "150",
+                "PartyA": "600481",
+                "PartyB": userNumber,
+                "Remarks": "None",
+                "QueueTimeOutURL": "https://www.sakadocs.co.ke/payuser",
+                "ResultURL": "https://www.sakadocs.co.ke/payuser",
+                "Occasion": " "
+            }
+        },
+        function(error, response, body) {
+            // TODO: Use the body object to extract the response
+            console.log(body);
+        }
+    )
+
 };
 exports.mpesac2bvalidation = function(req, res) {
     var docType = req.body.BillRefNumber.toUpperCase().charAt(0);
