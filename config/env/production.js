@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db:  process.env.MONGOHQ_URL || 	process.env.MONGOLAB_URI || 'mongodb://localhost/patadocs',
+	db: 'mongodb://localhost/patadocs-dev',
 	assets: {
 		lib: {
 			css: [
