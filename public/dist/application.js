@@ -988,6 +988,16 @@ angular.module('nationals').controller('ClaimController', ['$scope', '$http', '$
             $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
         };
         if ($scope.authentication.user) {
+            $scope.showMpesa = false;
+            $scope.showAirtel = false;
+            $scope.toggleMpesa = function () {
+                $scope.showMpesa = true;
+                $scope.showAirtel = false;
+            }
+            $scope.toggleAirtel = function () {
+                $scope.showAirtel = true;
+                $scope.showMpesa = false;
+            }
             $scope.claim = function() {
                 $http.get('/nationalid/' + $stateParams.id).success(function(res) {
                     $scope.id = res;
@@ -2080,223 +2090,6 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 ]);
 'use strict';
 
-angular.module('users').controller('ClaimatmpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
-    function($scope, $http, $location, Authentication, $stateParams, $window) {
-        $scope.authentication = Authentication;
-        if ($window.sessionStorage['user']) {
-            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
-        };
-        if ($scope.authentication.user) {
-            $scope.claim = function() {
-                var url = '/atm/';
-                if ($scope.authentication.user.accountBalance < 200) {
-                    $http.get(url + $stateParams.id).success(function(res) {
-                        $scope.id = res;
-                    }).error(function(res) {
-                        $scope.error = res.message;
-                    });
-                }
-
-            }
-
-        } else {
-            $location.path('/signin');
-        }
-
-    }
-]);
-'use strict';
-
-angular.module('users').controller('ClaimcertificatepaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
-
-    function($scope, $http, $location, Authentication, $stateParams, $window) {
-        $scope.authentication = Authentication;
-        if ($window.sessionStorage['user']) {
-            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
-        };
-        if ($scope.authentication.user) {
-            $scope.claim = function() {
-                var url = '/certificate/';
-                if ($scope.authentication.user.accountBalance < 200) {
-                    $http.get(url + $stateParams.id).success(function(res) {
-                        $scope.id = res;
-                    }).error(function(res) {
-                        $scope.error = res.message;
-                    });
-                }
-
-            }
-
-        } else {
-            $location.path('/signin');
-        }
-
-    }
-]);
-'use strict';
-
-angular.module('users').controller('ClaimdlpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
-    function($scope, $http, $location, Authentication, $stateParams, $window) {
-        $scope.authentication = Authentication;
-        if ($window.sessionStorage['user']) {
-            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
-        };
-        if ($scope.authentication.user) {
-            $scope.claim = function() {
-                var url = '/dl/';
-                if ($scope.authentication.user.accountBalance < 200) {
-                    $http.get(url + $stateParams.id).success(function(res) {
-                        $scope.id = res;
-                    }).error(function(res) {
-                        $scope.error = res.message;
-                    });
-                }
-
-            }
-
-        } else {
-            $location.path('/signin');
-        }
-
-    }
-]);
-'use strict';
-
-angular.module('users').controller('ClaimnhifpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
-    function($scope, $http, $location, Authentication, $stateParams, $window) {
-        $scope.authentication = Authentication;
-        if ($window.sessionStorage['user']) {
-            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
-        };
-        if ($scope.authentication.user) {
-            $scope.claim = function() {
-                var url = '/nhifcard/';
-                if ($scope.authentication.user.accountBalance < 200) {
-                    $http.get(url + $stateParams.id).success(function(res) {
-                        $scope.id = res;
-                    }).error(function(res) {
-                        $scope.error = res.message;
-                    });
-                }
-
-            }
-
-        } else {
-            $location.path('/signin');
-        }
-
-    }
-]);
-'use strict';
-
-angular.module('users').controller('ClaimpassportpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
-    function($scope, $http, $location, Authentication, $stateParams, $window) {
-        $scope.authentication = Authentication;
-        if ($window.sessionStorage['user']) {
-            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
-        };
-        if ($scope.authentication.user) {
-            $scope.claim = function() {
-                var url = '/passport/';
-                if ($scope.authentication.user.accountBalance < 200) {
-                    $http.get(url + $stateParams.id).success(function(res) {
-                        $scope.id = res;
-                    }).error(function(res) {
-                        $scope.error = res.message;
-                    });
-                }
-
-            }
-
-        } else {
-            $location.path('/signin');
-        }
-
-    }
-]);
-'use strict';
-
-angular.module('users').controller('ClaimpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
-    function($scope, $http, $location, Authentication, $stateParams, $window) {
-        $scope.authentication = Authentication;
-        if ($window.sessionStorage['user']) {
-            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
-        };
-        if ($scope.authentication.user) {
-            $scope.claim = function() {
-                var url = '/nationalid/';
-                if ($scope.authentication.user.accountBalance < 200) {
-                    $http.get(url + $stateParams.id).success(function(res) {
-                        $scope.id = res;
-                    }).error(function(res) {
-                        $scope.error = res.message;
-                    });
-                }
-
-            }
-
-        } else {
-            $location.path('/signin');
-        }
-
-    }
-]);
-'use strict';
-
-angular.module('users').controller('ClaimstaffidpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
-    function($scope, $http, $location, Authentication, $stateParams, $window) {
-        $scope.authentication = Authentication;
-        if ($window.sessionStorage['user']) {
-            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
-        };
-        if ($scope.authentication.user) {
-            $scope.claim = function() {
-                var url = '/staffid/';
-                if ($scope.authentication.user.accountBalance < 200) {
-                    $http.get(url + $stateParams.id).success(function(res) {
-                        $scope.id = res;
-                    }).error(function(res) {
-                        $scope.error = res.message;
-                    });
-                }
-
-            }
-
-        } else {
-            $location.path('/signin');
-        }
-
-    }
-]);
-'use strict';
-
-angular.module('users').controller('ClaimstudentidpaymentController', ['$scope', '$http', '$location', 'Authentication', '$stateParams', '$window',
-    function($scope, $http, $location, Authentication, $stateParams, $window) {
-        $scope.authentication = Authentication;
-        if ($window.sessionStorage['user']) {
-            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
-        };
-        if ($scope.authentication.user) {
-            $scope.claim = function() {
-                var url = '/studentid/';
-                if ($scope.authentication.user.accountBalance < 200) {
-                    $http.get(url + $stateParams.id).success(function(res) {
-                        $scope.id = res;
-                    }).error(function(res) {
-                        $scope.error = res.message;
-                    });
-                }
-
-            }
-
-        } else {
-            $location.path('/signin');
-        }
-
-    }
-]);
-'use strict';
-
 angular.module('users').controller('MyatmsController', ['$scope', '$http', '$location', 'Authentication', '$window',
 
     function($scope, $http, $location, Authentication, $window) {
@@ -2305,12 +2098,33 @@ angular.module('users').controller('MyatmsController', ['$scope', '$http', '$loc
             $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
         };
         if ($scope.authentication) {
+            $scope.show = false;
+            $scope.credentials = {};
             $scope.find = function() {
-                $http.get('/atms/' + $scope.authentication.user.phoneNumber).success(function(res) {
+                $http.get('/atms/' + $scope.authentication.user.username).success(function(res) {
                     $scope.ids = res;
                     $scope.alert = 'alert alert-danger';
                 }).error(function(res) {
                     $scope.error = res.message;
+                });
+            }
+            $scope.toggle = function() {
+                $scope.show = true;
+            }
+            $scope.payUser = function() {
+                $scope.ids.forEach(function(id) {
+                    if (id.claimed === true && id.sakaDocsCode.toUpperCase() === $scope.credentials.sakaDocsCode.toUpperCase()) {
+                        $scope.credentials.userNumber = $scope.authentication.user.username;
+                        $scope.credentials.docType = "atm";
+                        $http.post('/payuser', $scope.credentials).success(function(res) {
+                            $scope.message = res.message;
+                        }).error(function(res) {
+                            $scope.error = res.message;
+                        });
+                    }else{
+                        if (id.claimed === false) {
+                            $scope.error = "This ATM has not been claimed yet";                        }
+                    }
                 });
             }
         } else {
@@ -2330,11 +2144,33 @@ angular.module('users').controller('MycertificatesController', ['$scope', '$http
         };
         if ($scope.authentication.user) {
             $scope.find = function() {
-                $http.get('/certificates/' + $scope.authentication.user.phoneNumber).success(function(res) {
+                $scope.show = false;
+                $scope.credentials = {};
+                $http.get('/certificates/' + $scope.authentication.user.username).success(function(res) {
                     $scope.ids = res;
                     $scope.alert = 'alert alert-danger';
                 }).error(function(res) {
                     $scope.error = res.message;
+                });
+            }
+            $scope.toggle = function() {
+                $scope.show = true;
+            }
+            $scope.payUser = function() {
+                $scope.ids.forEach(function(id) {
+                    if (id.claimed === true && id.sakaDocsCode.toUpperCase() === $scope.credentials.sakaDocsCode.toUpperCase()) {
+                        $scope.credentials.userNumber = $scope.authentication.user.username;
+                        $scope.credentials.docType = "certificate";
+                        $http.post('/payuser', $scope.credentials).success(function(res) {
+                            $scope.message = res.message;
+                        }).error(function(res) {
+                            $scope.error = res.message;
+                        });
+                    } else {
+                        if (id.claimed === false) {
+                            $scope.error = "This ID has not been claimed yet";
+                        }
+                    }
                 });
             }
         } else {
@@ -2353,12 +2189,35 @@ angular.module('users').controller('MydlsController', ['$scope', '$http', '$loca
             $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
         };
         if ($scope.authentication.user) {
+            $scope.show = false;
             $scope.find = function() {
-                $http.get('/dls/' + $scope.authentication.user.phoneNumber).success(function(res) {
+                $scope.show = false;
+                $scope.credentials = {};
+                $http.get('/dls/' + $scope.authentication.user.username).success(function(res) {
                     $scope.ids = res;
                     $scope.alert = 'alert alert-danger';
                 }).error(function(res) {
                     $scope.error = res.message;
+                });
+            }
+            $scope.toggle = function() {
+                $scope.show = true;
+            }
+            $scope.payUser = function() {
+                $scope.ids.forEach(function(id) {
+                    if (id.claimed === true && id.sakaDocsCode.toUpperCase() === $scope.credentials.sakaDocsCode.toUpperCase()) {
+                        $scope.credentials.userNumber = $scope.authentication.user.username;
+                        $scope.credentials.docType = "dl";
+                        $http.post('/payuser', $scope.credentials).success(function(res) {
+                            $scope.message = res.message;
+                        }).error(function(res) {
+                            $scope.error = res.message;
+                        });
+                    } else {
+                        if (id.claimed === false) {
+                            $scope.error = "This ID has not been claimed yet";
+                        }
+                    }
                 });
             }
         } else {
@@ -2377,12 +2236,34 @@ angular.module('users').controller('MyidsController', ['$scope', '$http', '$loca
             $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
         };
         if ($scope.authentication.user) {
+            $scope.show = false;
+            $scope.credentials = {};
             $scope.find = function() {
                 $http.get('/nationalids/' + $scope.authentication.user.username).success(function(res) {
                     $scope.ids = res;
                     $scope.alert = 'alert alert-danger';
                 }).error(function(res) {
                     $scope.error = res.message;
+                });
+            }
+            $scope.toggle = function() {
+                $scope.show = true;
+            }
+            $scope.payUser = function() {
+                $scope.ids.forEach(function(id) {
+                    if (id.claimed === true && id.sakaDocsCode.toUpperCase() === $scope.credentials.sakaDocsCode.toUpperCase()) {
+                        $scope.credentials.userNumber = $scope.authentication.user.username;
+                        $scope.credentials.docType = "national";
+                        $http.post('/payuser', $scope.credentials).success(function(res) {
+                            $scope.message = res.message;
+                        }).error(function(res) {
+                            $scope.error = res.message;
+                        });
+                    } else {
+                        if (id.claimed === false) {
+                            $scope.error = "This ID has not been claimed yet";
+                        }
+                    }
                 });
             }
         } else {
@@ -2402,11 +2283,33 @@ angular.module('users').controller('MynhifsController', ['$scope', '$http', '$lo
         };
         if ($scope.authentication.user) {
             $scope.find = function() {
-                $http.get('/nhifcards/' + $scope.authentication.user.phoneNumber).success(function(res) {
+                $scope.show = false;
+                $scope.credentials = {};
+                $http.get('/nhifcards/' + $scope.authentication.user.username).success(function(res) {
                     $scope.ids = res;
                     $scope.alert = 'alert alert-danger';
                 }).error(function(res) {
                     $scope.error = res.message;
+                });
+            }
+            $scope.toggle = function() {
+                $scope.show = true;
+            }
+            $scope.payUser = function() {
+                $scope.ids.forEach(function(id) {
+                    if (id.claimed === true && id.sakaDocsCode.toUpperCase() === $scope.credentials.sakaDocsCode.toUpperCase()) {
+                        $scope.credentials.userNumber = $scope.authentication.user.username;
+                        $scope.credentials.docType = "nhif";
+                        $http.post('/payuser', $scope.credentials).success(function(res) {
+                            $scope.message = res.message;
+                        }).error(function(res) {
+                            $scope.error = res.message;
+                        });
+                    } else {
+                        if (id.claimed === false) {
+                            $scope.error = "This ID has not been claimed yet";
+                        }
+                    }
                 });
             }
         } else {
@@ -2426,11 +2329,33 @@ angular.module('users').controller('MypassportsController', ['$scope', '$http', 
         };
         if ($scope.authentication.user) {
             $scope.find = function() {
-                $http.get('/passports/' + $scope.authentication.user.phoneNumber).success(function(res) {
+                $scope.show = false;
+                $scope.credentials = {};
+                $http.get('/passports/' + $scope.authentication.user.username).success(function(res) {
                     $scope.ids = res;
                     $scope.alert = 'alert alert-danger';
                 }).error(function(res) {
                     $scope.error = res.message;
+                });
+            }
+            $scope.toggle = function() {
+                $scope.show = true;
+            }
+            $scope.payUser = function() {
+                $scope.ids.forEach(function(id) {
+                    if (id.claimed === true && id.sakaDocsCode.toUpperCase() === $scope.credentials.sakaDocsCode.toUpperCase()) {
+                        $scope.credentials.userNumber = $scope.authentication.user.username;
+                        $scope.credentials.docType = "passport";
+                        $http.post('/payuser', $scope.credentials).success(function(res) {
+                            $scope.message = res.message;
+                        }).error(function(res) {
+                            $scope.error = res.message;
+                        });
+                    } else {
+                        if (id.claimed === false) {
+                            $scope.error = "This ID has not been claimed yet";
+                        }
+                    }
                 });
             }
         } else {
@@ -2450,11 +2375,33 @@ angular.module('users').controller('MystaffidsController', ['$scope', '$http', '
         };
         if ($scope.authentication.user) {
             $scope.find = function() {
-                $http.get('/staffids/' + $scope.authentication.user.phoneNumber).success(function(res) {
+                $scope.show = false;
+                $scope.credentials = {};
+                $http.get('/staffids/' + $scope.authentication.user.username).success(function(res) {
                     $scope.ids = res;
                     $scope.alert = 'alert alert-danger';
                 }).error(function(res) {
                     $scope.error = res.message;
+                });
+            }
+            $scope.toggle = function() {
+                $scope.show = true;
+            }
+            $scope.payUser = function() {
+                $scope.ids.forEach(function(id) {
+                    if (id.claimed === true && id.sakaDocsCode.toUpperCase() === $scope.credentials.sakaDocsCode.toUpperCase()) {
+                        $scope.credentials.userNumber = $scope.authentication.user.username;
+                        $scope.credentials.docType = "staffid";
+                        $http.post('/payuser', $scope.credentials).success(function(res) {
+                            $scope.message = res.message;
+                        }).error(function(res) {
+                            $scope.error = res.message;
+                        });
+                    } else {
+                        if (id.claimed === false) {
+                            $scope.error = "This ID has not been claimed yet";
+                        }
+                    }
                 });
             }
         } else {
@@ -2474,11 +2421,33 @@ angular.module('users').controller('MystudentidsController', ['$scope', '$http',
         };
         if ($scope.authentication.user) {
             $scope.find = function() {
-                $http.get('/studentids/' + $scope.authentication.user.phoneNumber).success(function(res) {
+                $scope.show = false;
+                $scope.credentials = {};
+                $http.get('/studentids/' + $scope.authentication.user.username).success(function(res) {
                     $scope.ids = res;
                     $scope.alert = 'alert alert-danger';
                 }).error(function(res) {
                     $scope.error = res.message;
+                });
+            }
+            $scope.toggle = function() {
+                $scope.show = true;
+            }
+            $scope.payUser = function() {
+                $scope.ids.forEach(function(id) {
+                    if (id.claimed === true && id.sakaDocsCode.toUpperCase() === $scope.credentials.sakaDocsCode.toUpperCase()) {
+                        $scope.credentials.userNumber = $scope.authentication.user.username;
+                        $scope.credentials.docType = "studentid";
+                        $http.post('/payuser', $scope.credentials).success(function(res) {
+                            $scope.message = res.message;
+                        }).error(function(res) {
+                            $scope.error = res.message;
+                        });
+                    } else {
+                        if (id.claimed === false) {
+                            $scope.error = "This ID has not been claimed yet";
+                        }
+                    }
                 });
             }
         } else {
