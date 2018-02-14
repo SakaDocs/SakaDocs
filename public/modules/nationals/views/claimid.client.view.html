@@ -29,9 +29,20 @@
     <div class="row">
         <div class="col-sm-6 row">
             <div class="col-sm-4"></div>
-            <div class="col-sm-6">
+            <div class="col-sm-6" data-ng-show="showMpesa">
                 <div class="">
                     <h6 style="font-weight: bold; font-size: 15px;">Payment via MPesa</h6>
+                </div>
+                <p style="font-size: 11px;">1. Go to MPesa menu</p>
+                <p style="font-size: 11px;">2. Choose Lipa Na MPesa</p>
+                <p style="font-size: 11px;">3. Next go to Paybill</p>
+                <p style="font-size: 11px;">4. Enter Business number 753753</p>
+                <p style="font-size: 11px;">5. Enter Account number {{id.accountNumber}}</p>
+                <p style="font-size: 11px;">6. Enter amount then your MPesa PIN to <span>finish transaction</span>.</p>
+            </div>
+            <div class="col-sm-6" data-ng-show="showAirtel">
+                <div class="">
+                    <h6 style="font-weight: bold; font-size: 15px;">Payment via Airtel Money</h6>
                 </div>
                 <p style="font-size: 11px;">1. Go to MPesa menu</p>
                 <p style="font-size: 11px;">2. Choose Lipa Na MPesa</p>
@@ -47,14 +58,14 @@
 <div class="col-sm-8">
     <h4 style="font-weight: bold">Choose payment method</h4>
     <div class="row col-sm-6" style="height: 70px; padding-right: 19px;">
-        <a ng-click="toggleMpesa()">
-            <div class="thumbnail img-responsive">
+        <a  href="">
+            <div class="thumbnail img-responsive" data-ng-click="toggleMpesa()">
                 <img src="/modules/core/img/SakaDocs_ MPesa_paybill.png" class="img-responsive" alt="">
             </div>
         </a>
     </div>
     <div class="row col-sm-6" style="height: 70px;padding-left: 19px;">
-        <a ng-click="toggleAirtel()">
+        <a ng-click="toggleAirtel()" href="">
             <div class="thumbnail img-responsive">
                 <img src="/modules/core/img/SakaDocs_Airtel_Money_Paybill.png" class="img-responsive" alt="">
             </div>
