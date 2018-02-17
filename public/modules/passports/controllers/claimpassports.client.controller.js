@@ -7,6 +7,16 @@ angular.module('passports').controller('ClaimpassportController', ['$scope', '$h
             $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
         };
         if ($scope.authentication.user) {
+            $scope.showMpesa = false;
+            $scope.showAirtel = false;
+            $scope.toggleMpesa = function() {
+                $scope.showMpesa = true;
+                $scope.showAirtel = false;
+            }
+            $scope.toggleAirtel = function() {
+                $scope.showAirtel = true;
+                $scope.showMpesa = false;
+            }
             $scope.claim = function() {
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get('/passport/' + $stateParams.id).success(function(res) {

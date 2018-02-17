@@ -73,7 +73,8 @@ exports.create = function(req, res) {
                     jobNumber: idDetails.admissionNumber,
                     locationFound: idDetails.location,
                     companyName: idDetails.companyName,
-                    finderNumber: idDetails.finderNumber
+                    finderNumber: idDetails.finderNumber,
+                    department: idDetails.department
 
                 }
             } else {
@@ -84,6 +85,7 @@ exports.create = function(req, res) {
                     locationFound: idDetails.location,
                     companyName: idDetails.companyName,
                     finderNumber: idDetails.finderNumber,
+                    department: idDetails.department,
                     idPhoto: req.file.secure_url
                 };
                 var staff = new Staff(id);

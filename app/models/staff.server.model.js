@@ -30,6 +30,10 @@ var StaffSchema = new Schema({
 		type: String, 
 		trim: true
 	},
+	department: {
+		type: String, 
+		trim: true
+	},
 	locationFound: {
 		type: String, 
 		trim: true

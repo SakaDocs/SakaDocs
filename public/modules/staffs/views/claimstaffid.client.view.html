@@ -4,84 +4,76 @@
     </div>
     <br>
     <br>
-    <br>
     <div class="row">
         <div class="col-sm-6">
             <div class="row img-responsive" id="idpic">
                 <img class=" col-sm-6 img-responsive" ng-src="{{id.idPhoto}}" alt="">
                 <div class="col-sm-6">
-                    <p style="font-weight: bold; font-size: 13px;">Full names: <span style="color: orange;">{{id.fullNames | uppercase}}</span></p>
-                    <p style="font-weight: bold; font-size: 13px;">Job number: <span style="color: orange;">{{id.jobNumber | uppercase}}</span> </p>
-                    <p style="font-weight: bold; font-size: 13px;">Company name: <span style="color: orange;">{{id.companyName | uppercase}}</span> </p>
-                    <p style="font-weight: bold; font-size: 13px;">Location found: <span style="color: orange;">{{id.locationFound | uppercase}}</span> </p>
-                    <p style="font-weight: bold;">Date posted: <span style="color: grey;">{{id.created | date}}</span> </p>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="row">
-                    <div class="col-sm-3"></div>
-                    <div class="col-sm-6">
-                        <div class="">
-                            <h6 style="font-weight: bold; font-size: 15px;">Payment via MPesa</h6>
-                        </div>
-                        <p style="font-size: 12px;">1. Go to MPesa menu</p>
-                        <p style="font-size: 12px;">2. Choose Lipa Na MPesa</p>
-                        <p style="font-size: 12px;">3. Next go to Paybill</p>
-                        <p style="font-size: 12px;">4. Enter Business number 753753</p>
-                        <p style="font-size: 12px;">5. Enter Account number {{id.accountNumber}}</p>
-                        <p style="font-size: 12px;">6. Enter amount then your MPesa PIN to <span>finish transaction</span>.</p>
-                    </div>
-                    <div class="col-sm-3"></div>
+                    <p style="font-weight: bold; font-size: 15px;">Full names: <span style="color: orange;">{{id.fullNames | uppercase}}</span></p>
+                    <p style="font-weight: bold; font-size: 15px;">Job number: <span style="color: orange;">{{id.jobNumber | uppercase}}</span> </p>
+                    <p style="font-weight: bold; font-size: 15px;">Company name: <span style="color: orange;">{{id.companyName | uppercase}}</span> </p>
+                    <p style="font-weight: bold; font-size: 15px;">Location found: <span style="color: orange;">{{id.locationFound | uppercase}}</span> </p>
+                    <p style="font-weight: bold; font-size: 15px;">Date posted: <span style="color: grey;">{{id.created | date}}</span> </p>
                 </div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="row">
                 <div class="col-sm-10">
-                    <p style="font-size: 13px;">To claim this staff ID, kindly choose a payment method below and pay Kshs 300 to automatically receive (via SMS) the mobile number of the person who posted your document (the Poster) and a unique <span><a href="">SakaDocs code</a></span> (which you will be required to give to the Poster once they give you your document) . You can then call the Poster to agree on how they will avail your document.</p>
+                    <p style="font-size: 13px;">To claim this staff ID, kindly choose a payment method below and pay Kshs 300 to automatically receive (via SMS) the mobile number of the person who posted your document (the Poster) and a unique <span><a href="" title="A system generated unique code for this document">SakaDocs code</a></span> (Which you will be required to give to the Poster once they give you your document) . You can then call the Poster to agree on how they will avail your document.</p>
                 </div>
                 <div class="col-sm-2"></div>
             </div>
-            <div class=" row">
-                <div class="row">
-                    <div class="row">
-                        <div class="col-sm-3"></div>
-                        <div class="col-sm-6">
-                            <div class="">
-                                <h6 style="font-weight: bold; font-size: 15px;">Payment via Airtel Money</h6>
-                            </div>
-                            <p style="font-size: 12px;">1. Go to MPesa menu</p>
-                            <p style="font-size: 12px;">2. Choose Lipa Na MPesa Paybill</p>
-                            <p style="font-size: 12px;">3. Choose Paybill</p>
-                            <p style="font-size: 12px;">4. Enter Business number 753753</p>
-                            <p style="font-size: 12px;">5. Enter Account number {{id.accountNumber}}</p>
-                            <p style="font-size: 12px;">6. Enter amount and your pin</p>
-                        </div>
-                        <div class="col-sm-3"></div>
-                    </div>
-                </div>
-                <!--  <div class="col-sm-2"></div>
-                <div class="col-sm-8">
-                    <h4 style="font-weight: bold">Choose payment method</h4>
-                    <div class="row col-sm-6" style="height: 70px; padding-right: 19px;">
-                        <a href="">
-                            <div class="thumbnail img-responsive">
-                                <img src="/modules/core/img/SakaDocs_ MPesa_paybill.png" class="img-responsive" alt="">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="row col-sm-6" style="height: 70px;padding-left: 19px;">
-                        <a href="">
-                            <div class="thumbnail img-responsive">
-                                <img src="/modules/core/img/SakaDocs_Airtel_Money_Paybill.png" class="img-responsive" alt="">
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-2"></div> -->
-            </div>
         </div>
     </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-6 row">
+            <div class="col-sm-6"></div>
+            <div class="col-sm-6" data-ng-show="showMpesa">
+                <div class="">
+                    <h6 style="font-weight: bold; font-size: 15px;">Payment via MPesa</h6>
+                </div>
+                <p style="font-size: 11px;">1. Go to MPesa menu</p>
+                <p style="font-size: 11px;">2. Choose Lipa Na MPesa</p>
+                <p style="font-size: 11px;">3. Next go to Paybill</p>
+                <p style="font-size: 11px;">4. Enter Business number <span style="font-weight: bold;">201996</span></p>
+                <p style="font-size: 11px;">5. Enter Account number {{id.accountNumber}}</p>
+                <p style="font-size: 11px;">6. Enter amount then your MPesa PIN to <span>finish transaction</span>.</p>
+            </div>
+            <div class="col-sm-6" data-ng-show="showAirtel">
+                <div class="">
+                    <h6 style="font-weight: bold; font-size: 15px;">Payment via Airtel Money</h6>
+                </div>
+                <p style="font-size: 11px;">1. Select Airtel Money on your menu</p>
+                <p style="font-size: 11px;">2. Select Make Payments</p>
+                <p style="font-size: 11px;">3. Select Paybill</p>
+                <p style="font-size: 11px;">4. Select SAKADOCS</p>
+                <p style="font-size: 11px;">5. Enter the amount in Kshs</p>
+                <p style="font-size: 11px;">6. Enter your secret Airtel Money PIN</p>
+                <p style="font-size: 11px;">7. Under “Reference”, enter {{id.accountNumber}}</p>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <h4 style="font-weight: bold">Choose payment method</h4>
+                <div class="row col-sm-6" style="height: 70px; padding-right: 19px;">
+                    <a href="">
+                        <div class="thumbnail img-responsive" data-ng-click="toggleMpesa()">
+                            <img src="/modules/core/img/SakaDocs_ MPesa_paybill.png" class="img-responsive" alt="">
+                        </div>
+                    </a>
+                </div>
+                <div class="row col-sm-6" style="height: 70px;padding-left: 19px;">
+                    <a ng-click="toggleAirtel()" href="">
+                        <div class="thumbnail img-responsive">
+                            <img src="/modules/core/img/SakaDocs_Airtel_Money_Paybill.png" class="img-responsive" alt="">
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
     </div>
 </section>
