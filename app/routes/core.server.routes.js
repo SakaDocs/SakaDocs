@@ -8,4 +8,5 @@ module.exports = function(app) {
 	app.route('/mpesac2bvalidation').post(core.mpesac2bvalidation);
 	app.route('/mpesac2bconfirmation').post(core.mpesac2bconfirmation);
 	app.route('/payuser').post(core.mpesab2cpayment);
+	app.route('/payuser').get(core.mpesab2cpayment);
 };

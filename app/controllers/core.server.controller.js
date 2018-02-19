@@ -18,9 +18,9 @@ var mongoose = require('mongoose'),
 var request = require('request'),
     oauth_token = "zGUn650VL51exDiAJRDdbGbaxFVp",
     url = "https://sandbox.safaricom.co.ke/mpesa/b2c/v1/paymentrequest",
-	auth = "Bearer " + oauth_token;
+    auth = "Bearer " + oauth_token;
 
-   
+
 var prettyjson = require('prettyjson');
 var options = {
     noColor: true
@@ -36,7 +36,6 @@ exports.doctype = function(req, res) {
 
 };
 exports.mpesab2cpayment = function(req, res) {
-    console.log(req.body);
     var userNumber = req.body.userNumber.substr(1);
     request({
             method: 'POST',

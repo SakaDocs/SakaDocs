@@ -159,6 +159,16 @@ angular.module('atms').controller('ClaimatmController', ['$scope', '$http', '$lo
             $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
         };
         if ($scope.authentication.user) {
+            $scope.showMpesa = false;
+            $scope.showAirtel = false;
+            $scope.toggleMpesa = function() {
+                $scope.showMpesa = true;
+                $scope.showAirtel = false;
+            }
+            $scope.toggleAirtel = function() {
+                $scope.showAirtel = true;
+                $scope.showMpesa = false;
+            }
             $scope.claim = function() {
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get('/atm/' + $stateParams.id).success(function(res) {
@@ -345,6 +355,16 @@ angular.module('nationals').controller('ClaimcertificateController', ['$scope', 
             $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
         };
         if ($scope.authentication.user) {
+            $scope.showMpesa = false;
+            $scope.showAirtel = false;
+            $scope.toggleMpesa = function() {
+                $scope.showMpesa = true;
+                $scope.showAirtel = false;
+            }
+            $scope.toggleAirtel = function() {
+                $scope.showAirtel = true;
+                $scope.showMpesa = false;
+            }
             $scope.claim = function() {
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get('/certificate/' + $stateParams.id).success(function(res) {
@@ -801,6 +821,16 @@ angular.module('dls').controller('ClaimdlController', ['$scope', '$http', '$loca
             $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
         };
         if ($scope.authentication.user) {
+            $scope.showMpesa = false;
+            $scope.showAirtel = false;
+            $scope.toggleMpesa = function() {
+                $scope.showMpesa = true;
+                $scope.showAirtel = false;
+            }
+            $scope.toggleAirtel = function() {
+                $scope.showAirtel = true;
+                $scope.showMpesa = false;
+            }
             $scope.claim = function() {
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get('/dl/' + $stateParams.id).success(function(res) {
@@ -1184,6 +1214,16 @@ angular.module('nhifs').controller('ClaimnhifController', ['$scope', '$http', '$
             $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
         };
         if ($scope.authentication.user) {
+            $scope.showMpesa = false;
+            $scope.showAirtel = false;
+            $scope.toggleMpesa = function() {
+                $scope.showMpesa = true;
+                $scope.showAirtel = false;
+            }
+            $scope.toggleAirtel = function() {
+                $scope.showAirtel = true;
+                $scope.showMpesa = false;
+            }
             $scope.claim = function() {
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get('/nhifcard/' + $stateParams.id).success(function(res) {
@@ -1376,6 +1416,16 @@ angular.module('passports').controller('ClaimpassportController', ['$scope', '$h
             $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
         };
         if ($scope.authentication.user) {
+            $scope.showMpesa = false;
+            $scope.showAirtel = false;
+            $scope.toggleMpesa = function() {
+                $scope.showMpesa = true;
+                $scope.showAirtel = false;
+            }
+            $scope.toggleAirtel = function() {
+                $scope.showAirtel = true;
+                $scope.showMpesa = false;
+            }
             $scope.claim = function() {
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get('/passport/' + $stateParams.id).success(function(res) {
@@ -1561,6 +1611,16 @@ angular.module('staffs').controller('ClaimstaffidController', ['$scope', '$http'
             $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
         };
         if ($scope.authentication.user) {
+            $scope.showMpesa = false;
+            $scope.showAirtel = false;
+            $scope.toggleMpesa = function() {
+                $scope.showMpesa = true;
+                $scope.showAirtel = false;
+            }
+            $scope.toggleAirtel = function() {
+                $scope.showAirtel = true;
+                $scope.showMpesa = false;
+            }
             $scope.claim = function() {
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get('/staffid/' + $stateParams.id).success(function(res) {
@@ -1750,6 +1810,16 @@ angular.module('students').controller('ClaimstudentidController', ['$scope', '$h
             $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
         };
         if ($scope.authentication.user) {
+            $scope.showMpesa = false;
+            $scope.showAirtel = false;
+            $scope.toggleMpesa = function() {
+                $scope.showMpesa = true;
+                $scope.showAirtel = false;
+            }
+            $scope.toggleAirtel = function() {
+                $scope.showAirtel = true;
+                $scope.showMpesa = false;
+            }
             $scope.claim = function() {
                 if ($scope.authentication.user.accountBalance < 200) {
                     $http.get('/studentid/' + $stateParams.id).success(function(res) {
@@ -1943,65 +2013,33 @@ angular.module('users').config(['$stateProvider',
 	function($stateProvider) {
 		// Users state routing
 		$stateProvider.
-		state('claimpassportpayment', {
-			url: '/claimpassportpayment/:id',
-			templateUrl: 'modules/users/views/claimpassportpayment.client.view.html'
-		}).
 		state('mypassports', {
 			url: '/mypassports',
 			templateUrl: 'modules/users/views/mypassports.client.view.html'
-		}).
-		state('claimdlpayment', {
-			url: '/claimdlpayment/:id',
-			templateUrl: 'modules/users/views/claimdlpayment.client.view.html'
 		}).
 		state('mydls', {
 			url: '/mydls',
 			templateUrl: 'modules/users/views/mydls.client.view.html'
 		}).
-		state('claimcertificatepayment', {
-			url: '/claimcertificatepayment/:id',
-			templateUrl: 'modules/users/views/claimcertificatepayment.client.view.html'
-		}).
 		state('mycertificates', {
 			url: '/mycertificates',
 			templateUrl: 'modules/users/views/mycertificates.client.view.html'
-		}).
-		state('claimnhifpayment', {
-			url: '/claimnhifpayment/:id',
-			templateUrl: 'modules/users/views/claimnhifpayment.client.view.html'
 		}).
 		state('mynhifs', {
 			url: '/mynhifs',
 			templateUrl: 'modules/users/views/mynhifs.client.view.html'
 		}).
-		state('claimatmpayment', {
-			url: '/claimatmpayment/:id',
-			templateUrl: 'modules/users/views/claimatmpayment.client.view.html'
-		}).
 		state('myatms', {
 			url: '/myatms',
 			templateUrl: 'modules/users/views/myatms.client.view.html'
-		}).
-		state('claimstaffidpayment', {
-			url: '/claimstaffidpayment/:id',
-			templateUrl: 'modules/users/views/claimstaffidpayment.client.view.html'
 		}).
 		state('mystaffids', {
 			url: '/mystaffids',
 			templateUrl: 'modules/users/views/mystaffids.client.view.html'
 		}).
-		state('claimstudentidpayment', {
-			url: '/claimstudentidpayment/:id',
-			templateUrl: 'modules/users/views/claimstudentidpayment.client.view.html'
-		}).
 		state('mystudentids', {
 			url: '/mystudentids',
 			templateUrl: 'modules/users/views/mystudentids.client.view.html'
-		}).
-		state('claimpayment', {
-			url: '/claimpayment/:id',
-			templateUrl: 'modules/users/views/claimpayment.client.view.html'
 		}).
 		state('myids', {
 			url: '/myids',
