@@ -62,26 +62,24 @@ var Tawk_API = Tawk_API || {},
     <div id="mobile-space"></div>
     <div class="jumbotron content row" id="jumbo" style="margin:  0px;margin:  0px;padding-top: 18px; border-top-width: 20px;">
         <section class="col-sm-2" style="">
-            <div style="  top: 100px; margin-left: -14px; margin-top: 120px; position: fixed; width: 35px; background-color: black; ">
+            <div id="socials_on_pc" style="  top: 100px; margin-left: -14px; margin-top: 120px; position: fixed; width: 35px; background-color: black; ">
                 <div class="img-responsive" style="border-bottom-color: white; border-bottom-style: solid; border-bottom-width: 2px; min-height: 35px;">
-                    <a href="www.facebook.com/sakadocs">
+                    <a href="https://www.facebook.com/sakadocs" target="_blank">
                         <img class="img-responsive" src="/modules/core/img/fb.png" alt="" style="padding-left: 10px;padding-top: 5px; padding-bottom: 5px;">
                     </a>
                 </div>
                 <div style="border-bottom-color: white; border-bottom-style: solid; border-top-style: solid; border-bottom-width: 2px;
                 border-top-width: 2px; min-height: 35px;">
-                    <a href="www.twitter.com/sakadocs">
+                    <a href="https://www.twitter.com/sakadocs">
                     <img class="img-responsive" src="/modules/core/img/Twitter.png" alt="" style="padding-left: 4px;padding-top: 5px; padding-right: 4px;padding-bottom: 5px;">
                 </a>
                 </div>
                 <div style="border-bottom-color: white; border-bottom-style: solid; border-top-style: solid; border-bottom-width: 2px;
                 border-top-width: 2px; min-height: 35px;">
-                    <a href="/https://www.youtube.com/sakadocs">
+                    <a href="https://www.youtube.com/sakadocs">
                     <img class="img-responsive" src="/modules/core/img/youtube.png" alt="" style="padding-left: 6px;padding-top: 7px; padding-right: 5px;">
                 </a>
                 </div>
-                <div style="border-bottom-color: white; border-bottom-style: solid; border-top-style: solid; border-bottom-width: 2px;
-                border-top-width: 2px; min-height: 35px;"></div>
             </div>
         </section>
         <section class="container col-sm-8 " style="background-color: white; min-height: 700px; overflow: scroll; background-image: url('modules/core/img/SakaDocsBackground.png'); background-size: cover; background-repeat: no-repeat;">
@@ -94,55 +92,47 @@ var Tawk_API = Tawk_API || {},
                 </div>
                 <br>
                 <div style="min-height: 20px; background-color: white;">
-                    <a href="" style="text-decoration: none; color: black;">
+                    <a href="/#!/blog/howtopostadoc" style="text-decoration: none; color: black;">
                         <p style="position: relative; left: 10px;" class="card-text" id="card-text"> How to post a document on sakadocs <span style="position: relative; right: -1px; color: #616161;" class="glyphicon glyphicon-chevron-right"></span></p>
                     </a>
                 </div>
                 <hr style="margin-top: 0; margin-bottom: 0;">
                 <div style="min-height: 20px; background-color: white;">
-                    <a href="" style="text-decoration: none; color: black;">
+                    <a href="/#!/blog/howtoclaimadoc" style="text-decoration: none; color: black;">
                         <p style="position: relative; left: 10px;" class="card-text" id="card-text">How to claim a document on sakadocs <span style="position: relative; right: 4px; color: #616161;" class="glyphicon glyphicon-chevron-right"></span></p>
                     </a>
                 </div>
                 <hr style="margin-top: 0; margin-bottom: 0;">
                 <div style="min-height: 20px; background-color: white;">
-                    <a href="" style="text-decoration: none; color: black;">
+                    <a href="/#!/blog/howtoclaimpayment" style="text-decoration: none; color: black;">
                         <p style="position: relative; left: 10px;" class="card-text" id="card-text">How to claim payment on sakadocs <span style="position: relative; right: -11px; color: #616161;" class="glyphicon glyphicon-chevron-right"></span></p>
                     </a>
                 </div>
                 <hr style="margin-top: 0; margin-bottom: 0;">
             </div>
             <br>
-            <div class="card" style="background-color: white;" id="pc_payment_options">
+            <div class="card"  id="pc_payment_options">
+                <div id="blog-head" class=" text-center">
+                    <p id="blog-title">Payment options</p>
+                </div><hr style="margin-top: 0; margin-bottom: 0;"><hr style="margin-top: 0; margin-bottom: 0;"><hr style="margin-top: 0; margin-bottom: 0;"><hr style="margin-top: 0; margin-bottom: 0;"><hr style="margin-top: 0; margin-bottom: 0;">
+                <div class="card"  style=" background-color: white; min-height: 30px; padding-top: 8px; padding-left: 21px;">
+                        <img class="img-responsive" src="/modules/core/img/SakaDocs M-Pesa Paybill-01.jpg" alt="SakaDocs MPesa Paybill number 201996">
+                </div><hr style="margin-top: 0; margin-bottom: 0;"><hr style="margin-top: 0; margin-bottom: 0;"><hr style="margin-top: 0; margin-bottom: 0;"><hr style="margin-top: 0; margin-bottom: 0;"><hr style="margin-top: 0; margin-bottom: 0;">
+                <div class="card" style=" background-color: white; min-height: 20px; padding-top: 8px; padding-left: 21px;">
+                        <img class="img-responsive" src="/modules/core/img/SakaDocs Airtel Money Nickname.jpg" alt="SakaDocs Airtel money Nickname SAKADOCS">  
+                </div>
+            </div>
+            <div class="card"  id="mobile_payment_options">
                 <div id="blog-head" class=" text-center">
                     <p id="blog-title">Payment options</p>
                 </div>
-                <div class="card" style=" min-height: 70px; padding-top: 8px; padding-left: 21px;">
-                    <div class=" thumbnail card col-sm-5" style="background-color: white; padding-right: 7px; padding-left: 13px; height: 50px;">
-                        <img class="img-responsive" src="/modules/core/img/SakaDocs_ MPesa_paybill.png" alt="SakaDocs MPesa Paybill number">
-                    </div>
-                    <div class="col-sm-2" style="width: 5%; padding-left: 0px; padding-right: 0px;"></div>
-                    <div class="thumbnail card col-sm-5" style="background-color: white; padding-left: 7px; height: 50px; ">
-                        <img class="img-responsive" src="/modules/core/img/SakaDocs_Airtel_Money_Paybill.png" alt="SakaDocs Airtel money Paybill number">
-                    </div>
-                </div>
-                <hr style="margin-top: 0; margin-bottom: 0;">
-            </div>
-            <div class="card" style="background-color: white;" id="mobile_payment_options">
-                <div id="blog-head" class=" text-center">
-                    <p id="blog-title">Payment options</p>
-                </div>
-                <div class="card" style=" min-height: 80px; padding-top: 8px; padding-left: 21px;">
-                    <div class=" thumbnail card col-xs-5" style="background-color: white; padding-right: 7px; padding-left: 13px; height: 60px;">
-                        <img class="img-responsive" src="/modules/core/img/SakaDocs_ MPesa_paybill.png" alt="SakaDocs MPesa Paybill number">
-                    </div>
-                    <div class="col-xs-2" style="width: 5%; padding-left: 0px; padding-right: 25px;"></div>
-                    <div class="thumbnail card col-xs-5" style="background-color: white; padding-left: 7px; height: 60px; ">
-                        <img class="img-responsive" src="/modules/core/img/SakaDocs_Airtel_Money_Paybill.png" alt="SakaDocs Airtel money Paybill number">
-                    </div>
-                </div>
-                <hr style="margin-top: 0; margin-bottom: 0;">
-            </div>
+                <div class="card"  style=" background-color: white; min-height: 30px; padding-top: 8px; padding-left: 21px;">
+                        <img class="img-responsive" src="/modules/core/img/SakaDocs M-Pesa Paybill-01.jpg" alt="SakaDocs MPesa Paybill number">
+                </div><hr style="margin-top: 0; margin-bottom: 0;">
+                <!-- <div class="card" style=" background-color: white; min-height: 20px; padding-top: 8px; padding-left: 21px;">
+                        <img class="img-responsive" src="/modules/core/img/SakaDocs Airtel Money Nickname.jpg" alt="SakaDocs Airtel money Nickname SAKADOCS">  
+                </div> -->
+            </div>  
         </section>
     </div>
     <footer data-ng-include="'/modules/core/views/footer.client.view.html'"></footer>

@@ -59,7 +59,7 @@ exports.create = function(req, res) {
             } else {
                 res.json({
                     success: false,
-                    message: 'Image was not uploaded'
+                    message: 'The document has not been uploaded due to network error. Do you have internet?'
                 });
             }
         } else {

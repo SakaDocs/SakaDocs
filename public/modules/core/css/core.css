@@ -331,6 +331,9 @@ body{
 
 
 @media only screen and (max-width: 700px) {
+#socials_on_pc{
+	display: none;
+}
 #mobile_notfound{
 	display: block;
 }
