@@ -224,6 +224,12 @@ exports.mpesac2bvalidation = function(req, res) {
             });
         }
 
+    } else {
+        var fail = {
+            "ResultCode": 1,
+            "ResultDesc": "Rejecting the transaction"
+        }
+        res.json(fail);
     }
 };
 exports.mpesac2bconfirmation = function(req, res) {
