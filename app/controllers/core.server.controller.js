@@ -164,7 +164,7 @@ exports.mpesac2bconfirmation = function(req, res) {
         "ResultDesc": "Success"
     };
     if (docType === 'N') {
-        if (amountPaid != "300.00") {
+        if (amountPaid != "5.00") {
             var fail = {
                 "ResultCode": 1,
                 "ResultDesc": "Rejecting the transaction"
