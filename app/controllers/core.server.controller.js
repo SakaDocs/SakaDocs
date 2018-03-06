@@ -64,6 +64,7 @@ exports.mpesab2cpayment = function(req, res) {
 
 };
 exports.mpesac2bvalidation = function(req, res) {
+	console.log(req.body);
     var docType = req.body.BillRefNumber.toUpperCase().charAt(0);
     var message = {
         "ResultCode": 0,
@@ -153,6 +154,7 @@ exports.mpesac2bvalidation = function(req, res) {
     }
 };
 exports.mpesac2bconfirmation = function(req, res) {
+	console.log(req.body);
     // define variable for storing amount paid
     var amountPaid = req.body.TransAmount
     var docType = req.body.BillRefNumber.toUpperCase().charAt(0);
