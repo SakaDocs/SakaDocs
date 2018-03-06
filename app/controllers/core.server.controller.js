@@ -64,7 +64,7 @@ exports.mpesab2cpayment = function(req, res) {
 
 };
 exports.mpesac2bvalidation = function(req, res) {
-	console.log(req.body);
+    var amountPaid = req.body.TransAmount
     var docType = req.body.BillRefNumber.toUpperCase().charAt(0);
     var message = {
         "ResultCode": 0,
@@ -72,89 +72,161 @@ exports.mpesac2bvalidation = function(req, res) {
         "ThirdPartyTransID": "1234567890"
     };
     if (docType === 'N') {
-        National.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
-            if (err) {
-                return res.status(400).send({
-                    message: errorHandler.getErrorMessage(err)
-                });
-            } else {
-                res.json(message);
+        if (amountPaid != "300.00") {
+            var fail = {
+                "ResultCode": 1,
+                "ResultDesc": "Rejecting the transaction"
             }
-        });
+            res.json(fail);
+        } else {
+            National.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
+
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } else {
+                    res.json(message);
+                }
+            });
+        }
+
     } else if (docType === 'A') {
-        Atm.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
-            if (err) {
-                return res.status(400).send({
-                    message: errorHandler.getErrorMessage(err)
-                });
-            } else {
-                res.json(message);
+        if (amountPaid != "300.00") {
+            var fail = {
+                "ResultCode": 1,
+                "ResultDesc": "Rejecting the transaction"
             }
-        });
+            res.json(fail);
+        } else {
+            Atm.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } else {
+                    res.json(message);
+                }
+            });
+        }
+
     } else if (docType === 'C') {
-        Certificate.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
-            if (err) {
-                return res.status(400).send({
-                    message: errorHandler.getErrorMessage(err)
-                });
-            } else {
-                res.json(message);
+        if (amountPaid != "300.00") {
+            var fail = {
+                "ResultCode": 1,
+                "ResultDesc": "Rejecting the transaction"
             }
-        });
+            res.json(fail);
+        } else {
+            Certificate.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } else {
+                    res.json(message);
+                }
+            });
+        }
+
     } else if (docType === 'D') {
-        Dl.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
-            if (err) {
-                return res.status(400).send({
-                    message: errorHandler.getErrorMessage(err)
-                });
-            } else {
-                res.json(message);
+        if (amountPaid != "500.00") {
+            var fail = {
+                "ResultCode": 1,
+                "ResultDesc": "Rejecting the transaction"
             }
-        });
+            res.json(fail);
+        } else {
+            Dl.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } else {
+                    res.json(message);
+                }
+            });
+        }
+
     } else if (docType === 'I') {
-        Nhif.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
-            if (err) {
-                return res.status(400).send({
-                    message: errorHandler.getErrorMessage(err)
-                });
-            } else {
-                res.json(message);
+        if (amountPaid != "300.00") {
+            var fail = {
+                "ResultCode": 1,
+                "ResultDesc": "Rejecting the transaction"
             }
-        });
+            res.json(fail);
+        } else {
+            Nhif.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } else {
+                    res.json(message);
+                }
+            });
+        }
+
     } else if (docType === 'P') {
-        Passport.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
-            if (err) {
-                return res.status(400).send({
-                    message: errorHandler.getErrorMessage(err)
-                });
-            } else {
-                res.json(message);
+        if (amountPaid != "1000.00") {
+            var fail = {
+                "ResultCode": 1,
+                "ResultDesc": "Rejecting the transaction"
             }
-        });
+            res.json(fail);
+        } else {
+            Passport.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } else {
+                    res.json(message);
+                }
+            });
+        }
+
     } else if (docType === 'S') {
-        Student.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
-            if (err) {
-                return res.status(400).send({
-                    message: errorHandler.getErrorMessage(err)
-                });
-            } else {
-                res.json(message);
+        if (amountPaid != "300.00") {
+            var fail = {
+                "ResultCode": 1,
+                "ResultDesc": "Rejecting the transaction"
             }
-        });
+            res.json(fail);
+        } else {
+            Student.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } else {
+                    res.json(message);
+                }
+            });
+        }
+
     } else if (docType === 'J') {
-        Staff.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
-            if (err) {
-                return res.status(400).send({
-                    message: errorHandler.getErrorMessage(err)
-                });
-            } else {
-                res.json(message);
+        if (amountPaid != "300.00") {
+            var fail = {
+                "ResultCode": 1,
+                "ResultDesc": "Rejecting the transaction"
             }
-        });
+            res.json(fail);
+        } else {
+            Staff.find({ "accountNumber": req.body.BillRefNumber.toUpperCase() }).exec(function(err, id) {
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } else {
+                    res.json(message);
+                }
+            });
+        }
+
     }
 };
 exports.mpesac2bconfirmation = function(req, res) {
-	console.log(req.body);
     // define variable for storing amount paid
     var amountPaid = req.body.TransAmount
     var docType = req.body.BillRefNumber.toUpperCase().charAt(0);
@@ -164,7 +236,7 @@ exports.mpesac2bconfirmation = function(req, res) {
         "ResultDesc": "Success"
     };
     if (docType === 'N') {
-        if (amountPaid != "5.00") {
+        if (amountPaid != "300.00") {
             var fail = {
                 "ResultCode": 1,
                 "ResultDesc": "Rejecting the transaction"
@@ -185,12 +257,11 @@ exports.mpesac2bconfirmation = function(req, res) {
                     } else {
                         var message = "Payment received. Contact the Poster of your ID through " + claimedId.finderNumber + ". Give SakaDocs code " + claimedId.sakaDocsCode + " to the Poster after getting your document.";
                         // send sms to user
-                        console.log("sending sms");
+
                         sms.sendMessage(to, message, req, res);
-                        console.log("sms sent");
                         claimedId.claimed = true;
                         claimedId.claimedBy = to;
-                        console.log(claimedId);
+
                         claimedId.save(function(err) {
                             if (err) {
                                 return res.status(400).send(result);
