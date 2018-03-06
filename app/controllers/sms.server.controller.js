@@ -24,7 +24,7 @@ exports.sendMessage = function (to, message, req, res) {
         'message': message
     });
     var post_options = {
-        host: 'api.sandbox.africastalking.com',
+        host: 'api.africastalking.com',
         path: '/version1/messaging',
         method: 'POST',
 

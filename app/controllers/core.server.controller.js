@@ -185,7 +185,9 @@ exports.mpesac2bconfirmation = function(req, res) {
                     } else {
                         var message = "Payment received. Contact the Poster of your ID through " + claimedId.finderNumber + ". Give SakaDocs code " + claimedId.sakaDocsCode + " to the Poster after getting your document.";
                         // send sms to user
+                        console.log("sending sms");
                         sms.sendMessage(to, message, req, res);
+                        console.log("sms sent");
                         claimedId.claimed = true;
                         claimedId.claimedBy = to;
                         console.log(claimedId);
