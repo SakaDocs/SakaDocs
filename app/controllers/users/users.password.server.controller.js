@@ -67,9 +67,11 @@ exports.forgot = function(req, res, next) {
         // If valid email, send reset email using service
         function(emailHTML, user, done) {
             var smtpTransport = nodemailer.createTransport({
-                service: 'gmail',
+                host: 'smtp.zoho.com',
+                port: 465,
+                secure: true, // use SSL
                 auth: {
-                    user: 'pnganga05@gmail.com',
+                    user: 'biz@sakadocs.co.ke',
                     pass: 'Darell07'
                 }
             });
