@@ -324,13 +324,24 @@ body{
 	margin-right: 0px;
 	margin-left: 0px;
 }
-
+#claim_on_mobile{
+	display: none;
+}
 
 
 
 
 
 @media only screen and (max-width: 700px) {
+#claimpc{
+	display: none;
+}
+#claim_on_mobile{
+	display: block;
+}
+#claim_on_pc{
+	display: none;
+}
 #socials_on_pc{
 	display: none;
 }

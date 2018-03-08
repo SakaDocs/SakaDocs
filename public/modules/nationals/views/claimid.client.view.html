@@ -4,7 +4,51 @@
     </div>
     <br>
     <br>
-    <div class="row">
+    <div class="row" id="claim_on_mobile">
+        <div>
+            <div class="col-sm-6">
+                <div class="row img-responsive" id="idpic">
+                    <img class=" col-sm-6 img-responsive" ng-src="{{id.idPhoto}}" alt="">
+                    <br>
+                    <div class="col-sm-6">
+                        <p style="font-weight: bold; font-size: 13px;">Full names: <span style="color: orange; font-size: 13px;">{{id.fullNames | uppercase}}</span></p>
+                        <p style="font-weight: bold; font-size: 13px;">Id number: <span style="color: orange; font-size: 13px;">{{id.idNumber | uppercase}}</span> </p>
+                        <p style="font-weight: bold; font-size: 13px;">Area found: <span style="color: orange; font-size: 13px;">{{id.locationFound | uppercase}}</span> </p>
+                        <p style="font-weight: bold; font-size: 13px;">Date posted: <span style="color: grey; font-size: 13px;">{{id.posted | date}}</span> </p>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <p style="font-size: 13px;">To claim this ID, kindly choose a payment method below and pay Kshs 300 to automatically receive (via SMS) the mobile number of the person who posted your document (the Poster) and a unique <span><a href="" title="A system generated unique code for this document" style="text-decoration: none">SakaDocs code</a></span> (Which you will be required to give to the Poster once they give you your document) . You can then call the Poster to agree on how they will avail your document.</p>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8 row">
+                <div class="">
+                    <h6 style="font-weight: bold; font-size: 15px;">Payment via MPesa</h6>
+                </div>
+                <p style="font-size: 11px;">1. Go to MPesa menu</p>
+                <p style="font-size: 11px;">2. Choose Lipa Na MPesa</p>
+                <p style="font-size: 11px;">3. Next go to Paybill</p>
+                <p style="font-size: 11px;">4. Enter Business number <span style="font-weight: bold;">201996</span></p>
+                <p style="font-size: 11px;">5. Enter Account number {{id.accountNumber}}</p>
+                <p style="font-size: 11px;">6. Enter amount then your MPesa PIN to <span>finish transaction</span>.</p>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+    <div class="row" id="claim_on_pc">
         <div class="col-sm-6">
             <div class="row img-responsive" id="idpic">
                 <img class=" col-sm-6 img-responsive" ng-src="{{id.idPhoto}}" alt="">
@@ -26,7 +70,7 @@
         </div>
     </div>
     <br>
-    <div class="row">
+     <div class="row" id="claimpc">
         <div class="col-sm-6 row">
             <div class="col-sm-6"></div>
             <div class="col-sm-6" data-ng-show="showMpesa">
@@ -42,7 +86,7 @@
             </div>
             <div class="col-sm-6" data-ng-show="showAirtel">
                 <div class="">
-                    <h6 style="font-weight: bold; font-size: 15px;">Payment via Airtel Money</h6>
+                    <h6 style="font-weight: bold; font-size: 15px;">Payment method not available for now</h6>
                 </div>
                 <p style="font-size: 11px;">1. Select Airtel Money on your menu</p>
                 <p style="font-size: 11px;">2. Select Make Payments</p>
@@ -52,28 +96,28 @@
                 <p style="font-size: 11px;">6. Enter your secret Airtel Money PIN</p>
                 <p style="font-size: 11px;">7. Under “Reference”, enter {{id.accountNumber}}</p>
             </div>
-            <!-- <div class="col-sm-2"></div> -->
+            <div class="col-sm-2"></div>
         </div>
         <div class="col-sm-6">
-           <div class="col-sm-2"></div>
-<div class="col-sm-8">
-    <h4 style="font-weight: bold">Choose payment method</h4>
-    <div class="row col-sm-6" style="height: 70px; padding-right: 19px;">
-        <a  href="">
-            <div class="thumbnail img-responsive" data-ng-click="toggleMpesa()">
-                <img src="/modules/core/img/SakaDocs_ MPesa_paybill.png" class="img-responsive" alt="">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <h4 style="font-weight: bold">Choose payment method</h4>
+                <div class="row col-sm-6" style="height: 70px; padding-right: 19px;">
+                    <a href="">
+                        <div class="thumbnail img-responsive" data-ng-click="toggleMpesa()">
+                            <img src="/modules/core/img/SakaDocs_ MPesa_paybill.png" class="img-responsive" alt="">
+                        </div>
+                    </a>
+                </div>
+                <div class="row col-sm-6" style="height: 70px;padding-left: 19px;">
+                    <a ng-click="toggleAirtel()" href="">
+                        <div class="thumbnail img-responsive">
+                            <img src="/modules/core/img/SakaDocs_Airtel_Money_Paybill.png" class="img-responsive" alt="">
+                        </div>
+                    </a>
+                </div>
             </div>
-        </a>
+            <div class="col-sm-2"></div>
+        </div>
     </div>
-    <div class="row col-sm-6" style="height: 70px;padding-left: 19px;">
-        <a ng-click="toggleAirtel()" href="">
-            <div class="thumbnail img-responsive">
-                <img src="/modules/core/img/SakaDocs_Airtel_Money_Paybill.png" class="img-responsive" alt="">
-            </div>
-        </a>
-    </div>
-</div>
-<div class="col-sm-2"></div>
-</div>
-</div>
 </section>
