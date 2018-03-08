@@ -77,7 +77,7 @@ exports.forgot = function(req, res, next) {
             });
             var mailOptions = {
                 to: user.email,
-                from: '																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																											pnganga05@gmail.com',
+                from: 'biz@sakaDOcs.co.ke',
                 subject: 'Password Reset',
                 html: emailHTML
             };
