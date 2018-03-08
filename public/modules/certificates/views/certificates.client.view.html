@@ -27,10 +27,10 @@
     <div class="col-sm-2"></div>
     <br>
     <br>
-    <div class="row" ng-show="!testValue.length" style="min" id="pc_notfound ">
+    <div class="row" ng-show="!testValue.length" style="min" id="pc_notfound">
         <div class="row">
             <div class="col-sm-3"></div>
-            <div class="col-sm-6" style="min-height: 300px; ">
+            <div class="col-sm-6" style="min-height: 300px;">
                 <div class="row">
                     <div class="col-sm-3"></div>
                     <div class="col-sm-6">
@@ -44,10 +44,10 @@
                     <p style="font-size: 10px;">Good news though, You can get free alerts (Via SMS) when your certificate is posted</p>
                     <form data-ng-submit="getAlert()" autocomplete="off">
                         <div data-ng-show="message" class="text-center text-success bg-success">
-                            <strong style="padding-top: 2px; font-size: 10px;" data-ng-bind="message"></strong>
+                            <strong style="padding-top: 2px; font-size: 7px;" data-ng-bind="message"></strong>
                         </div>
-                        <input type="text" name="fullNames" data-ng-model="certificate.fullNames" placeholder="Enter full names">
-                        <input type="text" name="institutionName" data-ng-model="certificate.institutionName" placeholder="Enter institution name">
+                        <input type="text" name="fullNames" style="color: #BDBDBD;" data-ng-model="certificate.fullNames" placeholder="Enter full names">
+                        <input type="text" name="institutionName" style="color: #BDBDBD;" data-ng-model="certificate.institutionName" placeholder="Enter institution name">
                         <button type="submit">Get alert</button>
                     </form>
                 </div>
@@ -75,10 +75,10 @@
                         <div data-ng-show="message" class="text-center text-success bg-success">
                             <strong style="padding-top: 2px; font-size: 7px;" data-ng-bind="message"></strong>
                         </div>
-                        <input type="text" name="fullNames" data-ng-model="certificate.fullNames" placeholder="Enter full names">
+                        <input type="text" name="fullNames" style="color: #BDBDBD;" data-ng-model="certificate.fullNames" placeholder="Enter full names">
                         <br>
                         <br>
-                        <input type="text" name="institutionName" data-ng-model="certificate.institutionName" placeholder="Enter institution name">
+                        <input type="text" name="institutionName" style="color: #BDBDBD;" data-ng-model="certificate.institutionName" placeholder="Enter institution name">
                         <br>
                         <br>
                         <button type="submit">Get alert</button>
