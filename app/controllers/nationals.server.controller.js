@@ -42,7 +42,7 @@ exports.create = function(req, res) {
         }
     });
 
-    var parser = multer({ storage: storage }).single('idphoto');
+    var parser = multer({ storage: storage, limits: {fileSize: 1000 * 1000 * 10} }).single('idphoto');
 
     parser(req, res, function(err) {
         if (err) {

@@ -54,6 +54,11 @@ ApplicationConfiguration.registerModule('atms');
 'use strict';
 
 // Use application configuration module to register a new module
+ApplicationConfiguration.registerModule('blogs');
+
+'use strict';
+
+// Use application configuration module to register a new module
 ApplicationConfiguration.registerModule('certificates');
 
 'use strict';
@@ -290,6 +295,27 @@ angular.module('atms').service																																																		
 ]);
 
 
+'use strict';
+
+//Setting up route
+angular.module('blogs').config(['$stateProvider',
+	function($stateProvider) {
+		// Blogs state routing
+		$stateProvider.
+		state('howtopostadoc', {
+			url: '/blog/howtopostadoc',
+			templateUrl: 'modules/blogs/views/howtopostadoc.client.view.html'
+		});
+	}
+]);
+'use strict';
+
+angular.module('blogs').controller('HowtopostadocController', ['$scope',
+	function($scope) {
+		// Controller Logic
+		// ...
+	}
+]);
 'use strict';
 
 //Setting up route
