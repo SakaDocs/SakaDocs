@@ -110,7 +110,13 @@ exports.create = function(req, res) {
                                 alerts.forEach(function(alert) {
                                     var message = "Hi, Your Id number " + alert.details["idNumber"].toUpperCase() + " has been posted on SakaDocs. Visit www.sakadocs.co.ke to claim it.";
                                     if (id["idNumber"].toUpperCase() === alert.details["idNumber"].toUpperCase()) {
+                                       if (alert.details["mobileNumber"].chatAt(0) === 0) {
+                                        var mobileNumber = "+254" + alert.details["mobileNumber"].substr(1);
+                                          sms.sendMessage(mobileNumber, message, req, res);
+                                       } else{
                                         sms.sendMessage(alert.details["mobileNumber"], message, req, res);
+                                       }
+                                        
                                     }
                                 })
                             };
@@ -151,7 +157,7 @@ exports.read = function(req, res) {
         }
     });
 };
-
+// logic for creating an alert for national ID
 exports.nationalAlert = function(req, res) {
     var alert = new Alert({
         docType: "national",
