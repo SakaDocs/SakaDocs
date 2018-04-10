@@ -56,11 +56,14 @@ var Tawk_API = Tawk_API || {},
 
 <body class="ng-cloak">
     <header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top "></header>
+    <!-- Insert breaks to be only activated in pc mode -->
     <br class="breaks">
     <br class="breaks">
     <br class="breaks">
+    <!-- space to be created on mobile devices -->
     <div id="mobile-space"></div>
     <div class="jumbotron content row" id="jumbo" style="margin:  0px;margin:  0px;padding-top: 18px; border-top-width: 20px;">
+        <!-- left side column holding social media icons -->
         <section class="col-sm-2" style="">
             <div id="socials_on_pc" style="  top: 100px; margin-left: -14px; margin-top: 120px; position: fixed; width: 35px; background-color: black; ">
                 <div class="img-responsive" style="border-bottom-color: white; border-bottom-style: solid; border-bottom-width: 2px; min-height: 35px;">
@@ -82,9 +85,11 @@ var Tawk_API = Tawk_API || {},
                 </div>
             </div>
         </section>
+        <!-- Middle section for holding site content -->
         <section class="container col-sm-8 " style="background-color: white; min-height: 700px; overflow: scroll; background-image: url('modules/core/img/SakaDocsBackground.png'); background-size: cover; background-repeat: no-repeat;">
             {% block content %}{% endblock %}
         </section>
+        <!-- Right side column for holding blog links and payment options -->
         <section class="col-sm-2" style="">
             <div class="card" style="background-color: white;">
                 <div id="blog-head" class=" text-center">
@@ -118,9 +123,6 @@ var Tawk_API = Tawk_API || {},
                 <div class="card"  style=" background-color: white; min-height: 30px; padding-top: 8px; padding-left: 21px;">
                         <img class="img-responsive" src="/modules/core/img/SakaDocs M-Pesa Paybill-01.jpg" alt="SakaDocs MPesa Paybill number 201996">
                 </div><hr style="margin-top: 0; margin-bottom: 0;"><hr style="margin-top: 0; margin-bottom: 0;"><hr style="margin-top: 0; margin-bottom: 0;"><hr style="margin-top: 0; margin-bottom: 0;"><hr style="margin-top: 0; margin-bottom: 0;">
-                <!-- <div class="card" style=" background-color: white; min-height: 20px; padding-top: 8px; padding-left: 21px;">
-                        <img class="img-responsive" src="/modules/core/img/SakaDocs Airtel Money Nickname.jpg" alt="SakaDocs Airtel money Nickname SAKADOCS">  
-                </div> -->
             </div>
             <div class="card"  id="mobile_payment_options">
                 <div id="blog-head" class=" text-center">
@@ -129,12 +131,10 @@ var Tawk_API = Tawk_API || {},
                 <div class="card"  style=" background-color: white; min-height: 30px; padding-top: 8px; padding-left: 21px;">
                         <img class="img-responsive" src="/modules/core/img/SakaDocs M-Pesa Paybill-01.jpg" alt="SakaDocs MPesa Paybill number">
                 </div><hr style="margin-top: 0; margin-bottom: 0;">
-                <!-- <div class="card" style=" background-color: white; min-height: 20px; padding-top: 8px; padding-left: 21px;">
-                        <img class="img-responsive" src="/modules/core/img/SakaDocs Airtel Money Nickname.jpg" alt="SakaDocs Airtel money Nickname SAKADOCS">  
-                </div> -->
             </div>  
         </section>
     </div>
+    <!-- insert footer template -->
     <footer data-ng-include="'/modules/core/views/footer.client.view.html'"></footer>
     <!--Embedding The User Object-->
     <script type="text/javascript">

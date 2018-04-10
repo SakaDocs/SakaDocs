@@ -7,6 +7,7 @@ angular.module('atms').controller('AtmsController', ['$scope', '$http', '$locati
             $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
         };
         if ($scope.authentication.user) {
+            // init function for fetching all unclaimed atms
             $scope.find = function() {
                 $http.get('/atms').success(function(res) {
                     $scope.ids = res;
@@ -15,7 +16,7 @@ angular.module('atms').controller('AtmsController', ['$scope', '$http', '$locati
                     $scope.error = res.message;
                 });
             }
-
+            // function for getting subscription alerts for atms
             $scope.getAlert = function() {
                 $scope.atm.mobileNumber = Authentication.user.username;
                 $http.post('/atmalert', $scope.atm).success(function(response) {

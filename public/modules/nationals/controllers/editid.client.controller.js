@@ -2,23 +2,21 @@
 
 angular.module('nationals').controller('EditidController', ['$scope', '$window', 'Authentication', '$http', '$stateParams', '$location',
     function($scope, $window, Authentication, $http, $stateParams, $location) {
-        $scope.authentication = Authentication.user;
+        $scope.authentication = Authentication;
         if ($window.sessionStorage['user']) {
-            $scope.authentication = JSON.parse($window.sessionStorage['user']);
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
         }
         // check if user is signed in
-        if ($scope.authentication.user) {
+        if ($scope.authentication) {
             $scope.id = {};
             // fetch document using isValid
             $scope.getId = function() {
                 $http.get('/nationalid/' + $stateParams.id).success(function(res) {
                     $scope.id = res;
-                    console.log($scope.id);
                 }).error(function(res) {
                     $scope.error = res.message;
                 });
             }
-            console.log($scope.id);
             // Update a user profile
             $scope.updateDocument = function(isValid) {
                 if (isValid) {
