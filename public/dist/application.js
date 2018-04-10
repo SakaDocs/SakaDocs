@@ -130,6 +130,7 @@ angular.module('atms').controller('AtmsController', ['$scope', '$http', '$locati
             $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
         };
         if ($scope.authentication.user) {
+            // init function for fetching all unclaimed atms
             $scope.find = function() {
                 $http.get('/atms').success(function(res) {
                     $scope.ids = res;
@@ -138,7 +139,7 @@ angular.module('atms').controller('AtmsController', ['$scope', '$http', '$locati
                     $scope.error = res.message;
                 });
             }
-
+            // function for getting subscription alerts for atms
             $scope.getAlert = function() {
                 $scope.atm.mobileNumber = Authentication.user.username;
                 $http.post('/atmalert', $scope.atm).success(function(response) {
@@ -302,8 +303,12 @@ angular.module('blogs').config(['$stateProvider',
 	function($stateProvider) {
 		// Blogs state routing
 		$stateProvider.
+		state('blog/howtoclaimpayment', {
+			url: '/blog/howtoclaimpayment',
+			templateUrl: 'modules/blogs/views/howtoclaimpayment.client.view.html'
+		}).
 		state('blog/howtoclaimadoc', {
-			url: 'blog/howtoclaimadoc',
+			url: '/blog/howtoclaimadoc',
 			templateUrl: 'modules/blogs/views/howtoclaimadoc.client.view.html'
 		}).
 		state('blog/howtopostadoc', {
@@ -315,6 +320,14 @@ angular.module('blogs').config(['$stateProvider',
 'use strict';
 
 angular.module('blogs').controller('HowtoclaimadocController', ['$scope',
+	function($scope) {
+		// Controller Logic
+		// ...
+	}
+]);
+'use strict';
+
+angular.module('blogs').controller('HowtoclaimpaymentController', ['$scope',
 	function($scope) {
 		// Controller Logic
 		// ...
@@ -1088,23 +1101,21 @@ angular.module('nationals').controller('ClaimController', ['$scope', '$http', '$
 
 angular.module('nationals').controller('EditidController', ['$scope', '$window', 'Authentication', '$http', '$stateParams', '$location',
     function($scope, $window, Authentication, $http, $stateParams, $location) {
-        $scope.authentication = Authentication.user;
+        $scope.authentication = Authentication;
         if ($window.sessionStorage['user']) {
-            $scope.authentication = JSON.parse($window.sessionStorage['user']);
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
         }
         // check if user is signed in
-        if ($scope.authentication.user) {
+        if ($scope.authentication) {
             $scope.id = {};
             // fetch document using isValid
             $scope.getId = function() {
                 $http.get('/nationalid/' + $stateParams.id).success(function(res) {
                     $scope.id = res;
-                    console.log($scope.id);
                 }).error(function(res) {
                     $scope.error = res.message;
                 });
             }
-            console.log($scope.id);
             // Update a user profile
             $scope.updateDocument = function(isValid) {
                 if (isValid) {
