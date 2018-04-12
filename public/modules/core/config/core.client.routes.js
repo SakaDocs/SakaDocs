@@ -8,6 +8,10 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 
 		// Home state routing
 		$stateProvider.
+		state('privacypolicy', {
+			url: '/privacypolicy',
+			templateUrl: 'modules/core/views/privacypolicy.client.view.html'
+		}).
 		state('dl', {
 			url: '/dl',
 			templateUrl: 'modules/dls/views/dls.client.view.html'

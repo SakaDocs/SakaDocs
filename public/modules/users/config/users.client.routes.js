@@ -5,6 +5,10 @@ angular.module('users').config(['$stateProvider',
 	function($stateProvider) {
 		// Users state routing
 		$stateProvider.
+		state('adminsignup', {
+			url: '/adminsignup',
+			templateUrl: 'modules/users/views/adminsignup.client.view.html'
+		}).
 		state('mypassports', {
 			url: '/mypassports',
 			templateUrl: 'modules/users/views/mypassports.client.view.html'
