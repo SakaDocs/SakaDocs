@@ -1,3 +1,24 @@
-<section data-ng-controller="AdmindashboardController">
-	This is the Dashboard view
+<section data-ng-controller="AdmindashboardController" data-ng-init="countUsers()">
+    <br>
+    <div class="row text-center">
+        <h1>ADMIN DASHBOARD</h1>
+        <div class="col-sm-4" >
+            <div class="thumbnail text-center">
+                <h1 style="font-weight: bolder; color: brown;">{{usersCount}}</h1>
+                <h4 style="font-weight: bold;">Number of users</h4>
+            </div>
+        </div>
+        <div class="col-sm-4" >
+            <div class="thumbnail text-center" style="">
+                <h1 style="font-weight: bolder; color: green;">{{ nationalsCount }}</h1>
+                <h4 style="font-weight: bold;">Number of National IDs Posted</h4>
+            </div>
+        </div>
+        <div class="col-sm-4" data-ng-init="countUsers()">
+            <div class="thumbnail text-center">
+                <h1 style="font-weight: bolder;">{{usersCount}}</h1>
+                <h4 style="font-weight: bold;">Number of users</h4>
+            </div>
+        </div>
+    </div>
 </section>

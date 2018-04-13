@@ -175,7 +175,9 @@ exports.nationalAlert = function(req, res) {
 
 };
 
-
+/**
+A list of national ids posted by a user
+*/
 exports.myids = function(req, res) {
     var fN = req.params.finderNumber;
     National.find({ "finderNumber": fN }).exec(function(err, ids) {
@@ -185,6 +187,22 @@ exports.myids = function(req, res) {
             });
         } else {
             res.json(ids.reverse());
+        }
+    });
+};
+
+/**
+count all posted ids
+*/
+exports.countNationals = function(req, res) {
+    var fN = req.params.finderNumber;
+    National.count().exec(function(err, idsCount) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.json({"nationalsCount" : idsCount.toString()});
         }
     });
 };
@@ -204,7 +222,7 @@ exports.delete = function(req, res) {
 };
 
 /**
- * List of Categories
+ * List of unclaimed National IDs
  */
 exports.list = function(req, res) {
     National.find({ "claimed": false }).exec(function(err, ids) {

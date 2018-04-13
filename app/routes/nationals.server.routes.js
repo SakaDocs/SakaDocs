@@ -14,4 +14,6 @@ module.exports = function(app) {
         .get(nationals.myids);
     app.route('/nationalalert')
         .post(nationals.nationalAlert);
+    app.route('/countnationals')
+        .get(nationals.countNationals);
 };

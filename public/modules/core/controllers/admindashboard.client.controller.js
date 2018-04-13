@@ -10,8 +10,13 @@ angular.module('core').controller('AdmindashboardController', ['$scope', '$http'
             $scope.countUsers = function() {
 
                 $http.get('/countusers').success(function(res) {
-                    $scope.users = res["usersCount"].toString();
-                    $scope.alert = 'alert alert-danger';
+                    $scope.usersCount = res["usersCount"]
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+                $http.get('/countnationals').success(function(res) {
+                    $scope.nationalsCount = res["nationalsCount"]
+                    console.log($scope.nationalsCount);
                 }).error(function(res) {
                     $scope.error = res.message;
                 });

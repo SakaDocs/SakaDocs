@@ -93,10 +93,11 @@ exports.countusers = function(req, res) {
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            res.json({"usersCount" : usersCount});
+            res.json({ "usersCount": usersCount.toString()});
         }
     });
-}
+};
+
 /**
  * Signin after passport authentication
  */
