@@ -546,6 +546,14 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 
 		// Home state routing
 		$stateProvider.
+		state('admindashboard', {
+			url: '/admindashboard',
+			templateUrl: 'modules/core/views/admindashboard.client.view.html'
+		}).
+		state('privacypolicy', {
+			url: '/privacypolicy',
+			templateUrl: 'modules/core/views/privacypolicy.client.view.html'
+		}).
 		state('dl', {
 			url: '/dl',
 			templateUrl: 'modules/dls/views/dls.client.view.html'
@@ -602,6 +610,29 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 ]);
 'use strict';
 
+angular.module('core').controller('AdmindashboardController', ['$scope', '$http', '$location', 'Authentication', '$window',
+    function($scope, $http, $location, Authentication, $window) {
+        $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        if ($scope.authentication.user && $scope.authentication.user["roles"][0] === "admin") {
+            $scope.countUsers = function() {
+
+                $http.get('/countusers').success(function(res) {
+                    $scope.users = res["usersCount"].toString();
+                    $scope.alert = 'alert alert-danger';
+                }).error(function(res) {
+                    $scope.error = res.message;
+                });
+            }
+        } else {
+            $location.path('/signin');
+        }
+    }
+]);
+'use strict';
+
 angular.module('core').controller('HeaderController', ['$scope', '$http', '$location', 'Authentication', 'Menus', '$window',
     function($scope, $http, $location, Authentication, Menus, $window) {
         $scope.authentication = Authentication;
@@ -643,7 +674,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         $scope.signout = function() {
             $http.get('/auth/signout').success(function(res) {
                 $window.sessionStorage['user'] = null;
-                $location.path('/signup');
+                // $location.path('/#!/signup');
             }).error(function(res) {});
         }
     }
@@ -660,6 +691,14 @@ angular.module('core').controller('PricingplanController', ['$scope', 'Authentic
             $scope.authentication.user = JSON.parse($window.sessionStorage["user"]);
         }
     }
+]);
+'use strict';
+
+angular.module('core').controller('PrivacypolicyController', ['$scope',
+	function($scope) {
+		// Controller Logic
+		// ...
+	}
 ]);
 'use strict';
 
@@ -2108,6 +2147,10 @@ angular.module('users').config(['$stateProvider',
 	function($stateProvider) {
 		// Users state routing
 		$stateProvider.
+		state('adminsignup', {
+			url: '/adminsignup',
+			templateUrl: 'modules/users/views/adminsignup.client.view.html'
+		}).
 		state('mypassports', {
 			url: '/mypassports',
 			templateUrl: 'modules/users/views/mypassports.client.view.html'
@@ -2178,6 +2221,33 @@ angular.module('users').config(['$stateProvider',
 		});
 	}
 ]);
+'use strict';
+
+angular.module('users').controller('AdminsignupController', ['$scope', '$http', '$location', 'Authentication', '$window',
+    function($scope, $http, $location, Authentication, $window) {
+        $scope.authentication = Authentication;
+        if ($window.sessionStorage['user']) {
+            $scope.authentication.user = JSON.parse($window.sessionStorage['user']);
+        };
+        // If user is signed in then redirect back home
+        if ($scope.authentication.user) $location.path('/');
+        $scope.signup = function() {
+
+            $http.post('/auth/adminsignup', $scope.credentials).success(function(response) {
+                // If successful we assign the response to the global user model
+                $scope.authentication.user = response;
+                // we also save response to sessionStorage
+                $window.sessionStorage["user"] = JSON.stringify(response);
+                // And redirect to the index page
+                $location.path('/');
+            }).error(function(response) {
+                $scope.error = response.message;
+            });
+
+        };
+    }
+]);
+
 'use strict';
 
 angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$location', 'Authentication', '$window',

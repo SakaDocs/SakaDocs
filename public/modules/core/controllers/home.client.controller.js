@@ -10,7 +10,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         $scope.signout = function() {
             $http.get('/auth/signout').success(function(res) {
                 $window.sessionStorage['user'] = null;
-                $location.path('/signup');
+                // $location.path('/#!/signup');
             }).error(function(res) {});
         }
     }

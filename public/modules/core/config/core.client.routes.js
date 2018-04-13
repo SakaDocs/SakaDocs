@@ -8,6 +8,10 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 
 		// Home state routing
 		$stateProvider.
+		state('admindashboard', {
+			url: '/admindashboard',
+			templateUrl: 'modules/core/views/admindashboard.client.view.html'
+		}).
 		state('privacypolicy', {
 			url: '/privacypolicy',
 			templateUrl: 'modules/core/views/privacypolicy.client.view.html'
